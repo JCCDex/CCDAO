@@ -1,0 +1,943 @@
+{
+  "contractName": "IBlacklist",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "_user",
+          "type": "address"
+        }
+      ],
+      "name": "AddedBlackList",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "_blackListedUser",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_balance",
+          "type": "uint256"
+        }
+      ],
+      "name": "DestroyedBlackFunds",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "_user",
+          "type": "address"
+        }
+      ],
+      "name": "RemovedBlackList",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_maker",
+          "type": "address"
+        }
+      ],
+      "name": "getBlackListStatus",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_evilUser",
+          "type": "address"
+        }
+      ],
+      "name": "addBlackList",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_clearedUser",
+          "type": "address"
+        }
+      ],
+      "name": "removeBlackList",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.8.13+commit.abaa5c0e\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"_user\",\"type\":\"address\"}],\"name\":\"AddedBlackList\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"_blackListedUser\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_balance\",\"type\":\"uint256\"}],\"name\":\"DestroyedBlackFunds\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"_user\",\"type\":\"address\"}],\"name\":\"RemovedBlackList\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_evilUser\",\"type\":\"address\"}],\"name\":\"addBlackList\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_maker\",\"type\":\"address\"}],\"name\":\"getBlackListStatus\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_clearedUser\",\"type\":\"address\"}],\"name\":\"removeBlackList\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"notice\":\"IBlacklist \\u5bf9ERC20\\u6269\\u5c55\\u9ed1\\u540d\\u5355\\u80fd\\u529b\",\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/interface/IBlacklist.sol\":\"IBlacklist\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/interface/IBlacklist.sol\":{\"keccak256\":\"0xe60583a73b48fdc0466cfa4707a1c4cfc92ae4484d1d0c4dbb8e07496b399573\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://4ff3d9c8ec6e08a70e24b031433b134498f3a778295a7e1bec23a072c95adf0f\",\"dweb:/ipfs/QmVc1sNoM3V6uxXAJ9pgqaQeMdNMeHRWuX33tCvhvVuWzD\"]}},\"version\":1}",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "immutableReferences": {},
+  "generatedSources": [],
+  "deployedGeneratedSources": [],
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "// SPDX-License-Identifier: MIT\npragma solidity >=0.8.0;\n\n/**\nIBlacklist 对ERC20扩展黑名单能力\n*/\ninterface IBlacklist {\n  event DestroyedBlackFunds(address _blackListedUser, uint _balance);\n\n  event AddedBlackList(address _user);\n\n  event RemovedBlackList(address _user);\n\n  function getBlackListStatus(address _maker) external view returns (bool);\n\n  function addBlackList (address _evilUser) external;\n\n  function removeBlackList (address _clearedUser) external;\n}\n",
+  "sourcePath": "/Users/chtian/Documents/01_work/01_develope/jcc/CCDAO/contract/contracts/interface/IBlacklist.sol",
+  "ast": {
+    "absolutePath": "project:/contracts/interface/IBlacklist.sol",
+    "exportedSymbols": {
+      "IBlacklist": [
+        837
+      ]
+    },
+    "id": 838,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 804,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.8",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "32:24:2"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "IBlacklist",
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": {
+          "id": 805,
+          "nodeType": "StructuredDocumentation",
+          "src": "58:47:2",
+          "text": "IBlacklist 对ERC20扩展黑名单能力"
+        },
+        "fullyImplemented": false,
+        "id": 837,
+        "linearizedBaseContracts": [
+          837
+        ],
+        "name": "IBlacklist",
+        "nameLocation": "116:10:2",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "anonymous": false,
+            "eventSelector": "61e6e66b0d6339b2980aecc6ccc0039736791f0ccde9ed512e789a7fbdd698c6",
+            "id": 811,
+            "name": "DestroyedBlackFunds",
+            "nameLocation": "137:19:2",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 810,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 807,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "_blackListedUser",
+                  "nameLocation": "165:16:2",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 811,
+                  "src": "157:24:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 806,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "157:7:2",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 809,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "_balance",
+                  "nameLocation": "188:8:2",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 811,
+                  "src": "183:13:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 808,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "183:4:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "156:41:2"
+            },
+            "src": "131:67:2"
+          },
+          {
+            "anonymous": false,
+            "eventSelector": "42e160154868087d6bfdc0ca23d96a1c1cfa32f1b72ba9ba27b69b98a0d819dc",
+            "id": 815,
+            "name": "AddedBlackList",
+            "nameLocation": "208:14:2",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 814,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 813,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "_user",
+                  "nameLocation": "231:5:2",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 815,
+                  "src": "223:13:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 812,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "223:7:2",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "222:15:2"
+            },
+            "src": "202:36:2"
+          },
+          {
+            "anonymous": false,
+            "eventSelector": "d7e9ec6e6ecd65492dce6bf513cd6867560d49544421d0783ddf06e76c24470c",
+            "id": 819,
+            "name": "RemovedBlackList",
+            "nameLocation": "248:16:2",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 818,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 817,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "_user",
+                  "nameLocation": "273:5:2",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 819,
+                  "src": "265:13:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 816,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "265:7:2",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "264:15:2"
+            },
+            "src": "242:38:2"
+          },
+          {
+            "functionSelector": "59bf1abe",
+            "id": 826,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getBlackListStatus",
+            "nameLocation": "293:18:2",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 822,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 821,
+                  "mutability": "mutable",
+                  "name": "_maker",
+                  "nameLocation": "320:6:2",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 826,
+                  "src": "312:14:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 820,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "312:7:2",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "311:16:2"
+            },
+            "returnParameters": {
+              "id": 825,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 824,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 826,
+                  "src": "351:4:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 823,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "351:4:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "350:6:2"
+            },
+            "scope": 837,
+            "src": "284:73:2",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "functionSelector": "0ecb93c0",
+            "id": 831,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "addBlackList",
+            "nameLocation": "370:12:2",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 829,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 828,
+                  "mutability": "mutable",
+                  "name": "_evilUser",
+                  "nameLocation": "392:9:2",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 831,
+                  "src": "384:17:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 827,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "384:7:2",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "383:19:2"
+            },
+            "returnParameters": {
+              "id": 830,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "411:0:2"
+            },
+            "scope": 837,
+            "src": "361:51:2",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "functionSelector": "e4997dc5",
+            "id": 836,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "removeBlackList",
+            "nameLocation": "425:15:2",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 834,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 833,
+                  "mutability": "mutable",
+                  "name": "_clearedUser",
+                  "nameLocation": "450:12:2",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 836,
+                  "src": "442:20:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 832,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "442:7:2",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "441:22:2"
+            },
+            "returnParameters": {
+              "id": 835,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "472:0:2"
+            },
+            "scope": 837,
+            "src": "416:57:2",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 838,
+        "src": "106:369:2",
+        "usedErrors": []
+      }
+    ],
+    "src": "32:444:2"
+  },
+  "legacyAST": {
+    "absolutePath": "project:/contracts/interface/IBlacklist.sol",
+    "exportedSymbols": {
+      "IBlacklist": [
+        837
+      ]
+    },
+    "id": 838,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 804,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.8",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "32:24:2"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "IBlacklist",
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": {
+          "id": 805,
+          "nodeType": "StructuredDocumentation",
+          "src": "58:47:2",
+          "text": "IBlacklist 对ERC20扩展黑名单能力"
+        },
+        "fullyImplemented": false,
+        "id": 837,
+        "linearizedBaseContracts": [
+          837
+        ],
+        "name": "IBlacklist",
+        "nameLocation": "116:10:2",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "anonymous": false,
+            "eventSelector": "61e6e66b0d6339b2980aecc6ccc0039736791f0ccde9ed512e789a7fbdd698c6",
+            "id": 811,
+            "name": "DestroyedBlackFunds",
+            "nameLocation": "137:19:2",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 810,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 807,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "_blackListedUser",
+                  "nameLocation": "165:16:2",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 811,
+                  "src": "157:24:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 806,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "157:7:2",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 809,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "_balance",
+                  "nameLocation": "188:8:2",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 811,
+                  "src": "183:13:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 808,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "183:4:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "156:41:2"
+            },
+            "src": "131:67:2"
+          },
+          {
+            "anonymous": false,
+            "eventSelector": "42e160154868087d6bfdc0ca23d96a1c1cfa32f1b72ba9ba27b69b98a0d819dc",
+            "id": 815,
+            "name": "AddedBlackList",
+            "nameLocation": "208:14:2",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 814,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 813,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "_user",
+                  "nameLocation": "231:5:2",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 815,
+                  "src": "223:13:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 812,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "223:7:2",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "222:15:2"
+            },
+            "src": "202:36:2"
+          },
+          {
+            "anonymous": false,
+            "eventSelector": "d7e9ec6e6ecd65492dce6bf513cd6867560d49544421d0783ddf06e76c24470c",
+            "id": 819,
+            "name": "RemovedBlackList",
+            "nameLocation": "248:16:2",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 818,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 817,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "_user",
+                  "nameLocation": "273:5:2",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 819,
+                  "src": "265:13:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 816,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "265:7:2",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "264:15:2"
+            },
+            "src": "242:38:2"
+          },
+          {
+            "functionSelector": "59bf1abe",
+            "id": 826,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getBlackListStatus",
+            "nameLocation": "293:18:2",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 822,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 821,
+                  "mutability": "mutable",
+                  "name": "_maker",
+                  "nameLocation": "320:6:2",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 826,
+                  "src": "312:14:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 820,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "312:7:2",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "311:16:2"
+            },
+            "returnParameters": {
+              "id": 825,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 824,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 826,
+                  "src": "351:4:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 823,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "351:4:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "350:6:2"
+            },
+            "scope": 837,
+            "src": "284:73:2",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "functionSelector": "0ecb93c0",
+            "id": 831,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "addBlackList",
+            "nameLocation": "370:12:2",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 829,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 828,
+                  "mutability": "mutable",
+                  "name": "_evilUser",
+                  "nameLocation": "392:9:2",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 831,
+                  "src": "384:17:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 827,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "384:7:2",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "383:19:2"
+            },
+            "returnParameters": {
+              "id": 830,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "411:0:2"
+            },
+            "scope": 837,
+            "src": "361:51:2",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "functionSelector": "e4997dc5",
+            "id": 836,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "removeBlackList",
+            "nameLocation": "425:15:2",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 834,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 833,
+                  "mutability": "mutable",
+                  "name": "_clearedUser",
+                  "nameLocation": "450:12:2",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 836,
+                  "src": "442:20:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 832,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "442:7:2",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "441:22:2"
+            },
+            "returnParameters": {
+              "id": 835,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "472:0:2"
+            },
+            "scope": 837,
+            "src": "416:57:2",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 838,
+        "src": "106:369:2",
+        "usedErrors": []
+      }
+    ],
+    "src": "32:444:2"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.8.13+commit.abaa5c0e.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.6",
+  "updatedAt": "2022-04-07T17:22:06.051Z",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "notice": "IBlacklist 对ERC20扩展黑名单能力",
+    "version": 1
+  }
+}

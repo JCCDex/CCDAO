@@ -1,0 +1,343 @@
+{
+  "contractName": "IERC165",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "bytes4",
+          "name": "_interfaceID",
+          "type": "bytes4"
+        }
+      ],
+      "name": "supportsInterface",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.8.13+commit.abaa5c0e\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"bytes4\",\"name\":\"_interfaceID\",\"type\":\"bytes4\"}],\"name\":\"supportsInterface\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"details\":\"A standard for detecting smart contract interfaces. See https://goo.gl/cxQCse. get interfaceID in geth use follow command: web3.sha3(\\\"supportsInterface(bytes4)\\\", ture) web3.sha3(\\\"yourFunction(uint256,address)\\\", ture)\",\"kind\":\"dev\",\"methods\":{\"supportsInterface(bytes4)\":{\"details\":\"Checks if the smart contract includes a specific interface.\",\"params\":{\"_interfaceID\":\"The interface identifier, as specified in ERC-165.\"}}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"supportsInterface(bytes4)\":{\"notice\":\"This function uses less than 30,000 gas.\"}},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/interface/IERC165.sol\":\"IERC165\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/interface/IERC165.sol\":{\"keccak256\":\"0xdbaf76f189f2cdcad551d7c8402002f931aaa2d4ee2f374292bc408951074374\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://0fa25b6b7e4d9662c3f58a7200c4f4fa091fdf9071417ce160a0387934777b77\",\"dweb:/ipfs/QmRc3FkUWnp9Ucbengsge3edkGzc4qxPe8MH9EFV6nhSbe\"]}},\"version\":1}",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "immutableReferences": {},
+  "generatedSources": [],
+  "deployedGeneratedSources": [],
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "// SPDX-License-Identifier: MIT\npragma solidity >=0.8.0;\n\n/**\n * @dev A standard for detecting smart contract interfaces. See https://goo.gl/cxQCse.\n * get interfaceID in geth use follow command:\n * web3.sha3(\"supportsInterface(bytes4)\", ture)\n * web3.sha3(\"yourFunction(uint256,address)\", ture)\n */\ninterface IERC165 {\n  /**\n   * @dev Checks if the smart contract includes a specific interface.\n   * @notice This function uses less than 30,000 gas.\n   * @param _interfaceID The interface identifier, as specified in ERC-165.\n   */\n  function supportsInterface(bytes4 _interfaceID) external view returns (bool);\n}\n",
+  "sourcePath": "/Users/chtian/Documents/01_work/01_develope/jcc/CCDAO/contract/contracts/interface/IERC165.sol",
+  "ast": {
+    "absolutePath": "project:/contracts/interface/IERC165.sol",
+    "exportedSymbols": {
+      "IERC165": [
+        849
+      ]
+    },
+    "id": 850,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 839,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.8",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "32:24:3"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "IERC165",
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": {
+          "id": 840,
+          "nodeType": "StructuredDocumentation",
+          "src": "58:241:3",
+          "text": " @dev A standard for detecting smart contract interfaces. See https://goo.gl/cxQCse.\n get interfaceID in geth use follow command:\n web3.sha3(\"supportsInterface(bytes4)\", ture)\n web3.sha3(\"yourFunction(uint256,address)\", ture)"
+        },
+        "fullyImplemented": false,
+        "id": 849,
+        "linearizedBaseContracts": [
+          849
+        ],
+        "name": "IERC165",
+        "nameLocation": "310:7:3",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "documentation": {
+              "id": 841,
+              "nodeType": "StructuredDocumentation",
+              "src": "322:209:3",
+              "text": " @dev Checks if the smart contract includes a specific interface.\n @notice This function uses less than 30,000 gas.\n @param _interfaceID The interface identifier, as specified in ERC-165."
+            },
+            "functionSelector": "01ffc9a7",
+            "id": 848,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "supportsInterface",
+            "nameLocation": "543:17:3",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 844,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 843,
+                  "mutability": "mutable",
+                  "name": "_interfaceID",
+                  "nameLocation": "568:12:3",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 848,
+                  "src": "561:19:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes4",
+                    "typeString": "bytes4"
+                  },
+                  "typeName": {
+                    "id": 842,
+                    "name": "bytes4",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "561:6:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes4",
+                      "typeString": "bytes4"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "560:21:3"
+            },
+            "returnParameters": {
+              "id": 847,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 846,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 848,
+                  "src": "605:4:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 845,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "605:4:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "604:6:3"
+            },
+            "scope": 849,
+            "src": "534:77:3",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 850,
+        "src": "300:313:3",
+        "usedErrors": []
+      }
+    ],
+    "src": "32:582:3"
+  },
+  "legacyAST": {
+    "absolutePath": "project:/contracts/interface/IERC165.sol",
+    "exportedSymbols": {
+      "IERC165": [
+        849
+      ]
+    },
+    "id": 850,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 839,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.8",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "32:24:3"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "IERC165",
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": {
+          "id": 840,
+          "nodeType": "StructuredDocumentation",
+          "src": "58:241:3",
+          "text": " @dev A standard for detecting smart contract interfaces. See https://goo.gl/cxQCse.\n get interfaceID in geth use follow command:\n web3.sha3(\"supportsInterface(bytes4)\", ture)\n web3.sha3(\"yourFunction(uint256,address)\", ture)"
+        },
+        "fullyImplemented": false,
+        "id": 849,
+        "linearizedBaseContracts": [
+          849
+        ],
+        "name": "IERC165",
+        "nameLocation": "310:7:3",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "documentation": {
+              "id": 841,
+              "nodeType": "StructuredDocumentation",
+              "src": "322:209:3",
+              "text": " @dev Checks if the smart contract includes a specific interface.\n @notice This function uses less than 30,000 gas.\n @param _interfaceID The interface identifier, as specified in ERC-165."
+            },
+            "functionSelector": "01ffc9a7",
+            "id": 848,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "supportsInterface",
+            "nameLocation": "543:17:3",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 844,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 843,
+                  "mutability": "mutable",
+                  "name": "_interfaceID",
+                  "nameLocation": "568:12:3",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 848,
+                  "src": "561:19:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes4",
+                    "typeString": "bytes4"
+                  },
+                  "typeName": {
+                    "id": 842,
+                    "name": "bytes4",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "561:6:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes4",
+                      "typeString": "bytes4"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "560:21:3"
+            },
+            "returnParameters": {
+              "id": 847,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 846,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 848,
+                  "src": "605:4:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 845,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "605:4:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "604:6:3"
+            },
+            "scope": 849,
+            "src": "534:77:3",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 850,
+        "src": "300:313:3",
+        "usedErrors": []
+      }
+    ],
+    "src": "32:582:3"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.8.13+commit.abaa5c0e.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.6",
+  "updatedAt": "2022-04-07T17:22:06.051Z",
+  "devdoc": {
+    "details": "A standard for detecting smart contract interfaces. See https://goo.gl/cxQCse. get interfaceID in geth use follow command: web3.sha3(\"supportsInterface(bytes4)\", ture) web3.sha3(\"yourFunction(uint256,address)\", ture)",
+    "kind": "dev",
+    "methods": {
+      "supportsInterface(bytes4)": {
+        "details": "Checks if the smart contract includes a specific interface.",
+        "params": {
+          "_interfaceID": "The interface identifier, as specified in ERC-165."
+        }
+      }
+    },
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {
+      "supportsInterface(bytes4)": {
+        "notice": "This function uses less than 30,000 gas."
+      }
+    },
+    "version": 1
+  }
+}

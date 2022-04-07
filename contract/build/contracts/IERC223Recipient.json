@@ -1,0 +1,378 @@
+{
+  "contractName": "IERC223Recipient",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "from",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "value",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bytes",
+          "name": "data",
+          "type": "bytes"
+        }
+      ],
+      "name": "tokenReceived",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.8.13+commit.abaa5c0e\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"name\":\"tokenReceived\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"notice\":\"IERC223 Recipient call back hook definition\",\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/interface/IERC223Recipient.sol\":\"IERC223Recipient\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/interface/IERC223Recipient.sol\":{\"keccak256\":\"0x8de15c5eebf098760a39de55a1fb532b91f917b4a622a333bb7effb3f915aeda\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://27efaf4f714b702d644ddf57fab2675c6d826613d9fe277f59d5a24c5f671b60\",\"dweb:/ipfs/QmVyFSpFJFm2AmxDE3stGhJ7PMGXXmnWNXZFLaCCoRX6An\"]}},\"version\":1}",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "immutableReferences": {},
+  "generatedSources": [],
+  "deployedGeneratedSources": [],
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "// SPDX-License-Identifier: MIT\npragma solidity >=0.8.0;\n\n/**\nIERC223 Recipient call back hook definition\n*/\ninterface IERC223Recipient {\n  function tokenReceived(address from, uint256 value, bytes calldata data) external;\n}\n",
+  "sourcePath": "/Users/chtian/Documents/01_work/01_develope/jcc/CCDAO/contract/contracts/interface/IERC223Recipient.sol",
+  "ast": {
+    "absolutePath": "project:/contracts/interface/IERC223Recipient.sol",
+    "exportedSymbols": {
+      "IERC223Recipient": [
+        1026
+      ]
+    },
+    "id": 1027,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1015,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.8",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "32:24:7"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "IERC223Recipient",
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": {
+          "id": 1016,
+          "nodeType": "StructuredDocumentation",
+          "src": "58:50:7",
+          "text": "IERC223 Recipient call back hook definition"
+        },
+        "fullyImplemented": false,
+        "id": 1026,
+        "linearizedBaseContracts": [
+          1026
+        ],
+        "name": "IERC223Recipient",
+        "nameLocation": "119:16:7",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "functionSelector": "8943ec02",
+            "id": 1025,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "tokenReceived",
+            "nameLocation": "149:13:7",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1023,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1018,
+                  "mutability": "mutable",
+                  "name": "from",
+                  "nameLocation": "171:4:7",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1025,
+                  "src": "163:12:7",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1017,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "163:7:7",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1020,
+                  "mutability": "mutable",
+                  "name": "value",
+                  "nameLocation": "185:5:7",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1025,
+                  "src": "177:13:7",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1019,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "177:7:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1022,
+                  "mutability": "mutable",
+                  "name": "data",
+                  "nameLocation": "207:4:7",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1025,
+                  "src": "192:19:7",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_calldata_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 1021,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "192:5:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "162:50:7"
+            },
+            "returnParameters": {
+              "id": 1024,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "221:0:7"
+            },
+            "scope": 1026,
+            "src": "140:82:7",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 1027,
+        "src": "109:115:7",
+        "usedErrors": []
+      }
+    ],
+    "src": "32:193:7"
+  },
+  "legacyAST": {
+    "absolutePath": "project:/contracts/interface/IERC223Recipient.sol",
+    "exportedSymbols": {
+      "IERC223Recipient": [
+        1026
+      ]
+    },
+    "id": 1027,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1015,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.8",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "32:24:7"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "IERC223Recipient",
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": {
+          "id": 1016,
+          "nodeType": "StructuredDocumentation",
+          "src": "58:50:7",
+          "text": "IERC223 Recipient call back hook definition"
+        },
+        "fullyImplemented": false,
+        "id": 1026,
+        "linearizedBaseContracts": [
+          1026
+        ],
+        "name": "IERC223Recipient",
+        "nameLocation": "119:16:7",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "functionSelector": "8943ec02",
+            "id": 1025,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "tokenReceived",
+            "nameLocation": "149:13:7",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1023,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1018,
+                  "mutability": "mutable",
+                  "name": "from",
+                  "nameLocation": "171:4:7",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1025,
+                  "src": "163:12:7",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1017,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "163:7:7",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1020,
+                  "mutability": "mutable",
+                  "name": "value",
+                  "nameLocation": "185:5:7",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1025,
+                  "src": "177:13:7",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1019,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "177:7:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1022,
+                  "mutability": "mutable",
+                  "name": "data",
+                  "nameLocation": "207:4:7",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1025,
+                  "src": "192:19:7",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_calldata_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 1021,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "192:5:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "162:50:7"
+            },
+            "returnParameters": {
+              "id": 1024,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "221:0:7"
+            },
+            "scope": 1026,
+            "src": "140:82:7",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 1027,
+        "src": "109:115:7",
+        "usedErrors": []
+      }
+    ],
+    "src": "32:193:7"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.8.13+commit.abaa5c0e.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.6",
+  "updatedAt": "2022-04-07T17:22:06.054Z",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "notice": "IERC223 Recipient call back hook definition",
+    "version": 1
+  }
+}
