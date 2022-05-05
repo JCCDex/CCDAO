@@ -1,23 +1,24 @@
 <template>
   <div class="boxfour">
+      <a name=WebAdd></a>
       <p class="addtext">On-chain contract address</p>
       <img src="../assets/addtext.svg" class="addtextimg">
       <div class="addbox" style="left: 272px;top: 342.5px;">
           <img src="../assets/addimg.png" class="addimg">
-          <p class="addboxtext1" style="left: 42px;top: 4px;">ETH</p>
+          <p class="addboxtext1" style="left: 42px;top: 2px;">ETH</p>
           <a href="">
               <img src="../assets/rightarrow.svg" class="right">
           </a>
       </div>
       <div class="addbox" style="left: 272px;top: 443px;">
           <img src="../assets/addimg.png" class="addimg">
-          <p class="addboxtext1" style="left: 28px;top: 4px;">CCDAO</p>
+          <p class="addboxtext1" style="left: 28px;top: 2px;">CCDAO</p>
           <a href="">
               <img src="../assets/rightarrow.svg" class="right">
           </a>
       </div>
 
-      <img src="../assets/bgimg4.svg" style="width: 100%;position: relative; z-index: -1;"> 
+      <img src="../assets/bgimg4.svg" style="width: 100%;position: relative; z-index: -1;display: flex;"> 
   </div>
 </template>
 

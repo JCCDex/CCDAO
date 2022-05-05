@@ -1,12 +1,25 @@
 <template>
   <div class="boxthree">
+    <a name=ToBuy></a>
     <p class="buytext">HOW TO BUY</p>
     <img src="../assets/buytext.svg" class="buytextimg">
-    <a href="">
+    <div class="buyadd">
       <p class="buy">You can buy $CCDAO  in</p>
       <img src="../assets/buyarrow.svg" class="buyimg">
-    </a>
-    <img src="../assets/bgimg3.svg" style="width: 100%;position: relative; z-index: -1;">
+      <a href="">
+        <div href="" class="buyaddbox" style="top:25px;right: 300px;">
+          <img src="../assets/buyaddtag1.svg" class="buytag">
+          <p class="buyaddtext">Let'sDEX</p>
+        </div>
+      </a>
+      <a href="">
+        <div href="" class="buyaddbox" style="top:25px;right: 0px;">
+          <img src="../assets/buyaddtag2.svg" class="buytag">
+          <p class="buyaddtext">Uniswap</p>
+        </div>
+      </a>
+    </div>
+    <img src="../assets/bgimg3.svg" style="width: 100%;position: relative; z-index: -1;display: flex;">
   </div>
 </template>
 
@@ -24,7 +37,7 @@ export default {
 .buytext{
   left: 273px;
   top: 160px;
-  width: 304px;
+  width: 350px;
   height: 50px;
   mix-blend-mode: normal;
   color: rgba(61, 61, 59, 1);
@@ -38,9 +51,14 @@ export default {
   width: 36px;
   height: 36px;
 }
-.buy{
+.buyadd{
   left: 272px;
   top: 403px;
+  width: 919px;
+  height: 60px;
+  position: absolute;
+}
+.buy{
   width: 240px;
   height: 30px;
   mix-blend-mode: normal;
@@ -49,12 +67,39 @@ export default {
   line-height: 30px;
 }
 .buyimg{
+  left: 262px;
   position: absolute;
-  left: 534px;
-  top: 430.89px;
+  top: 28px;
   width: 16.01px;
   height: 14.09px;
   background-blend-mode: normal;
   mix-blend-mode: normal;
+}
+.buyaddbox{
+  position: absolute;
+  width: 260px;
+  height: 60px;
+  background: rgba(255, 255, 255, 1);
+  background-blend-mode: normal;
+  box-shadow: 0px 1px 5px rgba(201, 223, 240, 1);
+  border-radius: 16px;
+  mix-blend-mode: normal;
+}
+.buytag{
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  width: 30px;
+  height: 30px;
+  mix-blend-mode: normal;
+}
+.buyaddtext{
+  left: 60px;
+  top: 8px;
+  width: 77px;
+  height: 24px;
+  mix-blend-mode: normal;
+  color: rgba(23, 25, 29, 1);
+  font-size: 16px;
 }
 </style>

@@ -1,5 +1,6 @@
 <template>
 <div class="boxfive">
+  <a name=Member></a>
     <div class='memberbox'>
       <div class="memberdiv">
         <div class="membertag">
@@ -17,7 +18,7 @@
       </div>
     </div>
 
-  <img src="../assets/bgimg5.svg" style="width: 100%;position: relative; z-index: -1;"> 
+  <img src="../assets/bgimg5.svg" style="width: 100%;position: relative; z-index: -1;display: flex;"> 
 </div>
   
 </template>
@@ -71,7 +72,7 @@ export default {
 .mrtext{
   left: 10px;
   top: 200px;
-  width: 241px;
+  width: 300px;
   height: 20px;
   mix-blend-mode: normal;
   color: rgba(61, 61, 59, 1);

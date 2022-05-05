@@ -16,12 +16,12 @@
             $CCDAO &nbsp;<img src="../assets/downchart.svg">
         </button>
         <div class="ordertext">
-            <a href="">Holding</a>
-            <a href="">How to Buy</a>
-            <a href="">Countract Address</a>
+            <a href="#Holds">Holding</a>
+            <a href="#ToBuy">How to Buy</a>
+            <a href="#WebAdd">Countract Address</a>
         </div>
     </div>
-    <a href="" class="buttons" style="margin-left: 30px;margin-top: 12px;">Membership</a>
+    <a href="#Member" class="buttons" style="margin-left: 30px;margin-top: 12px;">Membership</a>
     <a href="" class="buttons" style="margin-left: 10px;margin-top: 12px;">Multi-Signers</a>
     <!-- <div class="downorder1" style="margin-left: 160px;margin-top: 12px;"> -->
     <div class="downorder1" style="margin-right: 2%;margin-top: 12px;">
@@ -30,7 +30,7 @@
             &nbsp;
             Connect Wallet
             &nbsp;
-            <img src="../assets/三角形.svg">
+            <img src="../assets/triangular.svg">
         </button>
         <div class="walletbox">
             <p>Connect Wallet</p>
@@ -201,6 +201,7 @@ export default {
         background-blend-mode: normal;
         border-radius: 21.5px;
         mix-blend-mode: normal;
+        color: rgba(255, 255, 255, 1);
         font-family: PingFangSC-Medium, sans-serif;
     }
     .ISW{
@@ -212,6 +213,7 @@ export default {
         height: 36px;
         background: rgba(255, 255, 255, 1);
         background-blend-mode: normal;
+        color: rgba(67, 162, 244, 1);
         border: 1px solid rgba(229, 232, 238, 1);
         border-radius: 18px;
         mix-blend-mode: normal;

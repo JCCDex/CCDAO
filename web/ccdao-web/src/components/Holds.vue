@@ -1,5 +1,6 @@
 <template>
     <div class="boxtwo">
+        <a name=Holds></a>
         <!-- <img src="../assets/bgimg2.svg" style="width: 100%;position: absolute; z-index: -1;"> -->
         <div>
             <p style="margin-left: 42.6%;margin-top: 8.8%;font-size: 50px;line-height: 50px;">$CCDAO</p>
@@ -32,7 +33,6 @@ export default {
 <style>
     .boxtwo{
         width: 100%;
-        mix-blend-mode: normal;
         position: relative;
         /* background-image: url("../assets/bgimg2.svg"); */
     }
