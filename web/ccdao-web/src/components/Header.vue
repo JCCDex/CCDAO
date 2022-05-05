@@ -1,7 +1,7 @@
 <template>
   <div class="box">
     <img class="boximg" src="../assets/CCDAO.svg">
-    <div class="downorder" style="margin-left: 253px;margin-top: 12px;">
+    <div class="downorder" style="margin-left: 17.5%;margin-top: 12px;">
         <button class="ComunityCss">
             Comunity &nbsp;<img src="../assets/downchart.svg">
         </button>
@@ -23,7 +23,8 @@
     </div>
     <a href="" class="buttons" style="margin-left: 30px;margin-top: 12px;">Membership</a>
     <a href="" class="buttons" style="margin-left: 10px;margin-top: 12px;">Multi-Signers</a>
-    <div class="downorder1" style="margin-left: 160px;margin-top: 12px;">
+    <!-- <div class="downorder1" style="margin-left: 160px;margin-top: 12px;"> -->
+    <div class="downorder1" style="margin-right: 2%;margin-top: 12px;">
         <button class="wallet" style="margin-left: 100px;margin-top: 0px;">
             <img src="../assets/Shape.svg">
             &nbsp;
@@ -51,14 +52,13 @@ export default {
         top: 0px;
         left: 0px;
         z-index: 1;
-        width: 1440px;
+        width: 100%;
         height: 60px;
         background: rgba(246, 249, 253, 1);
         background-blend-mode: normal;
         box-shadow: 0px 1px 5px rgba(201, 223, 240, 1);
         mix-blend-mode: normal;
         position: fixed;
-
     }
     .boximg{
         margin-left: 47px;
@@ -149,7 +149,7 @@ export default {
         width: 300px;
         height: auto;
         position:  relative;
-        float: left;
+        float: right;
         font-family: PingFangSC-Medium, sans-serif;
     }
     .downorder1:hover .walletbox{
@@ -180,6 +180,7 @@ export default {
         font-family: PingFangSC-Medium, sans-serif;
     }
     .downorder1 p{
+        position: relative;
         margin-left: auto;
         margin-right: auto;
         margin-top: 24px;

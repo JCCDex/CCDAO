@@ -1,5 +1,6 @@
 <template>
     <div class="boxone">
+        <img src="../assets/bgimg1.svg" style="width: 100%;position: absolute; z-index: -1;">
         <p class="wel" style="margin-left: 141px;margin-top: 134px;">Welcome&nbsp;to</p>
         <p class="tagCCDAO" style="margin-left: 141px;margin-top: 176px;">CCDAO&nbsp;Community</p>
         <p class="tagtext" style="margin-left: 141px;margin-top: 234px;">A&nbsp;Community&nbsp;to&nbsp;improve&nbsp;Cross&nbsp;Chain&nbsp;experience</p>
@@ -11,7 +12,7 @@
             <h1 style="left:20px;top:30px">{{num.toLocaleString()}}</h1>
             <h1 style="left:245px;top:30px">{{value.toLocaleString()}}</h1>
         </button>
-        <img src="../assets/stars.svg" style="margin-left: 100px;margin-top: 198px;">
+        <img src="../assets/stars.svg" style="margin-left: 6.9%;margin-top: 13.7%;width: 88.7%;height: 73%">
     </div>
 </template>
 
@@ -29,13 +30,10 @@ export default {
 
 <style>
     .boxone{
-        left: 0px;
-        top: 0px;
-        width: 1440px;
-        height: 900px;
+        width: 100%;
         mix-blend-mode: normal;
-        position: absolute;
-        background-image: url(../assets/bgimg1.svg);
+        /* background-image: url(../assets/bgimg1.svg);
+        background-size: 100% 100%; */
     }
     .wel{
         width: 222px;

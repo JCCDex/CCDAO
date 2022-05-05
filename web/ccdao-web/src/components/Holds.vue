@@ -1,24 +1,24 @@
 <template>
     <div class="boxtwo">
-        <p style="margin-left: 614px;margin-top: 80px;font-size: 50px;line-height: 50px;
-        font-family: PingFangSC-Medium, sans-serif;">$CCDAO</p>
-        <p style="margin-left: 628.5px;margin-top: 150px;font-size: 40px;line-height: 50px;
-        font-family: PingFangSC-Semibold, sans-serif;">HOLDING</p>
-        <div class="hold">
+        <!-- <img src="../assets/bgimg2.svg" style="width: 100%;position: absolute; z-index: -1;"> -->
+        <div>
+            <p style="margin-left: 42.6%;margin-top: 8.8%;font-size: 50px;line-height: 50px;">$CCDAO</p>
+            <p style="margin-left: 43.6%;margin-top: 16.6%;font-size: 40px;line-height: 50px;">HOLDING</p>
+        </div>
+        <div class="holdout">
+            <div class="hold">
             <div class="holdbox">
                 <img src="../assets/tag.svg" style="position: absolute;">
-                <p style="margin-left: 160px;margin-top: 20px;font-size: 14px;line-height: 40px;
-        font-family: PingFangSC-Semibold, sans-serif;">ETH chain Positions</p>
-                <p style="margin-left: 160px;margin-top: 60px;font-size: 30px;
-        font-family: PingFangSC-Semibold, sans-serif;">1000000CCDAO</p>
+                <p style="margin-left: 160px;margin-top: 20px;font-size: 14px;line-height: 40px;">ETH chain Positions</p>
+                <p style="margin-left: 160px;margin-top: 60px;font-size: 30px;">1000000CCDAO</p>
             </div>
             <div class="holdbox" style="margin-top:50px;">
                 <img src="../assets/tag.svg" style="position: absolute;">
-                <p style="margin-left: 160px;margin-top: 20px;font-size: 14px;line-height: 40px;
-        font-family: PingFangSC-Semibold, sans-serif;"> SWTC chain Positions</p>
-                <p style="margin-left: 160px;margin-top: 60px;font-size: 30px;
-        font-family: PingFangSC-Semibold, sans-serif;">1000000CCDAO</p>
+                <p style="margin-left: 160px;margin-top: 20px;font-size: 14px;line-height: 40px;"> SWTC chain Positions</p>
+                <p style="margin-left: 160px;margin-top: 60px;font-size: 30px;">1000000CCDAO</p>
             </div>
+            </div>
+        <img src="../assets/bgimg2.svg" style="width: 100%;position: relative; z-index: -1;"> 
         </div>
     </div>
 </template>
@@ -31,23 +31,27 @@ export default {
 
 <style>
     .boxtwo{
-        left: 0px;
-        top: 901px;
-        width: 1440px;
-        height: 900px;
-        position: absolute;
-        background-image: url("../assets/bgimg2.svg");
+        width: 100%;
+        mix-blend-mode: normal;
+        position: relative;
+        /* background-image: url("../assets/bgimg2.svg"); */
     }
-    .boxtwo p{
+    p{
         width: 183px;
         height: 50px;
         mix-blend-mode: normal;
-        color: rgba(255, 255, 255, 1);
+        font-family: PingFangSC-Semibold, sans-serif;
         position: absolute;
+        color: rgba(255, 255, 255, 1);
+    }
+    .holdout{
+        display: flex;
+        justify-content: center;
     }
     .hold{
-        margin-left: 420px;
-        margin-top: 285px;
+        /* margin-left: 29.1%; */
+        position: absolute;
+        margin-top: 30%;
         width: 600px;
         height: 290px;
     }
