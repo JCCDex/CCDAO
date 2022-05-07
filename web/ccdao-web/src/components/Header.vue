@@ -34,16 +34,85 @@
         </button>
         <div class="walletbox">
             <p>Connect Wallet</p>
-            <button class="CM">Connect MetaMask</button>
-            <button class="ISW">Import SWTC Wallet</button>
+
+            <!-- <button class="WB" style="margin-left: 20px;">Connect MetaMask</button> -->
+            <el-button @click="dialogVisible1=true,dlbtbool1=true,dlbtbool2=false"
+             class="WB" style="margin-left: 20px;">Connect MetaMask</el-button>
+            <!-- <button class="WB" style="margin-left: 20px;margin-top: 30px;">Import SWTC Wallet</button> -->
+            <el-button @click="dialogVisible1=true,dlbtbool1=false,dlbtbool2=true"
+             class="WB" style="margin-left: 20px;margin-top: 30px;">Import SWTC Wallet</el-button> 
         </div>
     </div>
+    <!-- 对话框1 -->
+         <el-dialog class="dlcss"
+        :visible.sync="dialogVisible1"
+        :show-close="false"
+        >
+          <div slot="title" class="dltitle">
+              <p>导入SWTC钱包</p>
+          </div>
+          <div class="dlbox">
+              <div class="dlbts">
+                  <el-button class="dlbt" @click="dlbtbool1=true,dlbtbool2=false"
+                   style="border-top-left-radius: 25px;border-bottom-left-radius: 25px;">SWTC钱包密钥</el-button>
+                  <el-button class="dlbt" @click="dlbtbool2=true,dlbtbool1=false"
+                   style="border-top-right-radius: 25px;border-bottom-right-radius: 25px;">SWTC文件</el-button>
+                  <el-input v-show="dlbtbool1"
+                    class="dlinput"
+                    type="textarea"
+                    :rows="2"
+                    placeholder="请输入SWTC钱包密钥"
+                    v-model="textarea">
+                  </el-input>
+                  <el-input v-show="dlbtbool2"
+                    class="dlupload"
+                    placeholder="点击导入SWTC文件"
+                    type="file"
+                    v-model="uploadfile">
+                   </el-input>
+              </div>
+          </div>
+          <span slot="footer">
+            <el-button class="fobt" @click="dialogVisible1 = false">取 消</el-button>
+            <el-button class="fobt" type="primary" @click="dialogVisible1 = false,dialogVisible2=true">确 定</el-button>
+          </span>
+        </el-dialog>
+
+        <el-dialog class="dlcss"
+        :visible.sync="dialogVisible2"
+        :show-close="false"
+        >
+          <div slot="title" class="dltitle">
+              <p>交易密码</p>
+          </div>
+          <div class="dlbox">
+              <el-input placeholder="请输入密码" v-model="password"
+               show-password=“true” clearable="true"></el-input>
+          </div>
+          <span slot="footer">
+            <el-button class="fobt" @click="dialogVisible2 = false">取 消</el-button>
+            <el-button class="fobt" type="primary" @click="dialogVisible2=false">确 定</el-button>
+          </span>
+        </el-dialog>
+
   </div>
 </template>
 
 <script>
 export default {
-    name:'Header'
+    name:'Header',
+    data() {
+        return {
+            dialogVisible1:false,
+            dlbtbool1:false,
+            textarea:"",
+            dlbtbool2:false,
+            uploadfile:"",
+            dialogVisible2:false,
+            password:""
+
+        }
+    }
 }
 </script>
 
@@ -176,7 +245,7 @@ export default {
         box-shadow: 2px 2px 6px rgba(225, 229, 234, 1);
         border-radius: 16px;
         mix-blend-mode: normal;
-        display: none;
+        display: block;
         font-family: PingFangSC-Medium, sans-serif;
     }
     .downorder1 p{
@@ -192,9 +261,21 @@ export default {
         font-size: 16px;
         font-family: PingFangSC-Medium, sans-serif;
     }
-    .CM{
+    .WB{
+        font-family: PingFangSC-Medium, sans-serif;
         border: none;
-        margin-left: 20px;
+        width: 260px;
+        height: 40px;
+        background: rgba(255, 255, 255, 1);
+        background-blend-mode: normal;
+        color: rgba(67, 162, 244, 1);
+        border: 1px solid rgba(229, 232, 238, 1);
+        border-radius: 18px;
+        mix-blend-mode: normal;
+
+    }
+    .WB:hover{
+        border: none;
         width: 260px;
         height: 40px;
         background: rgba(67, 162, 244, 1);
@@ -204,19 +285,89 @@ export default {
         color: rgba(255, 255, 255, 1);
         font-family: PingFangSC-Medium, sans-serif;
     }
-    .ISW{
-        font-family: PingFangSC-Medium, sans-serif;
-        margin-left: 20px;
-        margin-top: 30px;
-        border: none;
-        width: 262px;
-        height: 36px;
+    .dlcss{
+        position: absolute;
+        width: 360px;
+        height: 320px;
         background: rgba(255, 255, 255, 1);
         background-blend-mode: normal;
-        color: rgba(67, 162, 244, 1);
-        border: 1px solid rgba(229, 232, 238, 1);
-        border-radius: 18px;
+        border: 1px solid rgba(237, 241, 246, 1);
+        border-radius: 16px;
         mix-blend-mode: normal;
+    }
+    .dltitle{
+        display: flex;
+        justify-content: center;
+        
+        width: 360px;
+        height: 50px;
+        background: rgba(246, 249, 253, 1);
+        background-blend-mode: normal;
+        border-radius: 16px, 16px, 0px, 0px;
+        mix-blend-mode: normal;
+    }
+    .dltitle p{
+        width: 155px;
+        height: 20px;
+        mix-blend-mode: normal;
+        color: rgba(52, 63, 93, 1);
+        font-size: 16px;
+        line-height: 20px;
+    }
+    .dlbox{
+        width: 320px;
+        height: 150px;
 
+    }
+    .dlbts{
+        position: relative;
+        width: 320px;
+        height: 40px;
+    }
+    .dlbt{
+        width: 160px;
+        height: 40px;
+        background-blend-mode: normal;
+        mix-blend-mode: normal;
+        font-family: PingFangSC-Medium, sans-serif;
+        border: 1px solid rgba(216, 230, 254, 1);
+        background: rgba(242, 246, 253, 1);
+        color: rgba(120, 127, 147, 1);
+    }
+    .dlbt :hover{
+        background: rgba(74.35800000000002, 147.0636, 206.55, 1);
+        color: rgba(255, 255, 255, 1);
+    } 
+    .dlinput {
+        width: 320px;
+        height: 80px;
+        background: rgba(255, 255, 255, 1);
+        background-blend-mode: normal;
+        border: 1px solid rgba(220, 230, 242, 1);
+        border-radius: 12px;
+        mix-blend-mode: normal;
+    }
+    .dlupload{
+        width: 320px;
+        height: 50px;
+        background: rgba(209, 230, 248, 1);
+        background-blend-mode: normal;
+        border: 1px solid rgba(220, 230, 242, 1);
+        border-radius: 25px;
+        mix-blend-mode: normal;
+    }
+    .fobt{
+        width: 100px;
+        height: 40px;
+        background: rgba(255, 255, 255, 1);
+        background-blend-mode: normal;
+        border: 1px solid rgba(178, 187, 200, 1);
+        border-radius: 25px;
+        mix-blend-mode: normal;
+        color: rgba(118, 133, 154, 1);
+    }
+    .fobt :hover{
+        background: rgba(67.00000000000001, 162.00000000000003, 244, 1);
+        color: rgba(255, 255, 255, 1);
     }
 </style>
