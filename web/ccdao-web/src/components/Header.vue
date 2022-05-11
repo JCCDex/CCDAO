@@ -22,97 +22,222 @@
         </div>
     </div>
     <a href="#Member" class="buttons" style="margin-left: 30px;margin-top: 12px;">Membership</a>
-    <a href="" class="buttons" style="margin-left: 10px;margin-top: 12px;">Multi-Signers</a>
+    <a href="#Signers" class="buttons" style="margin-left: 10px;margin-top: 12px;">Multi-Signers</a>
     <!-- <div class="downorder1" style="margin-left: 160px;margin-top: 12px;"> -->
     <div class="downorder1" style="margin-right: 2%;margin-top: 12px;">
         <button class="wallet" style="margin-left: 100px;margin-top: 0px;">
-            <img src="../assets/Shape.svg">
-            &nbsp;
-            Connect Wallet
-            &nbsp;
-            <img src="../assets/triangular.svg">
+            <img src="../assets/connectwallet.svg" v-show="loginnum==0">
+            <img src="../assets/mywallet.svg" v-show="loginnum!=0">
         </button>
         <div class="walletbox">
-            <p>Connect Wallet</p>
+            <div v-show="loginnum==1||loginnum==3">
+                <div style="display: flex;margin-top:20px;margin-left:20px">
+                    <img src="../assets/MetaMaketag.svg">
+                    <p style="margin:0px;color: rgba(146, 146, 146, 1);">ETH  Wallet Address</p>
+                </div>
+                <div style="width:270px;margin-top:10px;margin-left:20px;height:60px;">
+                    <span style="word-wrap:break-word ;font-size: 14px;line-height: 24px;">{{MetaMaskaddr}}</span>
+                    <span style="float: right;margin-right:17px;margin-top:5px;
+                    font-size: 12px;color: rgba(71, 116, 175, 1);">Switch ETH Wallet</span>
+                </div>
+            </div>
+            <div v-show="loginnum==2||loginnum==3">
+                <div style="display: flex;margin-top:20px;margin-left:20px">
+                    <img src="../assets/SWTCtag.svg">
+                    <p style="margin:0px;color: rgba(146, 146, 146, 1);">SWTC Wallet Address</p>
+                </div>
+                <div style="width:270px;margin-top:10px;margin-left:20px;height:60px;">
+                    <span style="word-wrap:break-word ;font-size: 14px;line-height: 24px;">{{Walletaddr}}</span>
+                    <span style="float: right;margin-right:17px;margin-top:5px;
+                    font-size: 12px;color: rgba(71, 116, 175, 1);">Switch ETH Wallet</span>
+                </div>
+            </div>
+            <div v-show="loginnum!=0" style="position: absolute;
+                top:115px;width: 260px;height: 1px;background: rgba(231, 231, 233, 1);
+            margin-left:20px"></div>
 
-            <!-- <button class="WB" style="margin-left: 20px;">Connect MetaMask</button> -->
-            <el-button @click="dialogVisible1=true,dlbtbool1=true,dlbtbool2=false"
-             class="WB" style="margin-left: 20px;">Connect MetaMask</el-button>
-            <!-- <button class="WB" style="margin-left: 20px;margin-top: 30px;">Import SWTC Wallet</button> -->
-            <el-button @click="dialogVisible1=true,dlbtbool1=false,dlbtbool2=true"
-             class="WB" style="margin-left: 20px;margin-top: 30px;">Import SWTC Wallet</el-button> 
+            <p v-show="loginnum==0" style="margin-bottom:0px">Connect Wallet</p>
+            <button v-show="loginnum==2 || loginnum==0"
+             class="WB" style="margin-left: 20px;margin-top: 25px;" @click="loginMetaMask()">Connect MetaMask</button>
+            <button v-show="loginnum==1 || loginnum==0"
+             @click="dialogVisible1=true,n=0,dlinput=true,dlimport=false"
+             class="WB" style="margin-left: 20px;margin-top: 25px;">Import SWTC Wallet</button> 
         </div>
-    </div>
-    <!-- 对话框1 -->
-         <el-dialog class="dlcss"
-        :visible.sync="dialogVisible1"
-        :show-close="false"
-        >
-          <div slot="title" class="dltitle">
-              <p>导入SWTC钱包</p>
+
+        <el-dialog
+          title="导入SWTC钱包"
+          :visible.sync="dialogVisible1"
+          width='360px'
+          :show-close='false'
+          :center='true'
+          :modal-append-to-body='false'>
+          <div class="dlbtcss">
+              <button :class="dlbts1" @click="n=0,dlinput=true,dlimport=false" 
+              style="border-top-left-radius: 25px;border-bottom-left-radius: 25px;">SWTC钱包密钥</button>
+              <button :class="dlbts2" @click="n=1,dlinput=false,dlimport=true" 
+              style="border-top-right-radius: 25px;border-bottom-right-radius: 25px;">SWTC文件</button>
           </div>
-          <div class="dlbox">
-              <div class="dlbts">
-                  <el-button class="dlbt" @click="dlbtbool1=true,dlbtbool2=false"
-                   style="border-top-left-radius: 25px;border-bottom-left-radius: 25px;">SWTC钱包密钥</el-button>
-                  <el-button class="dlbt" @click="dlbtbool2=true,dlbtbool1=false"
-                   style="border-top-right-radius: 25px;border-bottom-right-radius: 25px;">SWTC文件</el-button>
-                  <el-input v-show="dlbtbool1"
-                    class="dlinput"
-                    type="textarea"
-                    :rows="2"
-                    placeholder="请输入SWTC钱包密钥"
-                    v-model="textarea">
-                  </el-input>
-                  <el-input v-show="dlbtbool2"
-                    class="dlupload"
-                    placeholder="点击导入SWTC文件"
-                    type="file"
-                    v-model="uploadfile">
-                   </el-input>
+          <div class="dlcss" v-show="dlinput">
+              <div style="width:320px">
+              <el-input
+              class="dltext"
+                type="textarea"
+                :rows="2"
+                placeholder="请输入SWTC钱包密钥"
+                v-model="textarea">
+              </el-input>
               </div>
           </div>
-          <span slot="footer">
-            <el-button class="fobt" @click="dialogVisible1 = false">取 消</el-button>
-            <el-button class="fobt" type="primary" @click="dialogVisible1 = false,dialogVisible2=true">确 定</el-button>
+          <div class="dlcss" v-show="dlimport">
+              <button class="importbtcss">
+                  <p v-show="filebool">点击导入SWTC文件</p>
+                  <div v-show="!filebool" style="display: flex;justify-content: center;">
+                      <p style="color: rgba(0, 0, 0, 1);margin-left:0px">{{filename}}</p>
+                      <img src="../assets/cleartag.svg" @click="clearFile()">
+                  </div>
+                  <input type="file" @change="importFile" v-show="filebool">
+              </button>
+          </div>
+        <!-- 输入钱包密钥 -->
+          <span v-show="dlinput" slot="footer" class="dialog-footer" style="width:320px;display: flex;justify-content: space-between;">
+            <el-button @click="dialogVisible1 = false">取 消</el-button>
+            <el-button type="primary" @click="dialogVisible1 = false,dialogVisible2 = true" :disabled="isInputbool">确 定</el-button>
+          </span>
+          <!-- 导入SWTC钱包 -->
+           <span v-show="dlimport" slot="footer" class="dialog-footer" style="width:320px;display: flex;justify-content: space-between;">
+            <el-button @click="dialogVisible1 = false">取 消</el-button>
+            <el-button type="primary" @click="dialogVisible1 = false,dialogVisible2 = true" :disabled="isInputbool1">确 定</el-button>
           </span>
         </el-dialog>
 
-        <el-dialog class="dlcss"
-        :visible.sync="dialogVisible2"
-        :show-close="false"
-        >
-          <div slot="title" class="dltitle">
-              <p>交易密码</p>
+        <el-dialog
+          title="交易密码"
+          :visible.sync="dialogVisible2"
+          width='360px'
+          :show-close='false'
+          :center='true'
+          :modal-append-to-body='false'>
+
+          <div style="width:360px;padding-top: 80px;padding-left: 20px;padding-right: 20px;">
+          <el-input placeholder="请输入密码" v-model="password" show-password clearable></el-input>
           </div>
-          <div class="dlbox">
-              <el-input placeholder="请输入密码" v-model="password"
-               show-password=“true” clearable="true"></el-input>
-          </div>
-          <span slot="footer">
-            <el-button class="fobt" @click="dialogVisible2 = false">取 消</el-button>
-            <el-button class="fobt" type="primary" @click="dialogVisible2=false">确 定</el-button>
+
+          <span slot="footer" class="dialog-footer" 
+          style="width:320px;display: flex;justify-content: space-between;padding-top:15px">
+            <el-button @click="dialogVisible2 = false">取 消</el-button>
+            <!-- <el-button type="primary" @click="dialogVisible2 = false">确 定</el-button> -->
+            <el-button type="primary" @click="createWallet(),dialogVisible2=false" :disabled="isPassbool">确 定</el-button>
           </span>
         </el-dialog>
 
+    </div>
   </div>
 </template>
 
 <script>
+import { jtWallet } from 'jcc_wallet'
+import { importFile } from "jcc_file";
+import { JingchangWallet } from 'jcc_wallet'
+
 export default {
     name:'Header',
+    async created() {
+        let value;
+        let wallet;
+        this.loginMetaMask();
+        value=JingchangWallet.get();
+        if(value!=null){
+            wallet=new JingchangWallet(JSON.parse(value));
+            this.Walletaddr=await wallet.getAddress();
+            this.loginnum+=2;
+        }
+
+    },
     data() {
         return {
             dialogVisible1:false,
-            dlbtbool1:false,
             textarea:"",
-            dlbtbool2:false,
-            uploadfile:"",
-            dialogVisible2:false,
-            password:""
+            n:0,
+            dlinput:false,
+            dlimport:false,
 
+            dialogVisible2:false,
+            password:"",
+
+            filename:"",
+            file:undefined,
+
+            Walletaddr:"",
+            MetaMaskaddr:"",
+
+            loginnum:0,
         }
-    }
+    },
+    computed:{
+        dlbts1(){
+            return this.n==0?"dlbt1":"dlbt";
+        },
+        dlbts2(){
+            return this.n==1?"dlbt1":"dlbt";
+        },
+        isInputbool(){
+            return jtWallet.isValidSecret(this.textarea)?false:true;
+        },
+        isInputbool1(){
+            return this.filename==""?true && this.dlimport : false && this.dlimport;
+        },
+        isPassbool(){
+            return this.password==""?true:false;
+        },
+        filebool(){
+            return this.filename==""?true && this.dlimport : false && this.dlimport;
+        }
+    },
+    methods: {
+        async loginMetaMask(){
+            if(typeof window.ethereum !== undefined){
+                let addr= await ethereum.request({method:'eth_requestAccounts'});
+                this.MetaMaskaddr=addr[0];
+                this.loginnum+=1;
+            }
+            else{
+                console.log('未安装插件')
+            }
+        },
+        clearFile(){
+            this.filename="";
+        },
+        async importFile(e){
+            this.filename=e.target.files[0].name;
+            this.file=e
+        },
+        async createWallet(){
+            let value;
+            let wallet;
+            if(this.dlinput){
+                value=await JingchangWallet.generate(this.password,this.textarea);
+                JingchangWallet.save(value);
+                this.password=""
+                wallet=new JingchangWallet(value);
+                
+            }else{
+                value=await importFile(this.file);
+                wallet=new JingchangWallet(JSON.parse(value));
+                let secret;
+                 try {
+                  secret = await wallet.getSecretWithType(this.password);
+
+                 } catch (error) {
+                   console.log("错误！");
+                   return;
+                 }
+                JingchangWallet.save(value);
+                this.password="";
+            }
+            this.loginnum+=2;
+            this.Walletaddr=await wallet.getAddress();
+        },
+    },
 }
 </script>
 
@@ -236,6 +361,7 @@ export default {
         font-family: PingFangSC-Medium, sans-serif;
     }
     .walletbox{
+        position: relative;
         margin-top: 12px;
         width: 300px;
         height: 220px;
@@ -245,7 +371,7 @@ export default {
         box-shadow: 2px 2px 6px rgba(225, 229, 234, 1);
         border-radius: 16px;
         mix-blend-mode: normal;
-        display: block;
+        display: none;
         font-family: PingFangSC-Medium, sans-serif;
     }
     .downorder1 p{
@@ -285,43 +411,11 @@ export default {
         color: rgba(255, 255, 255, 1);
         font-family: PingFangSC-Medium, sans-serif;
     }
-    .dlcss{
-        position: absolute;
-        width: 360px;
-        height: 320px;
-        background: rgba(255, 255, 255, 1);
-        background-blend-mode: normal;
-        border: 1px solid rgba(237, 241, 246, 1);
-        border-radius: 16px;
-        mix-blend-mode: normal;
-    }
-    .dltitle{
+    .dlbtcss{
+        margin-top: 20px;
+        bottom: 30px;
         display: flex;
         justify-content: center;
-        
-        width: 360px;
-        height: 50px;
-        background: rgba(246, 249, 253, 1);
-        background-blend-mode: normal;
-        border-radius: 16px, 16px, 0px, 0px;
-        mix-blend-mode: normal;
-    }
-    .dltitle p{
-        width: 155px;
-        height: 20px;
-        mix-blend-mode: normal;
-        color: rgba(52, 63, 93, 1);
-        font-size: 16px;
-        line-height: 20px;
-    }
-    .dlbox{
-        width: 320px;
-        height: 150px;
-
-    }
-    .dlbts{
-        position: relative;
-        width: 320px;
         height: 40px;
     }
     .dlbt{
@@ -334,20 +428,24 @@ export default {
         background: rgba(242, 246, 253, 1);
         color: rgba(120, 127, 147, 1);
     }
-    .dlbt :hover{
+    .dlbt1{
+        width: 160px;
+        height: 40px;
+        background-blend-mode: normal;
+        mix-blend-mode: normal;
+        font-family: PingFangSC-Medium, sans-serif;
+        border: 1px solid rgba(216, 230, 254, 1);
         background: rgba(74.35800000000002, 147.0636, 206.55, 1);
         color: rgba(255, 255, 255, 1);
-    } 
-    .dlinput {
-        width: 320px;
-        height: 80px;
-        background: rgba(255, 255, 255, 1);
-        background-blend-mode: normal;
-        border: 1px solid rgba(220, 230, 242, 1);
-        border-radius: 12px;
-        mix-blend-mode: normal;
     }
-    .dlupload{
+    .dlcss{
+        margin-top: 30px;
+        display: flex;
+        justify-content: center;
+    }
+    .importbtcss{
+        position: relative;
+        margin-top: 20px;
         width: 320px;
         height: 50px;
         background: rgba(209, 230, 248, 1);
@@ -356,18 +454,22 @@ export default {
         border-radius: 25px;
         mix-blend-mode: normal;
     }
-    .fobt{
-        width: 100px;
-        height: 40px;
-        background: rgba(255, 255, 255, 1);
-        background-blend-mode: normal;
-        border: 1px solid rgba(178, 187, 200, 1);
-        border-radius: 25px;
+    .importbtcss p{
+        margin-top: 12px;
+        width: 155px;
+        height: 21px;
         mix-blend-mode: normal;
-        color: rgba(118, 133, 154, 1);
+        color: rgba(43, 53, 81, 1);
+        font-size: 14px;
     }
-    .fobt :hover{
-        background: rgba(67.00000000000001, 162.00000000000003, 244, 1);
-        color: rgba(255, 255, 255, 1);
+    .importbtcss input{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 50px;
+        cursor: pointer;
+        opacity: 0;
     }
+
 </style>

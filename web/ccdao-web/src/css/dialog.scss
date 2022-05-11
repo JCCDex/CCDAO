@@ -1,0 +1,93 @@
+.el-dialog{
+    width: 360px;
+    height: 320px;
+    background: rgba(255, 255, 255, 1);
+    background-blend-mode: normal;
+    border-radius: 16px;
+    mix-blend-mode: normal;
+}
+.el-dialog__header {
+    padding: 0px;
+    width: 360px;
+    height: auto;
+    background: rgba(246, 249, 253, 1);
+    background-blend-mode: normal;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    mix-blend-mode: normal;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+.el-dialog__title {
+    width: 155px;
+    height: 20px;
+    mix-blend-mode: normal;
+    color: rgba(52, 63, 93, 1);
+    font-size: 16px;
+    line-height: 20px;   
+}
+.el-dialog--center .el-dialog__body {
+    width: 360px;
+    height: 195px;
+    text-align: initial;
+    padding: 0px;
+}
+.el-textarea__inner {
+    width: 320px;
+    height: 80px;
+    background: rgba(255, 255, 255, 1);
+    background-blend-mode: normal;
+    border: 1px solid rgba(220, 230, 242, 1);
+    border-radius: 12px;
+    mix-blend-mode: normal;
+}
+.el-dialog__footer {
+    padding: 0px;
+    text-align: right;
+    box-sizing: border-box;
+}
+.el-button {
+    width: 100px;
+    height: 40px;
+    background: rgba(255, 255, 255, 1);
+    background-blend-mode: normal;
+    border: 1px solid rgba(178, 187, 200, 1);
+    border-radius: 25px;
+    mix-blend-mode: normal;
+}
+.el-button--primary {
+    background: rgba(67.00000000000001, 162.00000000000003, 244, 1);
+    background-blend-mode: normal;
+    border-radius: 25px;
+    mix-blend-mode: normal;
+}
+.el-dialog__footer {
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 360px;
+    height: 40px;
+}
+.el-input--suffix{
+    width: 320px;
+    height: 50px;
+    background: rgba(255, 255, 255, 1);
+    background-blend-mode: normal;
+    border: 1px solid rgba(220, 230, 242, 1);
+    border-radius: 12px;
+    mix-blend-mode: normal;
+}
+.el-input__inner {
+    width: 320px;
+    height: 50px;
+    background: rgba(255, 255, 255, 1);
+    background-blend-mode: normal;
+    border: 1px solid rgba(220, 230, 242, 1);
+    border-radius: 12px;
+    mix-blend-mode: normal;
+}
+.el-input .el-input__clear {
+    color: #A1ABB2;
+    font-size: 14px;
+    cursor: pointer;
+    transition: color .2s cubic-bezier(.645,.045,.355,1);
+}

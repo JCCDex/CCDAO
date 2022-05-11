@@ -6,7 +6,7 @@
     <ToBuy></ToBuy>
     <WebAdd></WebAdd>
     <Member></Member>
-    <Create></Create>
+    <Signers></Signers>
     <Foot></Foot>
   </div>
 </template>
@@ -18,8 +18,9 @@ import Holds from "./components/Holds"
 import ToBuy from "./components/ToBuy"
 import WebAdd from "./components/WebAdd"
 import Member from "./components/Member"
-import Create from "./components/Create"
+import Signers from "./components/Signers"
 import Foot from "./components/Foot"
+import { JingchangWallet } from 'jcc_wallet'
 
 export default {
   components:{
@@ -29,9 +30,10 @@ export default {
     ToBuy,
     WebAdd,
     Member,
-    Create,
+    Signers,
     Foot
-  }
+  },
+
 }
 </script>
 
