@@ -91,7 +91,8 @@ a {
   font-size: 14px;
 }
 .outbt {
-  top: 45px;
+  top: 36px;
+  padding-top: 9px;
   width: 120px;
   height: 140px;
   background: rgba(255, 255, 255, 1);
