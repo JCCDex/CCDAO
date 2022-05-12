@@ -1,13 +1,13 @@
 <template>
     <div class="boxone">
-        <p class="wel" style="margin-left: 141px;margin-top: 134px;">Welcome&nbsp;to</p>
-        <p class="tagCCDAO" style="margin-left: 141px;margin-top: 176px;">CCDAO&nbsp;Community</p>
-        <p class="tagtext" style="margin-left: 141px;margin-top: 234px;">A&nbsp;Community&nbsp;to&nbsp;improve&nbsp;Cross&nbsp;Chain&nbsp;experience</p>
+        <p class="wel" style="margin-left: 141px;margin-top: 134px;">{{$t("Welcome to")}}</p>
+        <p class="tagCCDAO" style="margin-left: 141px;margin-top: 176px;">{{$t("CCDAO Community")}}</p>
+        <p class="tagtext" style="margin-left: 141px;margin-top: 234px;">{{$t("A Community to improve Cross Chain experience")}}</p>
         <p class="tagCCDAO" style="margin-left: 141px;margin-top: 296px;">$CCDAO</p>
-        <p class="tagtext" style="margin-left: 141px;margin-top: 362px;">Created by Community, for the Community.</p>
+        <p class="tagtext" style="margin-left: 141px;margin-top: 362px;">{{$t("Created by Community, for the Community.")}}</p>
         <button class="numandvalue">
-            <p style="left:20px;top:0px">Total Volume Traded</p>
-            <p style="left:237px;top:0px">Fully Diluted Valuation</p>
+            <p style="left:20px;top:0px">{{$t("Total Volume Traded ")}}</p>
+            <p style="left:237px;top:0px">{{$t("Fully Diluted Valuation")}}</p>
             <h1 style="left:20px;top:30px">{{num.toLocaleString()}}</h1>
             <h1 style="left:245px;top:30px">{{value.toLocaleString()}}</h1>
         </button>

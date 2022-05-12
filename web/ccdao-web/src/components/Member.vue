@@ -4,17 +4,17 @@
     <div class='memberbox'>
       <div class="memberdiv">
         <div class="membertag">
-          <p class="texthint" style="left: 50px;top: 5px;font-size: 16px;line-height: 40px;">My CCDAO Amount</p>
+          <p class="texthint" style="left: 50px;top: 5px;font-size: 16px;line-height: 40px;">{{$t("My CCDAO Amount")}}</p>
           <p class="text" style="left: 50px;top: 30px;">2000000CCDAO</p>
-          <p class="texthint" style="left: 370px;top: 40px;font-size: 14px;">status:</p>
-          <p class="text" style="left: 420px;top: 34px;font-size: 14px;">YES</p>
+          <p class="texthint" style="left: 370px;top: 40px;font-size: 14px;">{{$t("status:")}}</p>
+          <p class="text" style="left: 420px;top: 34px;font-size: 14px;">{{$t("YES")}}</p>
           <img src="../assets/member.svg" style="position: absolute;right: 0px;">
         </div>
         <a href="">
-          <p class="mrtext">Membership Requirements</p>
+          <p class="mrtext">{{$t("Membership Requirements")}}</p>
           <img src="../assets/buyarrow.svg" class="mrimg">
         </a>
-        <p class="outtext">$CCDAO Member need to hold 10000CCDAO at least.</p>
+        <p class="outtext">{{$t("$CCDAO Member need to hold 10000CCDAO at least.")}}</p>
       </div>
     </div>
 

@@ -3,12 +3,12 @@
     <img class="boximg" src="../assets/CCDAO.svg">
     <div class="downorder" style="margin-left: 17.5%;margin-top: 12px;">
         <button class="ComunityCss">
-            Comunity &nbsp;<img src="../assets/downchart.svg">
+            {{ $t("Comunity") }} &nbsp;<img src="../assets/downchart.svg">
         </button>
         <div class="ordertext">
-            <a href="">Twitter</a>
-            <a href="">Discord</a>
-            <a href="">Telegram</a>
+            <a href="">{{ $t("Twitter") }}</a>
+            <a href="">{{ $t("Discord") }}</a>
+            <a href="">{{ $t("Telegram") }}</a>
         </div>
     </div>
     <div class="downorder" style="margin-left: 30px;margin-top: 12px;">
@@ -16,13 +16,13 @@
             $CCDAO &nbsp;<img src="../assets/downchart.svg">
         </button>
         <div class="ordertext">
-            <a href="#Holds">Holding</a>
-            <a href="#ToBuy">How to Buy</a>
-            <a href="#WebAdd">Countract Address</a>
+            <a href="#Holds">{{ $t("Holding") }}</a>
+            <a href="#ToBuy">{{ $t("How to Buy") }}</a>
+            <a href="#WebAdd">{{ $t("Contract Address") }}</a>
         </div>
     </div>
-    <a href="#Member" class="buttons" style="margin-left: 30px;margin-top: 12px;">Membership</a>
-    <a href="#Signers" class="buttons" style="margin-left: 10px;margin-top: 12px;">Multi-Signers</a>
+    <a href="#Member" class="buttons" style="margin-left: 30px;margin-top: 12px;">{{ $t("Membership") }}</a>
+    <a href="#Signers" class="buttons" style="margin-left: 10px;margin-top: 12px;">{{ $t("Multi-Signers") }}</a>
     <!-- <div class="downorder1" style="margin-left: 160px;margin-top: 12px;"> -->
     <div class="downorder1" style="margin-right: 2%;margin-top: 12px;">
         <button class="wallet" style="margin-left: 100px;margin-top: 0px;">
@@ -56,26 +56,26 @@
                 top:115px;width: 260px;height: 1px;background: rgba(231, 231, 233, 1);
             margin-left:20px"></div>
 
-            <p v-show="loginnum==0" style="margin-bottom:0px">Connect Wallet</p>
+            <p v-show="loginnum==0" style="margin-bottom:0px">{{ $t("Connect Wallet") }}</p>
             <button v-show="loginnum==2 || loginnum==0"
-             class="WB" style="margin-left: 20px;margin-top: 25px;" @click="loginMetaMask()">Connect MetaMask</button>
+             class="WB" style="margin-left: 20px;margin-top: 25px;" @click="loginMetaMask()">{{ $t("Connect MetaMask") }}</button>
             <button v-show="loginnum==1 || loginnum==0"
              @click="dialogVisible1=true,n=0,dlinput=true,dlimport=false"
-             class="WB" style="margin-left: 20px;margin-top: 25px;">Import SWTC Wallet</button> 
+             class="WB" style="margin-left: 20px;margin-top: 25px;">{{ $t("Import SWTC Wallet") }}</button> 
         </div>
 
-        <el-dialog
-          title="导入SWTC钱包"
+        <el-dialog 
           :visible.sync="dialogVisible1"
           width='360px'
           :show-close='false'
           :center='true'
           :modal-append-to-body='false'>
+          <div slot="title">{{$t('message.导入SWTC钱包')}}</div>
           <div class="dlbtcss">
               <button :class="dlbts1" @click="n=0,dlinput=true,dlimport=false" 
-              style="border-top-left-radius: 25px;border-bottom-left-radius: 25px;">SWTC钱包密钥</button>
+              style="border-top-left-radius: 25px;border-bottom-left-radius: 25px;">{{$t("SWTC钱包密钥")}}</button>
               <button :class="dlbts2" @click="n=1,dlinput=false,dlimport=true" 
-              style="border-top-right-radius: 25px;border-bottom-right-radius: 25px;">SWTC文件</button>
+              style="border-top-right-radius: 25px;border-bottom-right-radius: 25px;">{{$t("SWTC文件")}}</button>
           </div>
           <div class="dlcss" v-show="dlinput">
               <div style="width:320px">
@@ -83,14 +83,14 @@
               class="dltext"
                 type="textarea"
                 :rows="2"
-                placeholder="请输入SWTC钱包密钥"
+                :placeholder="$t('message.请输入SWTC钱包密钥')"
                 v-model="textarea">
               </el-input>
               </div>
           </div>
           <div class="dlcss" v-show="dlimport">
               <button class="importbtcss">
-                  <p v-show="filebool">点击导入SWTC文件</p>
+                  <p v-show="filebool">{{$t("点击导入SWTC文件")}}</p>
                   <div v-show="!filebool" style="display: flex;justify-content: center;">
                       <p style="color: rgba(0, 0, 0, 1);margin-left:0px">{{filename}}</p>
                       <img src="../assets/cleartag.svg" @click="clearFile()">
@@ -100,18 +100,18 @@
           </div>
         <!-- 输入钱包密钥 -->
           <span v-show="dlinput" slot="footer" class="dialog-footer" style="width:320px;display: flex;justify-content: space-between;">
-            <el-button @click="dialogVisible1 = false">取 消</el-button>
-            <el-button type="primary" @click="dialogVisible1 = false,dialogVisible2 = true" :disabled="isInputbool">确 定</el-button>
+            <el-button @click="dialogVisible1 = false">{{$t("取 消")}}</el-button>
+            <el-button type="primary" @click="dialogVisible1 = false,dialogVisible2 = true" :disabled="isInputbool">{{$t("确 定")}}</el-button>
           </span>
           <!-- 导入SWTC钱包 -->
            <span v-show="dlimport" slot="footer" class="dialog-footer" style="width:320px;display: flex;justify-content: space-between;">
-            <el-button @click="dialogVisible1 = false">取 消</el-button>
-            <el-button type="primary" @click="dialogVisible1 = false,dialogVisible2 = true" :disabled="isInputbool1">确 定</el-button>
+            <el-button @click="dialogVisible1 = false">{{$t("取 消")}}</el-button>
+            <el-button type="primary" @click="dialogVisible1 = false,dialogVisible2 = true" :disabled="isInputbool1">{{$t("确 定")}}</el-button>
           </span>
         </el-dialog>
 
         <el-dialog
-          title="交易密码"
+          :title="$t('交易密码')"
           :visible.sync="dialogVisible2"
           width='360px'
           :show-close='false'
@@ -119,14 +119,14 @@
           :modal-append-to-body='false'>
 
           <div style="width:360px;padding-top: 80px;padding-left: 20px;padding-right: 20px;">
-          <el-input placeholder="请输入密码" v-model="password" show-password clearable></el-input>
+          <el-input :placeholder="$t('请输入交易密码')" v-model="password" show-password clearable></el-input>
           </div>
 
           <span slot="footer" class="dialog-footer" 
           style="width:320px;display: flex;justify-content: space-between;padding-top:15px">
-            <el-button @click="dialogVisible2 = false">取 消</el-button>
+            <el-button @click="dialogVisible2 = false">{{$t("取 消")}}</el-button>
             <!-- <el-button type="primary" @click="dialogVisible2 = false">确 定</el-button> -->
-            <el-button type="primary" @click="createWallet(),dialogVisible2=false" :disabled="isPassbool">确 定</el-button>
+            <el-button type="primary" @click="createWallet(),dialogVisible2=false" :disabled="isPassbool">{{$t("确 定")}}</el-button>
           </span>
         </el-dialog>
 
@@ -223,9 +223,8 @@ export default {
             }else{
                 value=await importFile(this.file);
                 wallet=new JingchangWallet(JSON.parse(value));
-                let secret;
                  try {
-                  secret = await wallet.getSecretWithType(this.password);
+                  await wallet.getSecretWithType(this.password);
 
                  } catch (error) {
                    console.log("错误！");

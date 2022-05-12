@@ -4,18 +4,18 @@
         <!-- <img src="../assets/bgimg2.svg" style="width: 100%;position: absolute; z-index: -1;"> -->
         <div>
             <p style="margin-left: 42.6%;margin-top: 8.8%;font-size: 50px;line-height: 50px;">$CCDAO</p>
-            <p style="margin-left: 43.6%;margin-top: 16.6%;font-size: 40px;line-height: 50px;">HOLDING</p>
+            <p style="margin-left: 43.6%;margin-top: 16.6%;font-size: 40px;line-height: 50px;">{{$t("HOLDING")}}</p>
         </div>
         <div class="holdout">
             <div class="hold">
             <div class="holdbox">
                 <img src="../assets/tag.svg" style="position: absolute;">
-                <p style="margin-left: 160px;margin-top: 20px;font-size: 14px;line-height: 40px;">ETH chain Positions</p>
+                <p style="margin-left: 160px;margin-top: 20px;font-size: 14px;line-height: 40px;">{{$t("ETH chain Positions")}}</p>
                 <p style="margin-left: 160px;margin-top: 60px;font-size: 30px;">1000000CCDAO</p>
             </div>
             <div class="holdbox" style="margin-top:50px;">
                 <img src="../assets/tag.svg" style="position: absolute;">
-                <p style="margin-left: 160px;margin-top: 20px;font-size: 14px;line-height: 40px;"> SWTC chain Positions</p>
+                <p style="margin-left: 160px;margin-top: 20px;font-size: 14px;line-height: 40px;"> {{$t("SWTC chain Positions")}}</p>
                 <p style="margin-left: 160px;margin-top: 60px;font-size: 30px;">1000000CCDAO</p>
             </div>
             </div>

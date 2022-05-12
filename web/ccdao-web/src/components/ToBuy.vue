@@ -1,21 +1,21 @@
 <template>
   <div class="boxthree">
     <a name=ToBuy></a>
-    <p class="buytext">HOW TO BUY</p>
+    <p class="buytext">{{$t("HOW TO BUY")}}</p>
     <img src="../assets/buytext.svg" class="buytextimg">
     <div class="buyadd">
-      <p class="buy">You can buy $CCDAO  in</p>
+      <p class="buy">{{$t("You can buy $CCDAO in")}}</p>
       <img src="../assets/buyarrow.svg" class="buyimg">
       <a href="">
         <div href="" class="buyaddbox" style="top:25px;right: 300px;">
           <img src="../assets/buyaddtag1.svg" class="buytag">
-          <p class="buyaddtext">Let'sDEX</p>
+          <p class="buyaddtext">{{$t("Let' sDEX")}}</p>
         </div>
       </a>
       <a href="">
         <div href="" class="buyaddbox" style="top:25px;right: 0px;">
           <img src="../assets/buyaddtag2.svg" class="buytag">
-          <p class="buyaddtext">Uniswap</p>
+          <p class="buyaddtext">{{$t("Uniswap")}}</p>
         </div>
       </a>
     </div>
