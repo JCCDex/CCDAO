@@ -14,16 +14,9 @@ export default {};
 .foot {
   width: 100%;
   height: 60px;
-  bottom: 0%;
-  position: fixed;
-  z-index: 1;
   background: rgba(246, 249, 253, 1);
-  background-blend-mode: normal;
-  mix-blend-mode: normal;
 }
 .foottext {
-  left: 39%;
-  top: 12px;
   width: 1440px;
   height: 60px;
   color: rgba(112, 112, 112, 1);

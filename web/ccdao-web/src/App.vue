@@ -1,29 +1,31 @@
 <template>
   <div id="app">
     <Header></Header>
-    <Wel></Wel>
-    <Holds></Holds>
-    <ToBuy></ToBuy>
-    <WebAdd></WebAdd>
-    <Member></Member>
-    <Signers></Signers>
+    <div class="roll">
+      <Wel></Wel>
+      <Holds></Holds>
+      <ToBuy></ToBuy>
+      <WebAdd></WebAdd>
+      <Member></Member>
+      <Signers></Signers>
+    </div>
     <Foot></Foot>
   </div>
 </template>
 
 <script>
-import Header from "./components/Header"
-import Wel from "./components/Wel"
-import Holds from "./components/Holds"
-import ToBuy from "./components/ToBuy"
-import WebAdd from "./components/WebAdd"
-import Member from "./components/Member"
-import Signers from "./components/Signers"
-import Foot from "./components/Foot"
-import { JingchangWallet } from 'jcc_wallet'
+import Header from "./components/Header";
+import Wel from "./components/Wel";
+import Holds from "./components/Holds";
+import ToBuy from "./components/ToBuy";
+import WebAdd from "./components/WebAdd";
+import Member from "./components/Member";
+import Signers from "./components/Signers";
+import Foot from "./components/Foot";
+import { JingchangWallet } from "jcc_wallet";
 
 export default {
-  components:{
+  components: {
     Header,
     Wel,
     Holds,
@@ -31,19 +33,33 @@ export default {
     WebAdd,
     Member,
     Signers,
-    Foot
+    Foot,
   },
-
-}
+};
 </script>
 
 <style>
-body{
+#app {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#app .roll {
+  flex: 1;
+  width: 100%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  height: auto;
+}
+html {
+  height: 100%;
+}
+body {
   margin: 0px;
   padding: 0px;
-}
-.app{
-  width: 100%;
   height: 100%;
+  overflow: hidden;
 }
 </style>

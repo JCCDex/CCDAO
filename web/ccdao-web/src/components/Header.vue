@@ -293,16 +293,12 @@ export default {
 
 <style>
 .box {
-  top: 0px;
-  left: 0px;
-  z-index: 1;
   width: 100%;
   height: 60px;
   background: rgba(246, 249, 253, 1);
   background-blend-mode: normal;
   box-shadow: 0px 1px 5px rgba(201, 223, 240, 1);
   mix-blend-mode: normal;
-  position: fixed;
 }
 .boximg {
   margin-left: 47px;
