@@ -42,5 +42,11 @@
   "点击导入SWTC文件": "点击导入SWTC文件",
   "交易密码": "交易密码",
   "请输入交易密码": "请输入交易密码",
-  "CCDAO": "CCDAO"
+  "CCDAO": "CCDAO",
+  "ETH Wallet Address": "ETH Wallet Address",
+  "SWTC Wallet Address": "SWTC Wallet Address",
+  "Switch ETH Wallet": "Switch ETH Wallet",
+  "Switch SWTC Wallet": "Switch SWTC Wallet",
+  "It is is under construction...": "It is is under construction...",
+  "$CCDAO": "$CCDAO"
 }

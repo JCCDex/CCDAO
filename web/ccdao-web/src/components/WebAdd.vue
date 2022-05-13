@@ -1,23 +1,28 @@
 <template>
   <div class="boxfour">
     <a name="WebAdd"></a>
-    <div class="webAddone">
-      <p class="addtext">{{ $t("On-chain contract address") }}</p>
-      <img src="../assets/addtext.svg" class="addtextimg" />
-    </div>
-    <div class="addbox" style="left: 272px; top: 342.5px">
-      <img src="../assets/addimg.png" class="addimg" />
-      <p class="addboxtext1" style="left: 42px; top: 2px">{{ $t("ETH") }}</p>
-      <a href="">
-        <img src="../assets/rightarrow.svg" class="right" />
-      </a>
-    </div>
-    <div class="addbox" style="left: 272px; top: 443px">
-      <img src="../assets/addimg.png" class="addimg" />
-      <p class="addboxtext1" style="left: 28px; top: 2px">{{ $t("CCDAO") }}</p>
-      <a href="">
-        <img src="../assets/rightarrow.svg" class="right" />
-      </a>
+    <div class="webadd">
+      <div class="webadds">
+        <div class="webAddone">
+          <p class="addtext">{{ $t("On-chain contract address") }}</p>
+          <img src="../assets/addtext.svg" class="addtextimg" />
+        </div>
+
+        <div class="addbox" style="margin-top: 130px">
+          <img src="../assets/addimg.png" class="addimg" />
+          <p class="addboxtext1" style="left: 42px; top: 2px">{{ $t("ETH") }}</p>
+          <a href="">
+            <img src="../assets/rightarrow.svg" class="right" />
+          </a>
+        </div>
+        <div class="addbox" style="margin-top: 30px">
+          <img src="../assets/addimg.png" class="addimg" />
+          <p class="addboxtext1" style="left: 28px; top: 2px">{{ $t("CCDAO") }}</p>
+          <a href="">
+            <img src="../assets/rightarrow.svg" class="right" />
+          </a>
+        </div>
+      </div>
     </div>
 
     <img src="../assets/bgimg4.svg" style="width: 100%; position: relative; z-index: -1; display: flex" />
@@ -36,13 +41,19 @@ export default {
   mix-blend-mode: normal;
   position: relative;
 }
+.webadd {
+  width: 100%;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  padding-top: 175px;
+}
+.webadds {
+  width: 900px;
+}
 .webAddone {
   display: flex;
   align-items: center;
-  justify-content: center;
-  position: absolute;
-  left: 270px;
-  top: 175px;
 }
 .addtext {
   margin: 0px;
@@ -60,7 +71,7 @@ export default {
   height: 36px;
 }
 .addbox {
-  position: absolute;
+  position: relative;
   width: 580px;
   height: 60px;
   background: rgba(108.55350000000001, 197.289675, 252.45, 1);

@@ -2,8 +2,8 @@
   <div class="Signers">
     <a name="Signers"></a>
     <div class="signers">
-      <p>Multi-Signers</p>
-      <p>It is is under construction...</p>
+      <p>{{ $t("Multi-Signers") }}</p>
+      <p>{{ $t("It is is under construction...") }}</p>
     </div>
     <img src="../assets/createimg.svg" style="width: 100%; position: absolute; bottom: 50px" />
     <img src="../assets/signers.svg" style="width: 100%; position: relative; z-index: -1; display: flex" />

@@ -1,26 +1,32 @@
 <template>
   <div class="boxthree">
     <a name="ToBuy"></a>
-    <div class="buyone">
-      <p class="buytext">{{ $t("HOW TO BUY") }}</p>
-      <img src="../assets/buytext.svg" class="buytextimg" />
-    </div>
-    <div class="buyadd">
-      <p class="buy">{{ $t("You can buy $CCDAO in") }}</p>
-      <img src="../assets/buyarrow.svg" class="buyimg" />
-      <a href="">
-        <div href="" class="buyaddbox" style="top: 25px; right: 300px">
-          <img src="../assets/buyaddtag1.svg" class="buytag" />
-          <p class="buyaddtext">{{ $t("Let' sDEX") }}</p>
+    <div class="tobuy">
+      <div class="tobuys">
+        <div class="buyone">
+          <p class="buytext">{{ $t("HOW TO BUY") }}</p>
+          <img src="../assets/buytext.svg" class="buytextimg" />
         </div>
-      </a>
-      <a href="">
-        <div href="" class="buyaddbox" style="top: 25px; right: 0px">
-          <img src="../assets/buyaddtag2.svg" class="buytag" />
-          <p class="buyaddtext">{{ $t("Uniswap") }}</p>
+
+        <div class="buyadd">
+          <span class="buy">{{ $t("You can buy $CCDAO in") }}</span>
+          <img src="../assets/buyarrow.svg" class="buyimg" />
+          <a href="">
+            <div href="" class="buyaddbox" style="top: -10px; right: 300px">
+              <img src="../assets/buyaddtag1.svg" class="buytag" />
+              <p class="buyaddtext">{{ $t("Let' sDEX") }}</p>
+            </div>
+          </a>
+          <a href="">
+            <div href="" class="buyaddbox" style="top: -10px; right: 0px">
+              <img src="../assets/buyaddtag2.svg" class="buytag" />
+              <p class="buyaddtext">{{ $t("Uniswap") }}</p>
+            </div>
+          </a>
         </div>
-      </a>
+      </div>
     </div>
+
     <img src="../assets/bgimg3.svg" style="width: 100%; position: relative; z-index: -1; display: flex" />
   </div>
 </template>
@@ -33,14 +39,23 @@ export default {};
 .boxthree {
   width: 100%;
   position: relative;
+  font-family: PingFangSC-Medium, sans-serif;
+}
+.tobuy {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+}
+.tobuys {
+  position: relative;
+  padding-top: 150px;
 }
 .buyone {
-  position: absolute;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  left: 280px;
-  top: 170px;
+  width: 400px;
 }
 .buytext {
   margin: 0px;
@@ -56,11 +71,10 @@ export default {};
   height: 36px;
 }
 .buyadd {
-  left: 272px;
-  top: 403px;
+  margin-top: 200px;
   width: 919px;
   height: 60px;
-  position: absolute;
+  position: relative;
 }
 .buy {
   width: 240px;
@@ -71,9 +85,7 @@ export default {};
   line-height: 30px;
 }
 .buyimg {
-  left: 262px;
-  position: absolute;
-  top: 28px;
+  margin-left: 50px;
   width: 16.01px;
   height: 14.09px;
   background-blend-mode: normal;

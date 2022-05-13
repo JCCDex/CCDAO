@@ -18,7 +18,7 @@
         </div>
         <div class="fbt" style="margin-left: 10px">
           <div class="fbt1">
-            $CCDAO
+            {{ $t("$CCDAO") }}
             <img src="../assets/downchart.svg" />
           </div>
           <div class="out" style="left: 130px">
@@ -38,20 +38,22 @@
       </div>
     </div>
     <div class="wallet" style="position: relative">
-      <div v-show="walletbool" style="display: flex; align-items: flex-start; justify-content: space-between">
-        <img src="../assets/Shape.svg" style="width: 20px; height: 20px" />
-        <p style="margin: 0px; margin-left: 10px">{{ $t("Connect Wallet") }}</p>
-      </div>
+      <button class="walletbt">
+        <div v-show="walletbool" style="display: flex; align-items: flex-start; justify-content: space-between">
+          <img src="../assets/Shape.svg" style="width: 20px; height: 20px" />
+          <p style="margin: 0px; margin-left: 10px">{{ $t("Connect Wallet") }}</p>
+        </div>
 
-      <div
-        v-show="!walletbool"
-        style="color: rgba(58, 155, 232, 1); display: flex; align-items: flex-start; justify-content: space-between"
-      >
-        <img src="../assets/shaceblue.svg" style="width: 20px; height: 20px" />
-        <p style="margin: 0px; margin-left: 5px">{{ $t("My Wallet") }}</p>
-      </div>
+        <div
+          v-show="!walletbool"
+          style="color: rgba(58, 155, 232, 1); display: flex; align-items: flex-start; justify-content: space-between"
+        >
+          <img src="../assets/shaceblue.svg" style="width: 20px; height: 20px" />
+          <p style="margin: 0px; margin-left: 5px">{{ $t("My Wallet") }}</p>
+        </div>
 
-      <img src="../assets/triangular.svg" style="width: 11px; height: 5.13px" />
+        <img src="../assets/triangular.svg" style="width: 11px; height: 5.13px" />
+      </button>
 
       <div class="walletdia">
         <Dialogs @getlogin="getloginnum"></Dialogs>
@@ -141,7 +143,7 @@ a {
   margin-top: 9px;
   width: 120px;
   height: 140px;
-  background: rgba(255, 255, 255, 1);
+  background: rgba(243, 243, 243, 1);
   background-blend-mode: normal;
   border: 1px solid rgba(251, 252, 254, 1);
   box-shadow: 0px 2px 4px rgba(228, 237, 246, 0.5);
@@ -172,6 +174,16 @@ a {
   color: rgba(12, 40, 69, 1);
 }
 .wallet {
+  width: 180px;
+  height: 36px;
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0px 0px 4px 2px rgba(237, 240, 242, 1);
+  border-radius: 18px;
+  margin-right: 50px;
+  font-size: 14px;
+}
+.walletbt {
+  border: none;
   display: flex;
   justify-content: space-between;
   align-items: center;

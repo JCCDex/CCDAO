@@ -4,25 +4,44 @@
       <div v-show="loginnum == 1 || loginnum == 3">
         <div style="display: flex; margin-top: 20px; margin-left: 20px">
           <img src="../assets/MetaMaketag.svg" />
-          <p style="margin: 0px; color: rgba(146, 146, 146, 1)">ETH Wallet Address</p>
+          <p style="margin: 0px; margin-left: 10px; color: rgba(146, 146, 146, 1)">{{ $t("ETH Wallet Address") }}</p>
         </div>
         <div style="width: 270px; margin-top: 10px; margin-left: 20px; height: 60px">
           <span style="word-wrap: break-word; font-size: 14px; line-height: 24px">{{ MetaMaskaddr }}</span>
-          <span style="float: right; margin-right: 17px; margin-top: 5px; font-size: 12px; color: rgba(71, 116, 175, 1)"
-            >Switch ETH Wallet</span
+          <button
+            style="
+              background: none;
+              float: right;
+              margin-right: 17px;
+              margin-top: 5px;
+              font-size: 12px;
+              color: rgba(71, 116, 175, 1);
+            "
           >
+            {{ $t("Switch ETH Wallet") }}
+          </button>
         </div>
       </div>
       <div v-show="loginnum == 2 || loginnum == 3">
         <div style="display: flex; margin-top: 20px; margin-left: 20px">
           <img src="../assets/SWTCtag.svg" />
-          <p style="margin: 0px; color: rgba(146, 146, 146, 1)">SWTC Wallet Address</p>
+          <p style="margin: 0px; margin-left: 10px; color: rgba(146, 146, 146, 1)">{{ $t("SWTC Wallet Address") }}</p>
         </div>
         <div style="width: 270px; margin-top: 10px; margin-left: 20px; height: 60px">
           <span style="word-wrap: break-word; font-size: 14px; line-height: 24px">{{ Walletaddr }}</span>
-          <span style="float: right; margin-right: 17px; margin-top: 5px; font-size: 12px; color: rgba(71, 116, 175, 1)"
-            >Switch ETH Wallet</span
+          <button
+            @click="(dialogVisible1 = true), (n = 0), (dlinput = true), (dlimport = false)"
+            style="
+              background: none;
+              float: right;
+              margin-right: 17px;
+              margin-top: 5px;
+              font-size: 12px;
+              color: rgba(71, 116, 175, 1);
+            "
           >
+            {{ $t("Switch SWTC Wallet") }}
+          </button>
         </div>
       </div>
       <div
@@ -235,7 +254,6 @@ export default {
       let wallet;
       if (this.dlinput) {
         value = await JingchangWallet.generate(this.password, this.textarea);
-        JingchangWallet.save(value);
         this.password = "";
         wallet = new JingchangWallet(value);
       } else {
@@ -247,9 +265,12 @@ export default {
           console.log("错误！");
           return;
         }
-        JingchangWallet.save(value);
         this.password = "";
       }
+      if (this.loginnum >= 2) {
+        this.loginnum -= 2;
+      }
+      JingchangWallet.save(value);
       this.loginnum += 2;
       this.Walletaddr = await wallet.getAddress();
       this.$emit("getlogin", this.loginnum);
@@ -262,6 +283,10 @@ export default {
 </script>
 
 <style>
+button {
+  border: none;
+  cursor: pointer;
+}
 .dialogbox {
   width: 300px;
   height: 220px;

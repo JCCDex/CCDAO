@@ -3,8 +3,8 @@
     <a name="Holds"></a>
     <!-- <img src="../assets/bgimg2.svg" style="width: 100%;position: absolute; z-index: -1;"> -->
     <div class="boxtwotext">
-      <p class="p1" style="font-size: 50px; line-height: 50px">$CCDAO</p>
-      <p class="p1" style="font-size: 40px; line-height: 50px">{{ $t("HOLDING") }}</p>
+      <span class="p1" style="font-size: 50px; line-height: 50px">$CCDAO</span>
+      <span class="p1" style="font-size: 40px; line-height: 50px">{{ $t("HOLDING") }}</span>
       <div class="holdout">
         <div class="hold">
           <div class="holdbox">
@@ -41,14 +41,15 @@ export default {
   /* background-image: url("../assets/bgimg2.svg"); */
 }
 .boxtwotext {
+  padding-top: 80px;
   position: absolute;
   width: 100%;
-  top: 80px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 .p1 {
+  margin-bottom: 35px;
   mix-blend-mode: normal;
   font-family: PingFangSC-Semibold, sans-serif;
   color: rgba(255, 255, 255, 1);
