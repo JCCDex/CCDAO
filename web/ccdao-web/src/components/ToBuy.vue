@@ -1,42 +1,49 @@
 <template>
   <div class="boxthree">
-    <a name=ToBuy></a>
-    <p class="buytext">{{$t("HOW TO BUY")}}</p>
-    <img src="../assets/buytext.svg" class="buytextimg">
+    <a name="ToBuy"></a>
+    <div class="buyone">
+      <p class="buytext">{{ $t("HOW TO BUY") }}</p>
+      <img src="../assets/buytext.svg" class="buytextimg" />
+    </div>
     <div class="buyadd">
-      <p class="buy">{{$t("You can buy $CCDAO in")}}</p>
-      <img src="../assets/buyarrow.svg" class="buyimg">
+      <p class="buy">{{ $t("You can buy $CCDAO in") }}</p>
+      <img src="../assets/buyarrow.svg" class="buyimg" />
       <a href="">
-        <div href="" class="buyaddbox" style="top:25px;right: 300px;">
-          <img src="../assets/buyaddtag1.svg" class="buytag">
-          <p class="buyaddtext">{{$t("Let' sDEX")}}</p>
+        <div href="" class="buyaddbox" style="top: 25px; right: 300px">
+          <img src="../assets/buyaddtag1.svg" class="buytag" />
+          <p class="buyaddtext">{{ $t("Let' sDEX") }}</p>
         </div>
       </a>
       <a href="">
-        <div href="" class="buyaddbox" style="top:25px;right: 0px;">
-          <img src="../assets/buyaddtag2.svg" class="buytag">
-          <p class="buyaddtext">{{$t("Uniswap")}}</p>
+        <div href="" class="buyaddbox" style="top: 25px; right: 0px">
+          <img src="../assets/buyaddtag2.svg" class="buytag" />
+          <p class="buyaddtext">{{ $t("Uniswap") }}</p>
         </div>
       </a>
     </div>
-    <img src="../assets/bgimg3.svg" style="width: 100%;position: relative; z-index: -1;display: flex;">
+    <img src="../assets/bgimg3.svg" style="width: 100%; position: relative; z-index: -1; display: flex" />
   </div>
 </template>
 
 <script>
-export default {
-
-}
+export default {};
 </script>
 
 <style>
-.boxthree{
-    width: 100%;
-    position: relative;
+.boxthree {
+  width: 100%;
+  position: relative;
 }
-.buytext{
-  left: 273px;
-  top: 160px;
+.buyone {
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  left: 280px;
+  top: 170px;
+}
+.buytext {
+  margin: 0px;
   width: 350px;
   height: 50px;
   mix-blend-mode: normal;
@@ -44,21 +51,18 @@ export default {
   font-size: 46px;
   line-height: 50px;
 }
-.buytextimg{
-  position: absolute;
-  left: 593px;
-  top: 210px;
+.buytextimg {
   width: 36px;
   height: 36px;
 }
-.buyadd{
+.buyadd {
   left: 272px;
   top: 403px;
   width: 919px;
   height: 60px;
   position: absolute;
 }
-.buy{
+.buy {
   width: 240px;
   height: 30px;
   mix-blend-mode: normal;
@@ -66,7 +70,7 @@ export default {
   font-size: 20px;
   line-height: 30px;
 }
-.buyimg{
+.buyimg {
   left: 262px;
   position: absolute;
   top: 28px;
@@ -75,7 +79,7 @@ export default {
   background-blend-mode: normal;
   mix-blend-mode: normal;
 }
-.buyaddbox{
+.buyaddbox {
   position: absolute;
   width: 260px;
   height: 60px;
@@ -84,18 +88,17 @@ export default {
   box-shadow: 0px 1px 5px rgba(201, 223, 240, 1);
   border-radius: 16px;
   mix-blend-mode: normal;
+  display: flex;
+  align-items: center;
 }
-.buytag{
-  position: absolute;
-  top: 15px;
-  left: 15px;
+.buytag {
+  margin-left: 15px;
   width: 30px;
   height: 30px;
   mix-blend-mode: normal;
 }
-.buyaddtext{
-  left: 60px;
-  top: 8px;
+.buyaddtext {
+  margin-left: 15px;
   width: 77px;
   height: 24px;
   mix-blend-mode: normal;

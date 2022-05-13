@@ -15,9 +15,12 @@ export default {
 .foot {
   width: 100%;
   height: 60px;
+  bottom: 0px;
   background: rgba(246, 249, 253, 1);
   position: relative;
   text-align: center;
+  position: fixed;
+  z-index: 1;
 }
 .foottext {
   margin-top: 25px;

@@ -1,52 +1,66 @@
 <template>
-<div class="boxfive">
-  <a name=Member></a>
-    <div class='memberbox'>
-      <div class="memberdiv">
-        <div class="membertag">
-          <p class="texthint" style="left: 50px;top: 5px;font-size: 16px;line-height: 40px;">{{$t("My CCDAO Amount")}}</p>
-          <p class="text" style="left: 50px;top: 30px;">2000000CCDAO</p>
-          <p class="texthint" style="left: 370px;top: 40px;font-size: 14px;">{{$t("status:")}}</p>
-          <p class="text" style="left: 420px;top: 34px;font-size: 14px;">{{$t("YES")}}</p>
-          <img src="../assets/member.svg" style="position: absolute;right: 0px;">
+  <div class="boxfive">
+    <a name="Member"></a>
+    <div class="member">
+      <p class="membership">{{ $t("Membership") }}</p>
+      <div class="memberbox">
+        <div>
+          <p class="mca">{{ $t("My CCDAO Amount") }}</p>
+          <p class="mcanum">2000000{{ $t("CCDAO") }}</p>
         </div>
-        <a href="">
-          <p class="mrtext">{{$t("Membership Requirements")}}</p>
-          <img src="../assets/buyarrow.svg" class="mrimg">
-        </a>
-        <p class="outtext">{{$t("$CCDAO Member need to hold 10000CCDAO at least.")}}</p>
+        <div style="display: flex; align-items: center; font-size: 14px">
+          <span style="color: rgba(161, 166, 169, 1)">Status:</span
+          ><span style="color: rgba(51, 147, 230, 1); margin-right: 10px">YES</span>
+          <img src="../assets/member.svg" alt="" />
+        </div>
+
+        <div class="memberboxtext">
+          <div style="display: flex; justify-content: space-between">
+            <p style="margin: 0px; font-size: 20px">{{ $t("Membership Requirements") }}</p>
+            <img src="../assets/buyarrow.svg" style="margin-left: 30px" />
+          </div>
+          <p style="position: absolute; margin: 0px; margin-top: 30px; font-size: 30px; width: 800px">
+            {{ $t("$CCDAO Member need to hold 10000CCDAO at least.") }}
+          </p>
+        </div>
       </div>
     </div>
 
-  <img src="../assets/bgimg5.svg" style="width: 100%;position: relative; z-index: -1;display: flex;"> 
-</div>
-  
+    <img src="../assets/bgimg5.svg" style="width: 100%; position: relative; z-index: -1; display: flex" />
+  </div>
 </template>
 
 <script>
 export default {
-    name:'Member'
-}
+  name: "Member",
+};
 </script>
 
 <style>
-.boxfive{
-    width: 100%;
-    mix-blend-mode: normal;
-    position: relative;
-}
-.memberbox{
-    display: flex;
-    justify-content: center;
-}
-.memberdiv{
-  position: absolute;
-  top: 31%;
-  width: 723px;
-  height: 313px;
-}
-.membertag{
+.boxfive {
+  width: 100%;
+  mix-blend-mode: normal;
   position: relative;
+  font-family: PingFangSC-Medium, sans-serif;
+}
+.member {
+  width: 100%;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 100px;
+}
+.membership {
+  margin: 0px;
+  mix-blend-mode: normal;
+  color: black;
+  font-size: 40px;
+  line-height: 46px;
+}
+.memberbox {
+  margin-top: 150px;
   width: 600px;
   height: 120px;
   background: rgba(255, 255, 255, 1);
@@ -54,52 +68,31 @@ export default {
   box-shadow: 0px 1px 5px rgba(201, 223, 240, 1);
   border-radius: 80px;
   mix-blend-mode: normal;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 50px;
+  position: relative;
 }
-.texthint{
+.mca {
+  margin: 0%;
   background-blend-mode: normal;
   mix-blend-mode: normal;
   color: rgba(161, 166, 169, 1);
-  font-family: PingFangSC-Medium, sans-serif;
+  font-size: 16px;
+  line-height: 40px;
 }
-.text{
+.mcanum {
+  margin: 0%;
   background-blend-mode: normal;
   mix-blend-mode: normal;
   color: rgba(73, 170, 239, 1);
   font-size: 30px;
   line-height: 30px;
-  font-family: PingFangSC-Medium, sans-serif;
 }
-.mrtext{
-  left: 10px;
+.memberboxtext {
+  position: absolute;
   top: 200px;
-  width: 300px;
-  height: 20px;
-  mix-blend-mode: normal;
-  color: rgba(61, 61, 59, 1);
-  font-size: 20px;
-  line-height: 20px;
-  font-family: PingFangSC-Medium, sans-serif;
-}
-.mrimg{
-  position: absolute;
-  left: 270px;
-  top: 225px;
-  width: 16.01px;
-  height: 14.09px;
-  background-blend-mode: normal;
-  mix-blend-mode: normal;
-}
-.outtext{
-  white-space: nowrap;
-  position: absolute;
-  left: 10px;
-  top: 240px;
-  width: 711px;
-  height: 20px;
-  mix-blend-mode: normal;
-  color: rgba(61, 61, 59, 1);
-  font-size: 30px;
-  line-height: 20px;
-  font-family: PingFangSC-Medium, sans-serif;
+  left: 0px;
 }
 </style>

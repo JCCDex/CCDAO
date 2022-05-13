@@ -5,26 +5,26 @@
     <div class="boxtwotext">
       <p class="p1" style="font-size: 50px; line-height: 50px">$CCDAO</p>
       <p class="p1" style="font-size: 40px; line-height: 50px">{{ $t("HOLDING") }}</p>
-    </div>
-    <div class="holdout">
-      <div class="hold">
-        <div class="holdbox">
-          <img src="../assets/tag.svg" style="position: absolute" />
-          <p class="p2" style="margin-left: 160px; margin-top: 20px; font-size: 14px; line-height: 40px">
-            {{ $t("ETH chain Positions") }}
-          </p>
-          <p class="p2" style="margin-left: 160px; margin-top: 60px; font-size: 30px">1000000CCDAO</p>
-        </div>
-        <div class="holdbox" style="margin-top: 50px">
-          <img src="../assets/tag.svg" style="position: absolute" />
-          <p class="p2" style="margin-left: 160px; margin-top: 20px; font-size: 14px; line-height: 40px">
-            {{ $t("SWTC chain Positions") }}
-          </p>
-          <p class="p2" style="margin-left: 160px; margin-top: 60px; font-size: 30px">1000000CCDAO</p>
+      <div class="holdout">
+        <div class="hold">
+          <div class="holdbox">
+            <img src="../assets/tag.svg" style="position: absolute" />
+            <p class="p2" style="margin-left: 160px; margin-top: 20px; font-size: 14px; line-height: 40px">
+              {{ $t("ETH chain Positions") }}
+            </p>
+            <p class="p2" style="margin-left: 160px; margin-top: 60px; font-size: 30px">1000000CCDAO</p>
+          </div>
+          <div class="holdbox" style="margin-top: 50px">
+            <img src="../assets/tag.svg" style="position: absolute" />
+            <p class="p2" style="margin-left: 160px; margin-top: 20px; font-size: 14px; line-height: 40px">
+              {{ $t("SWTC chain Positions") }}
+            </p>
+            <p class="p2" style="margin-left: 160px; margin-top: 60px; font-size: 30px">1000000CCDAO</p>
+          </div>
         </div>
       </div>
-      <img src="../assets/bgimg2.svg" style="width: 100%; position: relative; z-index: -1" />
     </div>
+    <img src="../assets/bgimg2.svg" style="width: 100%; position: relative; z-index: -1; display: flex" />
   </div>
 </template>
 
@@ -67,8 +67,6 @@ export default {
 }
 .hold {
   /* margin-left: 29.1%; */
-  position: absolute;
-  margin-top: 30%;
   width: 600px;
   height: 290px;
 }
