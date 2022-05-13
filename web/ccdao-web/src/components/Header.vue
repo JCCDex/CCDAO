@@ -8,10 +8,12 @@
             {{ $t("Comunity") }}
             <img src="../assets/downchart.svg" />
           </div>
-          <div class="outbt" style="left: 0px">
-            <a href="" class="outbts">{{ $t("Twitter") }}</a>
-            <a href="" class="outbts">{{ $t("Discord") }}</a>
-            <a href="" class="outbts">{{ $t("Telegram") }}</a>
+          <div class="out" style="left: 0px">
+            <div class="outbt">
+              <a href="" class="outbts">{{ $t("Twitter") }}</a>
+              <a href="" class="outbts">{{ $t("Discord") }}</a>
+              <a href="" class="outbts">{{ $t("Telegram") }}</a>
+            </div>
           </div>
         </div>
         <div class="fbt" style="margin-left: 10px">
@@ -19,10 +21,12 @@
             $CCDAO
             <img src="../assets/downchart.svg" />
           </div>
-          <div class="outbt" style="left: 130px">
-            <a href="#Holds" class="outbts">{{ $t("Holding") }}</a>
-            <a href="#ToBuy" class="outbts">{{ $t("How to Buy") }}</a>
-            <a href="#WebAdd" class="outbts">{{ $t("Contract Address") }}</a>
+          <div class="out" style="left: 130px">
+            <div class="outbt" style="left: 130px">
+              <a href="#Holds" class="outbts">{{ $t("Holding") }}</a>
+              <a href="#ToBuy" class="outbts">{{ $t("How to Buy") }}</a>
+              <a href="#WebAdd" class="outbts">{{ $t("Contract Address") }}</a>
+            </div>
           </div>
         </div>
         <a href="#Member"
@@ -90,9 +94,15 @@ a {
   color: rgba(12, 40, 69, 1);
   font-size: 14px;
 }
-.outbt {
+.out {
+  left: 0px;
   top: 36px;
-  padding-top: 9px;
+  position: absolute;
+  display: none;
+  z-index: 9999;
+}
+.outbt {
+  margin-top: 9px;
   width: 120px;
   height: 140px;
   background: rgba(255, 255, 255, 1);
@@ -100,14 +110,11 @@ a {
   border: 1px solid rgba(251, 252, 254, 1);
   box-shadow: 0px 2px 4px rgba(228, 237, 246, 0.5);
   border-radius: 3px;
-  z-index: 9999;
-  position: absolute;
-  display: none;
 }
 .fbt:hover .fbt1 {
   background: rgba(209, 230, 248, 1);
 }
-.fbt:hover .outbt {
+.fbt:hover .out {
   display: block;
 }
 .outbts {
