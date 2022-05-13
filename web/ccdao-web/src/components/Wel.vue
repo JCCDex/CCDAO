@@ -1,7 +1,7 @@
 <template>
   <div class="community">
     <div class="content">
-      <div class="wel">{{ $t("Welcome to") }}o</div>
+      <div class="wel">{{ $t("Welcome to") }}</div>
       <div class="ccdao">{{ $t("CCDAO Community") }}</div>
       <div class="vision">{{ $t("A Community to improve Cross Chain experience") }}</div>
       <div class="token">$CCDAO</div>

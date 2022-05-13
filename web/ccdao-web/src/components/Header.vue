@@ -37,13 +37,47 @@
         >
       </div>
     </div>
-    <div class="wallet"></div>
+    <div class="wallet" style="position: relative">
+      <div v-show="walletbool" style="display: flex; align-items: flex-start; justify-content: space-between">
+        <img src="../assets/Shape.svg" style="width: 20px; height: 20px" />
+        <p style="margin: 0px; margin-left: 10px">{{ $t("Connect Wallet") }}</p>
+      </div>
+
+      <div
+        v-show="!walletbool"
+        style="color: rgba(58, 155, 232, 1); display: flex; align-items: flex-start; justify-content: space-between"
+      >
+        <img src="../assets/shaceblue.svg" style="width: 20px; height: 20px" />
+        <p style="margin: 0px; margin-left: 5px">{{ $t("My Wallet") }}</p>
+      </div>
+
+      <img src="../assets/triangular.svg" style="width: 11px; height: 5.13px" />
+
+      <div class="walletdia">
+        <Dialogs @getlogin="getloginnum"></Dialogs>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import Dialogs from "./Dialogs";
+
 export default {
   name: "Header",
+  data() {
+    return {
+      walletbool: true,
+    };
+  },
+  components: {
+    Dialogs,
+  },
+  methods: {
+    getloginnum(login) {
+      this.walletbool = login == 0;
+    },
+  },
 };
 </script>
 
@@ -59,7 +93,6 @@ a {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  text-align: center;
   font-family: PingFangSC-Medium, sans-serif;
 }
 .boximg {
@@ -72,7 +105,7 @@ a {
   width: 80px;
   height: 36px;
   /* background: rgba(230, 236, 243, 1); */
-  background: rgba(246, 249, 253, 1);
+  background: rgba(230, 236, 243, 1);
   border-radius: 3px;
   display: flex;
   align-items: center;
@@ -86,13 +119,16 @@ a {
   width: 100px;
   height: 36px;
   /* background: rgba(230, 236, 243, 1); */
-  background: rgba(246, 249, 253, 1);
+  background: rgba(230, 236, 243, 1);
   border-radius: 3px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: rgba(12, 40, 69, 1);
   font-size: 14px;
+}
+.fbt2:hover {
+  background: rgba(209, 230, 248, 1);
 }
 .out {
   left: 0px;
@@ -121,7 +157,7 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, 1);
+  background: rgba(243, 243, 243, 1);
   /* color: rgba(12, 40, 69, 1); */
   width: 120px;
   height: 40px;
@@ -133,13 +169,31 @@ a {
 }
 .outbts:hover {
   background: rgba(244, 246, 248, 1);
+  color: rgba(12, 40, 69, 1);
 }
 .wallet {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 25px;
+  padding-right: 15px;
   width: 180px;
   height: 36px;
   background: rgba(255, 255, 255, 1);
   box-shadow: 0px 0px 4px 2px rgba(237, 240, 242, 1);
   border-radius: 18px;
   margin-right: 50px;
+  font-size: 14px;
+}
+.walletdia {
+  position: absolute;
+  z-index: 9999;
+  right: -50px;
+  top: 36px;
+  padding-top: 12px;
+  display: none;
+}
+.wallet:hover .walletdia {
+  display: block;
 }
 </style>
