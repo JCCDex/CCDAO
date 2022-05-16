@@ -30,7 +30,7 @@
         <div style="width: 270px; margin-top: 10px; margin-left: 20px; height: 60px">
           <span style="word-wrap: break-word; font-size: 14px; line-height: 24px">{{ Walletaddr }}</span>
           <button
-            @click="(dialogVisible1 = true), (n = 0), (dlinput = true), (dlimport = false)"
+            @click="showImportDialog"
             style="
               background: none;
               float: right;
@@ -69,7 +69,7 @@
       </button>
       <button
         v-show="loginnum == 1 || loginnum == 0"
-        @click="(dialogVisible1 = true), (n = 0), (dlinput = true), (dlimport = false)"
+        @click="showImportDialog"
         class="WB"
         style="margin-left: 20px; margin-top: 25px"
       >
@@ -77,84 +77,13 @@
       </button>
     </div>
     <el-dialog
-      :visible.sync="dialogVisible1"
-      width="360px"
-      :show-close="false"
-      :center="true"
-      :modal-append-to-body="false"
-    >
-      <div slot="title">{{ $t("message.导入SWTC钱包") }}</div>
-      <div class="dlbtcss">
-        <button
-          :class="dlbts1"
-          @click="(n = 0), (dlinput = true), (dlimport = false)"
-          style="border-top-left-radius: 25px; border-bottom-left-radius: 25px"
-        >
-          {{ $t("SWTC钱包密钥") }}
-        </button>
-        <button
-          :class="dlbts2"
-          @click="(n = 1), (dlinput = false), (dlimport = true)"
-          style="border-top-right-radius: 25px; border-bottom-right-radius: 25px"
-        >
-          {{ $t("SWTC文件") }}
-        </button>
-      </div>
-      <div class="dlcss" v-show="dlinput">
-        <div style="width: 320px">
-          <el-input
-            class="dltext"
-            type="textarea"
-            :rows="2"
-            :placeholder="$t('message.请输入SWTC钱包密钥')"
-            v-model="textarea"
-          >
-          </el-input>
-        </div>
-      </div>
-      <div class="dlcss" v-show="dlimport">
-        <button class="importbtcss">
-          <p v-show="filebool">{{ $t("点击导入SWTC文件") }}</p>
-          <div v-show="!filebool" style="display: flex; justify-content: center">
-            <p style="color: rgba(0, 0, 0, 1); margin-left: 0px">{{ filename }}</p>
-            <img src="../assets/cleartag.svg" @click="clearFile()" />
-          </div>
-          <input type="file" @change="importFile" v-show="filebool" />
-        </button>
-      </div>
-      <!-- 输入钱包密钥 -->
-      <span
-        v-show="dlinput"
-        slot="footer"
-        class="dialog-footer"
-        style="width: 320px; display: flex; justify-content: space-between"
-      >
-        <el-button @click="dialogVisible1 = false">{{ $t("取 消") }}</el-button>
-        <el-button type="primary" @click="(dialogVisible1 = false), (dialogVisible2 = true)" :disabled="isInputbool">{{
-          $t("确 定")
-        }}</el-button>
-      </span>
-      <!-- 导入SWTC钱包 -->
-      <span
-        v-show="dlimport"
-        slot="footer"
-        class="dialog-footer"
-        style="width: 320px; display: flex; justify-content: space-between"
-      >
-        <el-button @click="dialogVisible1 = false">{{ $t("取 消") }}</el-button>
-        <el-button type="primary" @click="(dialogVisible1 = false), (dialogVisible2 = true)" :disabled="isInputbool1">{{
-          $t("确 定")
-        }}</el-button>
-      </span>
-    </el-dialog>
-
-    <el-dialog
       :title="$t('交易密码')"
       :visible.sync="dialogVisible2"
       width="360px"
       :show-close="false"
       :center="true"
-      :modal-append-to-body="false"
+      :modal-append-to-body="true"
+      :close-on-click-modal="false"
     >
       <div style="width: 360px; padding-top: 80px; padding-left: 20px; padding-right: 20px">
         <el-input :placeholder="$t('请输入交易密码')" v-model="password" show-password clearable></el-input>
@@ -179,7 +108,7 @@
 import { jtWallet } from "jcc_wallet";
 import { importFile } from "jcc_file";
 import { JingchangWallet } from "jcc_wallet";
-
+import ImportDialog from "./import-dialog/index";
 export default {
   name: "Dialogs",
   async created() {
@@ -196,7 +125,6 @@ export default {
   },
   data() {
     return {
-      dialogVisible1: false,
       textarea: "",
       n: 0,
       dlinput: false,
@@ -248,6 +176,10 @@ export default {
     async importFile(e) {
       this.filename = e.target.files[0].name;
       this.file = e;
+    },
+    showImportDialog() {
+      console.log("aaaa");
+      ImportDialog().show();
     },
     async createWallet() {
       let value;
