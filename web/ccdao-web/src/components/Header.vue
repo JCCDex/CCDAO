@@ -39,13 +39,13 @@
     </div>
     <div class="wallet" style="position: relative">
       <button class="walletbt">
-        <div v-show="walletbool" style="display: flex; align-items: flex-start; justify-content: space-between">
+        <div v-show="!ishave" style="display: flex; align-items: flex-start; justify-content: space-between">
           <img src="../assets/Shape.svg" style="width: 20px; height: 20px" />
           <p style="margin: 0px; margin-left: 10px">{{ $t("Connect Wallet") }}</p>
         </div>
 
         <div
-          v-show="!walletbool"
+          v-show="ishave"
           style="color: rgba(58, 155, 232, 1); display: flex; align-items: flex-start; justify-content: space-between"
         >
           <img src="../assets/shaceblue.svg" style="width: 20px; height: 20px" />
@@ -56,7 +56,7 @@
       </button>
 
       <div class="walletdia">
-        <Dialogs @getlogin="getloginnum"></Dialogs>
+        <Dialogs></Dialogs>
       </div>
     </div>
   </div>
@@ -64,21 +64,22 @@
 
 <script>
 import Dialogs from "./Dialogs";
+import { EventBus } from "../Bus.js";
 
 export default {
   name: "Header",
   data() {
     return {
-      walletbool: true,
+      ishave: false,
     };
   },
   components: {
     Dialogs,
   },
-  methods: {
-    getloginnum(login) {
-      this.walletbool = login == 0;
-    },
+  mounted() {
+    EventBus.$on("ishave", (ishave) => {
+      this.ishave = ishave;
+    });
   },
 };
 </script>

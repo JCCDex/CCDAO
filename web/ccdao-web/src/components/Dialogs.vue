@@ -92,15 +92,16 @@ export default {
     let wallet;
     this.loginMetaMask();
     value = JingchangWallet.get();
-    console.log(value);
     if (value != null) {
       wallet = new JingchangWallet(value);
       this.WalletAddress = await wallet.getAddress();
     }
+    EventBus.$emit("ishave", "true");
   },
   mounted() {
     EventBus.$on("aMsg", (SWTCaddress) => {
       this.WalletAddress = SWTCaddress;
+      EventBus.$emit("ishave", "true");
     });
   },
   methods: {
@@ -112,6 +113,7 @@ export default {
       } else {
         console.log("未安装插件");
       }
+      EventBus.$emit("ishave", "true");
     },
     //显示对话框
     showdialog() {

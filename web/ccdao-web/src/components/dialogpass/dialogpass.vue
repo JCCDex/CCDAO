@@ -63,6 +63,7 @@ export default {
           return;
         }
         this.password = "";
+        this.value = JSON.parse(walletvalue);
       }
       JingchangWallet.save(this.value);
       let SWTCaddress = await wallet.getAddress();
