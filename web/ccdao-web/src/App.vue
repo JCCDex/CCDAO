@@ -22,7 +22,6 @@ import WebAdd from "./components/WebAdd";
 import Member from "./components/Member";
 import Signers from "./components/Signers";
 import Foot from "./components/Foot";
-import { JingchangWallet } from "jcc_wallet";
 
 export default {
   components: {
