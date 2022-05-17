@@ -39,7 +39,6 @@ export default {};
 .boxthree {
   width: 100%;
   position: relative;
-  font-family: PingFangSC-Medium, sans-serif;
 }
 .tobuy {
   width: 100%;

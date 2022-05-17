@@ -43,6 +43,7 @@ export default {
   height: 100%;
   flex-direction: column;
   justify-content: space-between;
+  font-family: PingFangSC-Medium, sans-serif;
 }
 
 #app .roll {

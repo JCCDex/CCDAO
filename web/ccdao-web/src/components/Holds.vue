@@ -51,14 +51,12 @@ export default {
 .p1 {
   margin-bottom: 35px;
   mix-blend-mode: normal;
-  font-family: PingFangSC-Semibold, sans-serif;
   color: rgba(255, 255, 255, 1);
 }
 .p2 {
   width: 183px;
   height: 50px;
   mix-blend-mode: normal;
-  font-family: PingFangSC-Semibold, sans-serif;
   color: rgba(255, 255, 255, 1);
   position: absolute;
 }

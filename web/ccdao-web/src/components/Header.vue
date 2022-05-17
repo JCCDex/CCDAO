@@ -96,7 +96,6 @@ a {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-family: PingFangSC-Medium, sans-serif;
 }
 .boximg {
   width: 138.84px;

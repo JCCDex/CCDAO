@@ -12,6 +12,7 @@
           <img src="../assets/addimg.png" class="addimg" />
           <p class="addboxtext1" style="left: 42px; top: 2px">{{ $t("ETH") }}</p>
           <a href="">
+            <span class="eth" v-show="ETH != ''">{{ ETH }}</span>
             <img src="../assets/rightarrow.svg" class="right" />
           </a>
         </div>
@@ -19,6 +20,9 @@
           <img src="../assets/addimg.png" class="addimg" />
           <p class="addboxtext1" style="left: 28px; top: 2px">{{ $t("CCDAO") }}</p>
           <a href="">
+            <span class="eth" v-show="SWTC != ''"
+              >CCDAO&nbsp;&nbsp;<span style="font-size: 12px">({{ SWTC }})</span></span
+            >
             <img src="../assets/rightarrow.svg" class="right" />
           </a>
         </div>
@@ -30,8 +34,24 @@
 </template>
 
 <script>
+import { EventBus } from "../Bus.js";
+
 export default {
   name: "WebAdd",
+  data() {
+    return {
+      ETH: "",
+      SWTC: "",
+    };
+  },
+  mounted() {
+    EventBus.$on("ETH", (ETHaddress) => {
+      this.ETH = ETHaddress;
+    });
+    EventBus.$on("SWTC", (SWTCaddress) => {
+      this.SWTC = SWTCaddress;
+    });
+  },
 };
 </script>
 
@@ -85,6 +105,15 @@ export default {
   background-blend-mode: normal;
   border-radius: NaNpx;
   mix-blend-mode: normal;
+}
+.eth {
+  position: absolute;
+  margin-left: 20px;
+  margin-top: 25px;
+  mix-blend-mode: normal;
+  color: rgba(255, 255, 255, 1);
+  font-size: 16px;
+  line-height: 14px;
 }
 .addboxtext1 {
   position: absolute;

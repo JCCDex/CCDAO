@@ -97,11 +97,13 @@ export default {
       this.WalletAddress = await wallet.getAddress();
     }
     EventBus.$emit("ishave", "true");
+    EventBus.$emit("SWTC", this.WalletAddress);
   },
   mounted() {
     EventBus.$on("aMsg", (SWTCaddress) => {
       this.WalletAddress = SWTCaddress;
       EventBus.$emit("ishave", "true");
+      EventBus.$emit("SWTC", this.WalletAddress);
     });
   },
   methods: {
@@ -114,6 +116,7 @@ export default {
         console.log("未安装插件");
       }
       EventBus.$emit("ishave", "true");
+      EventBus.$emit("ETH", this.MetaMask);
     },
     //显示对话框
     showdialog() {
@@ -142,7 +145,6 @@ button {
   flex-direction: column;
 }
 .WB {
-  font-family: PingFangSC-Medium, sans-serif;
   border: none;
   width: 260px;
   height: 40px;
@@ -162,38 +164,5 @@ button {
   border-radius: 21.5px;
   mix-blend-mode: normal;
   color: rgba(255, 255, 255, 1);
-  font-family: PingFangSC-Medium, sans-serif;
-}
-.dlbtcss {
-  margin-top: 20px;
-  bottom: 30px;
-  display: flex;
-  justify-content: center;
-  height: 40px;
-}
-.dlbt {
-  width: 160px;
-  height: 40px;
-  background-blend-mode: normal;
-  mix-blend-mode: normal;
-  font-family: PingFangSC-Medium, sans-serif;
-  border: 1px solid rgba(216, 230, 254, 1);
-  background: rgba(242, 246, 253, 1);
-  color: rgba(120, 127, 147, 1);
-}
-.dlbt1 {
-  width: 160px;
-  height: 40px;
-  background-blend-mode: normal;
-  mix-blend-mode: normal;
-  font-family: PingFangSC-Medium, sans-serif;
-  border: 1px solid rgba(216, 230, 254, 1);
-  background: rgba(74.35800000000002, 147.0636, 206.55, 1);
-  color: rgba(255, 255, 255, 1);
-}
-.dlcss {
-  margin-top: 30px;
-  display: flex;
-  justify-content: center;
 }
 </style>

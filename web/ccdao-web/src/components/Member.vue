@@ -41,7 +41,6 @@ export default {
   width: 100%;
   mix-blend-mode: normal;
   position: relative;
-  font-family: PingFangSC-Medium, sans-serif;
 }
 .member {
   width: 100%;
