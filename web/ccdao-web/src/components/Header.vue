@@ -145,7 +145,6 @@ a {
   height: 140px;
   background: rgba(243, 243, 243, 1);
   background-blend-mode: normal;
-  border: 1px solid rgba(251, 252, 254, 1);
   box-shadow: 0px 2px 4px rgba(228, 237, 246, 0.5);
   border-radius: 3px;
 }

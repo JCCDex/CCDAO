@@ -9,11 +9,11 @@
       <div class="amount">
         <div>
           <div>{{ $t("Total Volume Traded ") }}</div>
-          <div class="value">{{ num.toLocaleString() }}</div>
+          <div class="value">{{ totalVolumeTraded.toLocaleString() }}</div>
         </div>
         <div>
           <div>{{ $t("Fully Diluted Valuation") }}</div>
-          <div class="value">{{ value.toLocaleString() }}</div>
+          <div class="value">{{ fullyDilutedValuation.toLocaleString() }}</div>
         </div>
       </div>
     </div>
@@ -22,12 +22,14 @@
 </template>
 
 <script>
+import configdata from "../../public/config.json";
+
 export default {
   name: "Wel",
   data() {
     return {
-      num: 3628500320,
-      value: 5000680206,
+      totalVolumeTraded: configdata.totalVolumeTraded,
+      fullyDilutedValuation: configdata.fullyDilutedValuation,
     };
   },
 };

@@ -8,7 +8,7 @@
         </div>
         <div style="width: 270px; margin-top: 10px; margin-left: 20px; height: 60px">
           <span style="word-wrap: break-word; font-size: 14px; line-height: 24px">{{ MetaMask }}</span>
-          <button
+          <!-- <button
             @click="loginMetaMask()"
             style="
               background: none;
@@ -20,7 +20,7 @@
             "
           >
             {{ $t("Switch ETH Wallet") }}
-          </button>
+          </button> -->
         </div>
       </div>
       <div v-show="WalletAddress != ''">
