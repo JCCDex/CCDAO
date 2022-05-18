@@ -5,23 +5,21 @@
     <div class="dlbtcss">
       <button
         :class="btbool ? 'dlbt1' : 'dlbt'"
-        @click="(btbool = true), clearData(), (btname = 'bt1')"
+        @click="(btbool = true), clearData()"
         style="border-top-left-radius: 25px; border-bottom-left-radius: 25px"
       >
         {{ $t("message.swt_wallet_secret") }}
       </button>
       <button
         :class="btbool ? 'dlbt' : 'dlbt1'"
-        @click="(btbool = false), clearData(), (btname = 'bt2')"
+        @click="(btbool = false), clearData()"
         style="border-top-right-radius: 25px; border-bottom-right-radius: 25px"
       >
         {{ $t("message.swt_file") }}
       </button>
     </div>
-    <component :is="btname"></component>
-
     <!-- 输入钱包密钥 -->
-    <!-- <div class="dlcss" v-show="btbool">
+    <div class="dlcss" v-show="btbool">
       <div style="width: 320px">
         <el-input
           class="dltext"
@@ -32,9 +30,9 @@
         >
         </el-input>
       </div>
-    </div> -->
+    </div>
     <!-- 导入文件 -->
-    <!-- <div class="dlcss" v-show="!btbool">
+    <div class="dlcss" v-show="!btbool">
       <button class="importbtcss">
         <p style="margin-top: 12px" v-show="file === undefined">{{ $t("message.click_to_import_swt") }}</p>
         <div
@@ -46,7 +44,7 @@
         </div>
         <input id="fileupload" type="file" @change="importFile" v-show="file === undefined" />
       </button>
-    </div> -->
+    </div>
     <!-- 对话框底部按钮 -->
     <span slot="footer" class="dialog-footer" style="width: 320px; display: flex; justify-content: space-between">
       <el-button @click="(visible = false), clearData()">{{ $t("message.cancel") }}</el-button>
@@ -60,21 +58,13 @@
 <script>
 import { jtWallet } from "jcc_wallet";
 import ImportDialogpass from "../dialogpass/index";
-import bt1 from "./bt1";
-import bt2 from "./bt2";
-import { EventBus } from "../../Bus.js";
 
 export default {
   name: "Dialog",
-  components: {
-    bt1,
-    bt2,
-  },
   data() {
     return {
       visible: false,
       btbool: true,
-      btname: "",
 
       textarea: "",
       filename: "",
@@ -86,21 +76,10 @@ export default {
       return jtWallet.isValidSecret(this.textarea);
     },
   },
-  mounted() {
-    EventBus.$on("textarea", (text) => {
-      this.textarea = text;
-    });
-    EventBus.$on("file", (f, fname) => {
-      this.file = f;
-      this.filename = fname;
-    });
-  },
   methods: {
     //控制对话框显示函数
     show() {
       this.visible = true;
-      this.btname = "bt1";
-      this.btbool = true;
     },
     //接受导入文件
     async importFile(e) {
@@ -122,7 +101,6 @@ export default {
     clearData() {
       this.clearFile();
       this.textarea = "";
-      this.btname = "";
     },
     //显示下一个对话框
     nextshow() {
