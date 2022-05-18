@@ -11,6 +11,9 @@ Vue.use(ElementUI);
 import VueI18n from "vue-i18n";
 Vue.use(VueI18n);
 
+import axios from "axios";
+Vue.prototype.$axios = axios;
+
 const messages = {
   en: {
     message: require("./locales/en"),

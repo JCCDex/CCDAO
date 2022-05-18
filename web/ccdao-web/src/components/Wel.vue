@@ -22,15 +22,36 @@
 </template>
 
 <script>
-import configdata from "../../public/config.json";
+import axios from "axios";
 
 export default {
   name: "Wel",
   data() {
     return {
-      totalVolumeTraded: configdata.totalVolumeTraded,
-      fullyDilutedValuation: configdata.fullyDilutedValuation,
+      totalVolumeTraded: "",
+      fullyDilutedValuation: "",
     };
+  },
+  mounted() {
+    setTimeout(() => {
+      this.setdatatime();
+    }, 0);
+  },
+  methods: {
+    setdatatime() {
+      axios
+        .get("./config.json")
+        .then((response) => {
+          this.totalVolumeTraded = response.data.totalVolumeTraded;
+          this.fullyDilutedValuation = response.data.fullyDilutedValuation;
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      setTimeout(() => {
+        this.setdatatime();
+      }, 1000 * 60 * 10);
+    },
   },
 };
 </script>

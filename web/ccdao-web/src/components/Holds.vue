@@ -29,15 +29,36 @@
 </template>
 
 <script>
-import configdata from "../../public/config.json";
+import axios from "axios";
 
 export default {
   name: "Holds",
   data() {
     return {
-      ETHCCDAO: configdata.ETH,
-      SWTCCCDAO: configdata.SWTC,
+      ETHCCDAO: "",
+      SWTCCCDAO: "",
     };
+  },
+  mounted() {
+    setTimeout(() => {
+      this.setdatatime();
+    }, 0);
+  },
+  methods: {
+    setdatatime() {
+      axios
+        .get("./config.json")
+        .then((response) => {
+          this.ETHCCDAO = response.data.ETH;
+          this.SWTCCCDAO = response.data.SWTC;
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      setTimeout(() => {
+        this.setdatatime();
+      }, 1000 * 60 * 10);
+    },
   },
 };
 </script>
