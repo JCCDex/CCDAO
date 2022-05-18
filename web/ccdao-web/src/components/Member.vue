@@ -2,25 +2,25 @@
   <div class="boxfive">
     <a name="Member"></a>
     <div class="member">
-      <p class="membership">{{ $t("Membership") }}</p>
+      <p class="membership">{{ $t("message.Membership") }}</p>
       <div class="memberbox">
         <div>
-          <p class="mca">{{ $t("My CCDAO Amount") }}</p>
-          <p class="mcanum">2000000{{ $t("CCDAO") }}</p>
+          <p class="mca">{{ $t("message.My_CCDAO_Amount") }}</p>
+          <p class="mcanum">2000000{{ $t("message.CCDAO") }}</p>
         </div>
         <div style="display: flex; align-items: center; font-size: 14px">
-          <span style="color: rgba(161, 166, 169, 1)">Status:</span
-          ><span style="color: rgba(51, 147, 230, 1); margin-right: 10px">YES</span>
+          <span style="color: rgba(161, 166, 169, 1)">{{ $t("message.status") }}</span
+          ><span style="color: rgba(51, 147, 230, 1); margin-right: 10px">{{ $t("message.YES") }}</span>
           <img src="../assets/member.svg" alt="" />
         </div>
 
         <div class="memberboxtext">
           <div style="display: flex; justify-content: space-between">
-            <p style="margin: 0px; font-size: 20px">{{ $t("Membership Requirements") }}</p>
+            <p style="margin: 0px; font-size: 20px">{{ $t("message.Membership_Requirements") }}</p>
             <img src="../assets/buyarrow.svg" style="margin-left: 30px" />
           </div>
           <p style="position: absolute; margin: 0px; margin-top: 30px; font-size: 30px; width: 800px">
-            {{ $t("$CCDAO Member need to hold 10000CCDAO at least.") }}
+            {{ $t("message.$CCDAO_Member_need_to_hold_10000CCDAO_at_least") }}
           </p>
         </div>
       </div>

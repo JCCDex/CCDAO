@@ -1,6 +1,6 @@
 <template>
   <el-dialog
-    :title="$t('交易密码')"
+    :title="$t('message.trade_password')"
     :visible.sync="visiblepass"
     width="360px"
     :show-close="false"
@@ -9,7 +9,12 @@
     :close-on-click-modal="false"
   >
     <div style="width: 360px; padding-top: 80px; padding-left: 20px; padding-right: 20px">
-      <el-input :placeholder="$t('请输入交易密码')" v-model="password" show-password clearable></el-input>
+      <el-input
+        :placeholder="$t('message.pls_enter_trade_password')"
+        v-model="password"
+        show-password
+        clearable
+      ></el-input>
     </div>
 
     <span
@@ -17,9 +22,11 @@
       class="dialog-footer"
       style="width: 320px; display: flex; justify-content: space-between; padding-top: 15px"
     >
-      <el-button @click="(visiblepass = false), (password = '')">{{ $t("取 消") }}</el-button>
+      <el-button @click="(visiblepass = false), (password = '')">{{ $t("message.cancel") }}</el-button>
       <!-- <el-button type="primary" @click="dialogVisible2 = false">确 定</el-button> -->
-      <el-button type="primary" :disabled="password == ''" @click="finishwallet()">{{ $t("确 定") }}</el-button>
+      <el-button type="primary" :disabled="password == ''" @click="finishwallet()">{{
+        $t("message.confirm")
+      }}</el-button>
     </span>
   </el-dialog>
 </template>

@@ -1,18 +1,18 @@
 <template>
   <div class="community">
     <div class="content">
-      <div class="wel">{{ $t("Welcome to") }}</div>
-      <div class="ccdao">{{ $t("CCDAO Community") }}</div>
-      <div class="vision">{{ $t("A Community to improve Cross Chain experience") }}</div>
-      <div class="token">$CCDAO</div>
-      <div class="holder">{{ $t("Created by Community, for the Community.") }}</div>
+      <div class="wel">{{ $t("message.Welcome_to") }}</div>
+      <div class="ccdao">{{ $t("message.CCDAO_Community") }}</div>
+      <div class="vision">{{ $t("message.A_Community_to_improve_Cross_Chain_experience") }}</div>
+      <div class="token">{{ $t("message.$CCDAO") }}</div>
+      <div class="holder">{{ $t("message.Created_by_Community,for_the_Community") }}</div>
       <div class="amount">
         <div>
-          <div>{{ $t("Total Volume Traded ") }}</div>
+          <div>{{ $t("message.Total_Volume_Traded") }}</div>
           <div class="value">{{ totalVolumeTraded.toLocaleString() }}</div>
         </div>
         <div>
-          <div>{{ $t("Fully Diluted Valuation") }}</div>
+          <div>{{ $t("message.Fully_Diluted_Valuation") }}</div>
           <div class="value">{{ fullyDilutedValuation.toLocaleString() }}</div>
         </div>
       </div>

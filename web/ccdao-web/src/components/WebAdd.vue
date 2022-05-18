@@ -4,20 +4,20 @@
     <div class="webadd">
       <div class="webadds">
         <div class="webAddone">
-          <p class="addtext">{{ $t("On-chain contract address") }}</p>
+          <p class="addtext">{{ $t("message.On-chain_contract_address") }}</p>
           <img src="../assets/addtext.svg" class="addtextimg" />
         </div>
 
         <div class="addbox" style="margin-top: 130px">
           <img src="../assets/addimg.png" class="addimg" />
-          <p class="addboxtext1" style="left: 42px; top: 2px">{{ $t("ETH") }}</p>
+          <p class="addboxtext1" style="left: 42px; top: 2px">{{ $t("message.ETH") }}</p>
           <a href="">
             <img src="../assets/rightarrow.svg" class="right" />
           </a>
         </div>
         <div class="addbox" style="margin-top: 30px">
           <img src="../assets/addimg.png" class="addimg" />
-          <p class="addboxtext1" style="left: 28px; top: 2px">{{ $t("CCDAO") }}</p>
+          <p class="addboxtext1" style="left: 28px; top: 2px">{{ $t("message.CCDAO") }}</p>
           <a href="">
             <img src="../assets/rightarrow.svg" class="right" />
           </a>

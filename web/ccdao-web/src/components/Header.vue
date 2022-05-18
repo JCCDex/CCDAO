@@ -10,30 +10,30 @@
           </div>
           <div class="out" style="left: 0px">
             <div class="outbt">
-              <a href="" class="outbts">{{ $t("Twitter") }}</a>
-              <a href="" class="outbts">{{ $t("Discord") }}</a>
-              <a href="" class="outbts">{{ $t("Telegram") }}</a>
+              <a href="" class="outbts">{{ $t("message.Twitter") }}</a>
+              <a href="" class="outbts">{{ $t("message.Discord") }}</a>
+              <a href="" class="outbts">{{ $t("message.Telegram") }}</a>
             </div>
           </div>
         </div>
         <div class="fbt" style="margin-left: 10px">
           <div class="fbt1">
-            {{ $t("$CCDAO") }}
+            {{ $t("message.$CCDAO") }}
             <img src="../assets/downchart.svg" />
           </div>
           <div class="out" style="left: 130px">
             <div class="outbt" style="left: 130px">
-              <a href="#Holds" class="outbts">{{ $t("Holding") }}</a>
-              <a href="#ToBuy" class="outbts">{{ $t("How to Buy") }}</a>
-              <a href="#WebAdd" class="outbts">{{ $t("Contract Address") }}</a>
+              <a href="#Holds" class="outbts">{{ $t("message.Holding") }}</a>
+              <a href="#ToBuy" class="outbts">{{ $t("message.How_to_Buy") }}</a>
+              <a href="#WebAdd" class="outbts">{{ $t("message.Contract_Address") }}</a>
             </div>
           </div>
         </div>
         <a href="#Member"
-          ><div class="fbt2">{{ $t("Membership") }}</div></a
+          ><div class="fbt2">{{ $t("message.Membership") }}</div></a
         >
         <a href="#Signers"
-          ><div class="fbt2">{{ $t("Multi-Signers") }}</div></a
+          ><div class="fbt2">{{ $t("message.Multi-Signers") }}</div></a
         >
       </div>
     </div>
@@ -41,7 +41,7 @@
       <button class="walletbt">
         <div v-show="!ishave" style="display: flex; align-items: flex-start; justify-content: space-between">
           <img src="../assets/Shape.svg" style="width: 20px; height: 20px" />
-          <p style="margin: 0px; margin-left: 10px">{{ $t("Connect Wallet") }}</p>
+          <p style="margin: 0px; margin-left: 10px">{{ $t("message.Connect_Wallet") }}</p>
         </div>
 
         <div
@@ -49,7 +49,7 @@
           style="color: rgba(58, 155, 232, 1); display: flex; align-items: flex-start; justify-content: space-between"
         >
           <img src="../assets/shaceblue.svg" style="width: 20px; height: 20px" />
-          <p style="margin: 0px; margin-left: 5px">{{ $t("My Wallet") }}</p>
+          <p style="margin: 0px; margin-left: 5px">{{ $t("message.My_Wallet") }}</p>
         </div>
 
         <img src="../assets/triangular.svg" style="width: 11px; height: 5.13px" />
