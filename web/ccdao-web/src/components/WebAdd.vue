@@ -11,7 +11,7 @@
         <div class="addbox" style="margin-top: 130px">
           <img src="../assets/addimg.png" class="addimg" />
           <p class="addboxtext1" style="left: 42px; top: 2px">{{ $t("message.ETH") }}</p>
-          <a href="https://cn.etherscan.com/token/0x1487bd704fa05a222b0adb50dc420f001f003045">
+          <a href="https://cn.etherscan.com/token/0x1487bd704fa05a222b0adb50dc420f001f003045" target="_blank">
             <span class="spantext">0x1487bd704fa05a222b0adb50dc420f001f003045</span>
             <img src="../assets/rightarrow.svg" class="right" />
           </a>
@@ -19,7 +19,10 @@
         <div class="addbox" style="margin-top: 30px">
           <img src="../assets/addimg.png" class="addimg" />
           <p class="addboxtext1" style="left: 28px; top: 2px">{{ $t("message.CCDAO") }}</p>
-          <a href="https://swtcscan.jccdex.cn/#/historybalance/?token=CCDAO_jGa9J9TkqtBcUoHe2zqhVFFbgUVED6o9or">
+          <a
+            href="https://swtcscan.jccdex.cn/#/historybalance/?token=CCDAO_jGa9J9TkqtBcUoHe2zqhVFFbgUVED6o9or"
+            target="_blank"
+          >
             <span class="spantext"
               >CCDAO&nbsp;&nbsp;<span style="font-size: 12px">{{ $t("message.issuer") }}</span></span
             >

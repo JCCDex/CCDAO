@@ -10,9 +10,9 @@
           </div>
           <div class="out" style="left: 0px">
             <div class="outbt">
-              <a href="" class="outbts">{{ $t("message.Twitter") }}</a>
-              <a href="" class="outbts">{{ $t("message.Discord") }}</a>
-              <a href="" class="outbts">{{ $t("message.Telegram") }}</a>
+              <a href="" target="_blank" class="outbts">{{ $t("message.Twitter") }}</a>
+              <a href="" target="_blank" class="outbts">{{ $t("message.Discord") }}</a>
+              <a href="" target="_blank" class="outbts">{{ $t("message.Telegram") }}</a>
             </div>
           </div>
         </div>
