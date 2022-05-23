@@ -49,11 +49,10 @@ export default {
   },
   mounted() {
     EventBus.$on("SWTC", (SWTCaddress) => {
-      const address = "jsk45ksJZUB7durZrLt5e86Eu2gtiXNRN4";
       const CCDAO = "CCDAO_jGa9J9TkqtBcUoHe2zqhVFFbgUVED6o9or";
       this.SWTCaddress = SWTCaddress;
       axios
-        .get("http://swtcscan.jccdex.cn/wallet/balance/:uuid?w=" + address)
+        .get("http://swtcscan.jccdex.cn/wallet/balance/:uuid?w=" + this.SWTCaddress)
         .then((response) => {
           this.CCDAOnum = response.data.data.CCDAO_jGa9J9TkqtBcUoHe2zqhVFFbgUVED6o9or.value;
         })

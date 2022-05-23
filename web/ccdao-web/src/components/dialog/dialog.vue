@@ -5,14 +5,14 @@
     <div class="dlbtcss">
       <button
         :class="btbool ? 'dlbt1' : 'dlbt'"
-        @click="(btbool = true), clearData(), (btname = 'bt1')"
+        @click="(btbool = true), clearData(), (btname = 'SecretKey')"
         style="border-top-left-radius: 25px; border-bottom-left-radius: 25px"
       >
         {{ $t("message.swt_wallet_secret") }}
       </button>
       <button
         :class="btbool ? 'dlbt' : 'dlbt1'"
-        @click="(btbool = false), clearData(), (btname = 'bt2')"
+        @click="(btbool = false), clearData(), (btname = 'ImportFile')"
         style="border-top-right-radius: 25px; border-bottom-right-radius: 25px"
       >
         {{ $t("message.swt_file") }}
@@ -60,15 +60,15 @@
 <script>
 import { jtWallet } from "jcc_wallet";
 import ImportDialogpass from "../dialogpass/index";
-import bt1 from "./bt1";
-import bt2 from "./bt2";
+import SecretKey from "./SecretKey";
+import ImportFile from "./ImportFile";
 import { EventBus } from "../../Bus.js";
 
 export default {
   name: "Dialog",
   components: {
-    bt1,
-    bt2,
+    SecretKey,
+    ImportFile,
   },
   data() {
     return {
@@ -99,7 +99,7 @@ export default {
     //控制对话框显示函数
     show() {
       this.visible = true;
-      this.btname = "bt1";
+      this.btname = "SecretKey";
       this.btbool = true;
     },
     //接受导入文件
