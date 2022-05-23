@@ -11,14 +11,18 @@
         <div class="addbox" style="margin-top: 130px">
           <img src="../assets/addimg.png" class="addimg" />
           <p class="addboxtext1" style="left: 42px; top: 2px">{{ $t("message.ETH") }}</p>
-          <a href="">
+          <a href="https://cn.etherscan.com/token/0x1487bd704fa05a222b0adb50dc420f001f003045">
+            <span class="spantext">0x1487bd704fa05a222b0adb50dc420f001f003045</span>
             <img src="../assets/rightarrow.svg" class="right" />
           </a>
         </div>
         <div class="addbox" style="margin-top: 30px">
           <img src="../assets/addimg.png" class="addimg" />
           <p class="addboxtext1" style="left: 28px; top: 2px">{{ $t("message.CCDAO") }}</p>
-          <a href="">
+          <a href="https://swtcscan.jccdex.cn/#/historybalance/?token=CCDAO_jGa9J9TkqtBcUoHe2zqhVFFbgUVED6o9or">
+            <span class="spantext"
+              >CCDAO&nbsp;&nbsp;<span style="font-size: 12px">{{ $t("message.issuer") }}</span></span
+            >
             <img src="../assets/rightarrow.svg" class="right" />
           </a>
         </div>
@@ -111,5 +115,14 @@ export default {
   height: 10.5px;
   background-blend-mode: normal;
   mix-blend-mode: normal;
+}
+.spantext {
+  position: absolute;
+  left: 140px;
+  top: 25px;
+  mix-blend-mode: normal;
+  color: rgba(255, 255, 255, 1);
+  font-size: 16px;
+  line-height: 14px;
 }
 </style>
