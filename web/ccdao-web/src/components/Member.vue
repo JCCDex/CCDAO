@@ -6,12 +6,17 @@
       <div class="memberbox">
         <div>
           <p class="mca">{{ $t("message.My_CCDAO_Amount") }}</p>
-          <p class="mcanum">2000000{{ $t("message.CCDAO") }}</p>
+          <p class="mcanum">{{ CCDAOnum }}{{ $t("message.CCDAO") }}</p>
         </div>
-        <div style="display: flex; align-items: center; font-size: 14px">
-          <span style="color: rgba(161, 166, 169, 1)">{{ $t("message.status") }}</span
-          ><span style="color: rgba(51, 147, 230, 1); margin-right: 10px">{{ $t("message.YES") }}</span>
+        <div v-show="CCDAOnum >= 10000" style="display: flex; align-items: center; font-size: 14px">
+          <span style="color: rgba(161, 166, 169, 1)">{{ $t("message.status") }}</span>
+          <span style="color: rgba(51, 147, 230, 1); margin-right: 10px">{{ $t("message.YES") }}</span>
           <img src="../assets/member.svg" alt="" />
+        </div>
+        <div v-show="CCDAOnum < 10000" style="display: flex; align-items: center; font-size: 14px">
+          <span style="color: rgba(161, 166, 169, 1)">{{ $t("message.status") }}</span>
+          <span style="color: rgba(51, 147, 230, 1); margin-right: 10px">{{ $t("message.NO") }}</span>
+          <img src="../assets/member1.svg" alt="" />
         </div>
 
         <div class="memberboxtext">
@@ -31,8 +36,32 @@
 </template>
 
 <script>
+import axios from "axios";
+import { EventBus } from "../Bus.js";
+
 export default {
   name: "Member",
+  data() {
+    return {
+      CCDAOnum: 0,
+      SWTCaddress: "",
+    };
+  },
+  mounted() {
+    EventBus.$on("SWTC", (SWTCaddress) => {
+      const address = "jsk45ksJZUB7durZrLt5e86Eu2gtiXNRN4";
+      const CCDAO = "CCDAO_jGa9J9TkqtBcUoHe2zqhVFFbgUVED6o9or";
+      this.SWTCaddress = SWTCaddress;
+      axios
+        .get("http://swtcscan.jccdex.cn/wallet/balance/:uuid?w=" + address)
+        .then((response) => {
+          this.CCDAOnum = response.data.data.CCDAO_jGa9J9TkqtBcUoHe2zqhVFFbgUVED6o9or.value;
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    });
+  },
 };
 </script>
 
