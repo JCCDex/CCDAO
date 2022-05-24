@@ -96,8 +96,8 @@ a {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  position: fixed;
-  z-index: 1;
+  /* position: fixed; */
+  /* z-index: 1; */
 }
 .boximg {
   width: 138.84px;
