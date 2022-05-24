@@ -33,6 +33,6 @@ export default {
   width: 74px;
   height: 20.5px;
   right: 50px;
-  top: 15px;
+  top: 20px;
 }
 </style>

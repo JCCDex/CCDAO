@@ -20,7 +20,7 @@
           <img src="../assets/addimg.png" class="addimg" />
           <p class="addboxtext1" style="left: 28px; top: 2px">{{ $t("message.CCDAO") }}</p>
           <a
-            href="https://swtcscan.jccdex.cn/#/historybalance/?token=CCDAO_jGa9J9TkqtBcUoHe2zqhVFFbgUVED6o9or"
+            href="https://swtcscan.jccdex.cn/#/tokendetail/?token=CCDAO_jGa9J9TkqtBcUoHe2zqhVFFbgUVED6o9or"
             target="_blank"
           >
             <span class="spantext"
@@ -32,7 +32,7 @@
       </div>
     </div>
 
-    <img src="../assets/bgimg4.svg" style="width: 100%; position: relative; z-index: -1; display: flex" />
+    <img src="../assets/bgimg4.png" style="width: 100%; position: relative; z-index: -1; display: flex" />
   </div>
 </template>
 

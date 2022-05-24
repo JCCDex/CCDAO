@@ -5,8 +5,8 @@
       <p>{{ $t("message.Multi-Signers") }}</p>
       <p>{{ $t("message.It_is_under_construction") }}</p>
     </div>
-    <img src="../assets/createimg.svg" style="width: 100%; position: absolute; bottom: 50px" />
-    <img src="../assets/signers.svg" style="width: 100%; position: relative; z-index: -1; display: flex" />
+    <img src="../assets/createimg.png" style="width: 100%; position: absolute; bottom: 50px" />
+    <img src="../assets/signers.png" style="width: 100%; position: relative; z-index: -1; display: flex" />
   </div>
 </template>
 

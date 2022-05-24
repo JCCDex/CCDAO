@@ -69,7 +69,7 @@ export default {
     left: 0;
     top: 0;
     padding-left: 140px;
-    padding-top: 74px;
+    padding-top: 135px;
     .wel {
       font-size: 40px;
       line-height: 30px;

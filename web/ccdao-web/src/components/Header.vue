@@ -39,14 +39,14 @@
     </div>
     <div class="wallet" style="position: relative">
       <button class="walletbt">
-        <div v-show="!ishave" style="display: flex; align-items: flex-start; justify-content: space-between">
+        <div v-show="!ishave" style="display: flex; align-items: center; justify-content: space-between">
           <img src="../assets/Shape.svg" style="width: 20px; height: 20px" />
           <p style="margin: 0px; margin-left: 10px">{{ $t("message.Connect_Wallet") }}</p>
         </div>
 
         <div
           v-show="ishave"
-          style="color: rgba(58, 155, 232, 1); display: flex; align-items: flex-start; justify-content: space-between"
+          style="color: rgba(58, 155, 232, 1); display: flex; align-items: center; justify-content: space-between"
         >
           <img src="../assets/shaceblue.svg" style="width: 20px; height: 20px" />
           <p style="margin: 0px; margin-left: 5px">{{ $t("message.My_Wallet") }}</p>
@@ -91,11 +91,13 @@ a {
 .box {
   width: 100%;
   height: 60px;
-  background: rgba(246, 249, 253, 1);
+  background: rgb(246, 249, 253, 1);
   box-shadow: 0px 1px 5px rgba(201, 223, 240, 1);
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: fixed;
+  z-index: 1;
 }
 .boximg {
   width: 138.84px;
@@ -104,24 +106,24 @@ a {
 }
 .fbt1 {
   cursor: pointer;
-  width: 80px;
+  width: 88px;
   height: 36px;
   /* background: rgba(230, 236, 243, 1); */
-  background: rgba(230, 236, 243, 1);
+  background: rgba(230, 236, 243, 0.2);
   border-radius: 3px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   color: rgba(12, 40, 69, 1);
   font-size: 14px;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-left: 6px;
+  padding-right: 6px;
 }
 .fbt2 {
   width: 100px;
   height: 36px;
   /* background: rgba(230, 236, 243, 1); */
-  background: rgba(230, 236, 243, 1);
+  background: rgba(230, 236, 243, 0.2);
   border-radius: 3px;
   display: flex;
   align-items: center;
@@ -130,7 +132,7 @@ a {
   font-size: 14px;
 }
 .fbt2:hover {
-  background: rgba(209, 230, 248, 1);
+  background: rgb(230, 236, 243, 1);
 }
 .out {
   left: 0px;
@@ -143,13 +145,13 @@ a {
   margin-top: 9px;
   width: 120px;
   height: 140px;
-  background: rgba(243, 243, 243, 1);
+  background: rgb(255, 255, 255, 1);
   background-blend-mode: normal;
   box-shadow: 0px 2px 4px rgba(228, 237, 246, 0.5);
   border-radius: 3px;
 }
 .fbt:hover .fbt1 {
-  background: rgba(209, 230, 248, 1);
+  background: rgb(209, 230, 248, 1);
 }
 .fbt:hover .out {
   display: block;
@@ -158,7 +160,7 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(243, 243, 243, 1);
+  background: rgb(255, 255, 255, 1);
   /* color: rgba(12, 40, 69, 1); */
   width: 120px;
   height: 40px;
@@ -169,7 +171,7 @@ a {
   font-size: 14px;
 }
 .outbts:hover {
-  background: rgba(244, 246, 248, 1);
+  background: rgb(244, 246, 248, 1);
   color: rgba(12, 40, 69, 1);
 }
 .wallet {
