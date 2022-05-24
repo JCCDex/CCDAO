@@ -44,8 +44,10 @@ const subscribeInst = SubscribeFactory.init();
 const TASK_NAME = "pollingConfig";
 // task function
 const task = function () {
-  const data = axios.get("./config.json");
-  return data;
+  const promisedata = axios.get("./config.json").catch(function (error) {
+    console.log(error);
+  });
+  return promisedata;
 };
 // whether polling, default true
 const polling = true;
@@ -53,9 +55,8 @@ const polling = true;
 const timer = 1000 * 60 * 10;
 
 const callback = (err, res) => {
-  // console.log(err);
-  // console.log(res);
-  store.dispatch("setvalue", res);
+  if (err == null) store.dispatch("setvalue", res);
+  else console.log(err);
 };
 
 subscribeInst
