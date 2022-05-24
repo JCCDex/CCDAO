@@ -1,6 +1,5 @@
 <template>
-  <div class="boxthree">
-    <a name="ToBuy"></a>
+  <div class="boxthree" id="ToBuy">
     <div class="tobuy">
       <div class="tobuys">
         <div class="buyone">

@@ -1,6 +1,5 @@
 <template>
-  <div class="boxfive">
-    <a name="Member"></a>
+  <div class="boxfive" id="Member">
     <div class="member">
       <p class="membership">{{ $t("message.Membership") }}</p>
       <div class="memberbox">

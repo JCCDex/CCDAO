@@ -1,6 +1,5 @@
 <template>
-  <div class="boxfour">
-    <a name="WebAdd"></a>
+  <div class="boxfour" id="WebAdd">
     <div class="webadd">
       <div class="webadds">
         <div class="webAddone">

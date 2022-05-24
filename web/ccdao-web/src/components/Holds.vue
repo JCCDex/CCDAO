@@ -1,6 +1,5 @@
 <template>
-  <div class="boxtwo">
-    <a name="Holds"></a>
+  <div class="boxtwo" id="Holds">
     <!-- <img src="../assets/bgimg2.svg" style="width: 100%;position: absolute; z-index: -1;"> -->
     <div class="boxtwotext">
       <span class="p1" style="font-size: 50px; line-height: 50px">{{ $t("message.$CCDAO") }}</span>
