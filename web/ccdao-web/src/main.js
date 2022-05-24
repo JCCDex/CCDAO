@@ -36,6 +36,36 @@ const i18n = new VueI18n({
 
 Vue.config.productionTip = false;
 
+const { SubscribeFactory } = require("jcc_rpc");
+
+const subscribeInst = SubscribeFactory.init();
+
+// task name
+const TASK_NAME = "pollingConfig";
+// task function
+const task = function () {
+  const data = axios.get("./config.json");
+  return data;
+};
+// whether polling, default true
+const polling = true;
+// polling interval, default 5000(ms)
+const timer = 1000 * 60 * 10;
+
+const callback = (err, res) => {
+  // console.log(err);
+  // console.log(res);
+  store.dispatch("setvalue", res);
+};
+
+subscribeInst
+  // register task
+  .register(TASK_NAME, task, polling, timer)
+  // watch task
+  .on(TASK_NAME, callback)
+  // start task
+  .start(TASK_NAME);
+
 new Vue({
   i18n,
   store,
