@@ -80,6 +80,7 @@ export default {
     EventBus.$on("ishave", (ishave) => {
       this.ishave = ishave;
     });
+    this.$store.dispatch("setvalue");
   },
 };
 </script>

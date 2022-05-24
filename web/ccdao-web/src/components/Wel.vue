@@ -9,11 +9,12 @@
       <div class="amount">
         <div>
           <div>{{ $t("message.Total_Volume_Traded") }}</div>
-          <div class="value">{{ totalVolumeTraded.toLocaleString() }}</div>
+          <!-- <div class="value">{{ totalVolumeTraded.toLocaleString() }}</div> -->
+          <div class="value">{{ $store.state.totalVolumeTraded.toLocaleString() }}</div>
         </div>
         <div>
           <div>{{ $t("message.Fully_Diluted_Valuation") }}</div>
-          <div class="value">{{ fullyDilutedValuation.toLocaleString() }}</div>
+          <div class="value">{{ $store.state.fullyDilutedValuation.toLocaleString() }}</div>
         </div>
       </div>
     </div>
@@ -22,37 +23,8 @@
 </template>
 
 <script>
-import axios from "axios";
-
 export default {
   name: "Wel",
-  data() {
-    return {
-      totalVolumeTraded: "",
-      fullyDilutedValuation: "",
-    };
-  },
-  mounted() {
-    setTimeout(() => {
-      this.setdatatime();
-    }, 0);
-  },
-  methods: {
-    setdatatime() {
-      axios
-        .get("./config.json")
-        .then((response) => {
-          this.totalVolumeTraded = response.data.totalVolumeTraded;
-          this.fullyDilutedValuation = response.data.fullyDilutedValuation;
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-      setTimeout(() => {
-        this.setdatatime();
-      }, 1000 * 60 * 10);
-    },
-  },
 };
 </script>
 <style lang="scss" scoped>

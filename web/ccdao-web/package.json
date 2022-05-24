@@ -4,11 +4,11 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "prepare": "cd ../../ && husky install web/ccdao-web/.husky",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "pretty": "pretty-quick --staged",
-    "i18n:report": "vue-cli-service i18n:report --src \"./src/**/*.?(js|vue)\" --locales \"./src/locales/**/*.json\""
+    "i18n:report": "vue-cli-service i18n:report --src \"./src/**/*.?(js|vue)\" --locales \"./src/locales/**/*.json\"",
+    "prepare": "cd ../../ && husky install web/ccdao-web/.husky",
+    "pretty": "pretty-quick --staged"
   },
   "browser": {
     "crypto": false
@@ -20,10 +20,12 @@
     "crypto-browserify": "^3.12.0",
     "element-ui": "^2.15.8",
     "jcc_file": "^1.0.2",
+    "jcc_rpc": "^0.3.2",
     "jcc_wallet": "^1.1.0",
     "vue": "^2.6.14",
     "vue-i18n": "^8.26.3",
-    "vue-i18n-bridge": "^9.2.0-beta.10"
+    "vue-i18n-bridge": "^9.2.0-beta.10",
+    "vuex": "^3.6.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
@@ -31,6 +33,7 @@
     "@intlify/vue-i18n-loader": "^3.2.0",
     "@vue/cli-plugin-babel": "~5.0.0",
     "@vue/cli-plugin-eslint": "~5.0.0",
+    "@vue/cli-plugin-vuex": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
     "eslint": "^7.32.0",
     "eslint-plugin-vue": "^8.0.3",
