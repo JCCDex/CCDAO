@@ -18,7 +18,7 @@
         </div>
       </div>
     </div>
-    <img src="../assets/bgimg1.jpg" />
+    <img src="../assets/bgimg1.svg" />
   </div>
 </template>
 

@@ -4,7 +4,7 @@
       <p>{{ $t("message.Multi-Signers") }}</p>
       <p>{{ $t("message.It_is_under_construction") }}</p>
     </div>
-    <img src="../assets/signers.jpg" class="img2" />
+    <img src="../assets/signers.svg" class="img2" />
   </div>
 </template>
 
