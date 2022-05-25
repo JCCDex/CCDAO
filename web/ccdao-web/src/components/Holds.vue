@@ -12,7 +12,7 @@
               {{ $t("message.ETH_chain_Positions") }}
             </p>
             <p class="p2" style="margin-left: 160px; margin-top: 60px; font-size: 30px">
-              {{ $store.state.ETHCCDAO }}CCDAO
+              {{ $store.state.ETHCCDAO }}&nbsp;{{ $t("message.CCDAO") }}
             </p>
           </div>
           <div class="holdbox" style="margin-top: 50px">
@@ -21,7 +21,7 @@
               {{ $t("message.SWTC_chain_Positions") }}
             </p>
             <p class="p2" style="margin-left: 160px; margin-top: 60px; font-size: 30px">
-              {{ $store.state.SWTCCCDAO }}CCDAO
+              {{ $store.state.SWTCCCDAO }}&nbsp;{{ $t("message.CCDAO") }}
             </p>
           </div>
         </div>
