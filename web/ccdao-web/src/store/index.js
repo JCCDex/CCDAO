@@ -10,6 +10,8 @@ export default new Vuex.Store({
     fullyDilutedValuation: "",
     ETHCCDAO: "",
     SWTCCCDAO: "",
+    ishave: false,
+    ETHaddress: "",
   },
   getters: {},
   mutations: {
@@ -18,6 +20,12 @@ export default new Vuex.Store({
       state.fullyDilutedValuation = res.data.fullyDilutedValuation;
       state.ETHCCDAO = res.data.ETH;
       state.SWTCCCDAO = res.data.SWTC;
+    },
+    setishave(state, data) {
+      state.ishave = data;
+    },
+    setETHaddress(state, data) {
+      state.ETHaddress = data;
     },
   },
   actions: {

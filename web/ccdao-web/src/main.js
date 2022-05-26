@@ -1,9 +1,9 @@
 import Vue from "vue";
 import App from "./App.vue";
-
 import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
 import "./css/dialog.scss";
+import { EventBus } from "./Bus.js";
 // import i18n from './i18n'
 Vue.config.productionTip = false;
 Vue.use(ElementUI);
@@ -66,6 +66,15 @@ subscribeInst
   .on(TASK_NAME, callback)
   // start task
   .start(TASK_NAME);
+
+if (typeof window.ethereum !== undefined) {
+  ethereum.on("chainChanged", (_chainId) => window.location.reload());
+  ethereum.on("accountsChanged", (acc) => {
+    // store.state.ETHaddress=acc[0];
+    store.commit("setETHaddress", acc[0] === undefined ? "" : acc[0]);
+    if (acc[0] === undefined) EventBus.$emit("ishave", false);
+  });
+}
 
 new Vue({
   i18n,

@@ -1,13 +1,13 @@
 <template>
   <div class="dialogbox">
     <div class="walletbox">
-      <div v-show="MetaMask != ''">
+      <div v-show="$store.state.ETHaddress != ''">
         <div style="display: flex; margin-top: 20px; margin-left: 20px">
           <img src="../assets/MetaMaketag.svg" />
           <p style="margin: 0px; margin-left: 10px; color: rgba(146, 146, 146, 1)">{{ $t("ETH Wallet Address") }}</p>
         </div>
         <div style="width: 270px; margin-top: 10px; margin-left: 20px; height: 60px">
-          <span style="word-wrap: break-word; font-size: 14px; line-height: 24px">{{ MetaMask }}</span>
+          <span style="word-wrap: break-word; font-size: 14px; line-height: 24px">{{ $store.state.ETHaddress }}</span>
           <!-- <button
             @click="loginMetaMask()"
             style="
@@ -46,7 +46,7 @@
         </div>
       </div>
       <div
-        v-show="MetaMask != '' || WalletAddress != ''"
+        v-show="$store.state.ETHaddress != '' || WalletAddress != ''"
         style="
           position: absolute;
           top: 115px;
@@ -58,12 +58,17 @@
       ></div>
 
       <p
-        v-show="MetaMask == '' && WalletAddress == ''"
+        v-show="$store.state.ETHaddress == '' && WalletAddress == ''"
         style="text-align: center; margin-top: 30px; margin-bottom: 0px"
       >
         {{ $t("Connect Wallet") }}
       </p>
-      <button v-show="MetaMask == ''" class="WB" style="margin-left: 20px; margin-top: 25px" @click="loginMetaMask()">
+      <button
+        v-show="$store.state.ETHaddress == ''"
+        class="WB"
+        style="margin-left: 20px; margin-top: 25px"
+        @click="loginMetaMask()"
+      >
         {{ $t("Connect MetaMask") }}
       </button>
       <button v-show="WalletAddress == ''" class="WB" style="margin-left: 20px; margin-top: 25px" @click="showdialog()">
@@ -82,7 +87,6 @@ export default {
   name: "Dialogs",
   data() {
     return {
-      MetaMask: "",
       WalletAddress: "",
     };
   },
@@ -103,7 +107,6 @@ export default {
     EventBus.$on("aMsg", (SWTCaddress) => {
       this.WalletAddress = SWTCaddress;
       EventBus.$emit("ishave", "true");
-      EventBus.$emit("SWTC", this.WalletAddress);
     });
   },
   methods: {
@@ -111,12 +114,12 @@ export default {
     async loginMetaMask() {
       if (typeof window.ethereum !== undefined) {
         let addr = await ethereum.request({ method: "eth_requestAccounts" });
-        this.MetaMask = addr[0];
+        this.$store.commit("setETHaddress", addr[0]);
       } else {
         console.log("未安装插件");
       }
       EventBus.$emit("ishave", "true");
-      EventBus.$emit("ETH", this.MetaMask);
+      // EventBus.$emit("ETH", this.MetaMask);
     },
     //显示对话框
     showdialog() {
