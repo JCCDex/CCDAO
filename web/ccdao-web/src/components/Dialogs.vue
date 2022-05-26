@@ -96,13 +96,15 @@ export default {
       wallet = new JingchangWallet(value);
       this.WalletAddress = await wallet.getAddress();
     }
-    EventBus.$emit("ishave", "true");
+    ethereum.on("chainChanged", (_chainId) => window.location.reload());
+    ethereum.on("accountsChanged", (_chainId) => this.offMetaMask());
+    EventBus.$emit("ishave", true);
     EventBus.$emit("SWTC", this.WalletAddress);
   },
   mounted() {
     EventBus.$on("aMsg", (SWTCaddress) => {
       this.WalletAddress = SWTCaddress;
-      EventBus.$emit("ishave", "true");
+      EventBus.$emit("ishave", true);
       EventBus.$emit("SWTC", this.WalletAddress);
     });
   },
@@ -115,8 +117,17 @@ export default {
       } else {
         console.log("未安装插件");
       }
-      EventBus.$emit("ishave", "true");
+      EventBus.$emit("ishave", true);
       EventBus.$emit("ETH", this.MetaMask);
+    },
+    //断开MetaMask
+    offMetaMask() {
+      this.MetaMask = "";
+      if (this.WalletAddress == "") {
+        EventBus.$emit("ishave", false);
+      } else {
+        EventBus.$emit("ishave", true);
+      }
     },
     //显示对话框
     showdialog() {
