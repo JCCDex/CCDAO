@@ -45,20 +45,6 @@ export default {
       SWTCaddress: "",
     };
   },
-  // mounted() {
-  //   EventBus.$on("aMsg", (SWTCaddress) => {
-  //     const CCDAO = "CCDAO_jGa9J9TkqtBcUoHe2zqhVFFbgUVED6o9or";
-  //     this.SWTCaddress = SWTCaddress;
-  //     axios
-  //       .get("https://swtcscan.jccdex.cn/wallet/balance/" + this.SWTCaddress + "?w=" + this.SWTCaddress)
-  //       .then((response) => {
-  //         this.CCDAOnum = response.data.data.CCDAO_jGa9J9TkqtBcUoHe2zqhVFFbgUVED6o9or.value;
-  //       })
-  //       .catch(function (error) {
-  //         console.log(error);
-  //       });
-  //   });
-  // },
 };
 </script>
 
