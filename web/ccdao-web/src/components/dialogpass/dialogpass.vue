@@ -34,7 +34,7 @@
 <script>
 import { JingchangWallet } from "jcc_wallet";
 import { importFile } from "jcc_file";
-import { EventBus } from "../../Bus.js";
+import store from "../../store";
 
 export default {
   name: "dialogpass",
@@ -73,9 +73,10 @@ export default {
         this.value = JSON.parse(walletvalue);
       }
       JingchangWallet.save(this.value);
-      let SWTCaddress = await wallet.getAddress();
+      store.commit("setSWTCAddress", await wallet.getAddress());
+      store.dispatch("setMyCCDAONum");
+      // console.log(this.$store.state.SWTCAddress);
       this.visiblepass = false;
-      EventBus.$emit("aMsg", SWTCaddress);
     },
   },
 };

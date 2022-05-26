@@ -1,13 +1,13 @@
 <template>
   <div class="dialogbox">
     <div class="walletbox">
-      <div v-show="$store.state.ETHaddress != ''">
+      <div v-show="$store.state.ETHAddress != ''">
         <div style="display: flex; margin-top: 20px; margin-left: 20px">
           <img src="../assets/MetaMaketag.svg" />
           <p style="margin: 0px; margin-left: 10px; color: rgba(146, 146, 146, 1)">{{ $t("ETH Wallet Address") }}</p>
         </div>
         <div style="width: 270px; margin-top: 10px; margin-left: 20px; height: 60px">
-          <span style="word-wrap: break-word; font-size: 14px; line-height: 24px">{{ $store.state.ETHaddress }}</span>
+          <span style="word-wrap: break-word; font-size: 14px; line-height: 24px">{{ $store.state.ETHAddress }}</span>
           <!-- <button
             @click="loginMetaMask()"
             style="
@@ -23,13 +23,13 @@
           </button> -->
         </div>
       </div>
-      <div v-show="WalletAddress != ''">
+      <div v-show="$store.state.SWTCAddress != ''">
         <div style="display: flex; margin-top: 20px; margin-left: 20px">
           <img src="../assets/SWTCtag.svg" />
           <p style="margin: 0px; margin-left: 10px; color: rgba(146, 146, 146, 1)">{{ $t("SWTC Wallet Address") }}</p>
         </div>
         <div style="width: 270px; margin-top: 10px; margin-left: 20px; height: 60px">
-          <span style="word-wrap: break-word; font-size: 14px; line-height: 24px">{{ WalletAddress }}</span>
+          <span style="word-wrap: break-word; font-size: 14px; line-height: 24px">{{ $store.state.SWTCAddress }}</span>
           <button
             @click="showdialog()"
             style="
@@ -46,7 +46,7 @@
         </div>
       </div>
       <div
-        v-show="$store.state.ETHaddress != '' || WalletAddress != ''"
+        v-show="$store.state.ETHAddress != '' || $store.state.SWTCAddress != ''"
         style="
           position: absolute;
           top: 115px;
@@ -58,20 +58,25 @@
       ></div>
 
       <p
-        v-show="$store.state.ETHaddress == '' && WalletAddress == ''"
+        v-show="$store.state.ETHAddress == '' && $store.state.SWTCAddress == ''"
         style="text-align: center; margin-top: 30px; margin-bottom: 0px"
       >
         {{ $t("Connect Wallet") }}
       </p>
       <button
-        v-show="$store.state.ETHaddress == ''"
+        v-show="$store.state.ETHAddress == ''"
         class="WB"
         style="margin-left: 20px; margin-top: 25px"
         @click="loginMetaMask()"
       >
         {{ $t("Connect MetaMask") }}
       </button>
-      <button v-show="WalletAddress == ''" class="WB" style="margin-left: 20px; margin-top: 25px" @click="showdialog()">
+      <button
+        v-show="$store.state.SWTCAddress == ''"
+        class="WB"
+        style="margin-left: 20px; margin-top: 25px"
+        @click="showdialog()"
+      >
         {{ $t("Import SWTC Wallet") }}
       </button>
     </div>
@@ -81,7 +86,7 @@
 <script>
 import ImportDialog from "./dialog/index";
 import { JingchangWallet } from "jcc_wallet";
-import { EventBus } from "../Bus.js";
+import store from "../store";
 
 export default {
   name: "Dialogs",
@@ -100,38 +105,19 @@ export default {
       wallet = new JingchangWallet(value);
       this.WalletAddress = await wallet.getAddress();
     }
-    ethereum.on("chainChanged", (_chainId) => window.location.reload());
-    ethereum.on("accountsChanged", (_chainId) => this.offMetaMask());
-    EventBus.$emit("ishave", true);
-    EventBus.$emit("SWTC", this.WalletAddress);
-  },
-  mounted() {
-    EventBus.$on("aMsg", (SWTCaddress) => {
-      this.WalletAddress = SWTCaddress;
-
-      EventBus.$emit("ishave", "true");
-    });
+    store.commit("setSWTCAddress", this.WalletAddress);
+    store.dispatch("setMyCCDAONum");
   },
   methods: {
     //登录MetaMask
     async loginMetaMask() {
       if (typeof window.ethereum !== undefined) {
         let addr = await ethereum.request({ method: "eth_requestAccounts" });
-        this.$store.commit("setETHaddress", addr[0]);
+        this.$store.commit("setETHAddress", addr[0]);
       } else {
         console.log("未安装插件");
       }
-      EventBus.$emit("ishave", "true");
       // EventBus.$emit("ETH", this.MetaMask);
-    },
-    //断开MetaMask
-    offMetaMask() {
-      this.MetaMask = "";
-      if (this.WalletAddress == "") {
-        EventBus.$emit("ishave", false);
-      } else {
-        EventBus.$emit("ishave", true);
-      }
     },
     //显示对话框
     showdialog() {
