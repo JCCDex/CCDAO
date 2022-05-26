@@ -71,7 +71,7 @@ if (typeof window.ethereum !== undefined) {
   ethereum.on("chainChanged", (_chainId) => window.location.reload());
   ethereum.on("accountsChanged", (acc) => {
     // store.state.ETHaddress=acc[0];
-    store.commit("setETHaddress", acc[0] === undefined ? "" : acc[0]);
+    store.commit("setETHAddress", acc[0] === undefined ? "" : acc[0]);
     if (acc[0] === undefined) EventBus.$emit("ishave", false);
   });
 }

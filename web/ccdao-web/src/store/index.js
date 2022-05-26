@@ -16,7 +16,7 @@ export default new Vuex.Store({
   },
   getters: {
     isHave(state) {
-      return state.SWTCAddress === "" && state.ETHAddress === "";
+      return state.SWTCAddress !== "" || state.ETHAddress !== "";
     },
   },
   mutations: {
