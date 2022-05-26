@@ -47,7 +47,7 @@ export default {
     };
   },
   mounted() {
-    EventBus.$on("SWTC", (SWTCaddress) => {
+    EventBus.$on("aMsg", (SWTCaddress) => {
       const CCDAO = "CCDAO_jGa9J9TkqtBcUoHe2zqhVFFbgUVED6o9or";
       this.SWTCaddress = SWTCaddress;
       axios
