@@ -55,7 +55,7 @@ const polling = true;
 const timer = 1000 * 60 * 10;
 
 const callback = (err, res) => {
-  if (err == null) store.dispatch("setvalue", res);
+  if (err == null) store.dispatch("setValue", res);
   else console.log(err);
 };
 
@@ -71,8 +71,7 @@ if (typeof window.ethereum !== undefined) {
   ethereum.on("chainChanged", (_chainId) => window.location.reload());
   ethereum.on("accountsChanged", (acc) => {
     // store.state.ETHaddress=acc[0];
-    store.commit("setETHaddress", acc[0] === undefined ? "" : acc[0]);
-    if (acc[0] === undefined) EventBus.$emit("ishave", false);
+    store.commit("setEthAddress", acc[0] === undefined ? "" : acc[0]);
   });
 }
 

@@ -8,29 +8,48 @@ export default new Vuex.Store({
   state: {
     totalVolumeTraded: "",
     fullyDilutedValuation: "",
-    ETHCCDAO: "",
-    SWTCCCDAO: "",
-    ishave: false,
-    ETHaddress: "",
+    ethCcdao: "",
+    swtcCcdao: "",
+    ethAddress: "",
+    swtcAddress: "",
+    myCCDAONum: 0,
   },
-  getters: {},
+  getters: {
+    isHave(state) {
+      return state.swtcAddress !== "" || state.ethAddress !== "";
+    },
+  },
   mutations: {
-    setdata(state, res) {
+    setData(state, res) {
       state.totalVolumeTraded = res.data.totalVolumeTraded;
       state.fullyDilutedValuation = res.data.fullyDilutedValuation;
-      state.ETHCCDAO = res.data.ETH;
-      state.SWTCCCDAO = res.data.SWTC;
+      state.ethCcdao = res.data.ETH;
+      state.swtcCcdao = res.data.SWTC;
     },
-    setishave(state, data) {
-      state.ishave = data;
+    setEthAddress(state, data) {
+      state.ethAddress = data;
     },
-    setETHaddress(state, data) {
-      state.ETHaddress = data;
+    setSwtcAddress(state, data) {
+      state.swtcAddress = data;
+    },
+    setMyCCDAONumdata(state, data) {
+      state.myCCDAONum = data;
     },
   },
   actions: {
-    setvalue(isstore, res) {
-      isstore.commit("setdata", res);
+    setValue(isstore, res) {
+      isstore.commit("setData", res);
+    },
+    setMyCCDAONum(isStore) {
+      axios
+        .get("https://swtcscan.jccdex.cn/wallet/balance/" + isStore.SWTCAddress + "?w=" + isStore.SWTCAddress)
+        .then((response) => {
+          // this.CCDAOnum = response.data.data.CCDAO_jGa9J9TkqtBcUoHe2zqhVFFbgUVED6o9or.value;
+          isStore.commit("setMyCCDAONumdata", response.data.data.CCDAO_jGa9J9TkqtBcUoHe2zqhVFFbgUVED6o9or.value);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     },
   },
   modules: {},

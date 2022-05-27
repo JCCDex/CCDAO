@@ -10,11 +10,11 @@
         <div>
           <div>{{ $t("message.Total_Volume_Traded") }}</div>
           <!-- <div class="value">{{ totalVolumeTraded.toLocaleString() }}</div> -->
-          <div class="value">{{ $store.state.totalVolumeTraded.toLocaleString() }}</div>
+          <div class="value">{{ totalVolumeTraded }}</div>
         </div>
         <div>
           <div>{{ $t("message.Fully_Diluted_Valuation") }}</div>
-          <div class="value">{{ $store.state.fullyDilutedValuation.toLocaleString() }}</div>
+          <div class="value">{{ fullyDilutedValuation }}</div>
         </div>
       </div>
     </div>
@@ -25,6 +25,14 @@
 <script>
 export default {
   name: "Wel",
+  computed: {
+    totalVolumeTraded() {
+      return this.$store.state.totalVolumeTraded.toLocaleString();
+    },
+    fullyDilutedValuation() {
+      return this.$store.state.fullyDilutedValuation.toLocaleString();
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>

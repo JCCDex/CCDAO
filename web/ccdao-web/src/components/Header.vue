@@ -39,13 +39,13 @@
     </div>
     <div class="wallet" style="position: relative">
       <button class="walletbt">
-        <div v-show="!ishave" style="display: flex; align-items: center; justify-content: space-between">
+        <div v-show="!isHave" style="display: flex; align-items: center; justify-content: space-between">
           <img src="../assets/Shape.svg" style="width: 20px; height: 20px" />
           <p style="margin: 0px; margin-left: 10px">{{ $t("message.Connect_Wallet") }}</p>
         </div>
 
         <div
-          v-show="ishave"
+          v-show="isHave"
           style="color: rgba(58, 155, 232, 1); display: flex; align-items: center; justify-content: space-between"
         >
           <img src="../assets/shaceblue.svg" style="width: 20px; height: 20px" />
@@ -64,22 +64,16 @@
 
 <script>
 import Dialogs from "./Dialogs";
-import { EventBus } from "../Bus.js";
 
 export default {
   name: "Header",
-  data() {
-    return {
-      ishave: false,
-    };
+  computed: {
+    isHave() {
+      return this.$store.getters.isHave;
+    },
   },
   components: {
     Dialogs,
-  },
-  mounted() {
-    EventBus.$on("ishave", (ishave) => {
-      this.ishave = ishave;
-    });
   },
 };
 </script>
