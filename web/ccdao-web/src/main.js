@@ -67,10 +67,11 @@ subscribeInst
   // start task
   .start(TASK_NAME);
 
-if (typeof window.ethereum !== undefined) {
+if (window.ethereum) {
+  const ethereum = window.ethereum;
+
   ethereum.on("chainChanged", (_chainId) => window.location.reload());
   ethereum.on("accountsChanged", (acc) => {
-    // store.state.ETHaddress=acc[0];
     store.commit("setEthAddress", acc[0] === undefined ? "" : acc[0]);
   });
 }
