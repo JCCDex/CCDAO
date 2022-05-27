@@ -73,7 +73,7 @@ export default {
         this.value = JSON.parse(walletvalue);
       }
       JingchangWallet.save(this.value);
-      store.commit("setSWTCAddress", await wallet.getAddress());
+      store.commit("setSwtcAddress", await wallet.getAddress());
       store.dispatch("setMyCCDAONum");
       // console.log(this.$store.state.SWTCAddress);
       this.visiblepass = false;

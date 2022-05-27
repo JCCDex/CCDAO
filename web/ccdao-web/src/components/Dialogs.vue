@@ -1,13 +1,13 @@
 <template>
   <div class="dialogbox">
     <div class="walletbox">
-      <div v-show="$store.state.ETHAddress != ''">
+      <div v-show="ethAddress != ''">
         <div style="display: flex; margin-top: 20px; margin-left: 20px">
           <img src="../assets/MetaMaketag.svg" />
           <p style="margin: 0px; margin-left: 10px; color: rgba(146, 146, 146, 1)">{{ $t("ETH Wallet Address") }}</p>
         </div>
         <div style="width: 270px; margin-top: 10px; margin-left: 20px; height: 60px">
-          <span style="word-wrap: break-word; font-size: 14px; line-height: 24px">{{ $store.state.ETHAddress }}</span>
+          <span style="word-wrap: break-word; font-size: 14px; line-height: 24px">{{ ethAddress }}</span>
           <!-- <button
             @click="loginMetaMask()"
             style="
@@ -23,13 +23,13 @@
           </button> -->
         </div>
       </div>
-      <div v-show="$store.state.SWTCAddress != ''">
+      <div v-show="swtcAddress != ''">
         <div style="display: flex; margin-top: 20px; margin-left: 20px">
           <img src="../assets/SWTCtag.svg" />
           <p style="margin: 0px; margin-left: 10px; color: rgba(146, 146, 146, 1)">{{ $t("SWTC Wallet Address") }}</p>
         </div>
         <div style="width: 270px; margin-top: 10px; margin-left: 20px; height: 60px">
-          <span style="word-wrap: break-word; font-size: 14px; line-height: 24px">{{ $store.state.SWTCAddress }}</span>
+          <span style="word-wrap: break-word; font-size: 14px; line-height: 24px">{{ swtcAddress }}</span>
           <button
             @click="showdialog()"
             style="
@@ -46,7 +46,7 @@
         </div>
       </div>
       <div
-        v-show="$store.state.ETHAddress != '' || $store.state.SWTCAddress != ''"
+        v-show="ethAddress != '' || swtcAddress != ''"
         style="
           position: absolute;
           top: 115px;
@@ -58,25 +58,15 @@
       ></div>
 
       <p
-        v-show="$store.state.ETHAddress == '' && $store.state.SWTCAddress == ''"
+        v-show="ethAddress == '' && swtcAddress == ''"
         style="text-align: center; margin-top: 30px; margin-bottom: 0px"
       >
         {{ $t("Connect Wallet") }}
       </p>
-      <button
-        v-show="$store.state.ETHAddress == ''"
-        class="WB"
-        style="margin-left: 20px; margin-top: 25px"
-        @click="loginMetaMask()"
-      >
+      <button v-show="ethAddress == ''" class="WB" style="margin-left: 20px; margin-top: 25px" @click="loginMetaMask()">
         {{ $t("Connect MetaMask") }}
       </button>
-      <button
-        v-show="$store.state.SWTCAddress == ''"
-        class="WB"
-        style="margin-left: 20px; margin-top: 25px"
-        @click="showdialog()"
-      >
+      <button v-show="swtcAddress == ''" class="WB" style="margin-left: 20px; margin-top: 25px" @click="showdialog()">
         {{ $t("Import SWTC Wallet") }}
       </button>
     </div>
@@ -86,7 +76,6 @@
 <script>
 import ImportDialog from "./dialog/index";
 import { JingchangWallet } from "jcc_wallet";
-import store from "../store";
 
 export default {
   name: "Dialogs",
@@ -95,7 +84,14 @@ export default {
       WalletAddress: "",
     };
   },
-  computed: {},
+  computed: {
+    ethAddress() {
+      return this.$store.state.ethAddress;
+    },
+    swtcAddress() {
+      return this.$store.state.swtcAddress;
+    },
+  },
   async created() {
     let value;
     let wallet;
@@ -105,15 +101,15 @@ export default {
       wallet = new JingchangWallet(value);
       this.WalletAddress = await wallet.getAddress();
     }
-    store.commit("setSWTCAddress", this.WalletAddress);
-    store.dispatch("setMyCCDAONum");
+    this.$store.commit("setSwtcAddress", this.WalletAddress);
+    this.$store.dispatch("setMyCCDAONum");
   },
   methods: {
     //登录MetaMask
     async loginMetaMask() {
       if (typeof window.ethereum !== undefined) {
         let addr = await ethereum.request({ method: "eth_requestAccounts" });
-        this.$store.commit("setETHAddress", addr[0]);
+        this.$store.commit("setEthAddress", addr[0]);
       } else {
         console.log("未安装插件");
       }
@@ -146,12 +142,13 @@ button {
   flex-direction: column;
 }
 .WB {
+  font-size: 14px;
   border: none;
   width: 260px;
   height: 40px;
   background: rgba(255, 255, 255, 1);
   background-blend-mode: normal;
-  color: rgba(67, 162, 244, 1);
+  color: #3595e8;
   border: 1px solid rgba(229, 232, 238, 1);
   border-radius: 18px;
   mix-blend-mode: normal;
@@ -160,7 +157,7 @@ button {
   border: none;
   width: 260px;
   height: 40px;
-  background: rgba(67, 162, 244, 1);
+  background: #3595e8;
   background-blend-mode: normal;
   border-radius: 21.5px;
   mix-blend-mode: normal;

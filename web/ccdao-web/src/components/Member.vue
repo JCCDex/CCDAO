@@ -5,14 +5,14 @@
       <div class="memberbox">
         <div>
           <p class="mca">{{ $t("message.My_CCDAO_Amount") }}</p>
-          <p class="mcanum">{{ $store.state.myCCDAONum }}&nbsp;{{ $t("message.CCDAO") }}</p>
+          <p class="mcanum">{{ ccdaoNum }}&nbsp;{{ $t("message.CCDAO") }}</p>
         </div>
-        <div v-show="CCDAOnum >= 10000" style="display: flex; align-items: center; font-size: 14px">
+        <div v-show="ccdaoNum >= 10000" style="display: flex; align-items: center; font-size: 14px">
           <span style="color: rgba(161, 166, 169, 1)">{{ $t("message.status") }}</span>
           <span style="color: rgba(51, 147, 230, 1); margin-right: 10px">{{ $t("message.YES") }}</span>
           <img src="../assets/member.svg" alt="" />
         </div>
-        <div v-show="CCDAOnum < 10000" style="display: flex; align-items: center; font-size: 14px">
+        <div v-show="ccdaoNum < 10000" style="display: flex; align-items: center; font-size: 14px">
           <span style="color: rgba(161, 166, 169, 1)">{{ $t("message.status") }}</span>
           <span style="color: rgba(51, 147, 230, 1); margin-right: 10px">{{ $t("message.NO") }}</span>
           <img src="../assets/member1.svg" alt="" />
@@ -35,15 +35,12 @@
 </template>
 
 <script>
-import store from "../store";
-
 export default {
   name: "Member",
-  data() {
-    return {
-      CCDAOnum: 0,
-      SWTCaddress: "",
-    };
+  computed: {
+    ccdaoNum() {
+      return this.$store.state.myCCDAONum.toLocaleString();
+    },
   },
 };
 </script>

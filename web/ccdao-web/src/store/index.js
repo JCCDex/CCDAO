@@ -8,37 +8,37 @@ export default new Vuex.Store({
   state: {
     totalVolumeTraded: "",
     fullyDilutedValuation: "",
-    ETHCCDAO: "",
-    SWTCCCDAO: "",
-    ETHAddress: "",
-    SWTCAddress: "",
+    ethCcdao: "",
+    swtcCcdao: "",
+    ethAddress: "",
+    swtcAddress: "",
     myCCDAONum: 0,
   },
   getters: {
     isHave(state) {
-      return state.SWTCAddress !== "" || state.ETHAddress !== "";
+      return state.swtcAddress !== "" || state.ethAddress !== "";
     },
   },
   mutations: {
-    setdata(state, res) {
+    setData(state, res) {
       state.totalVolumeTraded = res.data.totalVolumeTraded;
       state.fullyDilutedValuation = res.data.fullyDilutedValuation;
-      state.ETHCCDAO = res.data.ETH;
-      state.SWTCCCDAO = res.data.SWTC;
+      state.ethCcdao = res.data.ETH;
+      state.swtcCcdao = res.data.SWTC;
     },
-    setETHAddress(state, data) {
-      state.ETHAddress = data;
+    setEthAddress(state, data) {
+      state.ethAddress = data;
     },
-    setSWTCAddress(state, data) {
-      state.SWTCAddress = data;
+    setSwtcAddress(state, data) {
+      state.swtcAddress = data;
     },
     setMyCCDAONumdata(state, data) {
       state.myCCDAONum = data;
     },
   },
   actions: {
-    setvalue(isstore, res) {
-      isstore.commit("setdata", res);
+    setValue(isstore, res) {
+      isstore.commit("setData", res);
     },
     setMyCCDAONum(isStore) {
       axios

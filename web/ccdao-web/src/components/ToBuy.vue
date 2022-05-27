@@ -11,13 +11,13 @@
           <span class="buy">{{ $t("message.You_can_buy_$CCDAO_in") }}</span>
           <img src="../assets/buyarrow.svg" class="buyimg" />
           <a href="https://letsdex.com" target="_blank">
-            <div class="buyaddbox" style="top: -10px; right: 300px">
+            <div class="buyaddbox" style="top: 0px; right: 300px">
               <img src="../assets/buyaddtag1.svg" class="buytag" />
               <p class="buyaddtext">{{ $t("message.LetsDEX") }}</p>
             </div>
           </a>
           <a href="https://app.uniswap.org/" target="_blank">
-            <div class="buyaddbox" style="top: -10px; right: 0px">
+            <div class="buyaddbox" style="top: 0px; right: 0px">
               <img src="../assets/buyaddtag2.svg" class="buytag" />
               <p class="buyaddtext">{{ $t("message.Uniswap") }}</p>
             </div>
