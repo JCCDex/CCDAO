@@ -4,7 +4,6 @@
       <p>{{ $t("message.Multi-Signers") }}</p>
       <p>{{ $t("message.It_is_under_construction") }}</p>
     </div>
-    <img src="../assets/signers.svg" class="img2" />
   </div>
 </template>
 
@@ -15,10 +14,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../css/background.scss";
+
 .Signers {
-  width: 100%;
-  mix-blend-mode: normal;
   position: relative;
+  @include div-same-size-as-background-img("../assets/signers.svg");
 
   .signers {
     top: 100px;
@@ -30,18 +30,6 @@ export default {
     flex-direction: column;
     color: rgba(255, 255, 255, 1);
     font-size: 50px;
-  }
-
-  .img1 {
-    left: 0;
-    width: 100%;
-    position: absolute;
-    bottom: -16px;
-  }
-
-  .img2 {
-    width: 100%;
-    z-index: -1;
   }
 }
 </style>

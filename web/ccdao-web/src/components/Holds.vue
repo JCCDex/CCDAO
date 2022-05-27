@@ -1,5 +1,5 @@
 <template>
-  <div class="boxtwo" id="Holds">
+  <div class="hold-container" id="Holds">
     <!-- <img src="../assets/bgimg2.svg" style="width: 100%;position: absolute; z-index: -1;"> -->
     <div class="boxtwotext">
       <span class="p1" style="font-size: 50px; line-height: 50px">{{ $t("message.$CCDAO") }}</span>
@@ -27,7 +27,6 @@
         </div>
       </div>
     </div>
-    <img src="../assets/bgimg2.png" style="width: 100%; position: relative; z-index: -1; display: flex" />
   </div>
 </template>
 
@@ -45,47 +44,52 @@ export default {
 };
 </script>
 
-<style>
-.boxtwo {
-  width: 100%;
+<style lang="scss" scoped>
+@import "../css/background.scss";
+
+.hold-container {
   position: relative;
-  /* background-image: url("../assets/bgimg2.svg"); */
-}
-.boxtwotext {
-  padding-top: 80px;
-  position: absolute;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.p1 {
-  margin-bottom: 35px;
-  mix-blend-mode: normal;
-  color: rgba(255, 255, 255, 1);
-}
-.p2 {
-  width: 183px;
-  height: 50px;
-  mix-blend-mode: normal;
-  color: rgba(255, 255, 255, 1);
-  position: absolute;
-}
-.holdout {
-  display: flex;
-  justify-content: center;
-}
-.hold {
-  /* margin-left: 29.1%; */
-  width: 600px;
-  height: 290px;
-}
-.holdbox {
-  width: 600px;
-  height: 120px;
-  background: rgba(96.00000000000001, 194.00000000000006, 248, 1);
-  background-blend-mode: normal;
-  border-radius: 110px;
-  mix-blend-mode: normal;
+  @include div-same-size-as-background-img("../assets/bgimg2.png");
+
+  .boxtwotext {
+    padding-top: 80px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .p1 {
+    margin-bottom: 35px;
+    mix-blend-mode: normal;
+    color: rgba(255, 255, 255, 1);
+  }
+  .p2 {
+    width: 183px;
+    height: 50px;
+    mix-blend-mode: normal;
+    color: rgba(255, 255, 255, 1);
+    position: absolute;
+  }
+  .holdout {
+    display: flex;
+    justify-content: center;
+  }
+  .hold {
+    /* margin-left: 29.1%; */
+    width: 600px;
+    height: 290px;
+  }
+  .holdbox {
+    position: relative;
+    width: 600px;
+    height: 120px;
+    background: rgba(96.00000000000001, 194.00000000000006, 248, 1);
+    background-blend-mode: normal;
+    border-radius: 110px;
+    mix-blend-mode: normal;
+  }
 }
 </style>

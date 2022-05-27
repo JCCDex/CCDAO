@@ -1,5 +1,5 @@
 <template>
-  <div class="boxfive" id="Member">
+  <div class="member-container" id="Member">
     <div class="member">
       <p class="membership">{{ $t("message.Membership") }}</p>
       <div class="memberbox">
@@ -29,8 +29,6 @@
         </div>
       </div>
     </div>
-
-    <img src="../assets/bgimg5.svg" style="width: 100%; position: relative; z-index: -1; display: flex" />
   </div>
 </template>
 
@@ -45,62 +43,66 @@ export default {
 };
 </script>
 
-<style>
-.boxfive {
-  width: 100%;
-  mix-blend-mode: normal;
+<style lang="scss" scoped>
+@import "../css/background.scss";
+
+.member-container {
   position: relative;
-}
-.member {
-  width: 100%;
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding-top: 100px;
-}
-.membership {
-  margin: 0px;
-  mix-blend-mode: normal;
-  color: black;
-  font-size: 40px;
-  line-height: 46px;
-}
-.memberbox {
-  margin-top: 150px;
-  width: 600px;
-  height: 120px;
-  background: rgba(255, 255, 255, 1);
-  background-blend-mode: normal;
-  box-shadow: 0px 1px 5px rgba(201, 223, 240, 1);
-  border-radius: 80px;
-  mix-blend-mode: normal;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-left: 50px;
-  position: relative;
-}
-.mca {
-  margin: 0%;
-  background-blend-mode: normal;
-  mix-blend-mode: normal;
-  color: rgba(161, 166, 169, 1);
-  font-size: 16px;
-  line-height: 40px;
-}
-.mcanum {
-  margin: 0%;
-  background-blend-mode: normal;
-  mix-blend-mode: normal;
-  color: rgba(73, 170, 239, 1);
-  font-size: 30px;
-  line-height: 30px;
-}
-.memberboxtext {
-  position: absolute;
-  top: 200px;
-  left: 0px;
+  @include div-same-size-as-background-img("../assets/bgimg5.svg");
+
+  .member {
+    width: 100%;
+    position: absolute;
+    display: flex;
+    left: 0;
+    top: 0;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 100px;
+  }
+  .membership {
+    margin: 0px;
+    mix-blend-mode: normal;
+    color: black;
+    font-size: 40px;
+    line-height: 46px;
+  }
+  .memberbox {
+    margin-top: 150px;
+    width: 600px;
+    height: 120px;
+    background: rgba(255, 255, 255, 1);
+    background-blend-mode: normal;
+    box-shadow: 0px 1px 5px rgba(201, 223, 240, 1);
+    border-radius: 80px;
+    mix-blend-mode: normal;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 50px;
+    position: relative;
+  }
+  .mca {
+    margin: 0%;
+    background-blend-mode: normal;
+    mix-blend-mode: normal;
+    color: rgba(161, 166, 169, 1);
+    font-size: 16px;
+    line-height: 40px;
+  }
+  .mcanum {
+    margin: 0%;
+    background-blend-mode: normal;
+    mix-blend-mode: normal;
+    color: rgba(73, 170, 239, 1);
+    font-size: 30px;
+    line-height: 30px;
+  }
+  .memberboxtext {
+    position: absolute;
+    top: 200px;
+    left: 0px;
+  }
 }
 </style>

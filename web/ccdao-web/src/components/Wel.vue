@@ -18,7 +18,6 @@
         </div>
       </div>
     </div>
-    <img src="../assets/bgimg1.svg" />
   </div>
 </template>
 
@@ -36,14 +35,11 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+@import "../css/background.scss";
 .community {
-  width: 100%;
   position: relative;
+  @include div-same-size-as-background-img("../assets/bgimg1.svg");
 
-  img {
-    display: flex;
-    width: 100%;
-  }
   .content {
     position: absolute;
     left: 0;
