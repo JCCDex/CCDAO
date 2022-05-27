@@ -5,6 +5,7 @@ import axios from "axios";
 import { Token, SwapContract, SwapMulticall, SwapBalance } from "@jccdex/ethereum-contract";
 import { Web3Provider } from "@ethersproject/providers";
 import { normalizeAccount } from "@jccdex/ethereum-contract/lib/utils/normalizers";
+import BigNumber from "bignumber.js";
 
 Vue.use(Vuex);
 
@@ -24,7 +25,7 @@ export default new Vuex.Store({
       return state.swtcAddress !== "" || state.ethAddress !== "";
     },
     myCCDAONum(state) {
-      return state.mySwtcNum + state.myEthNum;
+      return new BigNumber(state.mySwtcNum).plus(state.myEthNum).toNumber();
     },
   },
   mutations: {
@@ -41,29 +42,26 @@ export default new Vuex.Store({
       state.swtcAddress = data;
     },
     setMyEthNumData(state, data) {
-      state.myEthNum = Number(data);
+      state.myEthNum = data;
     },
     setMySwtcNumData(state, data) {
-      state.mySwtcNum = Number(data);
+      state.mySwtcNum = data;
     },
   },
   actions: {
     setValue(isstore, res) {
       isstore.commit("setData", res);
     },
-    setMySwtcNum(isStore) {
-      axios
-        .get(
+    async setMySwtcNum(isStore) {
+      try {
+        const res = await axios.get(
           "https://swtcscan.jccdex.cn/wallet/balance/" + isStore.state.swtcAddress + "?w=" + isStore.state.swtcAddress
-          // "https://swtcscan.jccdex.cn/wallet/balance/" + "jsk45ksJZUB7durZrLt5e86Eu2gtiXNRN4" + "?w=" + "jsk45ksJZUB7durZrLt5e86Eu2gtiXNRN4"
-        )
-        .then((response) => {
-          console.log(1);
-          isStore.commit("setMySwtcNumData", response.data.data.CCDAO_jGa9J9TkqtBcUoHe2zqhVFFbgUVED6o9or.value);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+        );
+        const value = res.data.data.CCDAO_jGa9J9TkqtBcUoHe2zqhVFFbgUVED6o9or.value;
+        isStore.commit("setMySwtcNumData", value);
+      } catch (error) {
+        isStore.commit("setMySwtcNumData", 0);
+      }
     },
     async setMyEthNum(isStore) {
       if (isStore.state.ethAddress === "") {
@@ -71,20 +69,22 @@ export default new Vuex.Store({
         return;
       }
 
-      let chainId = 1;
-      let web3 = window.web3;
-      let multicallAddress = "0xeefba1e63905ef1d7acba5a8513c70307c1ce441";
-
-      // let account = normalizeAccount("0x3907acb4c1818adf72d965c08e0a79af16e7ffb8");
-      let account = normalizeAccount(isStore.state.ethAddress);
-      const currentProvider = web3.currentProvider;
-      const web3Provider = new Web3Provider(currentProvider, chainId);
-      let swapContract = new SwapContract(account, multicallAddress, web3Provider);
-      let swapMulticall = new SwapMulticall(chainId, web3, swapContract);
-      let swapBalance = new SwapBalance(swapMulticall);
-      const token = new Token(chainId, "0x1487Bd704Fa05A222B0aDB50dc420f001f003045", 18);
-      let num = await (await swapBalance.useTokenBalance(account, token)).toSignificant(10);
-      isStore.commit("setMyEthNumData", num);
+      try {
+        let chainId = 1;
+        let web3 = window.web3;
+        let multicallAddress = "0xeefba1e63905ef1d7acba5a8513c70307c1ce441";
+        let account = normalizeAccount(isStore.state.ethAddress);
+        const currentProvider = web3.currentProvider;
+        const web3Provider = new Web3Provider(currentProvider, chainId);
+        let swapContract = new SwapContract(account, multicallAddress, web3Provider);
+        let swapMulticall = new SwapMulticall(chainId, web3, swapContract);
+        let swapBalance = new SwapBalance(swapMulticall);
+        const token = new Token(chainId, "0x1487Bd704Fa05A222B0aDB50dc420f001f003045", 18);
+        const amount = await swapBalance.useTokenBalance(account, token);
+        isStore.commit("setMyEthNumData", amount.toSignificant(10));
+      } catch (error) {
+        isStore.commit("setMyEthNumData", 0);
+      }
     },
   },
   modules: {},
