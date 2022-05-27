@@ -100,20 +100,19 @@ export default {
     if (value != null) {
       wallet = new JingchangWallet(value);
       this.WalletAddress = await wallet.getAddress();
+      this.$store.commit("setSwtcAddress", this.WalletAddress);
+      this.$store.dispatch("setMyCCDAONum");
     }
-    this.$store.commit("setSwtcAddress", this.WalletAddress);
-    this.$store.dispatch("setMyCCDAONum");
   },
   methods: {
     //登录MetaMask
     async loginMetaMask() {
-      if (typeof window.ethereum !== undefined) {
+      if (window.ethereum) {
         let addr = await ethereum.request({ method: "eth_requestAccounts" });
         this.$store.commit("setEthAddress", addr[0]);
       } else {
         console.log("未安装插件");
       }
-      // EventBus.$emit("ETH", this.MetaMask);
     },
     //显示对话框
     showdialog() {
