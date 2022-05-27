@@ -101,7 +101,7 @@ export default {
       wallet = new JingchangWallet(value);
       this.WalletAddress = await wallet.getAddress();
       this.$store.commit("setSwtcAddress", this.WalletAddress);
-      this.$store.dispatch("setMyCCDAONum");
+      this.$store.dispatch("setMySwtcNum");
     }
   },
   methods: {
@@ -110,6 +110,7 @@ export default {
       if (window.ethereum) {
         let addr = await ethereum.request({ method: "eth_requestAccounts" });
         this.$store.commit("setEthAddress", addr[0]);
+        this.$store.dispatch("setMyEthNum");
       } else {
         console.log("未安装插件");
       }

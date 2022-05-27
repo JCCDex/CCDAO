@@ -3,7 +3,9 @@ import App from "./App.vue";
 import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
 import "./css/dialog.scss";
-import { EventBus } from "./Bus.js";
+// import { Token,SwapContract,SwapMulticall,SwapBalance } from "@jccdex/ethereum-contract";
+// import { Web3Provider } from "@ethersproject/providers";
+// import { normalizeAccount } from "@jccdex/ethereum-contract/lib/utils/normalizers";
 // import i18n from './i18n'
 Vue.config.productionTip = false;
 Vue.use(ElementUI);
@@ -71,8 +73,9 @@ if (window.ethereum) {
   const ethereum = window.ethereum;
 
   ethereum.on("chainChanged", (_chainId) => window.location.reload());
-  ethereum.on("accountsChanged", (acc) => {
+  ethereum.on("accountsChanged", async (acc) => {
     store.commit("setEthAddress", acc[0] === undefined ? "" : acc[0]);
+    store.dispatch("setMyEthNum");
   });
 }
 

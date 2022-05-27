@@ -5,7 +5,7 @@
       <div class="memberbox">
         <div>
           <p class="mca">{{ $t("message.My_CCDAO_Amount") }}</p>
-          <p class="mcanum">{{ ccdaoNum }}&nbsp;{{ $t("message.CCDAO") }}</p>
+          <p class="mcanum">{{ ccdaoNum.toLocaleString() }}&nbsp;{{ $t("message.CCDAO") }}</p>
         </div>
         <div v-show="ccdaoNum >= 10000" style="display: flex; align-items: center; font-size: 14px">
           <span style="color: rgba(161, 166, 169, 1)">{{ $t("message.status") }}</span>
@@ -37,7 +37,7 @@ export default {
   name: "Member",
   computed: {
     ccdaoNum() {
-      return this.$store.state.myCCDAONum.toLocaleString();
+      return this.$store.getters.myCCDAONum;
     },
   },
 };
