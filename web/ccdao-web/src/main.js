@@ -3,8 +3,6 @@ import App from "./App.vue";
 import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
 import "./css/dialog.scss";
-import { EventBus } from "./Bus.js";
-// import i18n from './i18n'
 Vue.config.productionTip = false;
 Vue.use(ElementUI);
 
@@ -25,14 +23,6 @@ const i18n = new VueI18n({
   locale: "en",
   messages,
 });
-
-// // 通过选项创建 VueI18n 实例
-// const i18n = new VueI18n({
-//   locale: 'en',    // 语言标识
-//   messages: {
-//     'en': require('./locales/en'),   // 英文语言包
-//   }
-// })
 
 Vue.config.productionTip = false;
 
@@ -73,6 +63,7 @@ if (window.ethereum) {
   ethereum.on("chainChanged", (_chainId) => window.location.reload());
   ethereum.on("accountsChanged", (acc) => {
     store.commit("setEthAddress", acc[0] === undefined ? "" : acc[0]);
+    store.dispatch("setMyEthNum");
   });
 }
 

@@ -74,7 +74,7 @@ export default {
       }
       JingchangWallet.save(this.value);
       store.commit("setSwtcAddress", await wallet.getAddress());
-      store.dispatch("setMyCCDAONum");
+      store.dispatch("setMySwtcNum");
       // console.log(this.$store.state.SWTCAddress);
       this.visiblepass = false;
     },
