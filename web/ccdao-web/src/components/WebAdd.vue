@@ -1,5 +1,5 @@
 <template>
-  <div class="contract" id="WebAdd">
+  <div class="contract" id="contract">
     <div class="webadd">
       <div class="webadds">
         <div class="webAddone">

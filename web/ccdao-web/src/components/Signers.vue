@@ -1,5 +1,5 @@
 <template>
-  <div class="Signers" id="Signers">
+  <div class="Signers" id="multi">
     <div class="signers">
       <p>{{ $t("message.Multi-Signers") }}</p>
       <p>{{ $t("message.It_is_under_construction") }}</p>

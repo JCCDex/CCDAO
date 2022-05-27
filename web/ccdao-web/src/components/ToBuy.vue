@@ -1,5 +1,5 @@
 <template>
-  <div class="buy-container" id="ToBuy">
+  <div class="buy-container" id="trade">
     <div class="tobuy">
       <div class="tobuys">
         <div class="buyone">

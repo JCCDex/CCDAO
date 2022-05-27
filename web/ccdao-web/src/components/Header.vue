@@ -23,16 +23,16 @@
           </div>
           <div class="out" style="left: 130px">
             <div class="outbt" style="left: 130px">
-              <a href="#Holds" class="outbts">{{ $t("message.Holding") }}</a>
-              <a href="#ToBuy" class="outbts">{{ $t("message.How_to_Buy") }}</a>
-              <a href="#WebAdd" class="outbts">{{ $t("message.Contract_Address") }}</a>
+              <a href="#holding" class="outbts">{{ $t("message.Holding") }}</a>
+              <a href="#trade" class="outbts">{{ $t("message.How_to_Buy") }}</a>
+              <a href="#contract" class="outbts">{{ $t("message.Contract_Address") }}</a>
             </div>
           </div>
         </div>
-        <a href="#Member"
+        <a href="#membership"
           ><div class="fbt2">{{ $t("message.Membership") }}</div></a
         >
-        <a href="#Signers"
+        <a href="#multi"
           ><div class="fbt2">{{ $t("message.Multi-Signers") }}</div></a
         >
       </div>
