@@ -36,8 +36,8 @@ export default {};
 @import "../css/background.scss";
 
 .buy-container {
-  width: 100%;
   position: relative;
+  padding-top: 62.5%;
   @include div-same-size-as-background-img("../assets/bgimg3.svg");
 
   .tobuy {

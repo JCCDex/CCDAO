@@ -43,6 +43,7 @@ export default {
 @import "../css/background.scss";
 .contract {
   position: relative;
+  padding-top: 62.5%;
   @include div-same-size-as-background-img("../assets/bgimg4.png");
 
   .webadd {

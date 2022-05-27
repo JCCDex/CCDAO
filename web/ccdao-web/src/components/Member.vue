@@ -48,6 +48,7 @@ export default {
 
 .member-container {
   position: relative;
+  padding-top: 62.5%;
   @include div-same-size-as-background-img("../assets/bgimg5.svg");
 
   .member {

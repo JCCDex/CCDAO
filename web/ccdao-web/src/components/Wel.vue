@@ -38,6 +38,7 @@ export default {
 @import "../css/background.scss";
 .community {
   position: relative;
+  padding-top: 58.33333%;
   @include div-same-size-as-background-img("../assets/bgimg1.svg");
 
   .content {

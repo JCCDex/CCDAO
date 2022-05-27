@@ -49,6 +49,7 @@ export default {
 
 .hold-container {
   position: relative;
+  padding-top: 62.5%;
   @include div-same-size-as-background-img("../assets/bgimg2.png");
 
   .boxtwotext {

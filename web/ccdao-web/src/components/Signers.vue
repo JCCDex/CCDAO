@@ -18,6 +18,7 @@ export default {
 
 .Signers {
   position: relative;
+  padding-top: 58.33333%;
   @include div-same-size-as-background-img("../assets/signers.svg");
 
   .signers {

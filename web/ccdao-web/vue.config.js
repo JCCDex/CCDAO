@@ -1,6 +1,6 @@
 const { defineConfig } = require("@vue/cli-service");
 const NodePolyfillPlugin = require("node-polyfill-webpack-plugin");
-const assetFunctions = require("node-sass-asset-functions");
+// const assetFunctions = require("node-sass-asset-functions");
 
 module.exports = defineConfig({
   transpileDependencies: true,
@@ -9,15 +9,15 @@ module.exports = defineConfig({
   configureWebpack: {
     plugins: [new NodePolyfillPlugin()],
   },
-  css: {
-    loaderOptions: {
-      scss: {
-        sassOptions: {
-          functions: assetFunctions(),
-        },
-      },
-    },
-  },
+  // css: {
+  //   loaderOptions: {
+  //     scss: {
+  //       sassOptions: {
+  //         functions: assetFunctions(),
+  //       },
+  //     },
+  //   },
+  // },
 
   pluginOptions: {
     i18n: {
