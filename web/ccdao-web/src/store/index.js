@@ -42,9 +42,10 @@ export default new Vuex.Store({
     },
     setMyCCDAONum(isStore) {
       axios
-        .get("https://swtcscan.jccdex.cn/wallet/balance/" + isStore.SWTCAddress + "?w=" + isStore.SWTCAddress)
+        .get(
+          "https://swtcscan.jccdex.cn/wallet/balance/" + isStore.state.swtcAddress + "?w=" + isStore.state.swtcAddress
+        )
         .then((response) => {
-          // this.CCDAOnum = response.data.data.CCDAO_jGa9J9TkqtBcUoHe2zqhVFFbgUVED6o9or.value;
           isStore.commit("setMyCCDAONumdata", response.data.data.CCDAO_jGa9J9TkqtBcUoHe2zqhVFFbgUVED6o9or.value);
         })
         .catch(function (error) {
