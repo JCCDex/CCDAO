@@ -176,6 +176,7 @@ a {
   border-radius: 18px;
   margin-right: 50px;
   font-size: 14px;
+  border: 2px solid rgba(67, 162, 244, 0);
 }
 .walletbt {
   border: none;
@@ -201,10 +202,7 @@ a {
   display: none;
 }
 .wallet:hover {
-  border: 1px solid #3394e6;
-}
-.wallet:hover .bttext {
-  color: #278adb;
+  border: 2px solid #3394e6;
 }
 .wallet:hover .walletdia {
   display: block;

@@ -8,16 +8,18 @@
         </div>
 
         <div class="addbox" style="margin-top: 130px">
-          <img src="../assets/addimg.png" class="addimg" />
-          <p class="addboxtext1" style="left: 40px; top: 1px">{{ $t("message.ETH") }}</p>
+          <div class="addboxhead">
+            <p class="addboxtext1" style="left: 40px; top: 1px">{{ $t("message.ETH") }}</p>
+          </div>
           <a href="https://cn.etherscan.com/token/0x1487bd704fa05a222b0adb50dc420f001f003045" target="_blank">
             <span class="spantext">0x1487bd704fa05a222b0adb50dc420f001f003045</span>
             <img src="../assets/rightarrow.svg" class="right" />
           </a>
         </div>
         <div class="addbox" style="margin-top: 30px">
-          <img src="../assets/addimg.png" class="addimg" />
-          <p class="addboxtext1" style="left: 30px; top: 1px">{{ $t("message.SWTC") }}</p>
+          <div class="addboxhead">
+            <p class="addboxtext1" style="left: 30px; top: 1px">{{ $t("message.SWTC") }}</p>
+          </div>
           <a
             href="https://swtcscan.jccdex.cn/#/tokendetail/?token=CCDAO_jGa9J9TkqtBcUoHe2zqhVFFbgUVED6o9or"
             target="_blank"
@@ -85,6 +87,10 @@ export default {
     background-blend-mode: normal;
     border-radius: 60px;
     mix-blend-mode: normal;
+    border: 1px solid rgba(252, 254, 255, 0);
+  }
+  .addbox:hover {
+    border: 1px solid rgba(252, 254, 255, 1);
   }
   .addimg {
     width: 120px;
@@ -102,10 +108,18 @@ export default {
     font-size: 16px;
     line-height: 14px;
   }
+  .addboxhead {
+    background-color: white;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+    width: 120px;
+    height: 60px;
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   .addboxtext1 {
-    position: absolute;
-    width: 36px;
-    height: 25px;
     mix-blend-mode: normal;
     color: rgba(51, 147, 230, 1);
     font-size: 18px;
