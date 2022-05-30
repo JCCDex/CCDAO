@@ -49,7 +49,7 @@
           style="color: rgba(58, 155, 232, 1); display: flex; align-items: center; justify-content: space-between"
         >
           <img src="../assets/shaceblue.svg" style="width: 20px; height: 20px" />
-          <p style="margin: 0px; margin-left: 5px">{{ $t("message.My_Wallet") }}</p>
+          <p class="bttext" style="margin: 0px; margin-left: 5px">{{ $t("message.My_Wallet") }}</p>
         </div>
 
         <img src="../assets/triangular.svg" style="width: 11px; height: 5.13px" />
@@ -199,6 +199,12 @@ a {
   top: 36px;
   padding-top: 12px;
   display: none;
+}
+.wallet:hover {
+  border: 1px solid #3394e6;
+}
+.wallet:hover .bttext {
+  color: #278adb;
 }
 .wallet:hover .walletdia {
   display: block;

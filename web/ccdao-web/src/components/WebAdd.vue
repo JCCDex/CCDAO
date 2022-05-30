@@ -88,9 +88,9 @@ export default {
   }
   .addimg {
     width: 120px;
-    height: 60px;
+    height: 70px;
+    margin-top: -4px;
     background-blend-mode: normal;
-    border-radius: NaNpx;
     mix-blend-mode: normal;
   }
   .eth {

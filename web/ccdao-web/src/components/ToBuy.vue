@@ -10,13 +10,13 @@
         <div class="buyadd">
           <span class="buy">{{ $t("message.You_can_buy_$CCDAO_in") }}</span>
           <img src="../assets/buyarrow.svg" class="buyimg" />
-          <a href="https://letsdex.com" target="_blank">
+          <a class="buyaddimport" href="https://letsdex.com" target="_blank">
             <div class="buyaddbox" style="top: 0px; right: 300px">
               <img src="../assets/buyaddtag1.svg" class="buytag" />
               <p class="buyaddtext">{{ $t("message.LetsDEX") }}</p>
             </div>
           </a>
-          <a href="https://app.uniswap.org/" target="_blank">
+          <a class="buyaddimport" href="https://app.uniswap.org/" target="_blank">
             <div class="buyaddbox" style="top: 0px; right: 0px">
               <img src="../assets/buyaddtag2.svg" class="buytag" />
               <p class="buyaddtext">{{ $t("message.Uniswap") }}</p>
@@ -56,11 +56,11 @@ export default {};
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 400px;
+    width: 360px;
   }
   .buytext {
     margin: 0px;
-    width: 350px;
+    width: 330px;
     height: 50px;
     mix-blend-mode: normal;
     color: rgba(61, 61, 59, 1);
@@ -103,6 +103,9 @@ export default {};
     mix-blend-mode: normal;
     display: flex;
     align-items: center;
+  }
+  .buyaddbox:hover {
+    border: 1px solid #3394e6;
   }
   .buytag {
     margin-left: 15px;

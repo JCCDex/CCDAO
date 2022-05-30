@@ -152,6 +152,7 @@ button {
   border: 1px solid rgba(229, 232, 238, 1);
   border-radius: 18px;
   mix-blend-mode: normal;
+  border: 1px solid rgba(67, 162, 244, 1);
 }
 .WB:hover {
   border: none;
