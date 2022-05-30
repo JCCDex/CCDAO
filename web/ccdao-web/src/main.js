@@ -3,6 +3,15 @@ import App from "./App.vue";
 import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
 import "./css/dialog.scss";
+import "./css/wel.scss";
+import "./css/webadd.scss";
+import "./css/tobuy.scss";
+import "./css/signers.scss";
+import "./css/member.scss";
+import "./css/holds.scss";
+import "./css/header.scss";
+import "./css/foot.scss";
+
 Vue.config.productionTip = false;
 Vue.use(ElementUI);
 

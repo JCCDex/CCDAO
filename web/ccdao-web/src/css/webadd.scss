@@ -1,0 +1,101 @@
+@import "../css/background.scss";
+.contract {
+  position: relative;
+  padding-top: 62.5%;
+  @include div-same-size-as-background-img("../assets/bgimg4.png");
+
+  .webadd {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    padding-top: 175px;
+  }
+  .webadds {
+    width: 900px;
+  }
+  .webAddone {
+    display: flex;
+    align-items: center;
+  }
+  .addtext {
+    margin: 0px;
+    width: 592px;
+    height: 40px;
+    mix-blend-mode: normal;
+    color: rgba(255, 255, 255, 1);
+    font-size: 46px;
+    line-height: 40px;
+  }
+  .addtextimg {
+    left: 882px;
+    top: 220px;
+    width: 36px;
+    height: 36px;
+  }
+  .addbox {
+    position: relative;
+    width: 580px;
+    height: 60px;
+    background: rgba(108.55350000000001, 197.289675, 252.45, 1);
+    background-blend-mode: normal;
+    border-radius: 60px;
+    mix-blend-mode: normal;
+    border: 1px solid rgba(252, 254, 255, 0);
+  }
+  .addbox:hover {
+    border: 1px solid rgba(252, 254, 255, 1);
+  }
+  .addimg {
+    width: 120px;
+    height: 70px;
+    margin-top: -4px;
+    background-blend-mode: normal;
+    mix-blend-mode: normal;
+  }
+  .eth {
+    position: absolute;
+    margin-left: 20px;
+    margin-top: 25px;
+    mix-blend-mode: normal;
+    color: rgba(255, 255, 255, 1);
+    font-size: 16px;
+    line-height: 14px;
+  }
+  .addboxhead {
+    background-color: white;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+    width: 120px;
+    height: 60px;
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .addboxtext1 {
+    mix-blend-mode: normal;
+    color: rgba(51, 147, 230, 1);
+    font-size: 18px;
+  }
+  .right {
+    position: absolute;
+    left: 546px;
+    top: 25px;
+    width: 14px;
+    height: 10.5px;
+    background-blend-mode: normal;
+    mix-blend-mode: normal;
+  }
+  .spantext {
+    position: absolute;
+    left: 140px;
+    top: 25px;
+    mix-blend-mode: normal;
+    color: rgba(255, 255, 255, 1);
+    font-size: 16px;
+    line-height: 14px;
+  }
+}
