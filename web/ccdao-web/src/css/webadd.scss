@@ -1,8 +1,18 @@
 @import "../css/background.scss";
+@media (min-width: 764px) {
+  .contract {
+    @include div-same-size-as-background-img("../assets/bgimg4.png");
+  }
+}
+@media (max-width: 763px) {
+  .contract {
+    @include div-same-size-as-background-img("../assets/phonebgimg1.svg");
+  }
+}
+
 .contract {
   position: relative;
   padding-top: 62.5%;
-  @include div-same-size-as-background-img("../assets/bgimg4.png");
 
   .webadd {
     width: 100%;

@@ -1,9 +1,18 @@
 @import "../css/background.scss";
+@media (min-width: 764px) {
+  .buy-container {
+    @include div-same-size-as-background-img("../assets/bgimg3.svg");
+  }
+}
+@media (max-width: 763px) {
+  .buy-container {
+    @include div-same-size-as-background-img("../assets/phonebgimg1.svg");
+  }
+}
 
 .buy-container {
   position: relative;
   padding-top: 62.5%;
-  @include div-same-size-as-background-img("../assets/bgimg3.svg");
 
   .tobuy {
     width: 100%;

@@ -1,9 +1,18 @@
 @import "../css/background.scss";
+@media (min-width: 764px) {
+  .hold-container {
+    @include div-same-size-as-background-img("../assets/bgimg2.png");
+  }
+}
+@media (max-width: 763px) {
+  .hold-container {
+    @include div-same-size-as-background-img("../assets/phonebgimg1.svg");
+  }
+}
 
 .hold-container {
   position: relative;
   padding-top: 62.5%;
-  @include div-same-size-as-background-img("../assets/bgimg2.png");
 
   .boxtwotext {
     padding-top: 80px;

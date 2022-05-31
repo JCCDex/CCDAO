@@ -1,15 +1,31 @@
 @import "../css/background.scss";
+@import "../css/backgroundphone.scss";
+@media (min-width: 764px) {
+  .community {
+    @include div-same-size-as-background-img("../assets/bgimg1.svg");
+    .wel {
+      padding-left: 140px;
+      padding-top: 135px;
+    }
+  }
+}
+@media (max-width: 763px) {
+  .community {
+    @include div-same-size-as-background-img-phone("../assets/phonebgimg1.svg");
+    .wel {
+      padding-left: 0px;
+      padding-top: 0px;
+    }
+  }
+}
 .community {
   position: relative;
   padding-top: 58.33333%;
-  @include div-same-size-as-background-img("../assets/bgimg1.svg");
 
   .content {
     position: absolute;
     left: 0;
     top: 0;
-    padding-left: 140px;
-    padding-top: 135px;
     .wel {
       font-size: 40px;
       line-height: 30px;

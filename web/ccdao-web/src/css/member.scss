@@ -1,9 +1,18 @@
 @import "../css/background.scss";
+@media (min-width: 764px) {
+  .member-container {
+    @include div-same-size-as-background-img("../assets/bgimg5.svg");
+  }
+}
+@media (max-width: 763px) {
+  .member-container {
+    @include div-same-size-as-background-img("../assets/phonebgimg1.svg");
+  }
+}
 
 .member-container {
   position: relative;
   padding-top: 62.5%;
-  @include div-same-size-as-background-img("../assets/bgimg5.svg");
 
   .member {
     width: 100%;
