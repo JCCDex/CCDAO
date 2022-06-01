@@ -21,11 +21,11 @@
         <div class="memberboxtext">
           <div style="display: flex; justify-content: space-between">
             <p style="margin: 0px; font-size: 20px">{{ $t("message.Membership_Requirements") }}</p>
-            <img src="../assets/buyarrow.svg" style="margin-left: 30px" />
+            <img src="../assets/buyarrow.svg" class="memberarrow" />
           </div>
-          <p style="position: absolute; margin: 0px; margin-top: 30px; font-size: 30px; width: 800px">
+          <span class="needCcdao">
             {{ $t("message.$CCDAO_Member_need_to_hold_10000CCDAO_at_least") }}
-          </p>
+          </span>
         </div>
       </div>
     </div>

@@ -1,18 +1,84 @@
 @import "../css/background.scss";
 @media (min-width: 764px) {
   .buy-container {
+    padding-top: 62.5%;
     @include div-same-size-as-background-img("../assets/bgimg3.svg");
+    .buyadd {
+      margin-top: 200px;
+      width: 919px;
+    }
+    .tobuys {
+      padding-top: 150px;
+    }
+    .buyaddbox {
+      width: 260px;
+      height: 60px;
+    }
+    .buylocation1 {
+      top: 0px;
+      right: 300px;
+    }
+    .buylocation2 {
+      top: 0px;
+      right: 0px;
+    }
+    .buytag {
+      margin-left: 15px;
+      width: 30px;
+      height: 30px;
+    }
+    .buyaddtext {
+      margin-left: 15px;
+      color: rgba(23, 25, 29, 1);
+      font-size: 16px;
+    }
+    .buy {
+      font-size: 20px;
+    }
   }
 }
 @media (max-width: 763px) {
   .buy-container {
-    @include div-same-size-as-background-img("../assets/phonebgimg1.svg");
+    padding-top: 100%;
+    @include div-same-size-as-background-img("../assets/phonebgimg3.svg");
+    .tobuys {
+      padding-top: 110px;
+    }
+    .buyadd {
+      margin-top: 90px;
+      width: 480px;
+    }
+    .buyimg {
+      transform: rotate(90deg);
+    }
+    .buyaddbox {
+      width: 320px;
+      height: 80px;
+    }
+    .buylocation1 {
+      top: 60px;
+    }
+    .buylocation2 {
+      top: 160px;
+    }
+    .buytag {
+      margin-left: 20px;
+      width: 60px;
+      height: 60px;
+    }
+    .buyaddtext {
+      margin-left: 30px;
+      color: rgba(23, 25, 29, 1);
+      font-size: 30px;
+    }
+    .buy {
+      font-size: 26px;
+    }
   }
 }
 
 .buy-container {
   position: relative;
-  padding-top: 62.5%;
 
   .tobuy {
     width: 100%;
@@ -24,7 +90,6 @@
   }
   .tobuys {
     position: relative;
-    padding-top: 150px;
   }
   .buyone {
     display: flex;
@@ -46,8 +111,6 @@
     height: 36px;
   }
   .buyadd {
-    margin-top: 200px;
-    width: 919px;
     height: 60px;
     position: relative;
   }
@@ -56,7 +119,6 @@
     height: 30px;
     mix-blend-mode: normal;
     color: rgba(61, 61, 59, 1);
-    font-size: 20px;
     line-height: 30px;
   }
   .buyimg {
@@ -68,8 +130,6 @@
   }
   .buyaddbox {
     position: absolute;
-    width: 260px;
-    height: 60px;
     background: rgba(255, 255, 255, 1);
     background-blend-mode: normal;
     box-shadow: 0px 1px 5px rgba(201, 223, 240, 1);
@@ -80,19 +140,5 @@
   }
   .buyaddbox:hover {
     border: 1px solid #3394e6;
-  }
-  .buytag {
-    margin-left: 15px;
-    width: 30px;
-    height: 30px;
-    mix-blend-mode: normal;
-  }
-  .buyaddtext {
-    margin-left: 15px;
-    width: 77px;
-    height: 24px;
-    mix-blend-mode: normal;
-    color: rgba(23, 25, 29, 1);
-    font-size: 16px;
   }
 }

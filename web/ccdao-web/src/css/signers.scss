@@ -2,17 +2,33 @@
 @media (min-width: 764px) {
   .Signers {
     @include div-same-size-as-background-img("../assets/signers.svg");
+    padding-top: 58.33333%;
+    .ms {
+      top: 100px;
+      font-size: 40px;
+    }
+    .iiuc {
+      font-size: 40px;
+      margin-top: 80px;
+    }
   }
 }
 @media (max-width: 763px) {
   .Signers {
-    @include div-same-size-as-background-img("../assets/phonebgimg1.svg");
+    @include div-same-size-as-background-img("../assets/phonesigners.svg");
+    padding-top: 78.125%;
+    .ms {
+      font-size: 40px;
+    }
+    .iiuc {
+      font-size: 30px;
+      margin-top: 60px;
+    }
   }
 }
 
 .Signers {
   position: relative;
-  padding-top: 58.33333%;
 
   .signers {
     top: 100px;
@@ -22,7 +38,11 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+  }
+  .ms {
     color: rgba(255, 255, 255, 1);
-    font-size: 50px;
+  }
+  .iiuc {
+    color: rgba(195, 229, 251, 1);
   }
 }

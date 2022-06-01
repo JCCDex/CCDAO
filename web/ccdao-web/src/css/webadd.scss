@@ -2,17 +2,104 @@
 @media (min-width: 764px) {
   .contract {
     @include div-same-size-as-background-img("../assets/bgimg4.png");
+    padding-top: 62.5%;
+    .webadd {
+      padding-top: 175px;
+    }
+    .webadds {
+      width: 900px;
+    }
+    .addtext {
+      font-size: 46px;
+      width: 592px;
+    }
+    .addbox {
+      width: 580px;
+      height: 60px;
+    }
+    .addboxlocation1 {
+      margin-top: 130px;
+    }
+    .addboxlocation2 {
+      margin-top: 30px;
+    }
+    .addboxhead {
+      border-top-left-radius: 30px;
+      border-bottom-left-radius: 30px;
+      width: 120px;
+      height: 60px;
+      color: rgba(51, 147, 230, 1);
+      font-size: 18px;
+    }
+    .right {
+      left: 546px;
+      top: 25px;
+      width: 14px;
+      height: 10.5px;
+    }
+    .spantext {
+      font-size: 16px;
+      line-height: 14px;
+      top: 25px;
+    }
+    .spantext1 {
+      font-size: 12px;
+    }
   }
 }
 @media (max-width: 763px) {
   .contract {
-    @include div-same-size-as-background-img("../assets/phonebgimg1.svg");
+    @include div-same-size-as-background-img("../assets/phonebgimg4.svg");
+    padding-top: 100%;
+    .webadd {
+      padding-top: 150px;
+    }
+    .addtext {
+      padding-left: 15px;
+      font-size: 36px;
+      width: 450px;
+    }
+    .addbox {
+      width: 580px;
+      height: 100px;
+    }
+    .addboxlocation1 {
+      margin-top: 70px;
+    }
+    .addboxlocation2 {
+      margin-top: 50px;
+    }
+    .addboxhead {
+      border-top-left-radius: 50px;
+      border-bottom-left-radius: 50px;
+      width: 120px;
+      height: 100px;
+      color: rgba(51, 147, 230, 1);
+      font-size: 28px;
+    }
+    .right {
+      left: 530px;
+      top: 40px;
+      width: 26.67px;
+      height: 20px;
+    }
+    .spantext {
+      top: 20px;
+      font-size: 26px;
+      width: 380px;
+      height: 64px;
+      display: block;
+      word-wrap: break-word;
+      line-height: 34px;
+    }
+    .spantext1 {
+      font-size: 22px;
+    }
   }
 }
 
 .contract {
   position: relative;
-  padding-top: 62.5%;
 
   .webadd {
     width: 100%;
@@ -21,10 +108,6 @@
     top: 0;
     display: flex;
     justify-content: center;
-    padding-top: 175px;
-  }
-  .webadds {
-    width: 900px;
   }
   .webAddone {
     display: flex;
@@ -32,23 +115,17 @@
   }
   .addtext {
     margin: 0px;
-    width: 592px;
     height: 40px;
     mix-blend-mode: normal;
     color: rgba(255, 255, 255, 1);
-    font-size: 46px;
     line-height: 40px;
   }
   .addtextimg {
-    left: 882px;
-    top: 220px;
     width: 36px;
     height: 36px;
   }
   .addbox {
     position: relative;
-    width: 580px;
-    height: 60px;
     background: rgba(108.55350000000001, 197.289675, 252.45, 1);
     background-blend-mode: normal;
     border-radius: 60px;
@@ -76,36 +153,20 @@
   }
   .addboxhead {
     background-color: white;
-    border-top-left-radius: 30px;
-    border-bottom-left-radius: 30px;
-    width: 120px;
-    height: 60px;
     z-index: 999;
     display: flex;
     justify-content: center;
     align-items: center;
   }
-  .addboxtext1 {
-    mix-blend-mode: normal;
-    color: rgba(51, 147, 230, 1);
-    font-size: 18px;
-  }
   .right {
     position: absolute;
-    left: 546px;
-    top: 25px;
-    width: 14px;
-    height: 10.5px;
     background-blend-mode: normal;
     mix-blend-mode: normal;
   }
   .spantext {
     position: absolute;
     left: 140px;
-    top: 25px;
     mix-blend-mode: normal;
     color: rgba(255, 255, 255, 1);
-    font-size: 16px;
-    line-height: 14px;
   }
 }

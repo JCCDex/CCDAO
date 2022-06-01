@@ -1,18 +1,33 @@
 @import "../css/background.scss";
 @media (min-width: 764px) {
   .hold-container {
+    padding-top: 62.5%;
     @include div-same-size-as-background-img("../assets/bgimg2.png");
+    .hold {
+      /* margin-left: 29.1%; */
+      width: 600px;
+    }
+    .holdbox {
+      width: 600px;
+    }
   }
 }
 @media (max-width: 763px) {
   .hold-container {
-    @include div-same-size-as-background-img("../assets/phonebgimg1.svg");
+    padding-top: 100%;
+    @include div-same-size-as-background-img("../assets/phonebgimg2.svg");
+    .hold {
+      /* margin-left: 29.1%; */
+      width: 500px;
+    }
+    .holdbox {
+      width: 500px;
+    }
   }
 }
 
 .hold-container {
   position: relative;
-  padding-top: 62.5%;
 
   .boxtwotext {
     padding-top: 80px;
@@ -42,12 +57,10 @@
   }
   .hold {
     /* margin-left: 29.1%; */
-    width: 600px;
     height: 290px;
   }
   .holdbox {
     position: relative;
-    width: 600px;
     height: 120px;
     background: rgba(96.00000000000001, 194.00000000000006, 248, 1);
     background-blend-mode: normal;
