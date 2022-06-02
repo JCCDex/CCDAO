@@ -1,5 +1,5 @@
 @import "../css/background.scss";
-@media (min-width: 764px) {
+@media (min-width: 786px) {
   .contract {
     @include div-same-size-as-background-img("../assets/bgimg4.png");
     padding-top: 62.5%;
@@ -47,7 +47,7 @@
     }
   }
 }
-@media (max-width: 763px) {
+@media (max-width: 785px) {
   .contract {
     @include div-same-size-as-background-img("../assets/phonebgimg4.svg");
     padding-top: 100%;

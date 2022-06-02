@@ -17,6 +17,7 @@ export default new Vuex.Store({
     swtcCcdao: "",
     ethAddress: "",
     swtcAddress: "",
+    isNetWork: true,
     myEthNum: 0,
     mySwtcNum: 0,
   },
@@ -46,6 +47,9 @@ export default new Vuex.Store({
     },
     setMySwtcNumData(state, data) {
       state.mySwtcNum = data;
+    },
+    setIsNetWork(state, data) {
+      state.isNetWork = data;
     },
   },
   actions: {

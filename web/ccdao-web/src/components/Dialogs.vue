@@ -111,6 +111,12 @@ export default {
         let addr = await ethereum.request({ method: "eth_requestAccounts" });
         this.$store.commit("setEthAddress", addr[0]);
         this.$store.dispatch("setMyEthNum");
+        let ethNetWork = ["0x1"];
+        if (ethNetWork.indexOf(window.ethereum.networkVersion) < 0) {
+          this.$store.commit("setIsNetWork", false);
+        } else {
+          this.$store.commit("setIsNetWork", true);
+        }
       } else {
         console.log("未安装插件");
       }

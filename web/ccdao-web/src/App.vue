@@ -2,6 +2,7 @@
   <div id="app">
     <Header></Header>
     <div class="roll">
+      <Netalter></Netalter>
       <Wel></Wel>
       <Holds></Holds>
       <ToBuy></ToBuy>
@@ -14,6 +15,7 @@
 </template>
 
 <script>
+import Netalter from "./components/Netalter";
 import Header from "./components/Header";
 import Wel from "./components/Wel";
 import Holds from "./components/Holds";
@@ -25,6 +27,7 @@ import Foot from "./components/Foot";
 
 export default {
   components: {
+    Netalter,
     Header,
     Wel,
     Holds,

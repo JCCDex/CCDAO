@@ -1,5 +1,5 @@
 @import "../css/background.scss";
-@media (min-width: 764px) {
+@media (min-width: 786px) {
   .member-container {
     @include div-same-size-as-background-img("../assets/bgimg5.svg");
     padding-top: 62.5%;
@@ -14,7 +14,7 @@
     }
   }
 }
-@media (max-width: 763px) {
+@media (max-width: 785px) {
   .member-container {
     @include div-same-size-as-background-img("../assets/phonebgimg5.svg");
     padding-top: 100%;

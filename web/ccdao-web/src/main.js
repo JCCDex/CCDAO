@@ -69,7 +69,14 @@ subscribeInst
 if (window.ethereum) {
   const ethereum = window.ethereum;
 
-  ethereum.on("chainChanged", (_chainId) => window.location.reload());
+  ethereum.on("chainChanged", (_chainId) => {
+    let ethNetWork = ["0x1"];
+    if (ethNetWork.indexOf(_chainId) < 0) {
+      store.commit("setIsNetWork", false);
+    } else {
+      store.commit("setIsNetWork", true);
+    }
+  });
   ethereum.on("accountsChanged", (acc) => {
     store.commit("setEthAddress", acc[0] === undefined ? "" : acc[0]);
     store.dispatch("setMyEthNum");

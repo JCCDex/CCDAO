@@ -1,6 +1,34 @@
 a {
   text-decoration: none;
 }
+
+@media (min-width: 786px) {
+  .sanhen {
+    display: none;
+  }
+  .box {
+    justify-content: space-between;
+  }
+  .boximg {
+    margin-left: 50px;
+  }
+}
+@media (max-width: 785px) {
+  .sanhen {
+    position: absolute;
+    left: 20px;
+  }
+  .box {
+    justify-content: center;
+  }
+  .headbt1 {
+    display: none;
+  }
+  .headbt2 {
+    display: none;
+  }
+}
+
 .box {
   width: 100%;
   height: 60px;
@@ -8,14 +36,12 @@ a {
   box-shadow: 0px 1px 5px rgba(201, 223, 240, 1);
   display: flex;
   align-items: center;
-  justify-content: space-between;
   /* position: fixed; */
   /* z-index: 1; */
 }
 .boximg {
   width: 138.84px;
   height: 40px;
-  margin-left: 50px;
 }
 .fbt1 {
   cursor: pointer;

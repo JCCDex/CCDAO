@@ -1,7 +1,8 @@
 <template>
   <div class="box">
+    <img class="sanhen" src="../assets/sanhen.svg" alt="" />
     <img class="boximg" src="../assets/CCDAO.svg" />
-    <div style="position: relative">
+    <div class="headbt1" style="position: relative">
       <div style="width: 490px; height: 36px; display: flex; justify-content: space-between">
         <div class="fbt" style="margin-left: 10px">
           <div class="fbt1">
@@ -37,7 +38,7 @@
         >
       </div>
     </div>
-    <div class="wallet" style="position: relative">
+    <div class="wallet headbt2" style="position: relative">
       <button class="walletbt">
         <div v-show="!isHave" style="display: flex; align-items: center; justify-content: space-between">
           <img src="../assets/Shape.svg" style="width: 20px; height: 20px" />
