@@ -6,11 +6,38 @@
     .member {
       padding-top: 100px;
     }
+    .membership {
+      font-size: 40px;
+    }
     .memberbox {
       margin-top: 150px;
+      width: 550px;
+      height: 120px;
+      padding-left: 50px;
+    }
+    .mca {
+      font-size: 16px;
+      line-height: 40px;
+    }
+    .mcanum {
+      font-size: 30px;
+      line-height: 30px;
+    }
+    .memberboxtext {
+      top: 200px;
+    }
+    .mr {
+      margin: 0px;
+      font-size: 20px;
+    }
+    .memberarrow {
+      margin-left: 30px;
     }
     .needCcdao {
       width: 800px;
+      font-size: 30px;
+      margin: 0px;
+      margin-top: 30px;
     }
   }
 }
@@ -19,18 +46,58 @@
     @include div-same-size-as-background-img("../assets/phonebgimg5.svg");
     padding-top: 100%;
     .member {
-      padding-top: 80px;
+      height: 100%;
+      align-items: center;
+    }
+    .memberdiv {
+      height: 260px;
+    }
+    .membership {
+      font-size: 30px;
     }
     .memberbox {
-      margin-top: 70px;
+      margin-top: 30px;
+      width: 320px;
+      height: 70.48px;
+      padding-left: 23px;
+    }
+    .mca {
+      font-size: 12px;
+      line-height: 30px;
+    }
+    .mcanum {
+      font-size: 18px;
+    }
+    .memberimg {
+      width: 70.48px;
+      height: 70.48px;
+    }
+    .memberboxtext {
+      top: 85px;
+    }
+    .mr {
+      margin: 0px;
+      margin-top: 15px;
+      margin-left: 35px;
+      width: 167px;
+      height: 15px;
+      font-size: 13px;
     }
     .memberarrow {
+      margin-top: 22px;
       transform: rotate(90deg);
+      width: 10px;
+      height: 10px;
     }
     .needCcdao {
-      width: 600px;
+      width: 319px;
       display: block;
       word-wrap: break-word;
+      font-size: 16px;
+      line-height: 18px;
+      margin: 0px;
+      margin-left: 20px;
+      margin-top: 10px;
     }
   }
 }
@@ -44,20 +111,19 @@
     display: flex;
     left: 0;
     top: 0;
-    flex-direction: column;
     justify-content: center;
+  }
+  .memberdiv {
+    display: flex;
+    flex-direction: column;
     align-items: center;
   }
   .membership {
     margin: 0px;
     mix-blend-mode: normal;
     color: black;
-    font-size: 40px;
-    line-height: 46px;
   }
   .memberbox {
-    width: 550px;
-    height: 120px;
     background: rgba(255, 255, 255, 1);
     background-blend-mode: normal;
     box-shadow: 0px 1px 5px rgba(201, 223, 240, 1);
@@ -66,7 +132,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-left: 50px;
     position: relative;
   }
   .mca {
@@ -74,29 +139,18 @@
     background-blend-mode: normal;
     mix-blend-mode: normal;
     color: rgba(161, 166, 169, 1);
-    font-size: 16px;
-    line-height: 40px;
   }
   .mcanum {
     margin: 0%;
     background-blend-mode: normal;
     mix-blend-mode: normal;
     color: rgba(73, 170, 239, 1);
-    font-size: 30px;
-    line-height: 30px;
   }
   .memberboxtext {
     position: absolute;
-    top: 200px;
     left: 0px;
-  }
-  .memberarrow {
-    margin-left: 30px;
   }
   .needCcdao {
     position: absolute;
-    margin: 0px;
-    margin-top: 30px;
-    font-size: 30px;
   }
 }

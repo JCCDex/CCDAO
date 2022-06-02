@@ -18,11 +18,12 @@
   .foot {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    padding: 0px 10px;
   }
   .foottext {
-    font-size: 22px;
+    font-size: 13px;
     letter-spacing: -1px;
-    margin-left: 20px;
   }
   .foot img {
     width: 89.81px;
