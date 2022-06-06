@@ -1,12 +1,12 @@
 <template>
   <div class="box">
-    <img class="sanhen" src="../assets/sanhen.svg" alt="" />
+    <img class="sanhen" src="../assets/sanhen.svg" @click="showSidebar()" />
     <img class="boximg" src="../assets/CCDAO.svg" />
     <div class="headbt1" style="position: relative">
       <div style="width: 490px; height: 36px; display: flex; justify-content: space-between">
         <div class="fbt" style="margin-left: 10px">
           <div class="fbt1">
-            {{ $t("Community") }}
+            {{ $t("message.Community") }}
             <img src="../assets/downchart.svg" />
           </div>
           <div class="out" style="left: 0px">
@@ -75,6 +75,11 @@ export default {
   },
   components: {
     Dialogs,
+  },
+  methods: {
+    showSidebar() {
+      this.$store.commit("showSidebar");
+    },
   },
 };
 </script>

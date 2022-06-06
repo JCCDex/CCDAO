@@ -4,7 +4,7 @@ a {
 
 @media (min-width: 786px) {
   .sanhen {
-    display: none;
+    // display: none;
   }
   .box {
     justify-content: space-between;
@@ -17,6 +17,8 @@ a {
   .sanhen {
     position: absolute;
     left: 20px;
+    width: 28.26px;
+    height: 26.76px;
   }
   .box {
     justify-content: center;

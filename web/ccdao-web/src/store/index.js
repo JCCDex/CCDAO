@@ -20,6 +20,7 @@ export default new Vuex.Store({
     isNetWork: true,
     myEthNum: 0,
     mySwtcNum: 0,
+    sidebarBool: false,
   },
   getters: {
     isHave(state) {
@@ -50,6 +51,12 @@ export default new Vuex.Store({
     },
     setIsNetWork(state, data) {
       state.isNetWork = data;
+    },
+    showSidebar(state) {
+      state.sidebarBool = true;
+    },
+    downSidebar(state) {
+      state.sidebarBool = false;
     },
   },
   actions: {

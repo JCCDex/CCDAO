@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <Sidebar></Sidebar>
     <Header></Header>
     <div class="roll">
       <Netalter></Netalter>
@@ -15,6 +16,7 @@
 </template>
 
 <script>
+import Sidebar from "./components/Sidebar";
 import Netalter from "./components/Netalter";
 import Header from "./components/Header";
 import Wel from "./components/Wel";
@@ -27,6 +29,7 @@ import Foot from "./components/Foot";
 
 export default {
   components: {
+    Sidebar,
     Netalter,
     Header,
     Wel,
