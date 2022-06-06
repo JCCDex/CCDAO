@@ -1,5 +1,5 @@
 @import "../css/background.scss";
-@media (min-width: 786px) {
+@media (min-width: 1080px) {
   .buy-container {
     padding-top: 62.5%;
     @include div-same-size-as-background-img("../assets/bgimg3.svg");
@@ -49,7 +49,61 @@
     }
   }
 }
-@media (max-width: 785px) {
+@media (max-width: 1079px) and (min-width: 600px) {
+  .buy-container {
+    padding-top: 100%;
+    @include div-same-size-as-background-img("../assets/phonebgimg3.svg");
+    .tobuy {
+      height: 100%;
+      align-items: center;
+    }
+    .tobuys {
+      height: 400px;
+    }
+    .buyone {
+      width: 360px;
+    }
+    .buytext {
+      width: 304px;
+      height: 50px;
+      font-size: 46px;
+    }
+    .buytextimg {
+      width: 36px;
+      height: 36px;
+    }
+    .buyadd {
+      margin-top: 50px;
+    }
+    .buyimg {
+      transform: rotate(90deg);
+    }
+    .buyaddbox {
+      width: 320px;
+      height: 80px;
+    }
+    .buylocation1 {
+      top: 80px;
+    }
+    .buylocation2 {
+      top: 180px;
+    }
+    .buytag {
+      margin-left: 20px;
+      width: 60px;
+      height: 60px;
+    }
+    .buyaddtext {
+      margin-left: 23px;
+      color: rgba(23, 25, 29, 1);
+      font-size: 30px;
+    }
+    .buy {
+      font-size: 26px;
+    }
+  }
+}
+@media (max-width: 599px) {
   .buy-container {
     padding-top: 100%;
     @include div-same-size-as-background-img("../assets/phonebgimg3.svg");

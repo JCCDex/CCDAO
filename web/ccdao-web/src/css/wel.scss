@@ -1,5 +1,5 @@
 @import "../css/background.scss";
-@media (min-width: 786px) {
+@media (min-width: 1080px) {
   .community {
     @include div-same-size-as-background-img("../assets/bgimg1.svg");
     padding-top: 58.33333%;
@@ -49,7 +49,63 @@
     }
   }
 }
-@media (max-width: 785px) {
+@media (min-width: 600px) and (max-width: 1079px) {
+  .community {
+    @include div-same-size-as-background-img("../assets/phonebgimg1.svg");
+    padding-top: 100%;
+    .content {
+      // margin-top: 30px;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      .wel {
+        font-size: 40px;
+      }
+
+      .ccdao {
+        font-size: 50px;
+        margin-top: 6px;
+      }
+
+      .vision {
+        font-size: 22px;
+        margin-top: 4px;
+      }
+
+      .token {
+        font-size: 50px;
+        margin-top: 20px;
+      }
+
+      .holder {
+        font-size: 22px;
+        margin-top: 3px;
+      }
+
+      .amount {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 30px;
+        box-shadow: 0px 1px 5px rgba(201, 223, 240, 1);
+        border-radius: 16px;
+        background-color: #fff;
+        color: #a1a6a9;
+        // font-size: 3.4375%;
+        padding: 15px 20px;
+        font-size: 22px;
+        .value {
+          color: #3393e6;
+          // font-size: 3.125%;
+          font-size: 30px;
+          margin-top: 10px;
+        }
+      }
+    }
+  }
+}
+@media (max-width: 599px) {
   .community {
     @include div-same-size-as-background-img("../assets/phonebgimg1.svg");
     padding-top: 100%;

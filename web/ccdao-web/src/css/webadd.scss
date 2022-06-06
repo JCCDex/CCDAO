@@ -1,5 +1,5 @@
 @import "../css/background.scss";
-@media (min-width: 786px) {
+@media (min-width: 1080px) {
   .contract {
     @include div-same-size-as-background-img("../assets/bgimg4.png");
     padding-top: 62.5%;
@@ -52,7 +52,63 @@
     }
   }
 }
-@media (max-width: 785px) {
+@media (max-width: 1079px) and (min-width: 600px) {
+  .contract {
+    @include div-same-size-as-background-img("../assets/phonebgimg4.svg");
+    padding-top: 100%;
+    .webadd {
+      height: 100%;
+      align-items: center;
+    }
+    .addtext {
+      padding-left: 10px;
+      font-size: 36px;
+      width: 463px;
+    }
+    .addtextimg {
+      width: 26px;
+      height: 26px;
+    }
+    .addbox {
+      width: 580px;
+      height: 100px;
+    }
+    .addboxlocation1 {
+      margin-top: 70px;
+    }
+    .addboxlocation2 {
+      margin-top: 50px;
+    }
+    .addboxhead {
+      border-top-left-radius: 50px;
+      border-bottom-left-radius: 50px;
+      width: 120px;
+      height: 100px;
+      color: rgba(51, 147, 230, 1);
+      font-size: 28px;
+    }
+    .right {
+      left: 533px;
+      top: 39px;
+      width: 26.67px;
+      height: 20px;
+    }
+    .spantext {
+      top: 20px;
+      left: 140px;
+      font-size: 26px;
+      line-height: 34px;
+      width: 380px;
+      height: 64px;
+      display: block;
+      word-wrap: break-word;
+    }
+    .spantext1 {
+      font-size: 22px;
+    }
+  }
+}
+@media (max-width: 599px) {
   .contract {
     @include div-same-size-as-background-img("../assets/phonebgimg4.svg");
     padding-top: 100%;
