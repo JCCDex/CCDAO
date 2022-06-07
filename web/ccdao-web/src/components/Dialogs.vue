@@ -107,7 +107,12 @@ export default {
   methods: {
     //登录MetaMask
     async loginMetaMask() {
-      if (window.ethereum) {
+      var tp = require("tp-js-sdk");
+      if (tp.isConnected()) {
+        tp.getWallet({ walletTypes: ["eth"], switch: false }).then((req) => {
+          if (req.data.address !== undefined) this.$store.commit("setEthAddress", req.data.address);
+        });
+      } else if (window.ethereum) {
         let addr = await ethereum.request({ method: "eth_requestAccounts" });
         this.$store.commit("setEthAddress", addr[0]);
         this.$store.dispatch("setMyEthNum");
@@ -122,9 +127,16 @@ export default {
         console.log("未安装插件");
       }
     },
-    //显示对话框
+    //显示对话框或移动端连接SWTC钱包
     showdialog() {
-      ImportDialog().show();
+      var tp = require("tp-js-sdk");
+      if (tp.isConnected()) {
+        tp.getWallet({ walletTypes: ["jingtum"], switch: false }).then((req) => {
+          if (req.data.address !== undefined) {
+            this.$store.commit("setSwtcAddress", req.data.address);
+          }
+        });
+      } else ImportDialog().show();
     },
   },
 };

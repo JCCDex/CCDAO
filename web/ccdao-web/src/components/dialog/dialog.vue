@@ -20,33 +20,6 @@
     </div>
     <component :is="btname"></component>
 
-    <!-- 输入钱包密钥 -->
-    <!-- <div class="dlcss" v-show="btbool">
-      <div style="width: 320px">
-        <el-input
-          class="dltext"
-          type="textarea"
-          :rows="2"
-          :placeholder="$t('message.pls_enter_swt_secret')"
-          v-model="textarea"
-        >
-        </el-input>
-      </div>
-    </div> -->
-    <!-- 导入文件 -->
-    <!-- <div class="dlcss" v-show="!btbool">
-      <button class="importbtcss">
-        <p style="margin-top: 12px" v-show="file === undefined">{{ $t("message.click_to_import_swt") }}</p>
-        <div
-          v-show="file !== undefined"
-          style="display: flex; justify-content: space-between; width: 100%; height: 100%; align-items: center"
-        >
-          <p style="color: rgba(0, 0, 0, 1); margin-left: 0px">{{ filename }}</p>
-          <img src="../../assets/cleartag.svg" @click="clearFile()" />
-        </div>
-        <input id="fileupload" type="file" @change="importFile" v-show="file === undefined" />
-      </button>
-    </div> -->
     <!-- 对话框底部按钮 -->
     <span slot="footer" class="dialog-footer" style="width: 320px; display: flex; justify-content: space-between">
       <el-button @click="(visible = false), clearData()">{{ $t("message.cancel") }}</el-button>

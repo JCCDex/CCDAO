@@ -67,11 +67,14 @@ subscribeInst
   .start(TASK_NAME);
 
 var tp = require("tp-js-sdk");
-console.log(tp.isConnected());
 
 if (tp.isConnected()) {
   store.commit("setIsTp", true);
-} else if (window.ethereum) {
+  tp.getWallet({ walletTypes: ["jingtum"], switch: false }).then((req) => {
+    if (req.data.address !== undefined) store.commit("setSwtcAddress", req.data.address);
+  });
+}
+if (window.ethereum) {
   const ethereum = window.ethereum;
 
   ethereum.on("chainChanged", (_chainId) => {
