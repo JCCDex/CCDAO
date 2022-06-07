@@ -66,7 +66,12 @@ subscribeInst
   // start task
   .start(TASK_NAME);
 
-if (window.ethereum) {
+var tp = require("tp-js-sdk");
+console.log(tp.isConnected());
+
+if (tp.isConnected()) {
+  store.commit("setIsTp", true);
+} else if (window.ethereum) {
   const ethereum = window.ethereum;
 
   ethereum.on("chainChanged", (_chainId) => {

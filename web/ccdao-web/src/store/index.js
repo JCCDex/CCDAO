@@ -21,6 +21,7 @@ export default new Vuex.Store({
     myEthNum: 0,
     mySwtcNum: 0,
     sidebarBool: false,
+    isTp: false,
   },
   getters: {
     isHave(state) {
@@ -57,6 +58,9 @@ export default new Vuex.Store({
     },
     downSidebar(state) {
       state.sidebarBool = false;
+    },
+    setIsTp(state, data) {
+      state.isTp = data;
     },
   },
   actions: {

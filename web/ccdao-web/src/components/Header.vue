@@ -1,7 +1,8 @@
 <template>
   <div class="box">
-    <img class="sanhen" src="../assets/sanhen.svg" @click="showSidebar()" />
-    <img class="boximg" src="../assets/CCDAO.svg" />
+    <img class="sanhen" style="margin-left: 10px" src="../assets/sanhen.svg" @click="showSidebar()" />
+    <img v-if="!isTp" class="boximg" src="../assets/CCDAO.svg" />
+    <span class="sanhen" style="margin-right: 10px"></span>
     <div class="headbt1" style="position: relative">
       <div style="width: 490px; height: 36px; display: flex; justify-content: space-between">
         <div class="fbt" style="margin-left: 10px">
@@ -38,7 +39,7 @@
         >
       </div>
     </div>
-    <div class="wallet headbt2" style="position: relative">
+    <div class="wallet" v-if="isTpWallet" style="position: relative">
       <button class="walletbt">
         <div v-show="!isHave" style="display: flex; align-items: center; justify-content: space-between">
           <img src="../assets/Shape.svg" style="width: 20px; height: 20px" />
@@ -71,6 +72,12 @@ export default {
   computed: {
     isHave() {
       return this.$store.getters.isHave;
+    },
+    isTp() {
+      return this.$store.state.isTp;
+    },
+    isTpWallet() {
+      return this.$store.state.isTp || window.screen.width >= 1079;
     },
   },
   components: {
