@@ -1,5 +1,5 @@
 <template>
-  <div class="netalter" v-show="!$store.state.isNetWork">
+  <div class="netalter" v-show="!isNetWork">
     <div class="alterbox">
       <p class="nettitle">Network Error！</p>
       <p class="netcontent">Please switch to the Ethernet Network～</p>
@@ -10,6 +10,16 @@
 <script>
 export default {
   name: "Netalter",
+  computed: {
+    isNetWork() {
+      if (this.$store.state.isNetWork === false) {
+        setTimeout(() => {
+          this.$store.commit("setIsNetWork", true);
+          return this.$store.state.isNetWork;
+        }, 5000);
+      } else return this.$store.state.isNetWork;
+    },
+  },
 };
 </script>
 

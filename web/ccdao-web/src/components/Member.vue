@@ -39,7 +39,8 @@ export default {
   name: "Member",
   computed: {
     ccdaoNum() {
-      return this.$store.getters.myCCDAONum;
+      if (this.$store.state.ethAddress === "" && this.$store.state.swtcAddress === "") return "--";
+      else return this.$store.getters.myCCDAONum;
     },
   },
 };
