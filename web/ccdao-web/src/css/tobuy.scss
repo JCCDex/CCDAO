@@ -47,6 +47,9 @@
     .buy {
       font-size: 20px;
     }
+    .buyimg {
+      margin-left: 50px;
+    }
   }
 }
 @media (max-width: 1079px) and (min-width: 600px) {
@@ -76,6 +79,7 @@
       margin-top: 50px;
     }
     .buyimg {
+      margin-left: 15px;
       transform: rotate(90deg);
     }
     .buyaddbox {
@@ -131,6 +135,7 @@
       width: 300px;
     }
     .buyimg {
+      margin-left: 15px;
       transform: rotate(90deg);
     }
     .buyaddbox {
@@ -195,7 +200,6 @@
     line-height: 30px;
   }
   .buyimg {
-    margin-left: 50px;
     width: 16.01px;
     height: 14.09px;
     background-blend-mode: normal;
