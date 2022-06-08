@@ -8,4 +8,5 @@ npm run build
 # mv dist/static/favicon.ico dist
 
 # 拷贝到服务器
-rsync -avzr -e 'ssh -p 6422' dist/ front@58.243.201.56:/home/front/frontcode/cross-chain-dao
+
+rsync -avzr -e 'ssh -p 6422' dist/ front@58.243.201.56:/home/front/xubo/cross-chain-dao
