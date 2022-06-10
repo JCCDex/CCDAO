@@ -6,7 +6,9 @@
         v-show="file !== undefined"
         style="display: flex; justify-content: space-between; width: 100%; height: 100%; align-items: center"
       >
-        <p style="color: rgba(0, 0, 0, 1); margin-left: 0px">{{ filename }}</p>
+        <p style="color: rgba(0, 0, 0, 1); margin-left: 0px; font-family: PingFangSC-Medium, sans-serif">
+          {{ filename }}
+        </p>
         <img src="../../assets/cleartag.svg" @click="clearFile()" />
       </div>
       <input id="fileupload" type="file" @change="importFile" v-show="file === undefined" />
@@ -29,6 +31,10 @@ export default {
     async importFile(e) {
       this.filename = e.target.files[0].name;
       this.file = e;
+    },
+    clearFile() {
+      this.filename = "";
+      this.file = undefined;
     },
   },
   watch: {

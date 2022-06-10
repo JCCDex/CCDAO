@@ -1,4 +1,5 @@
 .el-dialog {
+  font-family: PingFangSC-Medium, sans-serif;
   width: 360px;
   height: 320px;
   background: rgba(255, 255, 255, 1);
@@ -40,6 +41,7 @@
   border: 1px solid rgba(220, 230, 242, 1);
   border-radius: 12px;
   mix-blend-mode: normal;
+  font-family: PingFangSC-Medium, sans-serif;
 }
 .el-dialog__footer {
   padding: 0px;
