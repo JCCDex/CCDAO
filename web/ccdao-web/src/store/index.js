@@ -17,8 +17,11 @@ export default new Vuex.Store({
     swtcCcdao: "",
     ethAddress: "",
     swtcAddress: "",
+    isNetWork: true,
     myEthNum: 0,
     mySwtcNum: 0,
+    sidebarBool: false,
+    isTp: false,
   },
   getters: {
     isHave(state) {
@@ -46,6 +49,18 @@ export default new Vuex.Store({
     },
     setMySwtcNumData(state, data) {
       state.mySwtcNum = data;
+    },
+    setIsNetWork(state, data) {
+      state.isNetWork = data;
+    },
+    showSidebar(state) {
+      state.sidebarBool = true;
+    },
+    downSidebar(state) {
+      state.sidebarBool = false;
+    },
+    setIsTp(state, data) {
+      state.isTp = data;
     },
   },
   actions: {

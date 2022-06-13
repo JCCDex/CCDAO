@@ -107,17 +107,36 @@ export default {
   methods: {
     //登录MetaMask
     async loginMetaMask() {
-      if (window.ethereum) {
+      var tp = require("tp-js-sdk");
+      if (tp.isConnected()) {
+        tp.getWallet({ walletTypes: ["eth"], switch: false }).then((req) => {
+          if (req.data.address !== undefined) this.$store.commit("setEthAddress", req.data.address);
+        });
+      } else if (window.ethereum) {
         let addr = await ethereum.request({ method: "eth_requestAccounts" });
         this.$store.commit("setEthAddress", addr[0]);
         this.$store.dispatch("setMyEthNum");
+        let ethNetWork = ["1"];
+
+        if (ethNetWork.indexOf(window.ethereum.networkVersion) < 0) {
+          this.$store.commit("setIsNetWork", false);
+        } else {
+          this.$store.commit("setIsNetWork", true);
+        }
       } else {
         console.log("未安装插件");
       }
     },
-    //显示对话框
+    //显示对话框或移动端连接SWTC钱包
     showdialog() {
-      ImportDialog().show();
+      var tp = require("tp-js-sdk");
+      if (tp.isConnected()) {
+        tp.getWallet({ walletTypes: ["jingtum"], switch: false }).then((req) => {
+          if (req.data.address !== undefined) {
+            this.$store.commit("setSwtcAddress", req.data.address);
+          }
+        });
+      } else ImportDialog().show();
     },
   },
 };
@@ -152,6 +171,7 @@ button {
   border: 1px solid rgba(229, 232, 238, 1);
   border-radius: 18px;
   mix-blend-mode: normal;
+  border: 1px solid rgba(67, 162, 244, 1);
 }
 .WB:hover {
   border: none;

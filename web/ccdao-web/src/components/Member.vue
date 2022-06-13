@@ -1,31 +1,33 @@
 <template>
   <div class="member-container" id="membership">
     <div class="member">
-      <p class="membership">{{ $t("message.Membership") }}</p>
-      <div class="memberbox">
-        <div>
-          <p class="mca">{{ $t("message.My_CCDAO_Amount") }}</p>
-          <p class="mcanum">{{ ccdaoNum.toLocaleString() }}&nbsp;{{ $t("message.CCDAO") }}</p>
-        </div>
-        <div v-show="ccdaoNum >= 10000" style="display: flex; align-items: center; font-size: 14px">
-          <span style="color: rgba(161, 166, 169, 1)">{{ $t("message.status") }}</span>
-          <span style="color: rgba(51, 147, 230, 1); margin-right: 10px">{{ $t("message.YES") }}</span>
-          <img src="../assets/member.svg" alt="" />
-        </div>
-        <div v-show="ccdaoNum < 10000" style="display: flex; align-items: center; font-size: 14px">
-          <span style="color: rgba(161, 166, 169, 1)">{{ $t("message.status") }}</span>
-          <span style="color: rgba(51, 147, 230, 1); margin-right: 10px">{{ $t("message.NO") }}</span>
-          <img src="../assets/member1.svg" alt="" />
-        </div>
-
-        <div class="memberboxtext">
-          <div style="display: flex; justify-content: space-between">
-            <p style="margin: 0px; font-size: 20px">{{ $t("message.Membership_Requirements") }}</p>
-            <img src="../assets/buyarrow.svg" style="margin-left: 30px" />
+      <div class="memberdiv">
+        <p class="membership">{{ $t("message.Membership") }}</p>
+        <div class="memberbox">
+          <div>
+            <p class="mca">{{ $t("message.My_CCDAO_Amount") }}</p>
+            <p class="mcanum">{{ ccdaoNum.toLocaleString() }}&nbsp;{{ $t("message.CCDAO") }}</p>
           </div>
-          <p style="position: absolute; margin: 0px; margin-top: 30px; font-size: 30px; width: 800px">
-            {{ $t("message.$CCDAO_Member_need_to_hold_10000CCDAO_at_least") }}
-          </p>
+          <div v-show="ccdaoNum >= 10000" style="display: flex; align-items: center; font-size: 14px">
+            <span style="color: rgba(161, 166, 169, 1)">{{ $t("message.status") }}</span>
+            <span style="color: rgba(51, 147, 230, 1); margin-right: 10px">{{ $t("message.YES") }}</span>
+            <img class="memberimg" src="../assets/member.svg" alt="" />
+          </div>
+          <div v-show="ccdaoNum < 10000" style="display: flex; align-items: center; font-size: 14px">
+            <span style="color: rgba(161, 166, 169, 1)">{{ $t("message.status") }}</span>
+            <span style="color: rgba(51, 147, 230, 1); margin-right: 10px">{{ $t("message.NO") }}</span>
+            <img class="memberimg" src="../assets/member1.svg" alt="" />
+          </div>
+
+          <div class="memberboxtext">
+            <div style="display: flex; justify-content: space-between">
+              <p class="mr">{{ $t("message.Membership_Requirements") }}</p>
+              <img src="../assets/buyarrow.svg" class="memberarrow" />
+            </div>
+            <span class="needCcdao">
+              {{ $t("message.$CCDAO_Member_need_to_hold_10000CCDAO_at_least") }}
+            </span>
+          </div>
         </div>
       </div>
     </div>
@@ -37,73 +39,11 @@ export default {
   name: "Member",
   computed: {
     ccdaoNum() {
-      return this.$store.getters.myCCDAONum;
+      if (this.$store.state.ethAddress === "" && this.$store.state.swtcAddress === "") return "--";
+      else return this.$store.getters.myCCDAONum;
     },
   },
 };
 </script>
 
-<style lang="scss" scoped>
-@import "../css/background.scss";
-
-.member-container {
-  position: relative;
-  padding-top: 62.5%;
-  @include div-same-size-as-background-img("../assets/bgimg5.svg");
-
-  .member {
-    width: 100%;
-    position: absolute;
-    display: flex;
-    left: 0;
-    top: 0;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding-top: 100px;
-  }
-  .membership {
-    margin: 0px;
-    mix-blend-mode: normal;
-    color: black;
-    font-size: 40px;
-    line-height: 46px;
-  }
-  .memberbox {
-    margin-top: 150px;
-    width: 600px;
-    height: 120px;
-    background: rgba(255, 255, 255, 1);
-    background-blend-mode: normal;
-    box-shadow: 0px 1px 5px rgba(201, 223, 240, 1);
-    border-radius: 80px;
-    mix-blend-mode: normal;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-left: 50px;
-    position: relative;
-  }
-  .mca {
-    margin: 0%;
-    background-blend-mode: normal;
-    mix-blend-mode: normal;
-    color: rgba(161, 166, 169, 1);
-    font-size: 16px;
-    line-height: 40px;
-  }
-  .mcanum {
-    margin: 0%;
-    background-blend-mode: normal;
-    mix-blend-mode: normal;
-    color: rgba(73, 170, 239, 1);
-    font-size: 30px;
-    line-height: 30px;
-  }
-  .memberboxtext {
-    position: absolute;
-    top: 200px;
-    left: 0px;
-  }
-}
-</style>
+<style lang="scss" scoped></style>

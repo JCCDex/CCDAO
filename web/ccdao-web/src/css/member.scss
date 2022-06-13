@@ -1,0 +1,215 @@
+@import "../css/background.scss";
+@media (min-width: 1080px) {
+  .member-container {
+    @include div-same-size-as-background-img("../assets/bgimg5.svg");
+    padding-top: 62.5%;
+    .member {
+      padding-top: 100px;
+    }
+    .membership {
+      font-size: 40px;
+    }
+    .memberbox {
+      margin-top: 150px;
+      width: 550px;
+      height: 120px;
+      padding-left: 50px;
+    }
+    .mca {
+      font-size: 16px;
+      line-height: 40px;
+    }
+    .mcanum {
+      font-size: 30px;
+      line-height: 30px;
+    }
+    .memberboxtext {
+      top: 200px;
+    }
+    .mr {
+      margin: 0px;
+      font-size: 20px;
+    }
+    .memberarrow {
+      margin-left: 30px;
+    }
+    .needCcdao {
+      width: 800px;
+      font-size: 30px;
+      margin: 0px;
+      margin-top: 30px;
+    }
+  }
+}
+@media (max-width: 1079px) and (min-width: 600px) {
+  .member-container {
+    @include div-same-size-as-background-img("../assets/phonebgimg5.svg");
+    padding-top: 100%;
+    .member {
+      height: 100%;
+      align-items: center;
+    }
+    .memberdiv {
+      height: 400px;
+    }
+    .membership {
+      font-size: 40px;
+    }
+    .memberbox {
+      margin-top: 70px;
+      width: 560px;
+      height: 120px;
+      padding-left: 40px;
+    }
+    .mca {
+      font-size: 22px;
+      line-height: 40px;
+    }
+    .mcanum {
+      font-size: 30px;
+      line-height: 30px;
+    }
+    .memberimg {
+      width: 120px;
+      height: 120px;
+    }
+    .memberboxtext {
+      top: 85px;
+      margin-top: 70px;
+    }
+    .mr {
+      margin: 0px;
+      width: 302px;
+      height: 20px;
+      font-size: 24px;
+      line-height: 20px;
+    }
+    .memberarrow {
+      transform: rotate(90deg);
+      width: 20px;
+      height: 18px;
+    }
+    .needCcdao {
+      width: 600px;
+      display: block;
+      word-wrap: break-word;
+      font-size: 32px;
+      line-height: 34px;
+      margin: 0px;
+      margin-top: 30px;
+    }
+  }
+}
+@media (max-width: 599px) {
+  .member-container {
+    @include div-same-size-as-background-img("../assets/phonebgimg5.svg");
+    padding-top: 100%;
+    .member {
+      height: 100%;
+      align-items: center;
+    }
+    .memberdiv {
+      height: 260px;
+    }
+    .membership {
+      font-size: 30px;
+    }
+    .memberbox {
+      margin-top: 30px;
+      width: 320px;
+      height: 70.48px;
+      padding-left: 23px;
+    }
+    .mca {
+      font-size: 12px;
+      line-height: 30px;
+    }
+    .mcanum {
+      font-size: 18px;
+    }
+    .memberimg {
+      width: 70.48px;
+      height: 70.48px;
+    }
+    .memberboxtext {
+      top: 85px;
+    }
+    .mr {
+      margin: 0px;
+      margin-top: 15px;
+      // margin-left: 20px;
+      width: 167px;
+      height: 15px;
+      font-size: 13px;
+    }
+    .memberarrow {
+      margin-top: 18px;
+      transform: rotate(90deg);
+      width: 10px;
+      height: 10px;
+    }
+    .needCcdao {
+      width: 360px;
+      display: block;
+      word-wrap: break-word;
+      font-size: 20px;
+      line-height: 22px;
+      margin: 0px;
+      // margin-left: 20px;
+      margin-top: 10px;
+    }
+  }
+}
+
+.member-container {
+  position: relative;
+
+  .member {
+    width: 100%;
+    position: absolute;
+    display: flex;
+    left: 0;
+    top: 0;
+    justify-content: center;
+  }
+  .memberdiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .membership {
+    margin: 0px;
+    mix-blend-mode: normal;
+    color: black;
+  }
+  .memberbox {
+    background: rgba(255, 255, 255, 1);
+    background-blend-mode: normal;
+    box-shadow: 0px 1px 5px rgba(201, 223, 240, 1);
+    border-radius: 80px;
+    mix-blend-mode: normal;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+  }
+  .mca {
+    margin: 0%;
+    background-blend-mode: normal;
+    mix-blend-mode: normal;
+    color: rgba(161, 166, 169, 1);
+  }
+  .mcanum {
+    margin: 0%;
+    background-blend-mode: normal;
+    mix-blend-mode: normal;
+    color: rgba(73, 170, 239, 1);
+  }
+  .memberboxtext {
+    position: absolute;
+    left: 0px;
+  }
+  .needCcdao {
+    position: absolute;
+  }
+}

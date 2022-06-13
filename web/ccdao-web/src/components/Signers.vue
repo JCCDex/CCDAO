@@ -1,8 +1,8 @@
 <template>
   <div class="Signers" id="multi">
     <div class="signers">
-      <p>{{ $t("message.Multi-Signers") }}</p>
-      <p>{{ $t("message.It_is_under_construction") }}</p>
+      <span class="ms">{{ $t("message.Multi-Signers") }}</span>
+      <span class="iiuc">{{ $t("message.It_is_under_construction") }}</span>
     </div>
   </div>
 </template>
@@ -13,24 +13,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-@import "../css/background.scss";
-
-.Signers {
-  position: relative;
-  padding-top: 58.33333%;
-  @include div-same-size-as-background-img("../assets/signers.svg");
-
-  .signers {
-    top: 100px;
-    width: 100%;
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    color: rgba(255, 255, 255, 1);
-    font-size: 50px;
-  }
-}
-</style>
+<style lang="scss" scoped></style>

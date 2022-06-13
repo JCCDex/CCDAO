@@ -3,6 +3,15 @@ import App from "./App.vue";
 import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
 import "./css/dialog.scss";
+import "./css/wel.scss";
+import "./css/webadd.scss";
+import "./css/tobuy.scss";
+import "./css/signers.scss";
+import "./css/member.scss";
+import "./css/holds.scss";
+import "./css/header.scss";
+import "./css/foot.scss";
+
 Vue.config.productionTip = false;
 Vue.use(ElementUI);
 
@@ -57,10 +66,25 @@ subscribeInst
   // start task
   .start(TASK_NAME);
 
+var tp = require("tp-js-sdk");
+
+if (tp.isConnected()) {
+  store.commit("setIsTp", true);
+  tp.getWallet({ walletTypes: ["jingtum"], switch: false }).then((req) => {
+    if (req.data.address !== undefined) store.commit("setSwtcAddress", req.data.address);
+  });
+}
 if (window.ethereum) {
   const ethereum = window.ethereum;
 
-  ethereum.on("chainChanged", (_chainId) => window.location.reload());
+  ethereum.on("chainChanged", (_chainId) => {
+    let ethNetWork = ["0x1"];
+    if (ethNetWork.indexOf(_chainId) < 0) {
+      store.commit("setIsNetWork", false);
+    } else {
+      store.commit("setIsNetWork", true);
+    }
+  });
   ethereum.on("accountsChanged", (acc) => {
     store.commit("setEthAddress", acc[0] === undefined ? "" : acc[0]);
     store.dispatch("setMyEthNum");

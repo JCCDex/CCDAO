@@ -1,0 +1,221 @@
+@import "../css/background.scss";
+@media (min-width: 1080px) {
+  .buy-container {
+    padding-top: 62.5%;
+    @include div-same-size-as-background-img("../assets/bgimg3.svg");
+    .buyadd {
+      margin-top: 200px;
+      width: 919px;
+    }
+    .tobuys {
+      padding-top: 150px;
+    }
+    .buyone {
+      width: 360px;
+    }
+    .buytext {
+      width: 330px;
+      height: 50px;
+      font-size: 46px;
+    }
+    .buytextimg {
+      width: 36px;
+      height: 36px;
+    }
+    .buyaddbox {
+      width: 260px;
+      height: 60px;
+    }
+    .buylocation1 {
+      top: 0px;
+      right: 300px;
+    }
+    .buylocation2 {
+      top: 0px;
+      right: 0px;
+    }
+    .buytag {
+      margin-left: 15px;
+      width: 30px;
+      height: 30px;
+    }
+    .buyaddtext {
+      margin-left: 15px;
+      color: rgba(23, 25, 29, 1);
+      font-size: 16px;
+    }
+    .buy {
+      font-size: 20px;
+    }
+    .buyimg {
+      margin-left: 50px;
+    }
+  }
+}
+@media (max-width: 1079px) and (min-width: 600px) {
+  .buy-container {
+    padding-top: 100%;
+    @include div-same-size-as-background-img("../assets/phonebgimg3.svg");
+    .tobuy {
+      height: 100%;
+      align-items: center;
+    }
+    .tobuys {
+      height: 400px;
+    }
+    .buyone {
+      width: 360px;
+    }
+    .buytext {
+      width: 304px;
+      height: 50px;
+      font-size: 46px;
+    }
+    .buytextimg {
+      width: 36px;
+      height: 36px;
+    }
+    .buyadd {
+      margin-top: 50px;
+    }
+    .buyimg {
+      margin-left: 15px;
+      transform: rotate(90deg);
+    }
+    .buyaddbox {
+      width: 320px;
+      height: 80px;
+    }
+    .buylocation1 {
+      top: 80px;
+    }
+    .buylocation2 {
+      top: 180px;
+    }
+    .buytag {
+      margin-left: 20px;
+      width: 60px;
+      height: 60px;
+    }
+    .buyaddtext {
+      margin-left: 23px;
+      color: rgba(23, 25, 29, 1);
+      font-size: 30px;
+    }
+    .buy {
+      font-size: 26px;
+    }
+  }
+}
+@media (max-width: 599px) {
+  .buy-container {
+    padding-top: 100%;
+    @include div-same-size-as-background-img("../assets/phonebgimg3.svg");
+    .tobuy {
+      height: 100%;
+      align-items: center;
+    }
+    .tobuys {
+      height: 270px;
+    }
+    .buyone {
+      width: 270px;
+    }
+    .buytext {
+      width: 228px;
+      height: 38px;
+      font-size: 34px;
+    }
+    .buytextimg {
+      width: 27px;
+      height: 27px;
+    }
+    .buyadd {
+      margin-top: 50px;
+      width: 300px;
+    }
+    .buyimg {
+      margin-left: 15px;
+      transform: rotate(90deg);
+    }
+    .buyaddbox {
+      width: 240px;
+      height: 60px;
+    }
+    .buylocation1 {
+      top: 40px;
+    }
+    .buylocation2 {
+      top: 120px;
+    }
+    .buytag {
+      margin-left: 17px;
+      width: 45px;
+      height: 45px;
+    }
+    .buyaddtext {
+      margin-left: 23px;
+      color: rgba(23, 25, 29, 1);
+      font-size: 20px;
+    }
+    .buy {
+      font-size: 20px;
+    }
+  }
+}
+
+.buy-container {
+  position: relative;
+
+  .tobuy {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+  .tobuys {
+    position: relative;
+  }
+  .buyone {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .buytext {
+    margin: 0px;
+    mix-blend-mode: normal;
+    color: rgba(61, 61, 59, 1);
+  }
+  .buyadd {
+    height: 60px;
+    position: relative;
+  }
+  .buy {
+    width: 240px;
+    height: 30px;
+    mix-blend-mode: normal;
+    color: rgba(61, 61, 59, 1);
+    line-height: 30px;
+  }
+  .buyimg {
+    width: 16.01px;
+    height: 14.09px;
+    background-blend-mode: normal;
+    mix-blend-mode: normal;
+  }
+  .buyaddbox {
+    position: absolute;
+    background: rgba(255, 255, 255, 1);
+    background-blend-mode: normal;
+    box-shadow: 0px 1px 5px rgba(201, 223, 240, 1);
+    border-radius: 16px;
+    mix-blend-mode: normal;
+    display: flex;
+    align-items: center;
+  }
+  .buyaddbox:hover {
+    border: 1px solid #3394e6;
+  }
+}

@@ -1,0 +1,45 @@
+@media (min-width: 786px) {
+  .foot {
+    text-align: center;
+  }
+  .foottext {
+    font-size: 12px;
+    margin-top: 25px;
+  }
+  .foot img {
+    position: absolute;
+    width: 74px;
+    height: 20.5px;
+    right: 50px;
+    top: 20px;
+  }
+}
+@media (max-width: 785px) {
+  .foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 10px;
+  }
+  .foottext {
+    font-size: 12px;
+    letter-spacing: -1px;
+  }
+  .foot img {
+    width: 89.81px;
+    height: 24px;
+  }
+}
+
+.foot {
+  // width: 100%;
+  height: 60px;
+  /* bottom: 0px; */
+  background: rgba(246, 249, 253, 1);
+  position: relative;
+  /* position: fixed; */
+  /* z-index: 1; */
+}
+.foottext {
+  color: rgba(112, 112, 112, 1);
+}

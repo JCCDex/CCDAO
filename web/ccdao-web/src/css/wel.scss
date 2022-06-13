@@ -1,0 +1,218 @@
+@import "../css/background.scss";
+@media (min-width: 1080px) {
+  .community {
+    @include div-same-size-as-background-img("../assets/bgimg1.svg");
+    padding-top: 58.33333%;
+    .content {
+      padding-left: 140px;
+      padding-top: 135px;
+      .wel {
+        font-size: 40px;
+      }
+
+      .ccdao {
+        font-size: 50px;
+        margin-top: 12px;
+        line-height: 50px;
+      }
+
+      .vision {
+        font-size: 16px;
+        margin-top: 8px;
+      }
+
+      .token {
+        font-size: 50px;
+        margin-top: 40px;
+      }
+
+      .holder {
+        font-size: 16px;
+        margin-top: 6px;
+      }
+
+      .amount {
+        display: flex;
+        justify-content: space-between;
+        padding: 14px 20px;
+        margin-top: 45px;
+        box-shadow: 0px 1px 5px rgba(201, 223, 240, 1);
+        border-radius: 16px;
+        background-color: #fff;
+        color: #a1a6a9;
+        font-size: 14px;
+        .value {
+          color: #3393e6;
+          font-size: 20px;
+          margin-top: 6px;
+        }
+      }
+    }
+  }
+}
+@media (min-width: 600px) and (max-width: 1079px) {
+  .community {
+    @include div-same-size-as-background-img("../assets/phonebgimg1.svg");
+    padding-top: 100%;
+    .content {
+      // margin-top: 30px;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      .wel {
+        font-size: 40px;
+      }
+
+      .ccdao {
+        font-size: 50px;
+        margin-top: 6px;
+      }
+
+      .vision {
+        font-size: 22px;
+      }
+
+      .token {
+        font-size: 50px;
+        margin-top: 20px;
+      }
+
+      .holder {
+        font-size: 22px;
+        margin-top: 3px;
+      }
+
+      .amount {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 30px;
+        box-shadow: 0px 1px 5px rgba(201, 223, 240, 1);
+        border-radius: 16px;
+        background-color: #fff;
+        color: #a1a6a9;
+        // font-size: 3.4375%;
+        padding: 15px 20px;
+        font-size: 22px;
+        .value {
+          color: #3393e6;
+          // font-size: 3.125%;
+          font-size: 30px;
+          margin-top: 10px;
+        }
+      }
+    }
+  }
+}
+@media (max-width: 599px) {
+  .community {
+    @include div-same-size-as-background-img("../assets/phonebgimg1.svg");
+    padding-top: 100%;
+    .content {
+      // margin-top: 30px;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      .wel {
+        font-size: 20px;
+      }
+
+      .ccdao {
+        padding-top: 10px;
+        font-size: 24px;
+        margin-top: 6px;
+      }
+
+      .vision {
+        font-size: 16px;
+      }
+
+      .token {
+        font-size: 24px;
+        margin-top: 20px;
+      }
+
+      .holder {
+        font-size: 16px;
+        margin-top: 3px;
+      }
+
+      .amount {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 30px;
+        box-shadow: 0px 1px 5px rgba(201, 223, 240, 1);
+        border-radius: 16px;
+        background-color: #fff;
+        color: #a1a6a9;
+        // font-size: 3.4375%;
+        padding: 15px 20px;
+        font-size: 15px;
+        .value {
+          color: #3393e6;
+          // font-size: 3.125%;
+          font-size: 18px;
+          margin-top: 10px;
+        }
+      }
+    }
+  }
+}
+
+.community {
+  position: relative;
+
+  .content {
+    position: absolute;
+    top: 0px;
+    .wel {
+      // font-size: 40px;
+      line-height: 30px;
+      color: #444444;
+    }
+
+    .ccdao {
+      // font-size: 50px;
+      color: #3393e6;
+      // margin-top: 12px;
+    }
+
+    .vision {
+      // font-size: 16px;
+      color: #444;
+      // margin-top: 8px;
+    }
+
+    .token {
+      // font-size: 50px;
+      color: #3393e6;
+      // margin-top: 40px;
+    }
+
+    .holder {
+      // font-size: 16px;
+      color: #555656;
+      // margin-top: 6px;
+    }
+
+    // .amount {
+    //   display: flex;
+    //   justify-content: space-between;
+    //   padding: 14px 20px;
+    //   margin-top: 45px;
+    //   box-shadow: 0px 1px 5px rgba(201, 223, 240, 1);
+    //   border-radius: 16px;
+    //   background-color: #fff;
+    //   color: #a1a6a9;
+    //   font-size: 14px;
+    //   .value {
+    //     color: #3393e6;
+    //     font-size: 20px;
+    //     margin-top: 6px;
+    //   }
+    // }
+  }
+}

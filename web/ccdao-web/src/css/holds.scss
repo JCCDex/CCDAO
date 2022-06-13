@@ -1,0 +1,177 @@
+@import "../css/background.scss";
+@media (min-width: 1080px) {
+  .hold-container {
+    padding-top: 62.5%;
+    @include div-same-size-as-background-img("../assets/bgimg2.png");
+    .boxtwotext {
+      padding-top: 80px;
+      .holdscss {
+        width: 600px;
+      }
+    }
+    .p1 {
+      margin-bottom: 35px;
+    }
+    .p11 {
+      font-size: 50px;
+    }
+    .p12 {
+      font-size: 40px;
+    }
+    .hold {
+      /* margin-left: 29.1%; */
+      width: 600px;
+    }
+    .holdbox {
+      width: 600px;
+      height: 120px;
+      .p21 {
+        margin-left: 160px;
+        margin-top: 20px;
+        font-size: 16px;
+        line-height: 40px;
+      }
+      .p22 {
+        margin-left: 160px;
+        margin-top: 60px;
+        font-size: 30px;
+      }
+    }
+    .holdboxplace {
+      margin-top: 50px;
+    }
+  }
+}
+@media (min-width: 600px) and (max-width: 1079px) {
+  .hold-container {
+    padding-top: 100%;
+    @include div-same-size-as-background-img("../assets/phonebgimg2.svg");
+    .boxtwotext {
+      // padding-top: 30px;
+      align-items: center;
+      .holdscss {
+        width: 375.27px;
+      }
+    }
+    .p1 {
+      margin-bottom: 25px;
+    }
+    .p11 {
+      font-size: 50px;
+    }
+    .p12 {
+      font-size: 32px;
+    }
+    .hold {
+      /* margin-left: 29.1%; */
+      width: 500px;
+    }
+    .holdbox {
+      width: 500px;
+      height: 120px;
+      .holdboximg {
+        width: 120px;
+        height: 120px;
+      }
+      .p21 {
+        margin-top: 30px;
+        margin-left: 140px;
+        font-size: 22px;
+      }
+      .p22 {
+        margin-top: 60px;
+        margin-left: 140px;
+        font-size: 32px;
+      }
+    }
+    .holdboxplace {
+      margin-top: 20px;
+    }
+  }
+}
+@media (max-width: 599px) {
+  .hold-container {
+    padding-top: 100%;
+    @include div-same-size-as-background-img("../assets/phonebgimg2.svg");
+    .boxtwotext {
+      // padding-top: 30px;
+      align-items: center;
+      .holdscss {
+        width: 375.27px;
+      }
+    }
+    .p1 {
+      margin-bottom: 20px;
+    }
+    .p11 {
+      font-size: 36px;
+    }
+    .p12 {
+      font-size: 24px;
+    }
+    .hold {
+      /* margin-left: 29.1%; */
+      width: 375.27px;
+    }
+    .holdbox {
+      width: 375.27px;
+      height: 90.07px;
+      .holdboximg {
+        width: 90.07px;
+        height: 90.07px;
+      }
+      .p21 {
+        margin-top: 20px;
+        margin-left: 105px;
+        font-size: 14px;
+      }
+      .p22 {
+        margin-top: 50px;
+        margin-left: 105px;
+        font-size: 18px;
+      }
+    }
+    .holdboxplace {
+      margin-top: 20px;
+    }
+  }
+}
+
+.hold-container {
+  position: relative;
+
+  .boxtwotext {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    .holdscss {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+  .p1 {
+    mix-blend-mode: normal;
+    color: rgba(255, 255, 255, 1);
+  }
+  .p2 {
+    mix-blend-mode: normal;
+    color: rgba(255, 255, 255, 1);
+    position: absolute;
+  }
+  .holdout {
+    display: flex;
+    justify-content: center;
+  }
+  .holdbox {
+    position: relative;
+    background: rgba(96.00000000000001, 194.00000000000006, 248, 1);
+    background-blend-mode: normal;
+    border-radius: 110px;
+    mix-blend-mode: normal;
+  }
+}
