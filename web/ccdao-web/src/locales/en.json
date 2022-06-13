@@ -50,5 +50,7 @@
   "It_is_under_construction": "It is under construction...",
   "$CCDAO": "$CCDAO",
   "My_Wallet": "My Wallet",
-  "issuer": "(Issuer:jGa9J9TkqtBcUoHe2zqhVFFbgUVED6o9or)"
+  "issuer": "(Issuer:jGa9J9TkqtBcUoHe2zqhVFFbgUVED6o9or)",
+  "Network_Error": "Network Error！",
+  "Please_switch_to_the_Ethernet_Network": "Please switch to the Ethernet Network～"
 }

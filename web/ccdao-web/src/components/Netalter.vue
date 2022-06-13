@@ -1,8 +1,8 @@
 <template>
   <div class="netalter" v-show="!isNetWork">
     <div class="alterbox">
-      <p class="nettitle">Network Error！</p>
-      <p class="netcontent">Please switch to the Ethernet Network～</p>
+      <p class="nettitle">{{ $t("message.Network_Error") }}</p>
+      <p class="netcontent">{{ $t("message.Please_switch_to_the_Ethernet_Network") }}</p>
     </div>
   </div>
 </template>
