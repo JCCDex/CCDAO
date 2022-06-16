@@ -27,7 +27,7 @@
     }
   }
 }
-@media (max-width: 599px) {
+@media (max-width: 599px) and (min-width: 410px) {
   .Signers {
     @include div-same-size-as-background-img("../assets/phonesigners.svg");
     padding-top: 78.125%;
@@ -37,6 +37,20 @@
     .iiuc {
       font-size: 23px;
       margin-top: 25px;
+    }
+  }
+}
+@media (max-width: 409px) {
+  .Signers {
+    @include div-same-size-as-background-img("../assets/phonesigners.svg");
+    padding-top: 78.125%;
+    .ms {
+      margin-top: -50px;
+      font-size: 22px;
+    }
+    .iiuc {
+      font-size: 14px;
+      margin-top: 10px;
     }
   }
 }

@@ -89,7 +89,7 @@
     }
   }
 }
-@media (max-width: 599px) {
+@media (max-width: 599px) and (min-width: 410px) {
   .hold-container {
     padding-top: 100%;
     @include div-same-size-as-background-img("../assets/phonebgimg2.svg");
@@ -129,6 +129,53 @@
         margin-top: 50px;
         margin-left: 105px;
         font-size: 18px;
+      }
+    }
+    .holdboxplace {
+      margin-top: 20px;
+    }
+  }
+}
+@media (max-width: 409px) {
+  .hold-container {
+    padding-top: 100%;
+    @include div-same-size-as-background-img("../assets/phonebgimg2.svg");
+    .boxtwotext {
+      // padding-top: 30px;
+      align-items: center;
+      .holdscss {
+        width: 260px;
+      }
+    }
+    .p1 {
+      margin-bottom: 15px;
+    }
+    .p11 {
+      font-size: 22px;
+    }
+    .p12 {
+      font-size: 14px;
+    }
+    .hold {
+      /* margin-left: 29.1%; */
+      width: 260px;
+    }
+    .holdbox {
+      width: 260px;
+      height: 62px;
+      .holdboximg {
+        width: 62px;
+        height: 62px;
+      }
+      .p21 {
+        margin-top: 10px;
+        margin-left: 72px;
+        font-size: 12px;
+      }
+      .p22 {
+        margin-top: 28px;
+        margin-left: 72px;
+        font-size: 16px;
       }
     }
     .holdboxplace {

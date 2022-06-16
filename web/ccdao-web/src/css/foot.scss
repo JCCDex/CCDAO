@@ -1,6 +1,7 @@
 @media (min-width: 786px) {
   .foot {
     text-align: center;
+    height: 60px;
   }
   .foottext {
     font-size: 12px;
@@ -14,12 +15,13 @@
     top: 20px;
   }
 }
-@media (max-width: 785px) {
+@media (max-width: 785px) and (min-width: 410px) {
   .foot {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0px 10px;
+    height: 60px;
   }
   .foottext {
     font-size: 12px;
@@ -30,10 +32,26 @@
     height: 24px;
   }
 }
+@media (max-width: 409px) {
+  .foot {
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 10px;
+  }
+  .foottext {
+    letter-spacing: -1px;
+    font-size: 11px;
+  }
+  .foot img {
+    width: 89.81px;
+    height: 24px;
+  }
+}
 
 .foot {
   // width: 100%;
-  height: 60px;
   /* bottom: 0px; */
   background: rgba(246, 249, 253, 1);
   position: relative;

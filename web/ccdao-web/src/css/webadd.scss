@@ -108,7 +108,7 @@
     }
   }
 }
-@media (max-width: 599px) {
+@media (max-width: 599px) and (min-width: 410px) {
   .contract {
     @include div-same-size-as-background-img("../assets/phonebgimg4.svg");
     padding-top: 100%;
@@ -161,6 +161,62 @@
     }
     .spantext1 {
       font-size: 14px;
+    }
+  }
+}
+@media (max-width: 409px) {
+  .contract {
+    @include div-same-size-as-background-img("../assets/phonebgimg4.svg");
+    padding-top: 100%;
+    .webadd {
+      height: 100%;
+      align-items: center;
+    }
+    .addtext {
+      padding-left: 8px;
+      font-size: 16px;
+      width: 210px;
+    }
+    .addtextimg {
+      width: 12.19px;
+      height: 12.19px;
+    }
+    .addbox {
+      width: 271.88px;
+      height: 46.88px;
+    }
+    .addboxlocation1 {
+      margin-top: 36px;
+    }
+    .addboxlocation2 {
+      margin-top: 23px;
+    }
+    .addboxhead {
+      border-top-left-radius: 50px;
+      border-bottom-left-radius: 50px;
+      width: 56.25px;
+      height: 46.88px;
+      color: rgba(51, 147, 230, 1);
+      font-size: 14px;
+    }
+    .right {
+      left: 250px;
+      top: 20px;
+      width: 12.5px;
+      height: 9.38px;
+    }
+    .spantext {
+      top: 8px;
+      left: 65px;
+      font-size: 12px;
+      line-height: 16px;
+      width: 182px;
+      height: 28px;
+      display: block;
+      word-wrap: break-word;
+    }
+    .spantext1 {
+      font-size: 10px;
     }
   }
 }
