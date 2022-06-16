@@ -100,7 +100,7 @@
     }
   }
 }
-@media (max-width: 599px) {
+@media (max-width: 599px) and (min-width: 410px) {
   .member-container {
     @include div-same-size-as-background-img("../assets/phonebgimg5.svg");
     padding-top: 100%;
@@ -154,6 +154,65 @@
       word-wrap: break-word;
       font-size: 20px;
       line-height: 22px;
+      margin: 0px;
+      // margin-left: 20px;
+      margin-top: 10px;
+    }
+  }
+}
+@media (max-width: 409px) {
+  .member-container {
+    @include div-same-size-as-background-img("../assets/phonebgimg5.svg");
+    padding-top: 100%;
+    .member {
+      height: 100%;
+      align-items: center;
+    }
+    .memberdiv {
+      height: 210px;
+    }
+    .membership {
+      font-size: 22px;
+    }
+    .memberbox {
+      margin-top: 30px;
+      width: 265.25px;
+      height: 56.25px;
+      padding-left: 15px;
+    }
+    .mca {
+      font-size: 12px;
+      line-height: 25px;
+    }
+    .mcanum {
+      font-size: 16px;
+    }
+    .memberimg {
+      width: 56.25px;
+      height: 56.25px;
+    }
+    .memberboxtext {
+      top: 85px;
+    }
+    .mr {
+      margin: 0px;
+      // margin-left: 20px;
+      width: 170px;
+      height: 14px;
+      font-size: 13px;
+    }
+    .memberarrow {
+      margin-top: 5px;
+      transform: rotate(90deg);
+      width: 9.38px;
+      height: 8.44px;
+    }
+    .needCcdao {
+      width: 280px;
+      display: block;
+      word-wrap: break-word;
+      font-size: 13px;
+      line-height: 15px;
       margin: 0px;
       // margin-left: 20px;
       margin-top: 10px;

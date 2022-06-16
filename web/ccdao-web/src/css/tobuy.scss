@@ -49,6 +49,8 @@
     }
     .buyimg {
       margin-left: 50px;
+      width: 16.01px;
+      height: 14.09px;
     }
   }
 }
@@ -79,6 +81,8 @@
       margin-top: 50px;
     }
     .buyimg {
+      width: 16.01px;
+      height: 14.09px;
       margin-left: 15px;
       transform: rotate(90deg);
     }
@@ -107,7 +111,7 @@
     }
   }
 }
-@media (max-width: 599px) {
+@media (max-width: 599px) and (min-width: 410px) {
   .buy-container {
     padding-top: 100%;
     @include div-same-size-as-background-img("../assets/phonebgimg3.svg");
@@ -135,6 +139,8 @@
       width: 300px;
     }
     .buyimg {
+      width: 16.01px;
+      height: 14.09px;
       margin-left: 15px;
       transform: rotate(90deg);
     }
@@ -160,6 +166,64 @@
     }
     .buy {
       font-size: 20px;
+    }
+  }
+}
+@media (max-width: 409px) {
+  .buy-container {
+    padding-top: 100%;
+    @include div-same-size-as-background-img("../assets/phonebgimg3.svg");
+    .tobuy {
+      height: 100%;
+      align-items: center;
+    }
+    .tobuys {
+      height: 200px;
+    }
+    .buyone {
+      width: 167px;
+    }
+    .buytext {
+      width: 146px;
+      height: 25px;
+      font-size: 22px;
+    }
+    .buytextimg {
+      width: 16px;
+      height: 16px;
+    }
+    .buyadd {
+      margin-top: 40px;
+      width: 225px;
+    }
+    .buyimg {
+      width: 11.36px;
+      height: 10px;
+      margin-left: 15px;
+      transform: rotate(90deg);
+    }
+    .buyaddbox {
+      width: 150px;
+      height: 37.5px;
+    }
+    .buylocation1 {
+      top: 45px;
+    }
+    .buylocation2 {
+      top: 95px;
+    }
+    .buytag {
+      margin-left: 10px;
+      width: 28.13px;
+      height: 28.13px;
+    }
+    .buyaddtext {
+      margin-left: 15px;
+      color: rgba(23, 25, 29, 1);
+      font-size: 14px;
+    }
+    .buy {
+      font-size: 14px;
     }
   }
 }
@@ -200,8 +264,6 @@
     line-height: 30px;
   }
   .buyimg {
-    width: 16.01px;
-    height: 14.09px;
     background-blend-mode: normal;
     mix-blend-mode: normal;
   }
