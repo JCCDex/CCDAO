@@ -1,2 +1,3 @@
-# cd /home/admin1/workspace/CCDAO/web/ccdao-web
-node setCcdao.js
+#!/bin/bash  
+/usr/local/bin/node setCcdao.js
+echo "hello" >> 1.txt
