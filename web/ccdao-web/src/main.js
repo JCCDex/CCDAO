@@ -20,6 +20,7 @@ Vue.use(VueI18n);
 
 import axios from "axios";
 import store from "./store";
+import { config } from "process";
 Vue.prototype.$axios = axios;
 
 const messages = {
@@ -57,6 +58,19 @@ const callback = (err, res) => {
   if (err == null) store.dispatch("setValue", res);
   else console.log(err);
 };
+// const callback_set = (err, res) => {
+//   // if (err == null) store.dispatch("setValue", res);
+//   // else console.log(err);
+//   var fs = require('fs');
+//   fs.open("./config.json", "w+", (err, fd)=>{
+//     if (err)
+//       return console.error(err);
+//   });
+
+//   const datas=res.data.data['JJCC-JUSDT'];
+//   console.log(datas);
+
+// };
 
 subscribeInst
   // register task
