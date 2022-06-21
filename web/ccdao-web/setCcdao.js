@@ -26,7 +26,7 @@ const setCcdao = () => {
 };
 
 var job = new CronJob(
-  "*/10 * * * * *",
+  "* */10 * * * *",
   function () {
     setCcdao();
   },
