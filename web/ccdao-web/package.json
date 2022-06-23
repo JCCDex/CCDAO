@@ -25,7 +25,6 @@
     "crypto": "^1.0.1",
     "crypto-browserify": "^3.12.0",
     "element-ui": "^2.15.8",
-    "fs": "0.0.1-security",
     "jcc_file": "^1.0.2",
     "jcc_rpc": "^0.3.2",
     "jcc_wallet": "^1.1.0",
