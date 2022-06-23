@@ -9,8 +9,8 @@ const setCcdao = () => {
   axios
     .get("https://ijib059e8792d5.jccdex.cn/info/alltickers")
     .then((res) => {
-      const ccdao = res.data.data["JJCC-JUSDT"];
-      // const ccdao = res.data.data["CCDAO-JUSDT"];
+      // const ccdao = res.data.data["JJCC-JUSDT"];
+      const ccdao = res.data.data["CCDAO-JUSDT"];
       const data = JSON.parse(fs.readFileSync(file, "utf8"));
       let x = new BigNumber(ccdao[6]);
       let y = new BigNumber(ccdao[1]);
