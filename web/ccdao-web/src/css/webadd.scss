@@ -4,7 +4,9 @@
     @include div-same-size-as-background-img("../assets/bgimg4.png");
     padding-top: 62.5%;
     .webadd {
-      padding-top: 175px;
+      // padding-top: 175px;
+      height: 100%;
+      align-items: center;
     }
     .webadds {
       width: 900px;
@@ -55,7 +57,7 @@
 @media (max-width: 1079px) and (min-width: 600px) {
   .contract {
     @include div-same-size-as-background-img("../assets/phonebgimg4.svg");
-    padding-top: 100%;
+    padding-top: 128%;
     .webadd {
       height: 100%;
       align-items: center;
@@ -74,10 +76,10 @@
       height: 100px;
     }
     .addboxlocation1 {
-      margin-top: 70px;
+      margin-top: 50px;
     }
     .addboxlocation2 {
-      margin-top: 50px;
+      margin-top: 25px;
     }
     .addboxhead {
       border-top-left-radius: 50px;
@@ -111,7 +113,7 @@
 @media (max-width: 599px) and (min-width: 410px) {
   .contract {
     @include div-same-size-as-background-img("../assets/phonebgimg4.svg");
-    padding-top: 100%;
+    padding-top: 128%;
     .webadd {
       height: 100%;
       align-items: center;
@@ -167,7 +169,7 @@
 @media (max-width: 409px) {
   .contract {
     @include div-same-size-as-background-img("../assets/phonebgimg4.svg");
-    padding-top: 100%;
+    padding-top: 128%;
     .webadd {
       height: 100%;
       align-items: center;
@@ -186,7 +188,7 @@
       height: 46.88px;
     }
     .addboxlocation1 {
-      margin-top: 36px;
+      margin-top: 23px;
     }
     .addboxlocation2 {
       margin-top: 23px;
@@ -238,10 +240,8 @@
   }
   .addtext {
     margin: 0px;
-    height: 40px;
     mix-blend-mode: normal;
     color: rgba(255, 255, 255, 1);
-    line-height: 40px;
   }
   .addbox {
     position: relative;

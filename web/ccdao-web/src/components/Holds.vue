@@ -33,10 +33,10 @@ export default {
   name: "Holds",
   computed: {
     ethCcdao() {
-      return this.$store.state.ethCcdao.toLocaleString();
+      return parseFloat(this.$store.state.ethCcdao).toLocaleString();
     },
     swtcCcdao() {
-      return this.$store.state.swtcCcdao.toLocaleString();
+      return parseFloat(this.$store.state.swtcCcdao).toLocaleString();
     },
   },
 };
