@@ -36,7 +36,7 @@ export default new Vuex.Store({
       state.totalVolumeTraded = res.data.totalVolumeTraded;
       state.fullyDilutedValuation = res.data.fullyDilutedValuation;
       state.ethCcdao = res.data.ETH;
-      state.swtcCcdao = res.data.SWTC;
+      state.swtcCcdao = res.data.SWT;
     },
     setEthAddress(state, data) {
       state.ethAddress = data;
