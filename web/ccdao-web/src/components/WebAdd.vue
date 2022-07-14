@@ -57,7 +57,6 @@
             <img src="../assets/rightarrow.svg" class="right" />
           </a>
         </div>
-        -->
       </div>
     </div>
   </div>
