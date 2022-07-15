@@ -20,7 +20,12 @@ Vue.use(VueI18n);
 
 import axios from "axios";
 import store from "./store";
+import BigNumber from "bignumber.js";
 Vue.prototype.$axios = axios;
+
+const { fetchPrice, fetchVolume } = require("../scripts/fetch-ticker");
+const fetchEthereumPosition = require("../scripts/fetch-ethereum-position");
+const fetchSwtPosition = require("../scripts/fetch-swt-position");
 
 const messages = {
   en: {
@@ -42,20 +47,27 @@ const subscribeInst = SubscribeFactory.init();
 // task name
 const TASK_NAME = "pollingConfig";
 // task function
-const task = function () {
-  const promisedata = axios.get("./config.json" + "?t=" + Date.now()).catch(function (error) {
-    console.log(error);
-  });
-  return promisedata;
+const task = async () => {
+  const price = await fetchPrice();
+  const volume = await fetchVolume();
+  const ethereumPosition = await fetchEthereumPosition();
+  const swtPosition = await fetchSwtPosition();
+  return {
+    totalVolumeTraded: new BigNumber(volume).toFixed(0),
+    fullyDilutedValuation: new BigNumber(2e9).times(price).toFixed(0),
+    ETH: ethereumPosition,
+    SWT: swtPosition,
+  };
 };
 // whether polling, default true
 const polling = true;
 // polling interval, default 5000(ms)
-const timer = 1000 * 60 * 10;
+const timer = 5 * 60 * 1000;
 
 const callback = (err, res) => {
-  if (err == null) store.dispatch("setValue", res);
-  else console.log(err);
+  if (err == null) {
+    store.dispatch("setValue", res);
+  }
 };
 
 subscribeInst
@@ -66,7 +78,7 @@ subscribeInst
   // start task
   .start(TASK_NAME);
 
-var tp = require("tp-js-sdk");
+const tp = require("tp-js-sdk");
 
 if (tp.isConnected()) {
   store.commit("setIsTp", true);

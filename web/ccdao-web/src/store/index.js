@@ -33,10 +33,10 @@ export default new Vuex.Store({
   },
   mutations: {
     setData(state, res) {
-      state.totalVolumeTraded = res.data.totalVolumeTraded;
-      state.fullyDilutedValuation = res.data.fullyDilutedValuation;
-      state.ethCcdao = res.data.ETH;
-      state.swtcCcdao = res.data.SWT;
+      state.totalVolumeTraded = res.totalVolumeTraded;
+      state.fullyDilutedValuation = res.fullyDilutedValuation;
+      state.ethCcdao = res.ETH;
+      state.swtcCcdao = res.SWT;
     },
     setEthAddress(state, data) {
       state.ethAddress = data;

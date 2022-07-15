@@ -1,30 +1,6 @@
 const BigNumber = require("bignumber.js").default;
-const fetch = require("./service");
-
-const fetchBalance = async (address) => {
-  const res = await fetch({
-    url: "https://swtcscan.jccdex.cn/wallet/balance/" + address,
-    methods: "get",
-    params: {
-      w: address,
-    },
-  });
-  const data = res.data;
-  delete data._id;
-  delete data.feeflag;
-  const balances = [];
-  for (const key in data) {
-    if (Object.hasOwnProperty.call(data, key)) {
-      const d = data[key];
-      if (key === "SWTC") {
-        balances.push(Object.assign(d, { currency: "SWT", issuer: "" }));
-      } else {
-        balances.push(Object.assign(d, { currency: key.split("_")[0], issuer: key.split("_")[1] }));
-      }
-    }
-  }
-  return balances;
-};
+const fetchBalance = require("./fetch-balance");
+const { isCCDAO } = require("./utils");
 
 const fetchPosition = async () => {
   const contract = {
@@ -44,7 +20,7 @@ const fetchPosition = async () => {
 
   const totalBalance = balances
     .map((b) => {
-      const balance = b.find((a) => a.currency === "CCDAO" && a.issuer === "jGa9J9TkqtBcUoHe2zqhVFFbgUVED6o9or");
+      const balance = b.find((a) => isCCDAO(a));
       if (balance && balance.value) {
         return balance.value;
       }
