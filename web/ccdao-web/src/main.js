@@ -43,7 +43,7 @@ const subscribeInst = SubscribeFactory.init();
 const TASK_NAME = "pollingConfig";
 // task function
 const task = function () {
-  const promisedata = axios.get("./config.json").catch(function (error) {
+  const promisedata = axios.get("./config.json" + "?t=" + Date.now()).catch(function (error) {
     console.log(error);
   });
   return promisedata;
