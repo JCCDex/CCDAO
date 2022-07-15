@@ -3,21 +3,15 @@ const { SwapBalance, SwapContract, Token, SwapMulticall, ERC20 } = require("@jcc
 const { Web3Provider } = require("@ethersproject/providers");
 const BigNumber = require("bignumber.js").default;
 
-/**
- * @url [CCDAO合约地址](https://cn.etherscan.com/token/0x1487Bd704Fa05A222B0aDB50dc420f001f003045)
- */
-const CCDAO_CONTRACT = "0x1487Bd704Fa05A222B0aDB50dc420f001f003045";
+const CCDAO_CONTRACT = "0xd4d0e5651debcab0d7abfd549bbf2c4154a3442c";
 
-/**
- * @url [CCDAO银关地址](https://cn.etherscan.com/token/0x3907acb4c1818adf72d965c08e0a79af16e7ffb8)
- */
-const CCDAO_FINGATE = "0x3907acb4c1818adf72d965c08e0a79af16e7ffb8";
+const CCDAO_FINGATE = "0x1cda44Da59E8e621088a06756Eb772eF1a6024D9";
 
-const multicall = "0x5BA1e12693Dc8F9c48aAD8770482f4739bEeD696";
+const multicall = "0x2C55D51804CF5b436BA5AF37bD7b8E5DB70EBf29";
 
-const chainId = 1;
+const chainId = 128;
 
-const web3 = new Web3(new Web3.providers.HttpProvider("https://etha.jccdex.cn"));
+const web3 = new Web3(new Web3.providers.HttpProvider("https://http-mainnet-node.defibox.com"));
 
 const library = new Web3Provider(web3.currentProvider, chainId);
 const swapContract = new SwapContract(CCDAO_FINGATE, multicall, library);

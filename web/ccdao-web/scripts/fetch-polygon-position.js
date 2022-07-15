@@ -3,21 +3,15 @@ const { SwapBalance, SwapContract, Token, SwapMulticall, ERC20 } = require("@jcc
 const { Web3Provider } = require("@ethersproject/providers");
 const BigNumber = require("bignumber.js").default;
 
-/**
- * @url [CCDAO合约地址](https://cn.etherscan.com/token/0x1487Bd704Fa05A222B0aDB50dc420f001f003045)
- */
-const CCDAO_CONTRACT = "0x1487Bd704Fa05A222B0aDB50dc420f001f003045";
+const CCDAO_CONTRACT = "0xee546f831533a913848b72f36a9d5e437f63dbb9";
 
-/**
- * @url [CCDAO银关地址](https://cn.etherscan.com/token/0x3907acb4c1818adf72d965c08e0a79af16e7ffb8)
- */
-const CCDAO_FINGATE = "0x3907acb4c1818adf72d965c08e0a79af16e7ffb8";
+const CCDAO_FINGATE = "0x49243438d1E20a9e1C338112e72c6A788f5fb0cC";
 
-const multicall = "0x5BA1e12693Dc8F9c48aAD8770482f4739bEeD696";
+const multicall = "0x11ce4B23bD875D7F5C6a31084f55fDe1e9A87507";
 
-const chainId = 1;
+const chainId = 137;
 
-const web3 = new Web3(new Web3.providers.HttpProvider("https://etha.jccdex.cn"));
+const web3 = new Web3(new Web3.providers.HttpProvider("https://rpc-mainnet.matic.quiknode.pro"));
 
 const library = new Web3Provider(web3.currentProvider, chainId);
 const swapContract = new SwapContract(CCDAO_FINGATE, multicall, library);
