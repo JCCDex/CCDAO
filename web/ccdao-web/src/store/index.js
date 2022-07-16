@@ -15,6 +15,9 @@ export default new Vuex.Store({
     fullyDilutedValuation: "",
     ethCcdao: "",
     swtcCcdao: "",
+    polygonCcdao: "",
+    bscCcdao: "",
+    hecoCcdao: "",
     ethAddress: "",
     swtcAddress: "",
     isNetWork: true,
@@ -37,6 +40,9 @@ export default new Vuex.Store({
       state.fullyDilutedValuation = res.fullyDilutedValuation;
       state.ethCcdao = res.ETH;
       state.swtcCcdao = res.SWT;
+      state.polygonCcdao = res.POLYGON;
+      state.bscCcdao = res.BSC;
+      state.hecoCcdao = res.HECO;
     },
     setEthAddress(state, data) {
       state.ethAddress = data;

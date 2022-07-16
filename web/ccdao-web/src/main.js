@@ -26,6 +26,9 @@ Vue.prototype.$axios = axios;
 const { fetchPrice, fetchVolume } = require("../scripts/fetch-ticker");
 const fetchEthereumPosition = require("../scripts/fetch-ethereum-position");
 const fetchSwtPosition = require("../scripts/fetch-swt-position");
+const fetchPolygonPosition = require("../scripts/fetch-polygon-position");
+const fetchBscPosition = require("../scripts/fetch-bsc-position");
+const fetchHecoPosition = require("../scripts/fetch-heco-position");
 
 const messages = {
   en: {
@@ -52,11 +55,17 @@ const task = async () => {
   const volume = await fetchVolume();
   const ethereumPosition = await fetchEthereumPosition();
   const swtPosition = await fetchSwtPosition();
+  const polygonPosition = await fetchPolygonPosition();
+  const bscPosition = await fetchBscPosition();
+  const hecoPosition = await fetchHecoPosition();
   return {
     totalVolumeTraded: new BigNumber(volume).toFixed(0),
     fullyDilutedValuation: new BigNumber(2e9).times(price).toFixed(0),
     ETH: ethereumPosition,
     SWT: swtPosition,
+    POLYGON: polygonPosition,
+    BSC: bscPosition,
+    HECO: hecoPosition,
   };
 };
 // whether polling, default true
