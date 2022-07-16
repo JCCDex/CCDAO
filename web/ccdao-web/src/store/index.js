@@ -11,13 +11,13 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    totalVolumeTraded: "",
-    fullyDilutedValuation: "",
-    ethCcdao: "",
-    swtcCcdao: "",
-    polygonCcdao: "",
-    bscCcdao: "",
-    hecoCcdao: "",
+    totalVolumeTraded: 0,
+    fullyDilutedValuation: 0,
+    ethCcdao: 0,
+    swtcCcdao: 0,
+    polygonCcdao: 0,
+    bscCcdao: 0,
+    hecoCcdao: 0,
     ethAddress: "",
     swtcAddress: "",
     isNetWork: true,
@@ -38,11 +38,11 @@ export default new Vuex.Store({
     setData(state, res) {
       state.totalVolumeTraded = res.totalVolumeTraded;
       state.fullyDilutedValuation = res.fullyDilutedValuation;
-      state.ethCcdao = res.ETH;
-      state.swtcCcdao = res.SWT;
-      state.polygonCcdao = res.POLYGON;
-      state.bscCcdao = res.BSC;
-      state.hecoCcdao = res.HECO;
+      state.ethCcdao = res.ethereumPosition;
+      state.swtcCcdao = res.swtPosition;
+      state.polygonCcdao = res.polygonPosition;
+      state.bscCcdao = res.bscPosition;
+      state.hecoCcdao = res.hecoPosition;
     },
     setEthAddress(state, data) {
       state.ethAddress = data;

@@ -23,12 +23,7 @@ import store from "./store";
 import BigNumber from "bignumber.js";
 Vue.prototype.$axios = axios;
 
-const { fetchPrice, fetchVolume } = require("../scripts/fetch-ticker");
-const fetchEthereumPosition = require("../scripts/fetch-ethereum-position");
-const fetchSwtPosition = require("../scripts/fetch-swt-position");
-const fetchPolygonPosition = require("../scripts/fetch-polygon-position");
-const fetchBscPosition = require("../scripts/fetch-bsc-position");
-const fetchHecoPosition = require("../scripts/fetch-heco-position");
+const fetch = require("../scripts/service");
 
 const messages = {
   en: {
@@ -51,22 +46,11 @@ const subscribeInst = SubscribeFactory.init();
 const TASK_NAME = "pollingConfig";
 // task function
 const task = async () => {
-  const price = await fetchPrice();
-  const volume = await fetchVolume();
-  const ethereumPosition = await fetchEthereumPosition();
-  const swtPosition = await fetchSwtPosition();
-  const polygonPosition = await fetchPolygonPosition();
-  const bscPosition = await fetchBscPosition();
-  const hecoPosition = await fetchHecoPosition();
-  return {
-    totalVolumeTraded: new BigNumber(volume).toFixed(0),
-    fullyDilutedValuation: new BigNumber(2e9).times(price).toFixed(0),
-    ETH: ethereumPosition,
-    SWT: swtPosition,
-    POLYGON: polygonPosition,
-    BSC: bscPosition,
-    HECO: hecoPosition,
-  };
+  const res = await fetch({
+    url: "./config.json" + "?t=" + Date.now(),
+    methods: "get",
+  });
+  return res;
 };
 // whether polling, default true
 const polling = true;
