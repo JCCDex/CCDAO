@@ -1,21 +1,29 @@
 const fs = require("fs");
 const path = require("path");
 const file = path.join(__dirname, "..", "./public/config.json");
-const fetchTicker = require("./fetch-ticker");
 const fetchEthereumPosition = require("./fetch-ethereum-position");
 const fetchSwtPosition = require("./fetch-swt-position");
+const { fetchPrice, fetchVolume } = require("../scripts/fetch-ticker");
+const fetchBscPosition = require("./fetch-bsc-position");
+const fetchPolygonPosition = require("./fetch-polygon-position");
+const BigNumber = require("bignumber.js").default;
 
 const sync = async () => {
   try {
-    const ticker = await fetchTicker();
+    const price = await fetchPrice();
+    const volume = await fetchVolume();
     const ethereumPosition = await fetchEthereumPosition();
     const swtPosition = await fetchSwtPosition();
+    const polygonPosition = await fetchPolygonPosition();
+    const bscPosition = await fetchBscPosition();
 
     const data = {
-      totalVolumeTraded: ticker.totalVolumeTraded,
-      fullyDilutedValuation: ticker.fullyDilutedValuation,
-      ETH: ethereumPosition,
-      SWT: swtPosition,
+      totalVolumeTraded: new BigNumber(volume).toFixed(0),
+      fullyDilutedValuation: new BigNumber(2e9).times(price).toFixed(0),
+      ethereumPosition: ethereumPosition,
+      swtPosition,
+      bscPosition,
+      polygonPosition,
     };
     fs.writeFileSync(file, JSON.stringify(data, null, 2), "utf-8");
   } catch (error) {
