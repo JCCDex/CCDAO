@@ -9,4 +9,4 @@ npm run build
 
 # 拷贝到服务器
 
-rsync -avzr -e 'ssh -p 6422' dist/ front@58.243.201.56:/home/front/xubo/cross-chain-dao
+rsync -avzr -e 'ssh -p 6422' dist/ --exclude=dist/public/config.json front@58.243.201.56:/home/front/xubo/cross-chain-dao
