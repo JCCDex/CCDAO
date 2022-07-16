@@ -16,7 +16,7 @@
           <div class="blank"></div>
           <div>
             <div>{{ $t("message.Fully_Diluted_Valuation") }}</div>
-            <div class="value">{{ fullyDilutedValuation }}</div>
+            <div class="value">$ {{ fullyDilutedValuation }}</div>
           </div>
         </div>
       </div>

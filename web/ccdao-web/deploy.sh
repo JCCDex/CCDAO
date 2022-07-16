@@ -2,7 +2,7 @@
 cd `dirname $0`
 
 # 编译
-# npm run build
+npm run build
 
 # 移动favicon
 # mv dist/static/favicon.ico dist
