@@ -12,8 +12,13 @@
           </div>
           <div class="out" style="left: 0px">
             <div class="outbt">
-              <a href="" target="_blank" class="outbts">{{ $t("message.Twitter") }}</a>
-              <a href="" target="_blank" class="outbts">{{ $t("message.Discord") }}</a>
+              <a href="https://twitter.com/ccda_ooo" target="_blank" class="outbts">{{ $t("message.Twitter") }}</a>
+              <a
+                href="https://discord.com/channels/940892832808464427/1000201112177094686"
+                target="_blank"
+                class="outbts"
+                >{{ $t("message.Discord") }}</a
+              >
               <a href="" target="_blank" class="outbts">{{ $t("message.Telegram") }}</a>
             </div>
           </div>
