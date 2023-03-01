@@ -11,8 +11,16 @@
         <img v-show="isShowCommunity" class="sidebarupimg" src="../assets/sidebarupimg.svg" alt="" />
       </div>
       <div v-show="isShowCommunity" class="sidebarselects">
-        <a href="" target="_blank" class="sidebarselect" @click="downSidebar()">{{ $t("message.Twitter") }}</a>
-        <a href="" target="_blank" class="sidebarselect" @click="downSidebar()">{{ $t("message.Discord") }}</a>
+        <a href="https://twitter.com/ccda_ooo" target="_blank" class="sidebarselect" @click="downSidebar()">{{
+          $t("message.Twitter")
+        }}</a>
+        <a
+          href="https://discord.com/channels/940892832808464427/1000201112177094686"
+          target="_blank"
+          class="sidebarselect"
+          @click="downSidebar()"
+          >{{ $t("message.Discord") }}</a
+        >
         <a href="" target="_blank" class="sidebarselect" @click="downSidebar()">{{ $t("message.Telegram") }}</a>
       </div>
       <div class="sidebarbt between" @click="isShowCcdao = !isShowCcdao">
