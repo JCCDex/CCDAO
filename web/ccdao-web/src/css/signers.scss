@@ -11,6 +11,10 @@
       font-size: 40px;
       margin-top: 80px;
     }
+    .addbox {
+      width: 760px;
+      margin-top: 80px;
+    }
   }
 }
 @media (max-width: 1079px) and (min-width: 600px) {
@@ -25,6 +29,10 @@
       font-size: 30px;
       line-height: 64px;
     }
+    .addbox {
+      width: 580px;
+      margin-top: 50px;
+    }
   }
 }
 @media (max-width: 599px) and (min-width: 410px) {
@@ -37,6 +45,10 @@
     .iiuc {
       font-size: 23px;
       margin-top: 25px;
+    }
+    .addbox {
+      width: 340px;
+      margin-top: 50px;
     }
   }
 }
@@ -51,6 +63,10 @@
     .iiuc {
       font-size: 14px;
       margin-top: 10px;
+    }
+    .addbox {
+      width: 280px;
+      margin-top: 30px;
     }
   }
 }
@@ -72,5 +88,23 @@
   }
   .iiuc {
     color: rgba(195, 229, 251, 1);
+  }
+  .addbox {
+    height: 60px;
+    border-radius: 60px;
+    background: rgba(109, 197, 252, 1);
+    a {
+      color: rgba(255, 255, 255, 1);
+      height: 100%;
+      display: flex;
+      justify-content: space-between;
+      padding-left: 30px;
+      padding-right: 20px;
+      align-items: center;
+      font-size: 16px;
+    }
+    &:hover {
+      border: 1px solid rgba(255, 255, 255, 1);
+    }
   }
 }

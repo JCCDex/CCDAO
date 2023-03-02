@@ -9,38 +9,38 @@
           <div class="hold">
             <div class="holdbox">
               <img class="holdboximg" src="../assets/tag.svg" style="position: absolute" />
-              <p class="p2 p21">
-                {{ $t("message.ETH_chain_Positions") }}
-              </p>
-              <p class="p2 p22">{{ ethCcdao }}&nbsp;{{ $t("message.CCDAO") }}</p>
+              <div class="boxText">
+                <span class="text1">{{ $t("message.ETH_chain_Positions") }}</span>
+                <span class="text2">{{ ethCcdao }}&nbsp;{{ $t("message.CCDAO") }}</span>
+              </div>
             </div>
             <div class="holdbox holdboxplace">
               <img class="holdboximg" src="../assets/tag.svg" style="position: absolute" />
-              <p class="p2 p21">
-                {{ $t("message.SWTC_chain_Positions") }}
-              </p>
-              <p class="p2 p22">{{ swtcCcdao }}&nbsp;{{ $t("message.CCDAO") }}</p>
+              <div class="boxText">
+                <span class="text1">{{ $t("message.SWTC_chain_Positions") }}</span>
+                <span class="text2">{{ swtcCcdao }}&nbsp;{{ $t("message.CCDAO") }}</span>
+              </div>
             </div>
             <div class="holdbox holdboxplace">
               <img class="holdboximg" src="../assets/tag.svg" style="position: absolute" />
-              <p class="p2 p21">
-                {{ $t("message.Polygon_chain_Positions") }}
-              </p>
-              <p class="p2 p22">{{ polygonCcdao }}&nbsp;{{ $t("message.CCDAO") }}</p>
+              <div class="boxText">
+                <span class="text1">{{ $t("message.Polygon_chain_Positions") }}</span>
+                <span class="text2">{{ polygonCcdao }}&nbsp;{{ $t("message.CCDAO") }}</span>
+              </div>
             </div>
             <div class="holdbox holdboxplace">
               <img class="holdboximg" src="../assets/tag.svg" style="position: absolute" />
-              <p class="p2 p21">
-                {{ $t("message.BSC_chain_Positions") }}
-              </p>
-              <p class="p2 p22">{{ bscCcdao }}&nbsp;{{ $t("message.CCDAO") }}</p>
+              <div class="boxText">
+                <span class="text1">{{ $t("message.BSC_chain_Positions") }}</span>
+                <span class="text2">{{ bscCcdao }}&nbsp;{{ $t("message.CCDAO") }}</span>
+              </div>
             </div>
             <div class="holdbox holdboxplace">
               <img class="holdboximg" src="../assets/tag.svg" style="position: absolute" />
-              <p class="p2 p21">
-                {{ $t("message.HECO_chain_Positions") }}
-              </p>
-              <p class="p2 p22">{{ hecoCcdao }}&nbsp;{{ $t("message.CCDAO") }}</p>
+              <div class="boxText">
+                <span class="text1">{{ $t("message.HECO_chain_Positions") }}</span>
+                <span class="text2">{{ hecoCcdao }}&nbsp;{{ $t("message.CCDAO") }}</span>
+              </div>
             </div>
           </div>
         </div>
@@ -72,4 +72,12 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.boxText {
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 24px);
+  justify-content: space-between;
+  padding: 12px 0px;
+}
+</style>
