@@ -25,17 +25,15 @@
         width: 75.15px;
         height: 75.15px;
       }
-      .p21 {
-        margin: 0px;
-        margin-top: 5px;
+      .boxText {
         margin-left: 100px;
-        font-size: 15px;
-        line-height: 40px;
+        height: calc(100% - 24px);
+        padding: 12px 0px;
       }
-      .p22 {
-        margin: 0px;
-        margin-top: 40px;
-        margin-left: 100px;
+      .text1 {
+        font-size: 15px;
+      }
+      .text2 {
         font-size: 25px;
       }
     }
@@ -71,16 +69,15 @@
         width: 94.42px;
         height: 94.42px;
       }
-      .p21 {
-        margin: 0px;
+      .boxText {
         margin-left: 120px;
-        margin-top: 15px;
+        height: calc(100% - 24px);
+        padding: 12px 0px;
+      }
+      .text1 {
         font-size: 22px;
       }
-      .p22 {
-        margin: 0px;
-        margin-left: 120px;
-        margin-top: 48px;
+      .text2 {
         font-size: 32px;
       }
     }
@@ -116,16 +113,15 @@
         width: 63.95px;
         height: 63.95px;
       }
-      .p21 {
-        margin: 0px;
-        margin-top: 8px;
+      .boxText {
         margin-left: 80px;
+        height: calc(100% - 16px);
+        padding: 8px 0px;
+      }
+      .text1 {
         font-size: 15px;
       }
-      .p22 {
-        margin: 0px;
-        margin-top: 32px;
-        margin-left: 80px;
+      .text2 {
         font-size: 22px;
       }
     }
@@ -161,16 +157,15 @@
         width: 48.26px;
         height: 48.26px;
       }
-      .p21 {
-        margin: 0px;
+      .boxText {
         margin-left: 58px;
-        margin-top: 6px;
+        height: calc(100% - 12px);
+        padding: 6px 0px;
+      }
+      .text1 {
         font-size: 11px;
       }
-      .p22 {
-        margin: 0px;
-        margin-left: 58px;
-        margin-top: 22px;
+      .text2 {
         font-size: 17px;
       }
     }
@@ -216,5 +211,11 @@
     background-blend-mode: normal;
     border-radius: 110px;
     mix-blend-mode: normal;
+  }
+  .boxText {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: white;
   }
 }
