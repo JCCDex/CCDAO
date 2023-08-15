@@ -36,7 +36,7 @@
             </div>
           </div>
         </div>
-        <a href="/#membership" @click="before('#membership')"
+        <a href="#membership" @click="before('#membership')"
           ><div class="fbt2">{{ $t("message.Membership") }}</div></a
         >
         <a href="#multi" @click="before('#multi')"
