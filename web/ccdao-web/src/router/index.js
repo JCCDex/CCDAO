@@ -25,28 +25,14 @@ const routes = [
 
 const router = new VueRouter({
   routes,
-  scrollBehavior(to, from, savedPosition) {
-    // 如果有锚点，滚动到锚点位置
-    if (to.hash) {
-      return {
-        selector: to.hash,
-        behavior: "smooth", // 可选，平滑滚动效果
-      };
-    }
-    // 如果之前已经滚动到某个位置，恢复到之前的位置
-    if (savedPosition) {
-      return savedPosition;
-    }
-    // 默认滚动到顶部
-    return { x: 0, y: 0 };
-  },
 });
 
 router.beforeEach((to, from, next) => {
   if (!to.name) {
-    router.push("/");
+    next("/");
+  } else {
+    next();
   }
-  next();
 });
 
 export default router;
