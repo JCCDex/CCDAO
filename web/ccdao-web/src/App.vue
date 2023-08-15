@@ -2,42 +2,20 @@
   <div id="app">
     <Sidebar></Sidebar>
     <Header></Header>
-    <div class="roll">
-      <Netalter></Netalter>
-      <Wel></Wel>
-      <Holds></Holds>
-      <ToBuy></ToBuy>
-      <WebAdd></WebAdd>
-      <Member></Member>
-      <Signers></Signers>
-    </div>
+    <router-view></router-view>
     <Foot></Foot>
   </div>
 </template>
 
 <script>
 import Sidebar from "./components/Sidebar";
-import Netalter from "./components/Netalter";
 import Header from "./components/Header";
-import Wel from "./components/Wel";
-import Holds from "./components/Holds";
-import ToBuy from "./components/ToBuy";
-import WebAdd from "./components/WebAdd";
-import Member from "./components/Member";
-import Signers from "./components/Signers";
 import Foot from "./components/Foot";
 
 export default {
   components: {
     Sidebar,
-    Netalter,
     Header,
-    Wel,
-    Holds,
-    ToBuy,
-    WebAdd,
-    Member,
-    Signers,
     Foot,
   },
 };

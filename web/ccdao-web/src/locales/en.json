@@ -60,5 +60,784 @@
   "My_Wallet": "My Wallet",
   "issuer": "(Issuer:jGa9J9TkqtBcUoHe2zqhVFFbgUVED6o9or)",
   "Network_Error": "Network Error！",
-  "Please_switch_to_the_Ethernet_Network": "Please switch to the Ethernet Network～"
+  "Please_switch_to_the_Ethernet_Network": "Please switch to the Ethereum Network～",
+  "Connector": "Connector",
+  "connector_explain": "A set of mnemonics, multiple blockchain networks, and unlimited accounts.",
+  "just_one_plugin": "Just one plugin.",
+  "terms_of_service": "Terms of Service",
+  "privacy_policy": "Privacy Policy",
+  "TermOfService": {
+    "title": "《CCDAO Terms of Service》",
+    "time": "Last Updated: Aug 10, 2023.",
+    "content": [
+      [
+        "Dear User,",
+        "Thank you for choosing CCDAO. This CCDAO Terms of Service (“Agreement”) is made between you (“you” or “User”) and CCDAO Foundation Ltd. (“CCDAO” or “we”) and is legally binding between you and CCDAO."
+      ],
+      [
+        "CCDAO hereby reminds you that you must carefully read the full content of this Agreement and other documents mentioned in this Agreement before using CCDAO (“CCDAO” or “App”). Particularly, you must carefully read the section of “Disclaimer and Limitation of Liability” and other sections which are displayed in bold. You must make sure that you fully understand the whole Agreement and evaluate the risks of using CCDAO on your own. In addition, CCDAO can be downloaded on mobile application platforms, including but not limited to Google Play and App Store."
+      ],
+      [
+        "I. Confirmation and Acceptance of this Agreement",
+        "1.1 You understand that this Agreement and other relevant documents apply to CCDAO and the Decentralized Applications (“DApps”) which are developed and owned independently by CCDAO on CCDAO (and excluding DApps developed by third parties).",
+        "1.2 After you download CCDAO and start to create or import wallet, you are deemed as having read and accepted this Agreement, which shall cause this Agreement to become effective and legally binding on both you and CCDAO immediately.",
+        "1.3 CCDAO may, at its sole discretion, modify or replace this Agreement at any time. The modified Agreement will automatically take effect once it is posted on CCDAO and you will not be notified separately. If you do not agree with the modifications, you shall cease to use CCDAO immediately. Use of CCDAO by you after any modification to this Agreement constitutes your acceptance of this Agreement as modified.",
+        "1.4 If you are under 18 years old or you are a person of no capacity for civil acts or a person of limited capacity for civil acts, please use CCDAO under the guidance of your parents or guardians."
+      ],
+      [
+        "II. Definition",
+        "2.1 CCDAO: The blockchain wallet developed by CCDAO based on BTC /ETH /BSC /HECO /TRON /Polkadot /Kusama /EOS /COSMOS /BOS /ENU /MOAC /IOST and other blockchain systems which CCDAO may support in the future, and other supporting tools which are developed for the convenience of the Users when using blockchain systems.",
+        "2.2 User: a) a User must be a natural person who possesses full capacity for civil acts; b) if you are under 18 years old, please use CCDAO under the guidance of your parents or guardians. If any person of no capacity for civil acts conducts any transactions on CCDAO or any person of limited capacity for civil acts conducts any transaction which does not commensurate his/her civil rights or act capacity, the parents or guardians of the User shall be liable for the consequences of such transactions.",
+        "2.3 Excluded Person: a) except for natural persons, persons who have the legal and consciousness ability to conclude this Agreement; or b) users who are prohibited, restricted, unauthorized or unqualified to use the service (as defined in this Agreement) ) in any form or method (in whole or in part) due to this Agreement, laws, regulatory requirements, or the provisions of the jurisdiction applicable to the user. For the avoidance of doubt, Chinese Users are also regarded as \"Excluded Person\". 2.4 Terms:",
+        {
+          "value": "a) Create or import wallet: Using CCDAO to create or import wallet after you accept this Agreement.",
+          "indent": true
+        },
+        {
+          "value": "b) Wallet Password: The password you set when you create the wallet. The Wallet Password will be used to encrypt and protect your Private Key. CCDAO, as a decentralized application, will not store your Wallet Password on our servers, nor will your Wallet Password be stored in your own mobile devices. If you lose or forget your Wallet Password, you will have to reset the Wallet Password with your Private Key or Mnemonic Words.Reminder: It is recommended that Users follow the relevant steps for the information prompts involved in the CCDAO operating interface.",
+          "indent": true
+        },
+        {
+          "value": "c) Specific Users: Users who should cooperate with CCDAO and disclose Personal Information in order to comply with the laws, regulations and policies of Singapore.",
+          "indent": true
+        },
+        {
+          "value": "d) Private Key: Consists of 256 random bits. Private Key is the core for the User to hold and use the Tokens.",
+          "indent": true
+        },
+        {
+          "value": "e) Public Key: Public key is derived from the Private Key based on cryptography and is used to generate wallet addresses. A wallet address is a public address for reception of Tokens.",
+          "indent": true
+        },
+        {
+          "value": "f) Mnemonic Words: Consists of 12 (or 15/18/21/24) words which are randomly generated, and it is based on BIP39, the industry standard of blockchain. It is a human readable format of words to back up your Private Key for recovery.",
+          "indent": true
+        },
+        {
+          "value": "g) Keystore: A file that is encrypted by Private Key or Mnemonic Words and protected by the User’s Wallet Password. Keystore is stored only in Users’ mobile device and will not be synchronized to CCDAO servers.",
+          "indent": true
+        },
+        {
+          "value": "h) Tokens: The tokens which are supported by CCDAO currently, including but not limited to ETH, EOS and so on.",
+          "indent": true
+        },
+        {
+          "value": "i) Materials: Contents in the columns of “News”, etc. on CCDAO. The Materials are CCDAO’ proprietary properties. User shall not reproduce or distribute the materials without CCDAO’ permission and authorization.",
+          "indent": true
+        },
+        {
+          "value": "j) Personal Information: Means information recorded in electronic or any other form which may identify a natural person when used alone or in combination with other information, including but not limited to name, date of birth, identification card number, personal biological identification information, address, telephone number, bank card number, email address, wallet address, mobile device information, operation record, transaction record, but excluding Wallet Password, Private Key, Mnemonic Words and Keystore.",
+          "indent": true
+        },
+        {
+          "value": "k) PRC: The People’s Republic of China, including Hong Kong, Macau and Taiwan.",
+          "indent": true
+        },
+        {
+          "value": "l) Third-party services: Products and services provided by third parties such as third-party DApps, third-party DeFi, third-party smart contracts, third-party open source agreements, third-party web pages, third-party hardware wallets, third-party online web wallets, third-party exchanges, etc.",
+          "indent": true
+        }
+      ],
+      [
+        "III. Services",
+        "3.1 Create or import wallet. You may use CCDAO to create a new wallet or import wallets generated by other wallet application. You may only import wallets with Tokens which are supported by CCDAO.",
+        "3.2 Transfer and receive Tokens. You may manage your digital Tokens by using the transfer and reception functions of CCDAO, i.e., you may revise the blockchain ledger by signing with your Private Key. Tokens Transfer means the payer transfer the Token to the blockchain address of the payee. The actual transfer of Tokens happens on the blockchain system (instead of on CCDAO).",
+        "3.3 Observe the market. You may use CCDAO to observe the market of the Tokens supported by CCDAO. The quotation of each Token is captured by CCDAO from corresponding exchange and is displayed in the “Markets” column on CCDAO.",
+        "3.4 Manage Tokens. You may use CCDAO to add, manage or delete the Tokens supported by CCDAO.Browse DApps. Users may use CCDAO to visit and use the services provided by DApps (including DApps developed by CCDAO and DApps developed by third parties).",
+        "3.5 Browse the DApp. Users can link to the DApp and use the services provided by the DApp (including CCDAO own DApps and third-party DApps) through the link on CCDAO.",
+        "3.6 Transaction records. We will copy all or part of your transaction records from the blockchain system. However, Users shall refer to the blockchain system for the latest transaction records.",
+        "3.7 Suspension of service. You understand that we are not able to reverse or cancel the transaction because transactions based on blockchain technologies are irrevocable. However, under certain circumstances, we may suspend or limit the function of CCDAO used by a particular User.",
+        "3.8 The mobile phone number, email address, and the added Owner’s authority required in the registration of CCDAO (the effective decentralized solution under the EOS system) belong to CCDAO. We will issue you a special note when the registration begins. If you choose to use the function, you are treated as having agreed to and recognized all terms.During the registration using the CCDAO mobile phone number and email address (the effective decentralized solution under the EOS system), your mobile phone or email address will be collected as a voucher. The multiple-signature authority of Owner will be added by default to facilitate the retrieval of the private key.In the registration method using the mobile phone and email address (the effective decentralized solution under the EOS system), we will impose the multiple-signature setting to CCDAO Owner authority to safeguard users’ authority security to the greatest extent. Additionally, the block information is traceable, which enables the largest openness and transparency. The initiator of every operation on the account can be checked.",
+        "3.9 Token exchange. Users can exchange tokens with third-party smart contracts or third-party DEXs. As an interface tool, CCDAO is used to help users interact with third parties and display the corresponding results of the token exchange.",
+        "3.10 Other services that CCDAO would like to provide."
+      ],
+      [
+        "IV. Users who use CCDAO must understand that:",
+        "4.1 In order to keep the decentralization feature of blockchain and to protect the security of your digital Tokens, CCDAO offers decentralized service which is largely different from the banking and financial institutions. Users shall understand that CCDAO (the decentralized solution) DOES NOT provide the following services:",
+        {
+          "value": "a) store Users’ Wallet Password (the password Users set when creating or importing wallets), Private Key, Mnemonic Words or Keystore;",
+          "indent": true
+        },
+        {
+          "value": "b) restore Users’ Wallet Password, Private Key, Mnemonic Words or Keystore;",
+          "indent": true
+        },
+        {
+          "value": "c) freeze the wallet;",
+          "indent": true
+        },
+        {
+          "value": "d) report the loss of wallet;",
+          "indent": true
+        },
+        {
+          "value": "e) restore the wallet;",
+          "indent": true
+        },
+        {
+          "value": "f) rollback transactions.",
+          "indent": true
+        },
+        "4.2 Users shall take care of their mobile devices, back up the CCDAO App, and back up the Wallet Password, Mnemonic Words, Private Key and Keystore by themselves. If your mobile device is lost, your CCDAO App or your wallet is deleted and not backed up, your wallet is stolen or you forget your Wallet Password, Private Key, Mnemonic Words or Keystore, CCDAO is not able to recover the wallet or restore Wallet Password, Private Key, Mnemonic Words or Keystore. Nor can CCDAO cancel transactions for the mishandling of Users (such as typing in wrong addresses for transactions).",
+        "4.3 CCDAO does not support all existing Tokens. Do not use CCDAO to handle any non-supported Tokens.",
+        "4.4 CCDAO is only a tool for Users to manage their Tokens and is not an exchange or a trading platform. For the purpose of this Agreement, the word “transactions” only means transferring and receiving Tokens, which is substantially different from transactions on the exchanges and trading platforms.",
+        "4.5 The DApps integrated into CCDAO include those developed independently by CCDAO and those developed by third parties. CCDAO only acts as a blockchain browser for those third-party-developed DApps. Users shall, at their sole discretion, decide whether there would be any risks to accept the services provided by or to conduct transactions on the third-party-developed DApps."
+      ],
+      [
+        "V. Your Rights and Obligations",
+        "5.1 Create or Import Wallet",
+        {
+          "value": "a) Create or import wallet: you are entitled to use CCDAO on your mobile device to create and/or import wallet, set Wallet Password and use your wallet on CCDAO to transfer and receive Tokens on blockchain.",
+          "indent": true
+        },
+        {
+          "value": "b) Identification verification: Specific Users will be asked to complete identification verification before using CCDAO to comply with related laws and regulations, according to the notification of CCDAO. Specific Users may be asked to provide Personal Information including but not limited to name, identification card number, cell phone number, bank card information, etc., without which the Specific Users will not be able to use certain services and the Specific Users alone shall be responsible for the loss caused by their delay in completing the verification.",
+          "indent": true
+        },
+        {
+          "value": "c) CCDAO may develop different versions of CCDAO for different terminal devices. You shall download and install applicable version. If you download and install CCDAO or other application with the same name as “CCDAO” from any unauthorized third party, CCDAO cannot guarantee the normal operation or security of such application. Any loss caused by using such application shall be borne by you.",
+          "indent": true
+        },
+        {
+          "value": "d) A previous version of CCDAO may stop to operate after a new version is released. CCDAO cannot guarantee the security, continuous operation or customer services for the previous version. Users shall download and use the latest version.",
+          "indent": true
+        },
+        "5.2 Use of CCDAO",
+        {
+          "value": "a) Users shall take care of their mobile devices, Wallet Password, Private Key, Mnemonic Words and Keystore by themselves. CCDAO does not store or hold the above information for Users. You shall be responsible for any risks, liabilities, losses and expenses which result from frauds, you losing your mobile device, disclosing (whether actively or passively) or forgetting Wallet Password, Private Key, Mnemonic Words or Keystore, or your wallet being attacked.",
+          "indent": true
+        },
+        {
+          "value": "b) Follow the Alert. You understand and agree to follow the Alert pushed by CCDAO. You shall be responsible for any risks, liabilities, losses and expenses which result from your failure to comply with the Alert.",
+          "indent": true
+        },
+        {
+          "value": "c) You understand that CCDAO undertakes no responsibility to conduct due diligence on the services or transactions provided by third-party-developed DApps. You shall make investment decisions rationally and assume the risks by yourself.",
+          "indent": true
+        },
+        {
+          "value": "d) Complete the identification verification. If CCDAO reasonably deems your operation or transactions to be abnormal, or considers your identification to be doubtful, or CCDAO considers it necessary to verify your identification documents or other necessary documents, you shall cooperate with CCDAO and provide your valid identification documents or other necessary documents and complete the identification verification in time.",
+          "indent": true
+        },
+        {
+          "value": "e) With the registration method using CCDAO mobile phone number and email address (the effective decentralized solution under the EOS system), you can choose to export the private key functions to better manage your account. You are also informed that you can delete the multiple-signature Owner authority added by default and that CCDAO can no longer help you recover the private key if the authority aforementioned is deleted.",
+          "indent": true
+        },
+        "5.3 Transfer of Tokens",
+        {
+          "value": "a) You understand that you may be subject to daily limits on the amount and times of transfers according to your location, regulatory requirements, transferring purposes, risk control by CCDAO, or identification verification.",
+          "indent": true
+        },
+        {
+          "value": "b) You understand that blockchain operations are “irrevocable”. When you use CCDAO to transfer Tokens, you shall be responsible for the consequences of your mishandling of the transfer (including but not limited to wrong address, problems of the node servers selected by you).",
+          "indent": true
+        },
+        {
+          "value": "c) You understand that the following reasons may result in “transfer failed” or “mining overtime”",
+          "indent": true
+        },
+        {
+          "value": "a. insufficient balance in wallet;",
+          "indent2": true
+        },
+        {
+          "value": "b. insufficient gas for transaction;",
+          "indent2": true
+        },
+        {
+          "value": "c. blockchain’s failure to execute the code of smart contracts;",
+          "indent2": true
+        },
+        {
+          "value": "d. the transfer amount exceeds the transfer limits imposed by authorities, CCDAO or laws or regulations;",
+          "indent2": true
+        },
+        {
+          "value": "e. technical failure of the network or equipment;",
+          "indent2": true
+        },
+        {
+          "value": "f. abandoned transactions result from blockchain network congestion or failure;",
+          "indent2": true
+        },
+        {
+          "value": "g. the wallet address of yours or your counterparty’s is identified as special addresses, such as high-risk address, exchange address, ICO address, Token address etc.",
+          "indent2": true
+        },
+        {
+          "value": "d) You understand that CCDAO is only a tool for transfer of Tokens. CCDAO shall be deemed to have fulfilled its obligations once you have finished the transfer and shall not be held liable for any other disputes.",
+          "indent": true
+        },
+        {
+          "value": "e) Compliance. You understand that you shall abide by relevant laws, regulations and policies when you use CCDAO or the DApps on CCDAO.",
+          "indent": true
+        },
+        {
+          "value": "f) Notifications. CCDAO may send notifications to you by web announcements, e-mails, text messages, phone calls, Notification Centre information, popup tips or client-end notices (e.g., information about your transfer or suggestions on certain operations) which you shall be aware of timely.",
+          "indent": true
+        },
+        "5.4 Service fees and taxes.",
+        {
+          "value": "a) CCDAO does not charge you any service fees or handling fees for the time being. CCDAO may reach an agreement with you or announce rules regarding service fees in the future;",
+          "indent": true
+        },
+        {
+          "value": "b) You need to pay gas when you transfer Tokens, the amount of which would be on your sole discretion and would be collected by certain blockchain system;",
+          "indent": true
+        },
+        {
+          "value": "c) You understand that under some specific circumstances, your transfer of Tokens may fail due to instable network, but you may still be charged gas by certain blockchain system;",
+          "indent": true
+        },
+        {
+          "value": "d) You shall bear all the applicable taxes and other expenses occurred due to your transactions on CCDAO.",
+          "indent": true
+        }
+      ],
+      [
+        "VI. Risks",
+        "6.1 You understand and acknowledge that the blockchain technology is a field of innovation where the laws and regulations are not fully established. You may be faced with material risks including instability of technology or failure of Tokens redemption. You also understand that Tokens have much higher volatility comparing to other financial assets. You shall make investment decisions and hold or dispose of the Tokens in a reasonable way and corresponding to your financial status and risk preferences. You also acknowledge that the market information is captured from exchanges by CCDAO and may not represent the latest or the best quotation of each Token.",
+        "6.2 If you or your counterparty fails to comply with this Agreement or fails to follow the instructions, tips or rules on the website or on the page of the transaction or payment, CCDAO does not guarantee successful transfer of the Tokens and CCDAO shall not be held liable for any of the consequences of such failure. If you or your counterparty has already received the payment in CCDAO wallet or third-party wallet, you understand that transactions on blockchain are irreversible and irrevocable. You and your counterparty shall assume the liabilities and consequences of your transactions.",
+        "6.3 You understand that blockchain operations and related transactions are irreversible. CCDAO shall not be held liable for the corresponding risks and consequences.",
+        "6.4 When you use third-party-developed DApps integrated in CCDAO, CCDAO strongly suggest you read this Agreement and CCDAO’s Alert carefully, get familiar with the counterparty and the product information and evaluate the risks before you make transactions on such DApps.",
+        "6.5 You understand that such transactions and corresponding contractual relationship are between you and your counterparty. CCDAO shall not be held liable for any risks, responsibilities, losses or expenses occurred due to such transactions.",
+        "6.6 It is your sole responsibility to make sure that your counterparty is a person with full capacity for civil acts and decide whether you shall transact with him/her.",
+        "6.7 You shall check the official blockchain system or other blockchain tools when you receive Alert such as “transaction failed” or “mining overtime” in order to avoid repetitive transfer. If you fail to follow this instruction, you shall bear the losses and expenses occurred due to such repetitive transfer.",
+        "6.8 You understand that after you create or import wallet on CCDAO, your Keystore, Private Key and Mnemonic Words are only stored on your mobile device and will not be stored in CCDAO or on the servers of CCDAO. You may change another mobile device to use CCDAO after you follow the instructions on CCDAO to backup your wallet. If you lose your mobile device before you could write down or backup your Wallet Password, Private Key, Mnemonic Words or Keystore, you may lose your Tokens and CCDAO is unable to restore them. If your Wallet Password, Private Key, Mnemonic Words or Keystore is disclosed or the device which stores or holds your Wallet Password, Private Key, Mnemonic Words or Keystore is hacked or attacked, you may lose your Tokens and CCDAO is unable to restore them. You shall bear the foregoing losses on your own.",
+        "6.9 We suggest you backup your Wallet Password, Private Key, Mnemonic Words and Keystore when you create or import wallet by writing them down on papers or backup them in password management apps. Please do not use electronic methods such as screenshots, e-mails, note-taking apps in cell phones, text messages, WeChat or QQ to backup any of the above information.",
+        "6.10 In order to avoid potential security risks, we suggest you use CCDAO in a secured network environment. Please do not use a jailbreak or Rooted mobile device.",
+        "6.11 Please be alert to frauds when you use CCDAO. If you find any suspicious conducts, we encourage you to inform us immediately."
+      ],
+      [
+        "VIl. Change, Suspension, Termination of CCDAO Service",
+        "7.1 You acknowledge and accept that CCDAO may, at its sole discretion, provide only a part of services for the time being, suspend certain services or provide new services in the future. When we change our services, your continuous use of CCDAO is deemed as your acceptance of this Agreement and revisions of this Agreement.",
+        "7.2 You understand that CCDAO may suspend services under the following circumstances:",
+        {
+          "value": "a) due to the maintenance, upgrading, failure of equipment and blockchain system and the interruption of communications etc., which lead to the suspension of the operation of CCDAO;",
+          "indent": true
+        },
+        {
+          "value": "b) due to force majeure events including but not limited to typhoon, earthquake, tsunami, flood, power outage, war, or terrorist attacks, or computer viruses, Trojan Horse, hacker attacks, system instability or government behaviors and other reasons, CCDAO is unable to provide services or in CCDAO’ reasonable opinion, continuous provision of services would result in significant risks;",
+          "indent": true
+        },
+        {
+          "value": "c) due to other events which CCDAO cannot control or reasonably predicate.",
+          "indent": true
+        },
+        {
+          "value": "d) CCDAO reserves the right to unilaterally suspend or terminate all or part of the function of CCDAO under the following circumstances:",
+          "indent": true
+        },
+        {
+          "value": "a. death of Users;",
+          "indent2": true
+        },
+        {
+          "value": "b. if you steal others’ wallets information or mobile devices;",
+          "indent2": true
+        },
+        {
+          "value": "c. if you provide false Personal Information on CCDAO or cheat on Questionnaire;",
+          "indent2": true
+        },
+        {
+          "value": "d. if you refuse to allow mandatory update of TokenPocket;",
+          "indent2": true
+        },
+        {
+          "value": "e. if you use CCDAO to commit illegal or criminal activities;",
+          "indent2": true
+        },
+        {
+          "value": "f. if you hinder the normal use of CCDAO by other Users;",
+          "indent2": true
+        },
+        {
+          "value": "g. if you pretend to be staff or management personnel of CCDAO;",
+          "indent2": true
+        },
+        {
+          "value": "h. if you threaten the normal operation of CCDAO computer system by attack, invasion, alternation or any other means;",
+          "indent2": true
+        },
+        {
+          "value": "i. if you use CCDAO to send spams;",
+          "indent2": true
+        },
+        {
+          "value": "j. if you spread rumors which endanger the goodwill of CCDAO and CCDAO;",
+          "indent2": true
+        },
+        {
+          "value": "k. if you conduct any illegal activities, breach this Agreement etc. or other circumstances under which CCDAO reasonably considers necessary to suspend services.",
+          "indent2": true
+        },
+        "7.3 You are entitled to export your wallets within a reasonable amount of time if CCDAO changes, suspends or terminates its services."
+      ],
+      [
+        "VIIl. Your Representations and Warranties",
+        "8.1 You shall comply with all applicable laws and regulations of the country or area you reside in. You shall not use CCDAO for any unlawful purposes or by any unlawful means.",
+        "8.2 You shall not use CCDAO to commit any illegal or unlawful activities, including but not limited to:",
+        {
+          "value": "a) activities opposing the basic principles set forth in the constitution, endangering national security, disclosing state secrets, overturning the government or undermining national unity;",
+          "indent": true
+        },
+        {
+          "value": "b) any illegal conducts, such as money laundering, illegal fund raising etc.;",
+          "indent": true
+        },
+        {
+          "value": "c) accessing CCDAO services, collecting or processing the content provided by CCDAO, intervening or attempting to intervene any Users, by the employment of any automated programs, software, network engines, web crawlers, web analytics tools, data mining tools or similar tools etc.;",
+          "indent": true
+        },
+        {
+          "value": "d) providing gambling information or inducing others to engage in gambling;",
+          "indent": true
+        },
+        {
+          "value": "e) invading into others’ CCDAO wallets to steal Tokens;",
+          "indent": true
+        },
+        {
+          "value": "f) engaging in any inaccurate or false transactions with the counterparty;",
+          "indent": true
+        },
+        {
+          "value": "g) committing any activities which harms or attempts to harm CCDAO service system and data;",
+          "indent": true
+        },
+        {
+          "value": "h) other activities which CCDAO has reason to believe are inappropriate.",
+          "indent": true
+        },
+        "8.3 You understand and accept that you shall be responsible for any violation of law (including but not limited to the regulations of the Customs and Tax) or for breach of this Agreement by you and shall indemnify CCDAO against the losses, the third-party claims or administrative penalties against CCDAO incurred by such violation or breach, including reasonable attorney’s fees.",
+        "8.4 You are not an Excluded Person who is eligible to use the CCDAO service.",
+        "8.5 You confirm that you will pay the service fees charged by CCDAO in time (if applicable). CCDAO reserves the right to suspend the services when the User fails to pay service fees (if applicable)."
+      ],
+      [
+        "IX. Privacy Policy",
+        "Your privacy is of utmost importance for CCDAO. Please refer to CCDAO Privacy Policy as updated by us from time to time for relevant privacy protection policies."
+      ],
+      [
+        "X. Disclaimer and Limitation of Liability",
+        "10.1 CCDAO only undertakes obligations expressly set forth in this Agreement.",
+        "10.2 YOU ACKNOWLEDGE AND ACCEPT THAT, TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, CCDAO IS PROVIDED ON AN “AS IS”, “AS AVAILABLE” AND “WITH ALL FAULTS” BASIS. CCDAO shall not be held liable for malfunction of CCDAO which results from the following reasons:",
+        {
+          "value": "a) system maintenance or upgrading of CCDAO;",
+          "indent": true
+        },
+        {
+          "value": "b) force majeure, such as typhoon, earthquake, flood, lightning or terrorist attack etc.;",
+          "indent": true
+        },
+        {
+          "value": "c) malfunction of your mobile device hardware and software, and failure of telecommunication lines and power supply lines;",
+          "indent": true
+        },
+        {
+          "value": "d) your improper, unauthorized or unrecognized use of CCDAO services;",
+          "indent": true
+        },
+        {
+          "value": "e) computer viruses, Trojan Horse, malicious program attacks, network congestion, system instability, system or equipment failure, telecommunication failure, power failure, banking issues, government acts etc.;",
+          "indent": true
+        },
+        {
+          "value": "f) any other reasons not imputed to CCDAO.",
+          "indent": true
+        },
+        "10.3 CCDAO shall not be held liable under the following circumstances:",
+        {
+          "value": "a) Users lose their mobile devices, delete CCDAO applications and wallets without back-up, forget Wallet Passwords, Private Keys, Mnemonic Words, Keystores without back-up, which result in the loss of their Tokens;",
+          "indent": true
+        },
+        {
+          "value": "b) Users disclose their Wallet Passwords, Private Keys, Mnemonic Words, Keystores, or lend or transfer their CCDAO wallets to others, or authorize others to use their mobile devices or CCDAO wallets, or download CCDAO applications through unofficial channels, or use CCDAO applications by other insecure means, which result in the loss of their Tokens;",
+          "indent": true
+        },
+        {
+          "value": "c) Users mishandle CCDAO (including but not limited to wrong address, failure of the node servers selected by you), which result in the loss of Tokens;",
+          "indent": true
+        },
+        {
+          "value": "d) Users are unfamiliar with the knowledge of blockchain and their mishandling of CCDAO results in loss of their Tokens;",
+          "indent": true
+        },
+        {
+          "value": "e) CCDAO is unable to copy accurate transaction records due to system delay or blockchain instability etc.;",
+          "indent": true
+        },
+        "10.4 Under the registration method using CCDAO mobile phone number and email address (the effective decentralized solution under the EOS system), users can choose to export the private key. The property damage arising from loss or stolen private key after the user changes the authority of Owner and Active shall not be borne by CCDAO in any way.",
+        "10.5 Under the default mode of the registration method using CCDAO mobile phone number and email address (the effective decentralized solution under the EOS system), if the private key cannot be retrieved through mobile phone number due to the user’s causes (such as the user cannot gain a new SIM card), CCDAO will not provide the service to retrieve the private key.",
+        "10.6 Property loss caused by users themselves (including but not limited to loss of mobile phone number, email address, the disclosure of the verification code, publication of the private key by the user, and the user’s personal information being hacked) shall not be borne by CCDAO in any way.",
+        "10.7 Users shall undertake the risks and consequences of their transactions on the third-party-developed DApps.You understand that CCDAO is only an management tool for Tokens which is incapable to control the quality, security and legitimacy of products and services provided by the third-party-developed DApps, or the authenticity and accuracy of their information and their capabilities to fulfill the obligations under the agreements with you. You, at your sole discretion, decide whether to transact on the third-party-developed DApps. It is the third-party-developed DApps, instead of CCDAO, that transact with you. We kindly remind you to carefully review the authenticity, legitimacy, and effectiveness of related information provided by the third-party-developed DApps before you decide to use the DApps. In addition, you shall also assume all the risks arising from the transactions between you and any third party exchanges."
+      ],
+      [
+        "You acknowledge that CCDAO may provide services to you and your counterparties simultaneously and you agree to waive any actual or potential conflicts of interests and will not claim against CCDAO on such base or burden CCDAO with more responsibilities or duty of care."
+      ],
+      [
+        "XI. CCDAO does not warrant that:",
+        "a) services provided by CCDAO would satisfy all your needs;",
+        "b) all techniques, products, services, information or other materials from CCDAO would meet your expectations;",
+        "c) all the transaction information in digital tokens markets captured from the third party exchanges are prompt, accurate, complete, and reliable;",
+        "d) your counterparties on CCDAO will perform their obligations in the transaction agreements with you timely.",
+        "e) in any case, the total liability for CCDAO under this Agreement shall not exceed the greater of:",
+        {
+          "value": "a. 0.1 Ether; or",
+          "indent": true
+        },
+        {
+          "value": "b. 100 SGD, higher value shall prevail.",
+          "indent": true
+        },
+        "11.1 You are aware that CCDAO is only a tool for Users to manage their Tokens and to display transaction information. CCDAO does not provide legal, tax or investment advice. You shall seek advice from professional legal, tax, and investment advisors. In addition, CCDAO shall not be liable for any investment loss, data loss etc. during your use of our service.",
+        "11.2 You understand that we may change our entry standards, limit the range and ways to provide services for specific Users etc. at any time in accordance with relevant laws and regulations."
+      ],
+      [
+        "XII. Entire Agreement",
+        "12.1 This Agreement incorporates CCDAO Terms of Service, CCDAO Privacy Policy, and other rules (including contents in the “Support” column) posted by CCDAO from time to time.",
+        "12.2 If any provision of this Agreement is found by a court with competent jurisdiction to be invalid, the other provisions of this Agreement remain in full force and effect.",
+        "12.3 This English version and other translated version of this Agreement (if any) are provided for the convenience of Users, and are not intended to revise the Chinese version of this Agreement. If there is any discrepancy between the Chinese version and non-Chinese version of this Agreement, the Chinese version shall prevail."
+      ],
+      [
+        "XIll. Intellectual Property Rights Protection",
+        "CCDAO is an application developed and owned by CCDAO. The intellectual property rights of any contents displayed in CCDAO (including this Agreement, announcements, articles, videos, audios, images, archives, information, materials, trademarks or logos) are owned by CCDAO or the third party licensors. Users can only use the CCDAO applications and its contents for the purpose of holding and managing their Tokens. In particular, without prior written consent from CCDAO or the third party licensors, no one shall use, modify, decompile, reproduce, publicly disseminate, alter, distribute, issue or publicly publish the abovementioned applications and contents."
+      ],
+      [
+        "XIV. Governing Law and Dispute Resolution",
+        "14.1 The validity, interpretation, alternation, enforcement, dispute resolution of this Agreement and its revised versions shall be governed and construed in accordance with the CCDAO's national laws. Where there is no applicable law, this Agreement shall be interpreted by applicable commercial and/or industrial practices.",
+        "14.2 If any dispute or claim in connection with this Agreement arises between you and CCDAO, the parties shall first attempt to resolve the dispute or claim through amicable negotiations in good faith. If the parties cannot reach an agreement, either party may sue the other party at the competent court where CCDAO is located."
+      ],
+      [
+        "XV. Miscellaneous",
+        "15.1 If you live outside of Singapore, you shall fully understand and conform to the laws, regulations and rules in your jurisdictions which are relevant to use of CCDAO services.",
+        "15.2 During your use of CCDAO services, if you come across any problems, you can contact us through the submission of your feedbacks on CCDAO.",
+        "15.3 This Agreement is accessible for all Users on CCDAO. We encourage you to read this Agreement each time you log onto CCDAO.This Agreement shall become effective on January 10th, 2018."
+      ],
+      [
+        "As for any issues not covered in this Agreement, you shall comply with the announcements and relevant rules as updated by CCDAO from time to time."
+      ]
+    ]
+  },
+  "PrivacyPolicy": {
+    "title": "《CCDAO Privacy Policy》",
+    "time": "Last Updated: Aug 10, 2023.",
+    "content": [
+      [
+        "Dear Users,",
+        "CCDAO community(“CCDAO” or “we”) respects and protects the privacy of Users (“you” or “Users”). We will collect and use your Personal Information, generated from your use of CCDAO in accordance with this Privacy Policy (“Policy”).",
+        "CCDAO recommends that you shall carefully read and understand the whole contents of this Policy before your use of the product (“CCDAO”). Additionally, significant information including the Disclaimer is in bold form in this Policy. Definitions of key words in this Policy are consistent with those in the CCDAO Terms of Service of CCDAO."
+      ],
+      [
+        "CCDAO reserves the right to update this Policy online from time to time, and the new policy will immediately replace the older one once posted. In particular, if you do not accept the revised policies, please immediately stop your use of CCDAO. Your continuous use of CCDAO will be regarded as your acceptance of the revised policy. Furthermore, the revised policies will take into effect immediately upon being posted on CCDAO.",
+        "You acknowledge and accept that this Policy and other relevant rules apply to CCDAO and the DApps owned by CCDAO community on CCDAO."
+      ],
+      [
+        "Information We Collect",
+        "We collect your information in order to provide the services you requested on CCDAO, and we highly value the protection for your privacy. We strictly abide by the principle of “lawful, justifiable and necessary” during our collection of your information. You acknowledge that, if you do not provide us with necessary information, your user experiences on CCDAO may be influenced.We may collect your Personal Information, including but not limited to your mobile device information, operation records, transaction records and wallet addresses.",
+        {
+          "value": "1.1 In order to satisfy your needs for specific services, we may collect your name, bank card number, telephone number (Mobile phone number registration method), email address (Email registration method), etc.",
+          "indent": true
+        },
+        {
+          "value": "1.2 You confirm that your Wallet Password, Private Key, Mnemonic Words, Keystore on CCDAO (the decentralized solution) are not stored or synchronized on CCDAO’ servers. CCDAO does not offer the service to restore your Wallet Password, Private Key, Mnemonic Words or Keystore.",
+          "indent": true
+        },
+        {
+          "value": "1.3 Apart from the foregoing provisions, when you are using specific function of CCDAO, we may give you special notification to ask for more Personal Information.",
+          "indent": true
+        },
+        {
+          "value": "1.4 After you link to the third-party-developed DApps from CCDAO, your Personal Information will be collected and held by the third-party-developed DApps instead of being collected or held by CCDAO. When you fill in your Personal Information on a third-party-developed DApp, you should pay attention to the Terms of Use and Privacy Policy of the third-party-developed DApp. We are not accountable for any losses caused by your operation on the third-party-developed DApp.",
+          "indent": true
+        },
+        {
+          "value": "1.5 To the extent permitted by laws and regulations, CCDAO may collect and use following Personal Information without your prior consent or authorization:",
+          "indent": true
+        },
+        {
+          "value": "a. information related to national security and national defense;",
+          "indent2": true
+        },
+        {
+          "value": "b. information related to public security, public health, significant public interests;",
+          "indent2": true
+        },
+        {
+          "value": "c. information related to criminal investigation, prosecution, trial and enforcement;",
+          "indent2": true
+        },
+        {
+          "value": "d. the Personal Information collected is publicized by yourself;",
+          "indent2": true
+        },
+        {
+          "value": "e. the Personal Information is collected from legally publicly disclosed information, such as legal news reports, government information disclosure and other channels;",
+          "indent2": true
+        },
+        {
+          "value": "f. the Personal Information is necessary to maintain the security and compliance of services, such as to detect or to solve the malfunction of products and services;",
+          "indent2": true
+        },
+        {
+          "value": "g. other circumstances prescribed by laws and regulations. We collect information in the following ways:",
+          "indent2": true
+        },
+        {
+          "value": "1). Information you give us. For example, you fill in your name, telephone number, or bank card number in “My Account” column or you provide your email address when submitting feedbacks, or you give extra information to us when you use our specific services.",
+          "indent3": true
+        },
+        {
+          "value": "2). we collect information during your use of CCDAO, including your mobile devices information and your operation records on CCDAO, etc.",
+          "indent3": true
+        }
+      ],
+      [
+        "How We Use Your Information",
+        {
+          "value": "2.1 We may associate you with your wallet by the unique serial number of your mobile device.",
+          "indent": true
+        },
+        {
+          "value": "2.2 We may promptly push important notifications to you, such as software update, update of Terms of Service and this Policy.",
+          "indent": true
+        },
+        {
+          "value": "2.3 We offer you the “Touch ID” option in the “Settings” column of CCDAO to provide you with a convenient and safe way to manage your digital Tokens.",
+          "indent": true
+        },
+        {
+          "value": "2.4 We deal with your feedbacks by using the Wallet Address and the mobile device information provided by you.",
+          "indent": true
+        },
+        {
+          "value": "2.5 We may collect your Personal Information to conduct our internal audit, data analysis and research etc. to enhance our services.",
+          "indent": true
+        },
+        {
+          "value": "2.6 According to CCDAO Terms of Service and other rules of CCDAO, CCDAO will manage and handle the use behaviors of Users through Users’ information.",
+          "indent": true
+        },
+        {
+          "value": "2.7 We may use your information in accordance with laws, regulations and to cooperate with regulatory authorities.",
+          "indent": true
+        }
+      ],
+      [
+        "How You Control Your Own Information",
+        "You are entitled to control your Personal Information provided to CCDAO:",
+        {
+          "value": "3.1 You may import your other wallets into CCDAO through synchronization of wallets and you may export your wallets from CCDAO to other Tokens management wallets.",
+          "indent": true
+        },
+        {
+          "value": "3.2 CCDAO will display the information of imported wallets to you. You may add or delete Tokens, transfer and collect Tokens using the “Assets” column.",
+          "indent": true
+        },
+        {
+          "value": "3.3 You understand that you may handle the following operations in the “Me” column on CCDAO:",
+          "indent": true
+        },
+        {
+          "value": "a. in the “Address Book” column, you may view and edit your “Contacts”;",
+          "indent2": true
+        },
+        {
+          "value": "b. in the “Settings” column, you may choose not to open “Unlock Setting”, which means you may refuse to use the verification service to enter CCDAO;",
+          "indent2": true
+        },
+        {
+          "value": "c. in the “Profile” column, you do not have to provide your name, telephone number, bank card number information. But if you wish to use specific services, you may need to provide the foregoing information;",
+          "indent2": true
+        },
+        {
+          "value": "d. in the “Help” column, you may submit any questions or suggestions for CCDAO at any time. We are glad to communicate with you to improve our services.",
+          "indent2": true
+        },
+        {
+          "value": "3.4 When we collect information from you for a specific purpose, we will ask for your consent in advance to which you are entitled to refuse. However, you understand that when you refuse to give such consent, you also give up the choice to use specific services provided by CCDAO.",
+          "indent": true
+        },
+        {
+          "value": "3.5 You acknowledge that since blockchain is an open source system, your transaction records are automatically public and transparent in the whole blockchain.",
+          "indent": true
+        },
+        {
+          "value": "3.6 You understand that after you link to the third-party-developed DApps from CCDAO, the CCDAO Terms of Service and CCDAO Privacy Policy will no longer apply. You are encouraged to carefully review its privacy policies and related terms of service before you start to use the third-party-developed DApps.",
+          "indent": true
+        },
+        {
+          "value": "3.7 You are entitled to ask us to update, revise, and delete your relevant information.",
+          "indent": true
+        },
+        {
+          "value": "3.8 We reserve the right to collect your information without your prior authorization or consent according to the Article 7 of Section 1 of this Policy.",
+          "indent": true
+        }
+      ],
+      [
+        "Information We may Share or Transfer",
+        {
+          "value": "4.1 The Personal Information collected by CCDAO for business and legal purposes",
+          "indent": true
+        },
+        {
+          "value": "4.2 The Personal Information will not be sold, traded or transferred to the third parties without your consent.",
+          "indent": true
+        },
+        {
+          "value": "4.3 The Personal Information may be disclosed to these entities if you agree to our disclosure of the personal information to strategic partners or related parties. These entities will only use your personal information for the purposes you have agreed to.",
+          "indent": true
+        },
+        {
+          "value": "4.4 You agree that we may disclose or share your personal information to the following third parties:",
+          "indent": true
+        },
+        {
+          "value": "a. service providers and data processors who represent us and provide services to us, such as KYC inspections, accounting, data processing or management services, website hosting, maintenance and operation services, mail information services, analysis services, and payment transaction processing, marketing, etc.;",
+          "indent2": true
+        },
+        {
+          "value": "b. CCDAO consultants and professional consultants (such as accountants, lawyers, auditors).",
+          "indent2": true
+        },
+        {
+          "value": "4.5 The Personal Information may be transferred to any other country for the above-mentioned purposes. CCDAO will obtain your consent and ensure that the recipient of personal information has the same level of personal information protection measures as CCDAO. If there is no personal information protection law applicable to the relationship between CCDAO and you in these countries or regions, we will sign a legally enforceable agreement with the receivers of personal information.",
+          "indent": true
+        },
+        {
+          "value": "4.6 CCDAO will not share with or transfer your Personal Information to any third party without your prior consent, except for the following circumstances:",
+          "indent": true
+        },
+        {
+          "value": "a. the collected Personal Information is publicized by yourself;",
+          "indent2": true
+        },
+        {
+          "value": "b. the Personal Information is collected from public information which was legally disclosed, such as news (lawfully reported), government information disclosure and other channels;",
+          "indent2": true
+        },
+        {
+          "value": "c. we may share your Personal Information with our affiliates only when necessary and to the extent permitted by this Policy;",
+          "indent2": true
+        },
+        {
+          "value": "d. in order to abide by applicable laws, regulations, legal procedures, and administrative or judiciary authorities, CCDAO will provide or implement this Policy to protect our or other parties' rights, assets or security;",
+          "indent2": true
+        },
+        {
+          "value": "e. in the case of mergers and acquisitions, if transfer of Personal Information is involved, CCDAO may require the receivers of Personal Information to be continuously bound by this Policy.",
+          "indent2": true
+        }
+      ],
+      [
+        "How We Collect Data Automatically",
+        {
+          "value": "5.1 We use automatic data collection technology in the application. E.g:",
+          "indent": true
+        },
+        {
+          "value": "a. cookies (or browser cookies). Cookies are small text files set by the operator of a website or application to identify your browser or device. We may use cookies on our apps to store and track information, such as the number and frequency of use of users, user distribution, and users' online preferences. Cookies do not capture information that can identify you, but the information they collect can help us analyze the usage of the application to improve your experience. You can turn off cookies in your browser settings. However, this may affect the functionality of the application.",
+          "indent2": true
+        },
+        {
+          "value": "b. network analysis. Web analytics is a method of collecting and evaluating the operation of visitors to web pages and mobile applications. This includes analyzing traffic patterns, such as determining the frequency of visits to certain functions of a website or mobile application, or to understand the information or services that visitors are most interested in. We use network analysis services provided by third-party tools.",
+          "indent2": true
+        },
+        {
+          "value": "5.2 We use third-party SDK in the application. E.g:",
+          "indent": true
+        },
+        {
+          "value": "SDK name: Umeng SDK",
+          "indent2": true
+        },
+        {
+          "value": "Service type: analysis",
+          "indent2": true
+        },
+        {
+          "value": "Collected data type: Device information (it may involve Android ID/OpenUDID information, etc., we will ask for your authorization before collecting this information)",
+          "indent2": true
+        },
+        {
+          "value": "Privacy Policy Link: https://www.umeng.com/page/ policy",
+          "indent2": true
+        }
+      ],
+      [
+        "How We Protect Your Information",
+        {
+          "value": "6.1 If CCDAO terminates operation, CCDAO will stop the collection of your Personal Information in time, post the announcement on CCDAO and delete or anonymize your Personal Information held by us within a reasonable period.",
+          "indent": true
+        },
+        {
+          "value": "6.2 To protect your Personal Information, CCDAO may adopt data security techniques, improve internal compliance levels, provide security training for our staff, and set security authority for access to relevant data to protect your Personal Information.",
+          "indent": true
+        },
+        {
+          "value": "6.3 We will send you messages about information security in the “Wallet Guide” column and update articles concerning the use of wallets and information protection in the “Wallet Guide” column on CCDAO for your reference.",
+          "indent": true
+        }
+      ],
+      [
+        "Protection for the Minors",
+        "The following special provisions apply to minors who are under the age of 18 years old:",
+        {
+          "value": "7.1 The minors shall not use CCDAO without the guidance from their parents or guardians.",
+          "indent": true
+        },
+        {
+          "value": "7.2 The parents and guardians of the minors shall provide guidance to the minors on using CCDAO after they read this Policy, CCDAO Terms of Service and other relevant rules.",
+          "indent": true
+        },
+        {
+          "value": "7.3 CCDAO will ensure the confidentiality and security of the minors’ Personal Information in accordance with national laws and regulations.",
+          "indent": true
+        }
+      ],
+      [
+        "Disclaimer",
+        {
+          "value": "8.1 After you link to the third-party-developed DApps from CCDAO, the privacy policies of the third-party-developed DApps will apply. The collection and use of your Personal Information by the third-party-developed DApps will be controlled neither by CCDAO, nor by this Policy.",
+          "indent": true
+        },
+        {
+          "value": "8.2 You shall carefully select and use the third-party-developed DApps and protect your Personal Information. CCDAO shall not be held liable for the privacy protection obligation of any third-party-developed DApps.",
+          "indent": true
+        },
+        {
+          "value": "8.3 You acknowledge and accept that, to the maximum extent permitted by applicable law, CCDAO will adopt measures as reasonable as possible to protect your Personal Information under current techniques on an “as is”, “as available” and “with all faults” basis, to avoid the disclosure, tampering or damage of information. since CCDAO transfers data wirelessly, CCDAO makes no guarantee on the privacy and security of wireless internet data transferring.",
+          "indent": true
+        }
+      ],
+      [
+        "Miscellaneous",
+        {
+          "value": "9.1 As a company that provides services to you, we will not actively provide your Personal Information to third parties other than the agreement, unless we obtain your consent and inform the other party's identity, contact information, processing purpose, processing method, etc. If there is service demand of processing your personal sensitive information in the future, we will ask your opinions once again, and use it after obtaining your consent.",
+          "indent": true
+        },
+        {
+          "value": "9.2 If you are a user outside of Singapore, you shall fully understand and conform to the laws, regulations and rules in your jurisdictions which are relevant to use of CCDAO.",
+          "indent": true
+        },
+        {
+          "value": "9.3 During your use of CCDAO services, if you come across any problems related to your Personal Information use, you may contact us through the submission of your feedbacks on CCDAO.",
+          "indent": true
+        },
+        {
+          "value": "9.4 You may access this Policy and other service rules of CCDAO on CCDAO. We encourage you to check the Terms of Service and Privacy Policy of CCDAO each time you log into CCDAO.",
+          "indent": true
+        },
+        {
+          "value": "9.5 This English version and other translated versions of this Policy are provided for the convenience of Users, and are not intended to revise the original Chinese version of this Policy. If there is any discrepancy between the Chinese version and non-Chinese version of this Policy, the Chinese version shall prevail.",
+          "indent": true
+        }
+      ],
+      ["This Policy shall become effective on January 10, 2018."],
+      [
+        "As for any issues not covered in this Policy, you shall comply with the announcements and relevant rules as updated by CCDAO from time to time."
+      ]
+    ]
+  }
 }

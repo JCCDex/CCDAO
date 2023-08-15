@@ -11,6 +11,9 @@ import "./css/member.scss";
 import "./css/holds.scss";
 import "./css/header.scss";
 import "./css/foot.scss";
+import "./css/connector.scss";
+import "./css/term.scss";
+import router from "./router";
 
 Vue.config.productionTip = false;
 Vue.use(ElementUI);
@@ -99,5 +102,6 @@ if (window.ethereum) {
 new Vue({
   i18n,
   store,
+  router,
   render: (h) => h(App),
 }).$mount("#app");
