@@ -28,8 +28,8 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  if (!to.name) {
-    next("/");
+  if (!to.name && !to.hash) {
+    next({ path: "/", hash: to.path.replace("/", "#") });
   } else {
     next();
   }
