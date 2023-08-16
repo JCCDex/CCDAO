@@ -23,6 +23,31 @@ import Connector from "../components/Connector";
 
 export default {
   name: "home",
+  data() {
+    return {
+      anchor: "",
+    };
+  },
+  beforeRouteEnter(to, from, next) {
+    next((vm) => {
+      if (to.hash) {
+        vm.anchor = to.hash.replace("#", "");
+      }
+    });
+  },
+  watch: {
+    anchor(newValue, oleValue) {
+      setTimeout(() => {
+        const targetElement = document.getElementById(newValue);
+        if (targetElement) {
+          targetElement.scrollIntoView({
+            behavior: "smooth", // 平滑滚动
+            block: "start", // 滚动到目标元素的顶部
+          });
+        }
+      }, 100);
+    },
+  },
   components: {
     Netalter,
     Wel,
