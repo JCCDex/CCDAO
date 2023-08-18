@@ -86,9 +86,30 @@
       ],
       [
         "II. Definition",
-        "2.1 CCDAO: The blockchain wallet developed by CCDAO based on BTC /ETH /BSC /HECO /TRON /Polkadot /Kusama /EOS /COSMOS /BOS /ENU /MOAC /IOST and other blockchain systems which CCDAO may support in the future, and other supporting tools which are developed for the convenience of the Users when using blockchain systems.",
-        "2.2 User: a) a User must be a natural person who possesses full capacity for civil acts; b) if you are under 18 years old, please use CCDAO under the guidance of your parents or guardians. If any person of no capacity for civil acts conducts any transactions on CCDAO or any person of limited capacity for civil acts conducts any transaction which does not commensurate his/her civil rights or act capacity, the parents or guardians of the User shall be liable for the consequences of such transactions.",
-        "2.3 Excluded Person: a) except for natural persons, persons who have the legal and consciousness ability to conclude this Agreement; or b) users who are prohibited, restricted, unauthorized or unqualified to use the service (as defined in this Agreement) ) in any form or method (in whole or in part) due to this Agreement, laws, regulatory requirements, or the provisions of the jurisdiction applicable to the user. For the avoidance of doubt, Chinese Users are also regarded as \"Excluded Person\". 2.4 Terms:",
+        "2.1 CCDAO:",
+        {
+          "value": "The blockchain wallet developed by CCDAO based on BTC /ETH /BSC /HECO /TRON /Polkadot /Kusama /EOS /COSMOS /BOS /ENU /MOAC /IOST and other blockchain systems which CCDAO may support in the future, and other supporting tools which are developed for the convenience of the Users when using blockchain systems.",
+          "indent": true
+        },
+        "2.2 User:",
+        {
+          "value": "a) a User must be a natural person who possesses full capacity for civil acts;",
+          "indent": true
+        },
+        {
+          "value": "b) if you are under 18 years old, please use CCDAO under the guidance of your parents or guardians. If any person of no capacity for civil acts conducts any transactions on CCDAO or any person of limited capacity for civil acts conducts any transaction which does not commensurate his/her civil rights or act capacity, the parents or guardians of the User shall be liable for the consequences of such transactions.",
+          "indent": true
+        },
+        "2.3 Excluded Person:",
+        {
+          "value": "a) except for natural persons, persons who have the legal and consciousness ability to conclude this Agreement; or",
+          "indent": true
+        },
+        {
+          "value": "b) users who are prohibited, restricted, unauthorized or unqualified to use the service (as defined in this Agreement) ) in any form or method (in whole or in part) due to this Agreement, laws, regulatory requirements, or the provisions of the jurisdiction applicable to the user. For the avoidance of doubt, Chinese Users are also regarded as \"Excluded Person\".",
+          "indent": true
+        },
+        "2.4 Terms:",
         {
           "value": "a) Create or import wallet: Using CCDAO to create or import wallet after you accept this Agreement.",
           "indent": true
@@ -98,7 +119,7 @@
           "indent": true
         },
         {
-          "value": "c) Specific Users: Users who should cooperate with CCDAO and disclose Personal Information in order to comply with the laws, regulations and policies of Singapore.",
+          "value": "c) Specific Users: Users who should cooperate with CCDAO and disclose Personal Information in order to comply with the laws, regulations and policies of Australia.",
           "indent": true
         },
         {
@@ -487,7 +508,7 @@
           "indent": true
         },
         {
-          "value": "b. 100 SGD, higher value shall prevail.",
+          "value": "b. 100 AUD, higher value shall prevail.",
           "indent": true
         },
         "11.1 You are aware that CCDAO is only a tool for Users to manage their Tokens and to display transaction information. CCDAO does not provide legal, tax or investment advice. You shall seek advice from professional legal, tax, and investment advisors. In addition, CCDAO shall not be liable for any investment loss, data loss etc. during your use of our service.",
@@ -510,9 +531,9 @@
       ],
       [
         "XV. Miscellaneous",
-        "15.1 If you live outside of Singapore, you shall fully understand and conform to the laws, regulations and rules in your jurisdictions which are relevant to use of CCDAO services.",
+        "15.1 If you live outside of Australia, you shall fully understand and conform to the laws, regulations and rules in your jurisdictions which are relevant to use of CCDAO services.",
         "15.2 During your use of CCDAO services, if you come across any problems, you can contact us through the submission of your feedbacks on CCDAO.",
-        "15.3 This Agreement is accessible for all Users on CCDAO. We encourage you to read this Agreement each time you log onto CCDAO.This Agreement shall become effective on January 10th, 2018."
+        "15.3 This Agreement is accessible for all Users on CCDAO. We encourage you to read this Agreement each time you log onto CCDAO.This Agreement shall become effective on August 10, 2023."
       ],
       [
         "As for any issues not covered in this Agreement, you shall comply with the announcements and relevant rules as updated by CCDAO from time to time."
@@ -743,26 +764,6 @@
         {
           "value": "b. network analysis. Web analytics is a method of collecting and evaluating the operation of visitors to web pages and mobile applications. This includes analyzing traffic patterns, such as determining the frequency of visits to certain functions of a website or mobile application, or to understand the information or services that visitors are most interested in. We use network analysis services provided by third-party tools.",
           "indent2": true
-        },
-        {
-          "value": "5.2 We use third-party SDK in the application. E.g:",
-          "indent": true
-        },
-        {
-          "value": "SDK name: Umeng SDK",
-          "indent2": true
-        },
-        {
-          "value": "Service type: analysis",
-          "indent2": true
-        },
-        {
-          "value": "Collected data type: Device information (it may involve Android ID/OpenUDID information, etc., we will ask for your authorization before collecting this information)",
-          "indent2": true
-        },
-        {
-          "value": "Privacy Policy Link: https://www.umeng.com/page/ policy",
-          "indent2": true
         }
       ],
       [
@@ -818,7 +819,7 @@
           "indent": true
         },
         {
-          "value": "9.2 If you are a user outside of Singapore, you shall fully understand and conform to the laws, regulations and rules in your jurisdictions which are relevant to use of CCDAO.",
+          "value": "9.2 If you are a user outside of Australia, you shall fully understand and conform to the laws, regulations and rules in your jurisdictions which are relevant to use of CCDAO.",
           "indent": true
         },
         {
@@ -834,7 +835,7 @@
           "indent": true
         }
       ],
-      ["This Policy shall become effective on January 10, 2018."],
+      ["This Policy shall become effective on August 10, 2023."],
       [
         "As for any issues not covered in this Policy, you shall comply with the announcements and relevant rules as updated by CCDAO from time to time."
       ]
