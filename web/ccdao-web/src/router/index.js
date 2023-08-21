@@ -17,9 +17,24 @@ const routes = [
     component: _import("home"),
   },
   {
-    path: "/connector/:type",
-    name: "showTerm",
-    component: _import("showTerm"),
+    path: "/connector/TermOfService",
+    name: "termOfService",
+    component: _import("termOfService/index"),
+  },
+  {
+    path: "/connector/TermOfService/:lang",
+    name: "termOfService",
+    component: _import("termOfService/index"),
+  },
+  {
+    path: "/connector/PrivacyPolicy",
+    name: "privacyPolicy",
+    component: _import("privacyPolicy/index"),
+  },
+  {
+    path: "/connector/PrivacyPolicy/:lang",
+    name: "privacyPolicy",
+    component: _import("privacyPolicy/index"),
   },
 ];
 
