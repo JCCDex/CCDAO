@@ -13,6 +13,7 @@ import "./css/header.scss";
 import "./css/foot.scss";
 import "./css/connector.scss";
 import "./css/term.scss";
+import "./css/button.scss";
 import router from "./router";
 
 Vue.config.productionTip = false;

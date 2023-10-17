@@ -65,5 +65,7 @@
   "connector_explain": "A set of mnemonics, multiple blockchain networks, and unlimited accounts.",
   "just_one_plugin": "Just one plugin.",
   "terms_of_service": "Terms of Service",
-  "privacy_policy": "Privacy Policy"
+  "privacy_policy": "Privacy Policy",
+  "chrome_download": "Chrome Extension Download",
+  "firefox_download": "Firefox Extension Download"
 }
