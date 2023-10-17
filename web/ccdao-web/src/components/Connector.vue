@@ -13,7 +13,11 @@
           <div style="margin-left: 100px">
             <div class="connector_explain" style="margin-top: 33px">{{ $t("message.connector_explain") }}</div>
             <div class="just_one_plugin" style="margin-top: 38px">{{ $t("message.just_one_plugin") }}</div>
-            <img style="padding-top: 155px; padding-left: 50px" src="../assets/mnemonic.svg" alt="" />
+            <div id="connectorBt" style="padding-top: 40px">
+              <el-button @click="toUrl('chrome')">{{ $t("message.chrome_download") }}</el-button>
+              <el-button @click="toUrl('firefox')">{{ $t("message.firefox_download") }}</el-button>
+            </div>
+            <img style="padding-top: 80px; padding-left: 50px" src="../assets/mnemonic.svg" alt="" />
           </div>
           <div>
             <img style="padding-top: 110px" src="../assets/multiNetwork.svg" alt="" />
@@ -64,7 +68,22 @@
 <script>
 export default {
   name: "Connector",
+  methods: {
+    toUrl(str) {
+      switch (str) {
+        case "chrome":
+          window.open(
+            "https://chrome.google.com/webstore/detail/ccdao-connector/fpondiojcgaollhcmjgpjmldjjkealjb?hl=zh-CN",
+            "_blank"
+          );
+          break;
+        case "firefox":
+          window.open("https://addons.mozilla.org/zh-CN/firefox/addon/ccdao-connector/", "_blank");
+          break;
+      }
+    },
+  },
 };
 </script>
 
-<style></style>
+<style lang="scss" scoped></style>
