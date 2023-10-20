@@ -138,7 +138,7 @@ export default {
     async loginCCDAO() {
       if (window.ccdao) {
         let addr = await ethereum.request({ method: "swtc_requestAccounts" });
-        this.$store.commit("setSwtcAddress", addr[0]);
+        this.$store.commit("setSwtcAddress", addr[0] === undefined ? "" : addr[0]);
       }
     },
     //显示对话框或移动端连接SWTC钱包
@@ -152,7 +152,7 @@ export default {
         });
       } else if (window.ccdao) {
         let addr = await ethereum.request({ method: "swtc_requestAccounts" });
-        this.$store.commit("setSwtcAddress", addr[0]);
+        this.$store.commit("setSwtcAddress", addr[0] === undefined ? "" : addr[0]);
       } else {
         ImportDialog().show();
         if (this.isMobile) {
