@@ -2,9 +2,11 @@
   <div class="dialogbox">
     <div class="walletbox">
       <div v-show="ethAddress != ''">
-        <div style="display: flex; margin-top: 20px; margin-left: 20px">
+        <div style="display: flex; margin-top: 20px; margin-left: 20px; align-items: center">
           <img src="../assets/MetaMaketag.svg" />
-          <p style="margin: 0px; margin-left: 10px; color: rgba(146, 146, 146, 1)">{{ $t("ETH Wallet Address") }}</p>
+          <p style="margin: 0px; margin-left: 10px; color: rgba(146, 146, 146, 1)">
+            {{ $t("message.ETH_Wallet_Address") }}
+          </p>
         </div>
         <div style="width: 270px; margin-top: 10px; margin-left: 20px; height: 60px">
           <span style="word-wrap: break-word; font-size: 14px; line-height: 24px">{{ ethAddress }}</span>
@@ -24,14 +26,17 @@
         </div>
       </div>
       <div v-show="swtcAddress != ''">
-        <div style="display: flex; margin-top: 20px; margin-left: 20px">
+        <div style="display: flex; margin-top: 20px; margin-left: 20px; align-items: center">
           <img src="../assets/SWTCtag.svg" />
-          <p style="margin: 0px; margin-left: 10px; color: rgba(146, 146, 146, 1)">{{ $t("SWTC Wallet Address") }}</p>
+          <p style="margin: 0px; margin-left: 10px; color: rgba(146, 146, 146, 1)">
+            {{ $t("message.SWTC_Wallet_Address") }}
+          </p>
         </div>
         <div style="width: 270px; margin-top: 10px; margin-left: 20px; height: 60px">
           <span style="word-wrap: break-word; font-size: 14px; line-height: 24px">{{ swtcAddress }}</span>
           <button
             @click="showdialog()"
+            v-show="!haveCcdaoPlugin"
             style="
               background: none;
               float: right;
@@ -41,7 +46,7 @@
               color: rgba(71, 116, 175, 1);
             "
           >
-            {{ $t("Switch SWTC Wallet") }}
+            {{ $t("message.Switch_SWTC_Wallet") }}
           </button>
         </div>
       </div>
@@ -61,13 +66,13 @@
         v-show="ethAddress == '' && swtcAddress == ''"
         style="text-align: center; margin-top: 30px; margin-bottom: 0px"
       >
-        {{ $t("Connect Wallet") }}
+        {{ $t("message.Connect_Wallet") }}
       </p>
       <button v-show="ethAddress == ''" class="WB" style="margin-left: 20px; margin-top: 25px" @click="loginMetaMask()">
-        {{ $t("Connect MetaMask") }}
+        {{ $t("message.Connect_MetaMask") }}
       </button>
       <button v-show="swtcAddress == ''" class="WB" style="margin-left: 20px; margin-top: 25px" @click="showdialog()">
-        {{ $t("Import SWTC Wallet") }}
+        {{ $t("message.Import_SWTC_Wallet") }}
       </button>
     </div>
   </div>
@@ -82,6 +87,7 @@ export default {
   data() {
     return {
       WalletAddress: "",
+      haveCcdaoPlugin: window.ccdao ? true : false,
     };
   },
   computed: {
@@ -96,6 +102,7 @@ export default {
     let value;
     let wallet;
     this.loginMetaMask();
+    this.loginCCDAO();
     value = JingchangWallet.get();
     if (value != null) {
       wallet = new JingchangWallet(value);
@@ -127,8 +134,15 @@ export default {
         console.log("未安装插件");
       }
     },
+    //连接CCDAO插件
+    async loginCCDAO() {
+      if (window.ccdao) {
+        let addr = await ethereum.request({ method: "swtc_requestAccounts" });
+        this.$store.commit("setSwtcAddress", addr[0]);
+      }
+    },
     //显示对话框或移动端连接SWTC钱包
-    showdialog() {
+    async showdialog() {
       var tp = require("tp-js-sdk");
       if (tp.isConnected()) {
         tp.getWallet({ walletTypes: ["jingtum"], switch: false }).then((req) => {
@@ -136,7 +150,23 @@ export default {
             this.$store.commit("setSwtcAddress", req.data.address);
           }
         });
-      } else ImportDialog().show();
+      } else if (window.ccdao) {
+        let addr = await ethereum.request({ method: "swtc_requestAccounts" });
+        this.$store.commit("setSwtcAddress", addr[0]);
+      } else {
+        ImportDialog().show();
+        if (this.isMobile) {
+          setTimeout(() => {
+            this.$message.error(this.$t("message.no_ccdao_plugin"));
+          }, 100);
+        }
+      }
+    },
+    isMobile() {
+      let flag = navigator.userAgent.match(
+        /(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i
+      );
+      return flag;
     },
   },
 };
