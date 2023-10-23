@@ -67,5 +67,6 @@
   "terms_of_service": "Terms of Service",
   "privacy_policy": "Privacy Policy",
   "chrome_download": "Chrome Extension Download",
-  "firefox_download": "Firefox Extension Download"
+  "firefox_download": "Firefox Extension Download",
+  "no_ccdao_plugin": "We recommend you install our plugin to log in！"
 }

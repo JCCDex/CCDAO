@@ -99,6 +99,13 @@ if (window.ethereum) {
     store.dispatch("setMyEthNum");
   });
 }
+if (window.ccdao) {
+  const ccdao = window.ccdao;
+
+  ccdao.on("swtcAccountsChanged", (acc) => {
+    store.commit("setSwtcAddress", acc[0] === undefined ? "" : acc[0]);
+  });
+}
 
 new Vue({
   i18n,

@@ -23,7 +23,7 @@ const routes = [
   },
   {
     path: "/connector/TermOfService/:lang",
-    name: "termOfService",
+    name: "termOfServiceLang",
     component: _import("termOfService/index"),
   },
   {
@@ -33,7 +33,7 @@ const routes = [
   },
   {
     path: "/connector/PrivacyPolicy/:lang",
-    name: "privacyPolicy",
+    name: "privacyPolicyLang",
     component: _import("privacyPolicy/index"),
   },
 ];
