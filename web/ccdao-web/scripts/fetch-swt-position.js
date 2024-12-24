@@ -6,7 +6,6 @@ const fetchPosition = async () => {
   const contract = {
     ETH: "jsk45ksJZUB7durZrLt5e86Eu2gtiXNRN4",
     BSC: "j9z82uwmvZ7WUHRrfXWKuRCJiXHXXh9Js",
-    HECO: "jse3Ph2DP7zRnBXAXvLduoWr6Fag2iqevH",
     Polygon: "jBttJkCeeXPfiL7Wa7gGmC5EKCAYuK3qGS",
   };
 
