@@ -41,15 +41,6 @@
         </div>
         <div class="addbox addboxlocation2">
           <div class="addboxhead">
-            <p style="left: 30px; top: 1px">{{ $t("message.HECO") }}</p>
-          </div>
-          <a href="https://hecoinfo.com/token/0xd4d0e5651debcab0d7abfd549bbf2c4154a3442c" target="_blank">
-            <span class="spantext">0xd4d0e5651debcab0d7abfd549bbf2c4154a3442c</span>
-            <img src="../assets/rightarrow.svg" class="right" />
-          </a>
-        </div>
-        <div class="addbox addboxlocation2">
-          <div class="addboxhead">
             <p style="left: 30px; top: 1px">{{ $t("message.Polygon") }}</p>
           </div>
           <a href="https://polygonscan.com/token/0xee546f831533a913848b72f36a9d5e437f63dbb9" target="_blank">
