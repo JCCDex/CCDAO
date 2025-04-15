@@ -1,0 +1,26 @@
+#connectorBt {
+  .el-button {
+    width: 240px;
+    height: 50px;
+    opacity: 1;
+    border-radius: 16px;
+    background: linear-gradient(
+      180deg,
+      rgba(99, 172, 255, 1) 0%,
+      rgba(83, 162, 252, 1) 47.88%,
+      rgba(86, 164, 252, 1) 100%
+    );
+    color: #ffffff;
+    border: none;
+    &:hover {
+      border-radius: 16px;
+      background: linear-gradient(
+        180deg,
+        rgba(92, 166, 250, 1) 0%,
+        rgba(79, 158, 247, 1) 47.81%,
+        rgba(79, 158, 247, 1) 100%
+      );
+      box-shadow: 0px 3px 6px rgba(122, 198, 252, 1);
+    }
+  }
+}

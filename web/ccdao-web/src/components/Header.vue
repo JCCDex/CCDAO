@@ -4,7 +4,7 @@
     <img v-if="!isTp" class="boximg" src="../assets/CCDAO.svg" />
     <span class="sanhen" style="margin-right: 10px"></span>
     <div class="headbt1" style="position: relative">
-      <div style="width: 490px; height: 36px; display: flex; justify-content: space-between">
+      <div style="width: 620px; height: 36px; display: flex; justify-content: space-between">
         <div class="fbt" style="margin-left: 10px">
           <div class="fbt1">
             {{ $t("message.Community") }}
@@ -12,8 +12,13 @@
           </div>
           <div class="out" style="left: 0px">
             <div class="outbt">
-              <a href="" target="_blank" class="outbts">{{ $t("message.Twitter") }}</a>
-              <a href="" target="_blank" class="outbts">{{ $t("message.Discord") }}</a>
+              <a href="https://twitter.com/ccda_ooo" target="_blank" class="outbts">{{ $t("message.Twitter") }}</a>
+              <a
+                href="https://discord.com/channels/940892832808464427/1000201112177094686"
+                target="_blank"
+                class="outbts"
+                >{{ $t("message.Discord") }}</a
+              >
               <a href="" target="_blank" class="outbts">{{ $t("message.Telegram") }}</a>
             </div>
           </div>
@@ -25,17 +30,20 @@
           </div>
           <div class="out" style="left: 130px">
             <div class="outbt" style="left: 130px">
-              <a href="#holding" class="outbts">{{ $t("message.Holding") }}</a>
-              <a href="#trade" class="outbts">{{ $t("message.How_to_Buy") }}</a>
-              <a href="#contract" class="outbts">{{ $t("message.Contract_Address") }}</a>
+              <a href="#holding" @click="before('#holding')" class="outbts">{{ $t("message.Holding") }}</a>
+              <a href="#trade" @click="before('#trade')" class="outbts">{{ $t("message.How_to_Buy") }}</a>
+              <a href="#contract" @click="before('#contract')" class="outbts">{{ $t("message.Contract_Address") }}</a>
             </div>
           </div>
         </div>
-        <a href="#membership"
+        <a href="#membership" @click="before('#membership')"
           ><div class="fbt2">{{ $t("message.Membership") }}</div></a
         >
-        <a href="#multi"
+        <a href="#multi" @click="before('#multi')"
           ><div class="fbt2">{{ $t("message.Multi-Signers") }}</div></a
+        >
+        <a href="#connector" @click="before('#connector')"
+          ><div class="fbt2">{{ $t("message.Connector") }}</div></a
         >
       </div>
     </div>
@@ -86,6 +94,11 @@ export default {
   methods: {
     showSidebar() {
       this.$store.commit("showSidebar");
+    },
+    before(hash) {
+      if (this.$router.history.current.path != "/") {
+        this.$router.push({ path: "/", hash: hash });
+      }
     },
   },
 };

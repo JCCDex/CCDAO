@@ -11,6 +11,10 @@ import "./css/member.scss";
 import "./css/holds.scss";
 import "./css/header.scss";
 import "./css/foot.scss";
+import "./css/connector.scss";
+import "./css/term.scss";
+import "./css/button.scss";
+import router from "./router";
 
 Vue.config.productionTip = false;
 Vue.use(ElementUI);
@@ -20,7 +24,10 @@ Vue.use(VueI18n);
 
 import axios from "axios";
 import store from "./store";
+import BigNumber from "bignumber.js";
 Vue.prototype.$axios = axios;
+
+const fetch = require("../scripts/service");
 
 const messages = {
   en: {
@@ -42,20 +49,22 @@ const subscribeInst = SubscribeFactory.init();
 // task name
 const TASK_NAME = "pollingConfig";
 // task function
-const task = function () {
-  const promisedata = axios.get("./config.json").catch(function (error) {
-    console.log(error);
+const task = async () => {
+  const res = await fetch({
+    url: "./config.json" + "?t=" + Date.now(),
+    methods: "get",
   });
-  return promisedata;
+  return res;
 };
 // whether polling, default true
 const polling = true;
 // polling interval, default 5000(ms)
-const timer = 1000 * 60 * 10;
+const timer = 5 * 60 * 1000;
 
 const callback = (err, res) => {
-  if (err == null) store.dispatch("setValue", res);
-  else console.log(err);
+  if (err == null) {
+    store.dispatch("setValue", res);
+  }
 };
 
 subscribeInst
@@ -66,7 +75,7 @@ subscribeInst
   // start task
   .start(TASK_NAME);
 
-var tp = require("tp-js-sdk");
+const tp = require("tp-js-sdk");
 
 if (tp.isConnected()) {
   store.commit("setIsTp", true);
@@ -90,9 +99,17 @@ if (window.ethereum) {
     store.dispatch("setMyEthNum");
   });
 }
+if (window.ccdao) {
+  const ccdao = window.ccdao;
+
+  ccdao.on("swtcAccountsChanged", (acc) => {
+    store.commit("setSwtcAddress", acc[0] === undefined ? "" : acc[0]);
+  });
+}
 
 new Vue({
   i18n,
   store,
+  router,
   render: (h) => h(App),
 }).$mount("#app");

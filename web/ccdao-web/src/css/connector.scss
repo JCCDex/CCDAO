@@ -1,0 +1,309 @@
+@import "../css/background.scss";
+@media (min-width: 1080px) {
+  .connector {
+    padding-top: 62.5%;
+    @include div-same-size-as-background-img("../assets/bgimg7.svg");
+    .content {
+      width: 980px;
+      height: 600px;
+      .title {
+        font-size: 46px;
+        font-weight: 500;
+        line-height: 50px;
+        color: rgba(61, 61, 59, 1);
+      }
+      .explain {
+        padding-top: 80px;
+        display: flex;
+        .connector_explain {
+          font-size: 20px;
+          font-weight: 400;
+          line-height: 30px;
+        }
+        .just_one_plugin {
+          font-size: 30px;
+          font-weight: 500;
+          line-height: 30px;
+        }
+      }
+    }
+    .phoneContent {
+      display: none;
+    }
+  }
+}
+@media (max-width: 1079px) and (min-width: 600px) {
+  .connector {
+    @include div-same-size-as-background-img("../assets/phonebgimg7.svg");
+    padding-top: 118.7%;
+    .content {
+      display: none;
+    }
+    .phoneContent {
+      width: 500px;
+      height: 550px;
+      .title {
+        font-size: 46px;
+        font-weight: 500;
+        line-height: 50px;
+        color: rgba(61, 61, 59, 1);
+      }
+      .connector_explain {
+        width: 475px;
+        margin-top: 40px;
+        font-size: 20px;
+        font-weight: 400;
+        line-height: 30px;
+      }
+      .just_one_plugin {
+        margin-top: 30px;
+        font-size: 30px;
+        font-weight: 500;
+        line-height: 30px;
+      }
+      .showImg {
+        margin-top: 50px;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        .unlimitAccounts {
+          width: 200px;
+        }
+        .right {
+          width: 200px;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          .multiNetwork {
+            width: 160px;
+          }
+          .mnemonic {
+            margin-top: 62px;
+            width: 200px;
+          }
+        }
+      }
+      .phone-connector-button {
+        display: flex;
+        justify-content: center;
+        margin-top: 50px;
+        white-space: nowrap;
+        .left {
+          margin-right: 20px;
+          cursor: pointer;
+          &:hover {
+            color: rgba(47, 141, 227, 1);
+          }
+        }
+        .right {
+          margin-left: 20px;
+          cursor: pointer;
+          &:hover {
+            color: rgba(47, 141, 227, 1);
+          }
+        }
+      }
+    }
+    .connector-button {
+      display: none;
+    }
+  }
+}
+@media (max-width: 599px) and (min-width: 410px) {
+  .connector {
+    @include div-same-size-as-background-img("../assets/phonebgimg7.svg");
+    padding-top: 118.7%;
+    .content {
+      display: none;
+    }
+    .phoneContent {
+      width: 320px;
+      height: 360px;
+      .title {
+        font-size: 36px;
+        font-weight: 500;
+        line-height: 38px;
+        color: rgba(61, 61, 59, 1);
+        img {
+          height: 25px;
+        }
+      }
+      .connector_explain {
+        width: 300px;
+        margin-top: 20px;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 18px;
+      }
+      .just_one_plugin {
+        margin-top: 20px;
+        font-size: 24px;
+        font-weight: 500;
+        line-height: 26px;
+      }
+      .showImg {
+        margin-top: 30px;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        .unlimitAccounts {
+          width: 140px;
+        }
+        .right {
+          width: 140px;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          .multiNetwork {
+            width: 120px;
+          }
+          .mnemonic {
+            margin-top: 30px;
+            width: 100%;
+          }
+        }
+      }
+      .phone-connector-button {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+        font-size: 14px;
+        white-space: nowrap;
+        .left {
+          margin-right: 10px;
+          cursor: pointer;
+          &:hover {
+            color: rgba(47, 141, 227, 1);
+          }
+        }
+        .right {
+          margin-left: 10px;
+          cursor: pointer;
+          &:hover {
+            color: rgba(47, 141, 227, 1);
+          }
+        }
+      }
+    }
+    .connector-button {
+      display: none;
+    }
+  }
+}
+@media (max-width: 409px) {
+  .connector {
+    @include div-same-size-as-background-img("../assets/phonebgimg7.svg");
+    padding-top: 118.7%;
+    .content {
+      display: none;
+    }
+    .phoneContent {
+      width: 230px;
+      height: 310px;
+      .title {
+        font-size: 22px;
+        font-weight: 500;
+        line-height: 22px;
+        color: rgba(61, 61, 59, 1);
+        img {
+          height: 16px;
+        }
+      }
+      .connector_explain {
+        width: 200px;
+        margin-top: 20px;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 16px;
+      }
+      .just_one_plugin {
+        margin-top: 14px;
+        font-size: 20px;
+        font-weight: 500;
+        line-height: 20px;
+      }
+      .showImg {
+        margin-top: 25px;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        .unlimitAccounts {
+          width: 80px;
+        }
+        .right {
+          width: 80px;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          .multiNetwork {
+            width: 70px;
+          }
+          .mnemonic {
+            margin-top: 30px;
+            width: 100%;
+          }
+        }
+      }
+      .phone-connector-button {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+        font-size: 14px;
+        white-space: nowrap;
+        .left {
+          margin-right: 10px;
+          cursor: pointer;
+          &:hover {
+            color: rgba(47, 141, 227, 1);
+          }
+        }
+        .right {
+          margin-left: 10px;
+          cursor: pointer;
+          &:hover {
+            color: rgba(47, 141, 227, 1);
+          }
+        }
+      }
+    }
+    .connector-button {
+      display: none;
+    }
+  }
+}
+
+.connector {
+  position: relative;
+  .connector-div {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .connector-button {
+    position: absolute;
+    bottom: 5%;
+    right: 5%;
+    .left {
+      margin-right: 20px;
+      cursor: pointer;
+      &:hover {
+        color: rgba(47, 141, 227, 1);
+      }
+    }
+    .right {
+      margin-left: 20px;
+      cursor: pointer;
+      &:hover {
+        color: rgba(47, 141, 227, 1);
+      }
+    }
+  }
+}

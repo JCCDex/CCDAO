@@ -4,47 +4,47 @@
     padding-top: 62.5%;
     @include div-same-size-as-background-img("../assets/bgimg2.png");
     .boxtwotext {
-      padding-top: 80px;
+      padding-top: 65px;
       .holdscss {
         width: 600px;
       }
     }
     .p1 {
-      margin-bottom: 35px;
+      margin-bottom: 25px;
     }
     .p11 {
-      font-size: 50px;
+      font-size: 36px;
     }
     .p12 {
-      font-size: 40px;
-    }
-    .hold {
-      /* margin-left: 29.1%; */
-      width: 600px;
+      font-size: 28px;
     }
     .holdbox {
-      width: 600px;
-      height: 120px;
-      .p21 {
-        margin-left: 160px;
-        margin-top: 20px;
-        font-size: 16px;
-        line-height: 40px;
+      width: 450.92px;
+      height: 75.15px;
+      .holdboximg {
+        width: 75.15px;
+        height: 75.15px;
       }
-      .p22 {
-        margin-left: 160px;
-        margin-top: 60px;
-        font-size: 30px;
+      .boxText {
+        margin-left: 100px;
+        height: calc(100% - 24px);
+        padding: 12px 0px;
+      }
+      .text1 {
+        font-size: 15px;
+      }
+      .text2 {
+        font-size: 25px;
       }
     }
     .holdboxplace {
-      margin-top: 50px;
+      margin-top: 22px;
     }
   }
 }
 @media (min-width: 600px) and (max-width: 1079px) {
   .hold-container {
-    padding-top: 100%;
+    padding-top: 135%;
     @include div-same-size-as-background-img("../assets/phonebgimg2.svg");
     .boxtwotext {
       // padding-top: 30px;
@@ -62,25 +62,22 @@
     .p12 {
       font-size: 32px;
     }
-    .hold {
-      /* margin-left: 29.1%; */
-      width: 500px;
-    }
     .holdbox {
-      width: 500px;
-      height: 120px;
+      width: 472.09px;
+      height: 94.42px;
       .holdboximg {
-        width: 120px;
-        height: 120px;
+        width: 94.42px;
+        height: 94.42px;
       }
-      .p21 {
-        margin-top: 30px;
-        margin-left: 140px;
+      .boxText {
+        margin-left: 120px;
+        height: calc(100% - 24px);
+        padding: 12px 0px;
+      }
+      .text1 {
         font-size: 22px;
       }
-      .p22 {
-        margin-top: 60px;
-        margin-left: 140px;
+      .text2 {
         font-size: 32px;
       }
     }
@@ -91,7 +88,7 @@
 }
 @media (max-width: 599px) and (min-width: 410px) {
   .hold-container {
-    padding-top: 100%;
+    padding-top: 135%;
     @include div-same-size-as-background-img("../assets/phonebgimg2.svg");
     .boxtwotext {
       // padding-top: 30px;
@@ -109,36 +106,33 @@
     .p12 {
       font-size: 24px;
     }
-    .hold {
-      /* margin-left: 29.1%; */
-      width: 375.27px;
-    }
     .holdbox {
-      width: 375.27px;
-      height: 90.07px;
+      width: 319.77px;
+      height: 63.95px;
       .holdboximg {
-        width: 90.07px;
-        height: 90.07px;
+        width: 63.95px;
+        height: 63.95px;
       }
-      .p21 {
-        margin-top: 20px;
-        margin-left: 105px;
-        font-size: 14px;
+      .boxText {
+        margin-left: 80px;
+        height: calc(100% - 16px);
+        padding: 8px 0px;
       }
-      .p22 {
-        margin-top: 50px;
-        margin-left: 105px;
-        font-size: 18px;
+      .text1 {
+        font-size: 15px;
+      }
+      .text2 {
+        font-size: 22px;
       }
     }
     .holdboxplace {
-      margin-top: 20px;
+      margin-top: 10px;
     }
   }
 }
 @media (max-width: 409px) {
   .hold-container {
-    padding-top: 100%;
+    padding-top: 135%;
     @include div-same-size-as-background-img("../assets/phonebgimg2.svg");
     .boxtwotext {
       // padding-top: 30px;
@@ -156,30 +150,27 @@
     .p12 {
       font-size: 14px;
     }
-    .hold {
-      /* margin-left: 29.1%; */
-      width: 260px;
-    }
     .holdbox {
-      width: 260px;
-      height: 62px;
+      width: 241.28px;
+      height: 48.26px;
       .holdboximg {
-        width: 62px;
-        height: 62px;
+        width: 48.26px;
+        height: 48.26px;
       }
-      .p21 {
-        margin-top: 10px;
-        margin-left: 72px;
-        font-size: 12px;
+      .boxText {
+        margin-left: 58px;
+        height: calc(100% - 12px);
+        padding: 6px 0px;
       }
-      .p22 {
-        margin-top: 28px;
-        margin-left: 72px;
-        font-size: 16px;
+      .text1 {
+        font-size: 11px;
+      }
+      .text2 {
+        font-size: 17px;
       }
     }
     .holdboxplace {
-      margin-top: 20px;
+      margin-top: 10px;
     }
   }
 }
@@ -220,5 +211,11 @@
     background-blend-mode: normal;
     border-radius: 110px;
     mix-blend-mode: normal;
+  }
+  .boxText {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: white;
   }
 }

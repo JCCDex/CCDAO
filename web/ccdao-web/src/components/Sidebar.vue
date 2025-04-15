@@ -11,8 +11,16 @@
         <img v-show="isShowCommunity" class="sidebarupimg" src="../assets/sidebarupimg.svg" alt="" />
       </div>
       <div v-show="isShowCommunity" class="sidebarselects">
-        <a href="" target="_blank" class="sidebarselect" @click="downSidebar()">{{ $t("message.Twitter") }}</a>
-        <a href="" target="_blank" class="sidebarselect" @click="downSidebar()">{{ $t("message.Discord") }}</a>
+        <a href="https://twitter.com/ccda_ooo" target="_blank" class="sidebarselect" @click="downSidebar()">{{
+          $t("message.Twitter")
+        }}</a>
+        <a
+          href="https://discord.com/channels/940892832808464427/1000201112177094686"
+          target="_blank"
+          class="sidebarselect"
+          @click="downSidebar()"
+          >{{ $t("message.Discord") }}</a
+        >
         <a href="" target="_blank" class="sidebarselect" @click="downSidebar()">{{ $t("message.Telegram") }}</a>
       </div>
       <div class="sidebarbt between" @click="isShowCcdao = !isShowCcdao">
@@ -21,19 +29,27 @@
         <img v-show="isShowCcdao" class="sidebarupimg" src="../assets/sidebarupimg.svg" alt="" />
       </div>
       <div v-show="isShowCcdao" class="sidebarselects">
-        <a href="#holding" class="sidebarselect" @click="downSidebar()">{{ $t("message.Holding") }}</a>
-        <a href="#trade" class="sidebarselect" @click="downSidebar()">{{ $t("message.How_to_Buy") }}</a>
-        <a href="#contract" class="sidebarselect" @click="downSidebar()">{{ $t("message.Contract_Address") }}</a>
+        <a href="#holding" class="sidebarselect" @click="downSidebar('holding')">{{ $t("message.Holding") }}</a>
+        <a href="#trade" class="sidebarselect" @click="downSidebar('trade')">{{ $t("message.How_to_Buy") }}</a>
+        <a href="#contract" class="sidebarselect" @click="downSidebar('contract')">{{
+          $t("message.Contract_Address")
+        }}</a>
       </div>
       <a href="#membership">
-        <div class="sidebarbt between" @click="downSidebar()">
+        <div class="sidebarbt between" @click="downSidebar('membership')">
           <span>{{ $t("message.Membership") }}</span>
           <span></span>
         </div>
       </a>
       <a href="#multi">
-        <div class="sidebarbt between" @click="downSidebar()">
+        <div class="sidebarbt between" @click="downSidebar('multi')">
           <span>{{ $t("message.Multi-Signers") }}</span>
+          <span></span>
+        </div>
+      </a>
+      <a href="#connector">
+        <div class="sidebarbt between" @click="downSidebar('connector')">
+          <span>{{ $t("message.Connector") }}</span>
           <span></span>
         </div>
       </a>
@@ -57,10 +73,13 @@ export default {
     },
   },
   methods: {
-    downSidebar() {
+    downSidebar(hash) {
       this.$store.commit("downSidebar");
       this.isShowCommunity = false;
       this.isShowCcdao = false;
+      if (this.$router.history.current.path != "/" && hash) {
+        this.$router.push({ path: "/", hash: hash });
+      }
     },
   },
   mounted() {
