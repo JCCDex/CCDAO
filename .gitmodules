@@ -1,3 +1,6 @@
 [submodule "contract/foundry/CCDAO_ERC20/lib/forge-std"]
 	path = contract/foundry/CCDAO_ERC20/lib/forge-std
 	url = https://github.com/foundry-rs/forge-std
+[submodule "contract/CCDAO_ERC3525/lib/forge-std"]
+	path = contract/CCDAO_ERC3525/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std
