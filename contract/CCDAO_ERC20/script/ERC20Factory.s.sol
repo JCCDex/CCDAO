@@ -9,13 +9,19 @@ contract ERC20FactoryScript is Script {
 
     function setUp() public {}
 
-    function run() public {
+    // forge script script/ERC20Factory.s.sol:ERC20FactoryScript --sig "deployCCDAO()" --chain chain_name --rpc-url rpc_node_server --broadcast -vvvv
+    function deployCCDAO() public {
+        deploy("Cross Chain DAO", "CCDAO", 18, 2000000000, true);
+    }
+
+    function deploy(string memory name, string memory symbol, uint8 decimals, uint256 initialSupply, bool isMintable) public {
         vm.startBroadcast();
 
         ERC20Factory erc20FactoryInstance = new ERC20Factory(
-            "JC Token", "JCC", 18, 2000000000, false
+            name, symbol, decimals, initialSupply, isMintable
         );
 
+        console.log("ERC20Factory deployed at:", address(erc20FactoryInstance));
         vm.stopBroadcast();
     }
 }
