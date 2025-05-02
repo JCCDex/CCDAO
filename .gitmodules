@@ -7,3 +7,6 @@
 [submodule "contract/CCDAO_ERC3525/lib/openzeppelin-contracts-upgradeable"]
 	path = contract/CCDAO_ERC3525/lib/openzeppelin-contracts-upgradeable
 	url = https://github.com/OpenZeppelin/openzeppelin-contracts-upgradeable
+[submodule "contract/CCDAO_ERC3525/lib/openzeppelin-contracts"]
+	path = contract/CCDAO_ERC3525/lib/openzeppelin-contracts
+	url = https://github.com/OpenZeppelin/openzeppelin-contracts
