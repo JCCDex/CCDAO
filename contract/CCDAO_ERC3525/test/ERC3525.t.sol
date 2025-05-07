@@ -26,6 +26,7 @@ contract ERC721BehaviorTest is Test {
 
     uint256 private constant TOKEN_ID_1 = 1001;
     uint256 private constant TOKEN_ID_2 = 1002;
+    uint256 private constant TOKEN_ID_3 = 1003;
     uint256 private constant nonExistentTokenId = 103;
 
     uint256 snapshotId; 
@@ -340,11 +341,274 @@ contract ERC721BehaviorTest is Test {
         vm.revertToState(snapshotId);
     }
 
-    function testSafeMint() public {}
-    function testApprove() public {}
-    function testSetApprovalForAll() public {}
-    function testGetApproved() public {}
-    function testMint() public {}
-    function testBurn() public {}
+    // test approve when clearing
+    function testApproveWhenClearing() public {
+        vm.startPrank(owner);
+        vm.recordLogs();
+        erc3525.approve(address(0x0), TOKEN_ID_1);
+        assertEq(erc3525.getApproved(TOKEN_ID_1), address(0));
 
+        Vm.Log[] memory logs = vm.getRecordedLogs();
+        assertEq(logs.length, 1);
+        // event Approval(address indexed _owner, address indexed _approved, uint256 indexed _tokenId);
+
+        assertEq(logs[0].topics[0], keccak256("Approval(address,address,uint256)"));
+        address _owner = abi.decode(abi.encodePacked(logs[0].topics[1]), (address));
+        address _approved = abi.decode(abi.encodePacked(logs[0].topics[2]), (address));
+        uint256 _tokenId = abi.decode(abi.encodePacked(logs[0].topics[3]), (uint256));
+        assertEq(_owner, owner);
+        assertEq(_approved, address(0));
+        assertEq(_tokenId, TOKEN_ID_1);
+
+        vm.stopPrank();
+
+        vm.revertToState(snapshotId);
+    }
+
+    // test approve when prior approval
+    function testApproveWhenPriorApproval() public {
+        vm.startPrank(owner);
+        vm.recordLogs();
+        erc3525.approve(approved, TOKEN_ID_1);
+        assertEq(erc3525.getApproved(TOKEN_ID_1), approved);
+        erc3525.approve(address(0), TOKEN_ID_1);
+        assertEq(erc3525.getApproved(TOKEN_ID_1), address(0));
+
+        Vm.Log[] memory logs = vm.getRecordedLogs();
+        assertEq(logs.length, 2);
+        // event Approval(address indexed _owner, address indexed _approved, uint256 indexed _tokenId);
+
+        assertEq(logs[0].topics[0], keccak256("Approval(address,address,uint256)"));
+        address _owner = abi.decode(abi.encodePacked(logs[0].topics[1]), (address));
+        address _approved = abi.decode(abi.encodePacked(logs[0].topics[2]), (address));
+        uint256 _tokenId = abi.decode(abi.encodePacked(logs[0].topics[3]), (uint256));
+        assertEq(_owner, owner);
+        assertEq(_approved, approved);
+        assertEq(_tokenId, TOKEN_ID_1);
+
+        vm.stopPrank();
+
+        vm.revertToState(snapshotId);
+    }
+
+    // test approve to same address
+    function testApproveSameAddress() public {
+        vm.startPrank(owner);
+        vm.recordLogs();
+        erc3525.approve(approved, TOKEN_ID_1);
+        assertEq(erc3525.getApproved(TOKEN_ID_1), approved);
+        erc3525.approve(approved, TOKEN_ID_1);
+        assertEq(erc3525.getApproved(TOKEN_ID_1), approved);
+
+        Vm.Log[] memory logs = vm.getRecordedLogs();
+        assertEq(logs.length, 2);
+        // event Approval(address indexed _owner, address indexed _approved, uint256 indexed _tokenId);
+
+        assertEq(logs[0].topics[0], keccak256("Approval(address,address,uint256)"));
+        address _owner = abi.decode(abi.encodePacked(logs[0].topics[1]), (address));
+        address _approved = abi.decode(abi.encodePacked(logs[0].topics[2]), (address));
+        uint256 _tokenId = abi.decode(abi.encodePacked(logs[0].topics[3]), (uint256));
+        assertEq(_owner, owner);
+        assertEq(_approved, approved);
+        assertEq(_tokenId, TOKEN_ID_1);
+
+        vm.stopPrank();
+
+        vm.revertToState(snapshotId);
+    }
+
+    // test approve to current owner
+    function testApproveToOwner() public {
+        vm.startPrank(owner);
+        vm.recordLogs();
+
+        vm.expectRevert("ERC3525: approval to current owner");
+        erc3525.approve(owner, TOKEN_ID_1);
+
+        vm.stopPrank();
+
+        vm.revertToState(snapshotId);
+    }
+
+    // test approve  but sender is not the owner
+    function testApproveSenderNotOwn() public {
+        vm.startPrank(other);
+        vm.recordLogs();
+
+        vm.expectRevert("ERC3525: approve caller is not owner nor approved for all");
+        erc3525.approve(approved, TOKEN_ID_1);
+
+        vm.stopPrank();
+
+        vm.revertToState(snapshotId);
+    }
+
+    // test approved address approve to other again
+    function testSecondHandRose() public {
+        vm.startPrank(owner);
+        vm.recordLogs();
+
+        erc3525.approve(approved, TOKEN_ID_1);
+        vm.stopPrank();
+        vm.startPrank(approved);
+
+        vm.expectRevert("ERC3525: approve caller is not owner nor approved for all");
+        erc3525.approve(other, TOKEN_ID_1);
+
+        vm.stopPrank();
+
+        vm.revertToState(snapshotId);
+    }
+
+    // test approve when sender is the operator
+    function testApproveWhenOperator() public {
+        vm.startPrank(owner);
+        erc3525.setApprovalForAll(operator, true);
+        vm.stopPrank();
+
+        vm.recordLogs();
+        vm.startPrank(operator);
+        erc3525.approve(approved, TOKEN_ID_1);
+        assertEq(erc3525.getApproved(TOKEN_ID_1), approved);
+
+        Vm.Log[] memory logs = vm.getRecordedLogs();
+        assertEq(logs.length, 1);
+        // event Approval(address indexed _owner, address indexed _approved, uint256 indexed _tokenId);
+
+        assertEq(logs[0].topics[0], keccak256("Approval(address,address,uint256)"));
+        address _owner = abi.decode(abi.encodePacked(logs[0].topics[1]), (address));
+        address _approved = abi.decode(abi.encodePacked(logs[0].topics[2]), (address));
+        uint256 _tokenId = abi.decode(abi.encodePacked(logs[0].topics[3]), (uint256));
+        assertEq(_owner, owner);
+        assertEq(_approved, approved);
+        assertEq(_tokenId, TOKEN_ID_1);
+
+        vm.stopPrank();
+
+        vm.revertToState(snapshotId);
+    }
+
+    // test approved by nonexistent token id
+    function testApproveNoneExistTokenId() public {
+        vm.startPrank(owner);
+        vm.recordLogs();
+
+        vm.expectRevert("ERC3525: invalid token ID");
+        erc3525.approve(approved, nonExistentTokenId);
+
+        vm.stopPrank();
+
+        vm.revertToState(snapshotId);
+    }
+
+    // test setApprovalForAll
+    function testSetApprovalForAll() public {
+        vm.startPrank(owner);
+        vm.recordLogs();
+
+        erc3525.setApprovalForAll(operator, true);
+        assertEq(erc3525.isApprovedForAll(owner, operator), true);
+
+        Vm.Log[] memory logs = vm.getRecordedLogs();
+        assertEq(logs.length, 1);
+        // event ApprovalForAll(address indexed _owner, address indexed _operator, bool _approved);
+
+        assertEq(logs[0].topics[0], keccak256("ApprovalForAll(address,address,bool)"));
+        address _owner = abi.decode(abi.encodePacked(logs[0].topics[1]), (address));
+        address _operator = abi.decode(abi.encodePacked(logs[0].topics[2]), (address));
+        assertEq(_owner, owner);
+        assertEq(_operator, operator);
+
+        erc3525.setApprovalForAll(operator, false);
+        assertEq(erc3525.isApprovedForAll(owner, operator), false);
+
+        vm.stopPrank();
+
+        vm.revertToState(snapshotId);
+    }
+
+    // test setApprovalForAll when sender is the operator
+    function testSetApprovalForAllWhenSenderIsOperator() public {
+        vm.startPrank(owner);
+        vm.recordLogs();
+
+        vm.expectRevert("ERC3525: approve to caller");
+        erc3525.setApprovalForAll(owner, true);
+
+        vm.stopPrank();
+
+        vm.revertToState(snapshotId);
+    }
+
+    // test getApproved
+    function testGetApproved() public {
+        vm.startPrank(owner);
+        vm.recordLogs();
+
+        vm.expectRevert("ERC3525: invalid token ID");
+        erc3525.getApproved(nonExistentTokenId);
+
+        address _approved = erc3525.getApproved(TOKEN_ID_1);
+        assertEq(_approved, approved);
+
+        _approved = erc3525.getApproved(TOKEN_ID_2);
+        assertEq(_approved, address(0));
+
+        vm.stopPrank();
+
+        vm.revertToState(snapshotId);
+    }
+
+    // test mint
+    function testMint() public {
+        vm.startPrank(owner);
+        vm.recordLogs();
+
+        vm.expectRevert("ERC3525: mint to the zero address");
+        erc3525.mint(address(0), TOKEN_ID_3, 1, 0);
+        assertEq(erc3525.ownerOf(TOKEN_ID_1), owner);
+
+        vm.expectRevert("ERC3525: token already minted");
+        erc3525.mint(owner, TOKEN_ID_1, 1, 0);
+
+        vm.stopPrank();
+
+        vm.revertToState(snapshotId);
+    }
+
+    // test burn
+    function testBurn() public {
+        vm.startPrank(owner);
+        vm.recordLogs();
+
+        vm.expectRevert("ERC3525: invalid token ID");
+        erc3525.burn(nonExistentTokenId);
+
+        erc3525.burn(TOKEN_ID_1);
+        assertEq(erc3525.balanceOf(owner), 1);
+
+        vm.expectRevert("ERC3525: invalid token ID");
+        erc3525.ownerOf(TOKEN_ID_1);
+
+        Vm.Log[] memory logs = vm.getRecordedLogs();
+        assertEq(logs.length, 3);
+
+        // event Transfer(address indexed _from, address indexed _to, uint256 indexed _tokenId);
+        assertEq(logs[2].topics[0], keccak256("Transfer(address,address,uint256)"));
+
+        address _from = abi.decode(abi.encodePacked(logs[2].topics[1]), (address));
+        address _to = abi.decode(abi.encodePacked(logs[2].topics[2]), (address));
+        uint256 _tokenId = abi.decode(abi.encodePacked(logs[2].topics[3]), (uint256));
+        assertEq(_from, owner);
+        assertEq(_to, address(0));
+        assertEq(_tokenId, TOKEN_ID_1);
+
+        vm.stopPrank();
+
+        vm.revertToState(snapshotId);
+    }
+
+    // ------------------------------------------------------
+    // test ERC721 Enumerable behavior
+    // ------------------------------------------------------
 }
