@@ -13,3 +13,6 @@
 [submodule "contract/CCDAO_ERC721/lib/forge-std"]
 	path = contract/CCDAO_ERC721/lib/forge-std
 	url = https://github.com/foundry-rs/forge-std
+[submodule "contract/CCDAO_ERC721/lib/openzeppelin-contracts"]
+	path = contract/CCDAO_ERC721/lib/openzeppelin-contracts
+	url = https://github.com/OpenZeppelin/openzeppelin-contracts
