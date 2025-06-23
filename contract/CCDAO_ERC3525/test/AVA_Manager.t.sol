@@ -324,7 +324,24 @@ contract AVA_ManagerTest is Test {
                 uint256(fundId1),
                 uint256(0)
             )
-        );
+        );        
+        vm.stopPrank();
+
+        vm.startPrank(admin);
+        manager.setFundEnable(fundId1, true);
+        vm.stopPrank();
+
+        // 恢复基金后可以认购
+        vm.startPrank(user1, user1);
+        avat.transfer(
+            address(manager),
+            minTransferValue,
+            abi.encode(
+                uint8(BusinessType.Subscribe),
+                uint256(fundId1),
+                uint256(0)
+            )
+        );        
         vm.stopPrank();
 
         vm.revertToState(snapshotId);

@@ -287,7 +287,8 @@ contract AVA_Manager is
     function setFundEnable(
         uint256 fundId,
         bool enable
-    ) external onlyRole(ADMIN_ROLE) validFund(fundId) {
+    ) external onlyRole(ADMIN_ROLE) {
+        require(funds[fundId].logic != address(0), "Fund not exists");
         funds[fundId].enabled = enable;
     }
 
