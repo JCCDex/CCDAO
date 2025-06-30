@@ -4,6 +4,29 @@ pragma solidity ^0.8.13;
 import {Test, console} from "forge-std/Test.sol";
 import {CCDAO_ERC721} from "../src/CCDAO_ERC721.sol";
 
+interface ICommunityVerifier {
+    function setReturnTrue() external;
+    function setReturnFalse() external;
+    function isVerifiedMember(address user) external view returns (bool);
+}
+
+contract MockCommunityVerifier {
+
+    bool public isMember;
+
+    function setReturnTrue() external {
+        isMember = true;
+    }
+    function setReturnFalse() external {
+        isMember = false;
+    }
+
+    function isVerifiedMember(address user) external view returns (bool) {
+        user;
+        return isMember;
+    }
+}
+
 contract CCDAO_ERC721Test is Test {
     CCDAO_ERC721 private erc721;
 
@@ -11,6 +34,7 @@ contract CCDAO_ERC721Test is Test {
     address private user1 = vm.addr(2);
     address private user2 = vm.addr(3);
     address private user3 = vm.addr(4);
+    MockCommunityVerifier private communityVerifier = new MockCommunityVerifier();
 
     uint256 snapshotId;
 
@@ -42,6 +66,30 @@ contract CCDAO_ERC721Test is Test {
         vm.expectRevert();
         erc721.mint(user1);
         vm.stopPrank();
+
+        vm.revertToState(snapshotId);
+    }
+
+    function testMintByCCDAOMember() public {
+        vm.startPrank(user1);
+        communityVerifier.setReturnTrue();
+        vm.expectRevert("Community verifier not set");
+        erc721.mintWithCommunityVerification(user1);
+        vm.stopPrank();
+
+        vm.startPrank(owner);
+        erc721.setCommunityVerifier(address(communityVerifier));
+        vm.stopPrank();
+
+        vm.startPrank(user1);
+        erc721.mintWithCommunityVerification(user1);
+        assertEq(erc721.balanceOf(user1), 1);
+        assertEq(erc721.ownerOf(0), user1);
+
+        vm.expectRevert("Already minted with community verification");
+        erc721.mintWithCommunityVerification(user1);
+        vm.stopPrank();
+
 
         vm.revertToState(snapshotId);
     }
