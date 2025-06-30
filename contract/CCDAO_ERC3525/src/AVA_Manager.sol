@@ -364,7 +364,7 @@ contract AVA_Manager is
         uint256 fundId,
         uint256 price,
         uint256 timestamp
-    ) external onlyRole(FINANCE_ROLE) validFund(fundId) {
+    ) external onlyRole(OPERATOR_ROLE) validFund(fundId) {
         funds[fundId].fairPrice = price;
         funds[fundId].fairPriceTimestamp = timestamp;
 
@@ -382,7 +382,7 @@ contract AVA_Manager is
         uint256 fundId,
         uint256 unrealized,
         uint256 timestamp
-    ) external onlyRole(FINANCE_ROLE) validFund(fundId) {
+    ) external onlyRole(OPERATOR_ROLE) validFund(fundId) {
         require(unrealized <= 100e18, "Unrealized must be <= 100%");
 
         funds[fundId].unrealized = unrealized;
@@ -645,7 +645,7 @@ contract AVA_Manager is
         uint256 tokenId,
         uint256 slot,
         uint256 value
-    ) external onlyRole(FINANCE_ROLE) validFund(fundId) {
+    ) external onlyRole(OPERATOR_ROLE) validFund(fundId) {
         Fund storage fund = funds[fundId];
 
         require(
