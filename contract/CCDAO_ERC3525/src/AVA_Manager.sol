@@ -269,7 +269,7 @@ contract AVA_Manager is
         uint256 end
     ) external onlyRole(OPERATOR_ROLE) validFund(fundId) {
         // 检查开始时间必须大于当前时间
-        require(start >= block.timestamp, "Start time must be in future");
+        // require(start >= block.timestamp, "Start time must be in future");
 
         // 检查结束时间必须大于开始时间
         require(end > start, "End time must be after start time");

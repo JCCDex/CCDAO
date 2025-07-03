@@ -103,8 +103,8 @@ contract CCDAO_ERC721Test is Test {
 
         vm.startPrank(owner);
         // erc721.setBaseURI("ipfs://QmExample/");
-        erc721.setBaseURI("https://ccda.ooo/nft/");
-        assertEq(erc721.tokenURI(0), "https://ccda.ooo/nft/0");
+        erc721.setBaseURI("ipfs://bafybeigdoc4pdukx2bupifreiphef7wmrbynjnqwvu3nnkaowuxsxwb43q/");
+        assertEq(erc721.tokenURI(0), "ipfs://bafybeigdoc4pdukx2bupifreiphef7wmrbynjnqwvu3nnkaowuxsxwb43q/0");
         vm.stopPrank();
 
         vm.revertToState(snapshotId);
