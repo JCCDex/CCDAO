@@ -263,6 +263,43 @@ contract AVA_v1Test is Test {
         vm.stopPrank();
 
         vm.revertToState(snapshotId);
+
+        // --------------------------------------------
+        // Check transfer value to new two accounts and mint 10001 tokenId first
+        vm.startPrank(admin);
+        ava001.mint(firstOwner, 10001, firstSlot, firstTokenValue);
+        vm.stopPrank();
+
+        vm.startPrank(secondOwner);
+        assertEq(ava001.totalSupply(), 3);
+        fromOwnerBalance = ava001.balanceOf(secondOwner);
+        fromTokenValue = ava001.balanceOf(secondTokenId);
+        toOwnerBalance = ava001.balanceOf(other);
+
+        // 业务意义: 一个基金持有者向另一个基金持有者转账部分基金份额，对方没有相同基金时候需要在转账同事铸造一个新的token
+        ava001.transferFrom(secondTokenId, other, minTransferValue);
+        
+        // 总的token供应量加1
+        assertEq(ava001.totalSupply(), 4);
+        // 转账的源账号持有的token(基金合同)数量不变
+        assertEq(ava001.balanceOf(secondOwner), fromOwnerBalance);
+        // 转账的源账号持有的token（基金）对应的资产份额减少
+        assertEq(ava001.balanceOf(secondTokenId), fromTokenValue - minTransferValue);
+        // 目的地账号持有的基金合同加1，等于多了一份基金合同，对应铸造了一个新的token
+        toTokenId = ava001.tokenOfOwnerByIndex(other, toOwnerBalance);
+        // 目的地账号持有的token（基金）对应的资产份额等于转账的资产份额
+        assertEq(ava001.balanceOf(toTokenId), minTransferValue);
+        // 目的地账号持有的token加1，相当于多了一份基金合同
+        assertEq(ava001.balanceOf(other), 1);
+        assertEq(toTokenId, 10000);
+
+        toOwnerBalance = ava001.balanceOf(other2);
+        vm.expectRevert("ERC3525: token already minted");
+        ava001.transferFrom(secondTokenId, other2, minTransferValue);
+
+        vm.stopPrank();
+
+        vm.revertToState(snapshotId);
     }
 
     // ------------------------------------------------------
@@ -287,6 +324,10 @@ contract AVA_v1Test is Test {
         // allow minting with zero value
         ava001.mint(firstOwner, fourthTokenId, firstSlot, 0);
         assertEq(ava001.balanceOf(fourthTokenId), 0);
+
+        // mint duplicated tokenId
+        vm.expectRevert("ERC3525: token already minted");
+        ava001.mint(firstOwner, firstTokenId, firstSlot, firstTokenValue);
         vm.stopPrank();
 
         vm.revertToState(snapshotId);
