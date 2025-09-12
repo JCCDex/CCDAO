@@ -16,3 +16,6 @@
 [submodule "contract/CCDAO_ERC721/lib/openzeppelin-contracts"]
 	path = contract/CCDAO_ERC721/lib/openzeppelin-contracts
 	url = https://github.com/OpenZeppelin/openzeppelin-contracts
+[submodule "contract/SafeGuard/lib/forge-std"]
+	path = contract/SafeGuard/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std
