@@ -60,7 +60,6 @@ contract SafeGuard is Pausable, ReentrancyGuard {
     // 治理地址（紧急情况下可以调用治理函数）
     address public governanceAddress;
     
-    
     // ============ 修饰符 ============
     
     modifier onlyOwner() {
@@ -151,6 +150,8 @@ contract SafeGuard is Pausable, ReentrancyGuard {
         bool success
     ) external {
         // 检查交易是否成功
+        // TODO: 我很想知道转账到了目的地，能不能在此处比较目的地前后的资产变化是否符合转账要求？毕竟现在钱包地址
+        // 也可以有所谓的合约代码了,万一这个合约是一个陷阱呢
         if (!success) return;
         // 更新频率跟踪
         _updateFrequencyTracking(msg.sender);
@@ -263,6 +264,7 @@ contract SafeGuard is Pausable, ReentrancyGuard {
         // 检查ERC20单笔限额（通过解析transfer函数调用）
         if (data.length >= 4) {
             bytes4 selector = bytes4(data);
+            // TODO: transfer判断有了, 那么tansferFrom 或者其他能转移token的函数呢?
             if (selector == 0xa9059cbb) { // transfer(address,uint256)
                 bytes memory callData = new bytes(data.length - 4);
                 for (uint i = 0; i < callData.length; i++) {
