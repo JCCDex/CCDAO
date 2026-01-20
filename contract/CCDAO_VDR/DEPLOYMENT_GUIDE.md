@@ -47,16 +47,30 @@ cast call 0xYourCCDAO_CREATE2Address "owner()" \
 ## Stage 2: 初始部署（VDR 核心）
 
 > 每个网络上执行 **一次**
+> 使用 CCDAO_CREATE2 通过 CREATE2 部署，获得确定性地址
 
 部署内容：
-- ✓ VDR Implementation
-- ✓ VDRFactory Implementation  
-- ✓ VDRFactory Proxy (ERC1967)
+- ✓ VDR Implementation (CREATE2 确定性地址)
+- ✓ VDRFactory Implementation (CREATE2 确定性地址)  
+- ✓ VDRFactory Proxy (CREATE2 确定性地址)
 - ✓ 示例 VDR 实例
+
+### 前置条件
+
+必须有 CCDAO_CREATE2 工厂地址（来自 Stage 1）：
+
+```bash
+# 保存工厂地址
+export CCDAO_CREATE2=0x...
+```
 
 ### 本地 Anvil
 
 ```bash
+# 获取 CCDAO_CREATE2 地址（已部署）
+export CCDAO_CREATE2=0x5FbDB2315678afccb333f8a9c45b65d30c01f173
+
+# 运行部署（使用默认盐值）
 forge script script/VDR_Deploy_Initial.s.sol \
   --rpc-url http://localhost:8545 \
   --broadcast \
@@ -66,6 +80,10 @@ forge script script/VDR_Deploy_Initial.s.sol \
 ### Sepolia 测试网
 
 ```bash
+# 设置工厂地址（从生产环境获取或已部署）
+export CCDAO_CREATE2=0x...
+
+# 运行部署
 forge script script/VDR_Deploy_Initial.s.sol \
   --rpc-url https://ethereum-sepolia-rpc.publicnode.com \
   --private-key $PRIVATE_KEY \
@@ -77,6 +95,10 @@ forge script script/VDR_Deploy_Initial.s.sol \
 ### Ethereum 主网
 
 ```bash
+# 使用生产环境的 CCDAO_CREATE2 地址
+export CCDAO_CREATE2=0x...
+
+# 运行部署
 forge script script/VDR_Deploy_Initial.s.sol \
   --rpc-url https://eth.llamarpc.com \
   --private-key $PRIVATE_KEY \
@@ -84,6 +106,21 @@ forge script script/VDR_Deploy_Initial.s.sol \
   --verify \
   --etherscan-api-key $ETHERSCAN_API_KEY \
   --priority-gas-price 1000000000
+```
+
+### 自定义盐值（可选）
+
+脚本使用默认盐值。如果需要自定义（例如多链部署保证地址一致）：
+
+```bash
+export CCDAO_CREATE2=0x...
+export VDR_IMPL_SALT=0x0000000000000000000000000000000000000000000000000000000000000001
+export VDRF_IMPL_SALT=0x0000000000000000000000000000000000000000000000000000000000000002
+export VDRF_PROXY_SALT=0x0000000000000000000000000000000000000000000000000000000000000003
+
+forge script script/VDR_Deploy_Initial.s.sol \
+  --rpc-url http://localhost:8545 \
+  --broadcast
 ```
 
 ### 保存关键地址
@@ -95,15 +132,13 @@ forge script script/VDR_Deploy_Initial.s.sol \
 export VDRF_FACTORY_PROXY=0x...    # ← 最重要！升级时需要
 export VDR_IMPLEMENTATION=0x...
 export VDRF_IMPLEMENTATION=0x...
-```
 
-或保存到 `.env` 文件：
-
-```bash
-# .env
+# 保存到 .env 文件
+cat >> .env << EOF
 VDRF_FACTORY_PROXY=0x...
 VDR_IMPLEMENTATION=0x...
 VDRF_IMPLEMENTATION=0x...
+EOF
 ```
 
 ---
@@ -159,26 +194,56 @@ cast send $VDRF_FACTORY_PROXY \
 ## 升级（后续版本）
 
 > 仅当需要更新 VDR 代码时执行
+> 使用 CREATE2 部署新版本，获得确定性地址
 
 ### 前置条件
 
-必须有 VDRF_FACTORY_PROXY 地址（来自 Stage 2）：
+必须有两个地址（来自 Stage 1 & Stage 2）：
 
 ```bash
-export VDRF_FACTORY_PROXY=0x...
+export CCDAO_CREATE2=0x...           # 来自 Stage 1
+export VDRF_FACTORY_PROXY=0x...      # 来自 Stage 2
 ```
 
 ### 执行升级
 
 ```bash
+# 使用默认盐值
 forge script script/VDR_Upgrade.s.sol \
   --rpc-url http://localhost:8545 \
   --broadcast \
   --sender 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266
 ```
 
+### 自定义升级盐值（推荐）
+
+每次升级应使用不同的盐值以获得不同的地址：
+
+```bash
+# 设置新盐值（例如：升级版本号递增）
+export VDR_IMPL_UPGRADE_SALT=0x0000000000000000000000000000000000000000000000000000000000000010
+
+forge script script/VDR_Upgrade.s.sol \
+  --rpc-url http://localhost:8545 \
+  --broadcast \
+  --sender 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266
+```
+
+### Testnet 升级
+
+```bash
+export CCDAO_CREATE2=0x...
+export VDRF_FACTORY_PROXY=0x...
+export VDR_IMPL_UPGRADE_SALT=0x...
+
+forge script script/VDR_Upgrade.s.sol \
+  --rpc-url https://ethereum-sepolia-rpc.publicnode.com \
+  --private-key $PRIVATE_KEY \
+  --broadcast
+```
+
 **升级会**:
-1. 部署新的 VDR Implementation
+1. 通过 CREATE2 部署新的 VDR Implementation（确定性地址）
 2. 调用 VDRFactory.setVDRImplementation() 更新工厂指向
 3. 所有现有 VDR 实例自动获得新版本
 4. VDRFactory Proxy 地址不变

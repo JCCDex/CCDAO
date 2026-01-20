@@ -52,33 +52,43 @@ cast call 0xYourCCDAO_CREATE2Address "owner()" \
 
 ### Stage 2: VDR 核心部署（只执行一次）
 
-**目的**: 部署 VDR 系统的核心基础设施
+**目的**: 部署 VDR 系统的核心基础设施，使用 CREATE2 获得确定性地址
 
 **执行时机**: 每个网络上执行 **一次**
 
+**必要信息**:
+- CCDAO_CREATE2 工厂地址（来自 Stage 1）
+- 盐值（salt）用于生成确定性地址
+
 **部署的合约**:
 
-| 合约 | 作用 | 可升级 |
-|-----|------|------|
-| VDR Implementation | VDR 业务逻辑 | ✅ 可升级 |
-| VDRFactory Implementation | 工厂业务逻辑 | ✅ 可升级 |
-| VDRFactory Proxy (ERC1967) | VDRFactory 代理 | ✅ UUPS |
+| 合约 | 作用 | 地址生成 |
+|-----|------|--------|
+| VDR Implementation | VDR 业务逻辑 | CREATE2 + 盐值 |
+| VDRFactory Implementation | 工厂业务逻辑 | CREATE2 + 盐值 |
+| VDRFactory Proxy (ERC1967) | VDRFactory 代理 | CREATE2 + 盐值 |
 
 **部署架构**:
 
 ```
-VDRFactory Proxy (ERC1967)
+CREATE2(VDRFactory Proxy) ← 确定性地址
         ↓
-VDRFactory Implementation v1.0.0
+CREATE2(VDRFactory Implementation)
         ↓
-  (指向VDR Implementation v1.0.0)
+  (指向 CREATE2(VDR Implementation))
         ↓
-VDR Implementation v1.0.0
+CREATE2(VDR Implementation)
 ```
 
 **执行命令**:
 
 ```bash
+# 设置环境变量
+export CCDAO_CREATE2=0x...           # 来自 Stage 1
+export VDR_IMPL_SALT=0x...           # 可选，有默认值
+export VDRF_IMPL_SALT=0x...          # 可选，有默认值
+export VDRF_PROXY_SALT=0x...         # 可选，有默认值
+
 # Local Anvil
 forge script script/VDR_Deploy_Initial.s.sol \
   --rpc-url http://localhost:8545 \
@@ -171,16 +181,21 @@ const receipt2 = await tx2.wait();
 
 ### VDR Implementation 升级
 
-当 VDR 合约代码需要更新时：
+当 VDR 合约代码需要更新时，使用 CREATE2 部署新版本：
 
 ```bash
-# 步骤1: 部署新 VDR Implementation
+# 步骤1: 设置环境变量
+export CCDAO_CREATE2=0x...                                    # 工厂地址
+export VDRF_FACTORY_PROXY=0x...                              # 代理地址（来自 Stage 2）
+export VDR_IMPL_UPGRADE_SALT=0x...                           # 新的升级盐值
+
+# 步骤2: 运行升级脚本
 forge script script/VDR_Upgrade.s.sol \
   --rpc-url http://localhost:8545 \
   --broadcast
 
 # 脚本会自动:
-# 1. 部署新的 VDR Implementation
+# 1. 使用 CREATE2 部署新的 VDR Implementation（确定性地址）
 # 2. 调用 VDRFactory.setVDRImplementation()
 # 3. 所有现有 VDR 实例自动指向新实现
 ```
