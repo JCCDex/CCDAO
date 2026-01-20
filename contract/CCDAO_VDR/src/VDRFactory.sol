@@ -8,6 +8,10 @@ import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 
+interface ICCDAO_CREATE2 {
+    function deploy(bytes calldata bytecode, bytes32 salt) external payable returns (address);
+}
+
 /**
  * @title VDRFactory
  * @dev Factory for creating and managing VDR instances with UUPS upgrade support
@@ -33,6 +37,7 @@ contract VDRFactory is IVDRFactory, Initializable, UUPSUpgradeable, OwnableUpgra
     
     address public vdrImplementation;  // Current VDR implementation address
     uint256 public vdrImplementationVersion;  // Current VDR implementation version
+    address public ccdaoCreate2;  // CCDAO_CREATE2 factory for deterministic proxy deployment
 
     /// @custom:oz-upgrades-unsafe-allow constructor
     constructor() {
@@ -47,11 +52,15 @@ contract VDRFactory is IVDRFactory, Initializable, UUPSUpgradeable, OwnableUpgra
      * Dynamically reads the version from the initial implementation
      * @param initialOwner The initial owner of the factory
      * @param initialImplementation The initial VDR implementation address
+     * @param ccdaoCreate2Address The CCDAO_CREATE2 factory for deterministic proxy deployment
      */
-    function initialize(address initialOwner, address initialImplementation) public initializer {
+    function initialize(address initialOwner, address initialImplementation, address ccdaoCreate2Address) public initializer {
         require(initialImplementation != address(0), "VDRFactory: invalid initial implementation");
+        require(ccdaoCreate2Address != address(0), "VDRFactory: invalid CCDAO_CREATE2 address");
+        
         __Ownable_init(initialOwner);
         vdrImplementation = initialImplementation;
+        ccdaoCreate2 = ccdaoCreate2Address;
         
         // Dynamically get version from the initial implementation
         // This ensures version consistency without manual synchronization
@@ -74,10 +83,11 @@ contract VDRFactory is IVDRFactory, Initializable, UUPSUpgradeable, OwnableUpgra
 
     /**
      * @dev Create a new VDR instance using the latest implementation
-     * @param name The name of the VDR
+     * VDR proxy address is deterministic based on DAO name (via CREATE2)
+     * @param name The name of the VDR (also used as salt for deterministic proxy deployment)
      * @param owner The owner address (can be a multisig contract like Safe)
      * @param dataManagers Array of initial data manager addresses
-     * @return vdrAddress The address of the created VDR proxy
+     * @return vdrAddress The address of the created VDR proxy (deterministic based on name)
      */
     function createVDR(
         string calldata name,
@@ -85,6 +95,7 @@ contract VDRFactory is IVDRFactory, Initializable, UUPSUpgradeable, OwnableUpgra
         address[] calldata dataManagers
     ) external returns (address) {
         require(owner != address(0), "VDRFactory: invalid owner address");
+        require(bytes(name).length > 0, "VDRFactory: DAO name cannot be empty");
 
         // Encode initialization data using VDR interface
         bytes memory initData = abi.encodeWithSelector(
@@ -94,7 +105,7 @@ contract VDRFactory is IVDRFactory, Initializable, UUPSUpgradeable, OwnableUpgra
             dataManagers
         );
         
-        return _createVDRWithData(vdrImplementation, initData, owner);
+        return _createVDRWithData(vdrImplementation, initData, owner, name);
     }
 
     /**
@@ -278,22 +289,36 @@ contract VDRFactory is IVDRFactory, Initializable, UUPSUpgradeable, OwnableUpgra
 
     /**
      * @dev Internal function to create VDR proxy instance
+     * Uses CREATE2 for deterministic proxy deployment based on DAO name
+     * This ensures VDR instances for the same DAO have consistent addresses across networks
      * @param vdrImpl Address of VDR implementation to deploy as proxy
      * @param initData Encoded initialization data
      * @param owner The owner address
+     * @param daoName The DAO name (used to generate salt for deterministic address)
      * @return vdrAddress The address of the created VDR proxy
      */
     function _createVDRWithData(
         address vdrImpl,
         bytes memory initData,
-        address owner
+        address owner,
+        string memory daoName
     ) internal returns (address) {
         require(vdrImpl != address(0), "VDRFactory: invalid VDR implementation");
+        require(ccdaoCreate2 != address(0), "VDRFactory: CCDAO_CREATE2 not set");
         
-        // Create proxy pointing to implementation
-        // ERC1967Proxy constructor: (address implementation, bytes memory _data)
-        ERC1967Proxy proxy = new ERC1967Proxy(vdrImpl, initData);
-        address vdrAddress = address(proxy);
+        // Generate salt from DAO name to ensure deterministic address for this DAO across networks
+        bytes32 salt = keccak256(abi.encodePacked(daoName));
+        
+        // Create proxy bytecode with encoded constructor arguments
+        bytes memory proxyBytecode = abi.encodePacked(
+            type(ERC1967Proxy).creationCode,
+            abi.encode(vdrImpl, initData)
+        );
+        
+        // Deploy proxy via CREATE2 using CCDAO_CREATE2 factory
+        ICCDAO_CREATE2 factory = ICCDAO_CREATE2(ccdaoCreate2);
+        address vdrAddress = factory.deploy(proxyBytecode, salt);
+        require(vdrAddress != address(0), "VDRFactory: VDR proxy deployment failed");
 
         // Register the VDR
         vdrInstances.push(vdrAddress);

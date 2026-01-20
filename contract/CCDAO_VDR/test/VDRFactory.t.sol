@@ -24,11 +24,15 @@ contract VDRFactoryTest is Test {
         // Deploy VDRFactory implementation
         VDRFactory factoryImpl = new VDRFactory();
         
+        // Create a mock CCDAO_CREATE2 factory for testing
+        // In production, this would be the real CCDAO_CREATE2 contract
+        address mockCreate2Factory = address(0x7777);
+        
         // Prepare initialization data
         factoryOwner = address(0x999);
         bytes memory initData = abi.encodeCall(
             VDRFactory.initialize,
-            (factoryOwner, address(vdrImplementation))
+            (factoryOwner, address(vdrImplementation), mockCreate2Factory)
         );
         
         // Deploy factory behind ERC1967Proxy

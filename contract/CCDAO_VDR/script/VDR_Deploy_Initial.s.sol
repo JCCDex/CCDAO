@@ -6,73 +6,46 @@ import "../src/VDR.sol";
 import "../src/VDRFactory.sol";
 import "@openzeppelin/contracts/proxy/ERC1967/ERC1967Proxy.sol";
 
-interface ICCDAO_CREATE2 {
-    function deploy(bytes calldata bytecode, bytes32 salt) external payable returns (address);
-    function predictAddress(bytes32 salt, bytes32 bytecodeHash) external view returns (address);
-}
-
 /**
  * @title VDR Initial Deployment Script (Stage 2)
- * @dev Deploys VDR core contracts using CCDAO_CREATE2 for deterministic addresses
+ * @dev Deploys VDR core contracts with deterministic address architecture
  * 
- * Deployment Stages:
- * Stage 1: Deploy CCDAO_CREATE2 factory (../../../CCDAO_CREATE2)
- * Stage 2: This script - Deploy VDR infrastructure via CREATE2:
- *   - VDR Implementation (deterministic address)
- *   - VDRFactory Implementation (deterministic address)
- *   - VDRFactory Proxy (deterministic address)
- * Stage 3: Use VDRFactory.createVDR() to create VDR instances
+ * Deployment Design:
+ * Stage 1: Deploy CCDAO_CREATE2 factory (external, fixed address)
+ * Stage 2: This script
+ *   - VDR Implementation: Random address (flexible per-org upgrades)
+ *   - VDRFactory Implementation: Random address
+ *   - VDRFactory Proxy: CREATE2 with fixed salt (deterministic entry point)
+ * Stage 3: Create VDR instances
+ *   - VDR Instance Proxies: CREATE2 with DAO-name-based salt (deterministic per DAO)
  * 
- * Key difference from standard deployment:
- * - Uses CCDAO_CREATE2.deploy() to generate deterministic addresses
- * - All contracts deployed via CREATE2 (salt-based)
- * - Same addresses across all networks with same salt values
+ * Environment Variables:
+ * export CCDAO_CREATE2=0x...  (address from Stage 1)
+ * export PRIVATE_KEY=0x...
  * 
- * Configuration:
- * Set environment variable with CCDAO_CREATE2 factory address:
- * export CCDAO_CREATE2=0x...
- * 
- * Or pass salt values to customize deployment (default: well-known salts)
- * export VDR_IMPL_SALT=0x...
- * export VDRF_IMPL_SALT=0x...
- * export VDRF_PROXY_SALT=0x...
- * 
- * Usage Examples:
- * 
- * Local Anvil:
- * export CCDAO_CREATE2=0x5FbDB2315678afccb333f8a9c45b65d30c01f173
- * export VDR_IMPL_SALT=0x0000000000000000000000000000000000000000000000000000000000000001
- * forge script script/VDR_Deploy_Initial.s.sol \
+ * Usage:
+ * forge script script/VDR_Deploy_Initial.s.sol:VDRDeployInitial \
  *   --rpc-url http://localhost:8545 \
- *   --broadcast \
- *   --sender 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266
- * 
- * Testnet:
- * export CCDAO_CREATE2=0x...
- * forge script script/VDR_Deploy_Initial.s.sol \
- *   --rpc-url https://ethereum-sepolia-rpc.publicnode.com \
- *   --private-key $PRIVATE_KEY \
  *   --broadcast
+ * 
+ * Key Architecture Points:
+ * - VDR Implementation has random address
+ *   → Each organization can upgrade independently
+ * - VDRFactory Proxy has deterministic address via CREATE2
+ *   → Stable business entry point across all chains
+ * - VDR Instance Proxies have deterministic addresses based on DAO name
+ *   → Same DAO name = same proxy address across all chains
  */
 contract VDRDeployInitial is Script {
-    // Default salt values for deterministic deployment (can be overridden via env)
-    bytes32 constant DEFAULT_VDR_IMPL_SALT = 0x0000000000000000000000000000000000000000000000000000000000000001;
-    bytes32 constant DEFAULT_VDRF_IMPL_SALT = 0x0000000000000000000000000000000000000000000000000000000000000002;
+    // Fixed salt for VDRFactory Proxy - ensures consistent address across chains
     bytes32 constant DEFAULT_VDRF_PROXY_SALT = 0x0000000000000000000000000000000000000000000000000000000000000003;
     
     function run() public {
         uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
         address deployer = vm.addr(deployerPrivateKey);
         
-        // Get CCDAO_CREATE2 factory address
         address ccdaoCreate2 = vm.envAddress("CCDAO_CREATE2");
         require(ccdaoCreate2 != address(0), "CCDAO_CREATE2 address not set");
-        
-        // Get salt values (or use defaults)
-        // For simplicity, use default salts - can be overridden by modifying constants
-        bytes32 vdrImplSalt = DEFAULT_VDR_IMPL_SALT;
-        bytes32 vdrfImplSalt = DEFAULT_VDRF_IMPL_SALT;
-        bytes32 vdrfProxySalt = DEFAULT_VDRF_PROXY_SALT;
 
         console.log("==================================================");
         console.log("VDR Initial Deployment (Stage 2)");
@@ -82,44 +55,34 @@ contract VDRDeployInitial is Script {
         console.log("Chain ID:", block.chainid);
         console.log("");
 
-        ICCDAO_CREATE2 factory = ICCDAO_CREATE2(ccdaoCreate2);
-
         vm.startBroadcast(deployerPrivateKey);
 
-        // Step 1: Deploy VDR implementation via CREATE2
-        console.log("Step 1: Deploying VDR Implementation via CREATE2...");
-        bytes memory vdrBytecode = type(VDR).creationCode;
-        bytes32 vdrBytecodeHash = keccak256(vdrBytecode);
-        address vdrImpl = factory.deploy(vdrBytecode, vdrImplSalt);
-        require(vdrImpl != address(0), "VDR Implementation deployment failed");
-        console.log("[OK] VDR Implementation:", vdrImpl);
-        console.log("  Bytecode Hash:", vm.toString(vdrBytecodeHash));
+        // Step 1: Deploy VDR implementation (random address)
+        console.log("Step 1: Deploying VDR Implementation (random address)...");
+        VDR vdrImpl = new VDR();
+        console.log("[OK] VDR Implementation:", address(vdrImpl));
 
-        // Step 2: Deploy VDRFactory implementation via CREATE2
-        console.log("Step 2: Deploying VDRFactory Implementation via CREATE2...");
-        bytes memory vdrfBytecode = type(VDRFactory).creationCode;
-        bytes32 vdrfBytecodeHash = keccak256(vdrfBytecode);
-        address vdrfImpl = factory.deploy(vdrfBytecode, vdrfImplSalt);
-        require(vdrfImpl != address(0), "VDRFactory Implementation deployment failed");
-        console.log("[OK] VDRFactory Implementation:", vdrfImpl);
-        console.log("  Bytecode Hash:", vm.toString(vdrfBytecodeHash));
+        // Step 2: Deploy VDRFactory implementation (random address)
+        console.log("Step 2: Deploying VDRFactory Implementation (random address)...");
+        VDRFactory factoryImpl = new VDRFactory();
+        console.log("[OK] VDRFactory Implementation:", address(factoryImpl));
 
-        // Step 3: Deploy VDRFactory proxy via CREATE2
+        // Step 3: Deploy VDRFactory proxy via CREATE2 (deterministic)
         console.log("Step 3: Deploying VDRFactory Proxy via CREATE2...");
         bytes memory factoryInitData = abi.encodeCall(
             VDRFactory.initialize,
-            (deployer, vdrImpl)
+            (deployer, address(vdrImpl), ccdaoCreate2)
         );
         
         bytes memory proxyBytecode = abi.encodePacked(
             type(ERC1967Proxy).creationCode,
-            abi.encode(vdrfImpl, factoryInitData)
+            abi.encode(address(factoryImpl), factoryInitData)
         );
-        bytes32 proxyBytecodeHash = keccak256(proxyBytecode);
-        address vdrfProxy = factory.deploy(proxyBytecode, vdrfProxySalt);
+
+        // Call CCDAO_CREATE2.deploy to deploy the proxy with deterministic address
+        address vdrfProxy = _callCreate2(ccdaoCreate2, proxyBytecode, DEFAULT_VDRF_PROXY_SALT);
         require(vdrfProxy != address(0), "VDRFactory Proxy deployment failed");
         console.log("[OK] VDRFactory Proxy:", vdrfProxy);
-        console.log("  Bytecode Hash:", vm.toString(proxyBytecodeHash));
 
         // Step 4: Create example VDR instance
         console.log("Step 4: Creating Example VDR Instance...");
@@ -134,7 +97,8 @@ contract VDRDeployInitial is Script {
             vdrOwner,
             dataManagers
         );
-        console.log("[OK] VDR Instance:", vdrAddress);
+        require(vdrAddress != address(0), "VDR instance creation failed");
+        console.log("[OK] VDR Instance (deterministic per name):", vdrAddress);
 
         vm.stopBroadcast();
 
@@ -142,24 +106,42 @@ contract VDRDeployInitial is Script {
         console.log("==================================================");
         console.log("Deployment Summary");
         console.log("==================================================");
-        console.log("VDR Implementation:", vdrImpl);
-        console.log("VDRFactory Implementation:", vdrfImpl);
-        console.log("VDRFactory Proxy:", vdrfProxy);
-        console.log("Default VDR Instance:", vdrAddress);
+        console.log("VDR Implementation (random):", address(vdrImpl));
+        console.log("VDRFactory Implementation (random):", address(factoryImpl));
+        console.log("VDRFactory Proxy (CREATE2 - fixed):", vdrfProxy);
+        console.log("VDR Instance (CREATE2 - per name):", vdrAddress);
         console.log("");
-        console.log("Salt Values Used:");
-        console.log("  VDR_IMPL_SALT:", vm.toString(vdrImplSalt));
-        console.log("  VDRF_IMPL_SALT:", vm.toString(vdrfImplSalt));
-        console.log("  VDRF_PROXY_SALT:", vm.toString(vdrfProxySalt));
+        console.log("Architecture Notes:");
+        console.log("  1. VDR Implementation has random address");
+        console.log("     - Each organization can upgrade independently");
+        console.log("  2. VDRFactory Proxy has deterministic address");
+        console.log("     - Stable entry point across all chains");
+        console.log("  3. VDR Instance Proxy has deterministic address");
+        console.log("     - Based on DAO name (keccak256 hash)");
         console.log("");
-        console.log("Environment Variables to Save:");
+        console.log("Next: Save for Stage 3");
         console.log("  export VDRF_FACTORY_PROXY=", vdrfProxy);
-        console.log("  export VDR_IMPLEMENTATION=", vdrImpl);
-        console.log("  export VDRF_IMPLEMENTATION=", vdrfImpl);
-        console.log("");
-        console.log("Next steps:");
-        console.log("1. Save VDRF_FACTORY_PROXY for upgrades");
-        console.log("2. Use VDR_Upgrade.s.sol for implementation upgrades");
-        console.log("3. Use VDRFactory.createVDR() to create new instances");
+        console.log("==================================================");
+    }
+
+    /**
+     * @dev Call CCDAO_CREATE2.deploy via low-level call
+     */
+    function _callCreate2(
+        address create2Factory,
+        bytes memory bytecode,
+        bytes32 salt
+    ) internal returns (address) {
+        // Encode the function call: deploy(bytecode, salt)
+        bytes memory callData = abi.encodeWithSignature(
+            "deploy(bytes,bytes32)",
+            bytecode,
+            salt
+        );
+        
+        (bool success, bytes memory result) = create2Factory.call(callData);
+        require(success, string(abi.encodePacked("CREATE2 call failed: ", result)));
+        
+        return abi.decode(result, (address));
     }
 }
