@@ -7,10 +7,35 @@ import "../src/VDR.sol";
 import "@openzeppelin/contracts/proxy/ERC1967/ERC1967Proxy.sol";
 import "../src/libraries/VDRConstants.sol";
 
+/**
+ * @dev Mock CCDAO_CREATE2 factory for testing
+ * Simulates CREATE2 deployment by simply creating contracts via new
+ */
+contract MockCCDAO_CREATE2 {
+    function deploy(bytes calldata bytecode, bytes32) external payable returns (address) {
+        // In a real implementation, this would use CREATE2 opcode
+        // For testing, we just deploy directly and ignore salt
+        // This allows tests to work without complex bytecode manipulation
+        
+        address deployed;
+        assembly {
+            // Load bytecode from calldata and deploy
+            deployed := create(0, bytecode.offset, bytecode.length)
+        }
+        require(deployed != address(0), "Deployment failed");
+        return deployed;
+    }
+    
+    function owner() external view returns (address) {
+        return msg.sender;
+    }
+}
+
 contract VDRFactoryTest is Test {
     VDRFactory factory;
     ERC1967Proxy factoryProxy;
     VDR vdrImplementation;
+    MockCCDAO_CREATE2 mockCreate2;
     
     address creator;
     address vdrOwner;
@@ -24,15 +49,14 @@ contract VDRFactoryTest is Test {
         // Deploy VDRFactory implementation
         VDRFactory factoryImpl = new VDRFactory();
         
-        // Create a mock CCDAO_CREATE2 factory for testing
-        // In production, this would be the real CCDAO_CREATE2 contract
-        address mockCreate2Factory = address(0x7777);
+        // Deploy mock CCDAO_CREATE2 factory
+        mockCreate2 = new MockCCDAO_CREATE2();
         
         // Prepare initialization data
         factoryOwner = address(0x999);
         bytes memory initData = abi.encodeCall(
             VDRFactory.initialize,
-            (factoryOwner, address(vdrImplementation), mockCreate2Factory)
+            (factoryOwner, address(vdrImplementation), address(mockCreate2))
         );
         
         // Deploy factory behind ERC1967Proxy
