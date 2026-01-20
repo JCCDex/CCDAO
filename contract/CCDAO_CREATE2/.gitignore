@@ -1,0 +1,29 @@
+# Foundry build outputs
+/out
+/broadcast
+/cache
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# OS
+Thumbs.db
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+
+# Hardhat (if used)
+artifacts/
+contracts/artifacts/
