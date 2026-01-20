@@ -6,43 +6,33 @@ import "../src/VDR.sol";
 import "../src/VDRFactory.sol";
 import "@openzeppelin/contracts/proxy/ERC1967/ERC1967Proxy.sol";
 
+/**
+ * @title VDR Deployment Scripts - DEPRECATED
+ * @dev This file is kept for reference only.
+ * 
+ * Please use the split scripts instead:
+ * 
+ * For INITIAL deployment (first-time setup):
+ *   → Use: VDR_Deploy_Initial.s.sol
+ *   → Deploys VDR Implementation, VDRFactory Implementation, and Proxy
+ *   → Creates an example VDR instance
+ * 
+ * For UPGRADES (after initial deployment):
+ *   → Use: VDR_Upgrade.s.sol
+ *   → Only deploys new VDR Implementation
+ *   → Updates VDRFactory to point to new implementation
+ *   → All existing VDR instances automatically upgraded
+ * 
+ * Why split scripts?
+ * - Initial deployment needs to set up everything
+ * - Upgrades only need to deploy new implementation and update factory
+ * - This avoids accidentally redeploying proxies (which would lose state)
+ * - Clearer intent and safer operations
+ */
+
+// Legacy contract - kept for backward compatibility but marked as deprecated
 contract DeployVDR is Script {
     function run() public {
-        uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
-        vm.startBroadcast(deployerPrivateKey);
-
-        // Deploy VDR implementation
-        VDR vdrImpl = new VDR();
-        console.log("VDR Implementation deployed at:", address(vdrImpl));
-
-        // Deploy VDRFactory implementation
-        VDRFactory factoryImpl = new VDRFactory();
-        console.log("VDRFactory Implementation deployed at:", address(factoryImpl));
-
-        // Deploy factory behind ERC1967Proxy with initialization
-        address factoryOwner = msg.sender;
-        bytes memory factoryInitData = abi.encodeCall(
-            VDRFactory.initialize,
-            (factoryOwner, address(vdrImpl))
-        );
-        
-        ERC1967Proxy factoryProxy = new ERC1967Proxy(address(factoryImpl), factoryInitData);
-        console.log("VDRFactory Proxy deployed at:", address(factoryProxy));
-
-        // Example: Create a VDR instance
-        VDRFactory factory = VDRFactory(address(factoryProxy));
-        
-        address vdrOwner = address(0x1);
-        address[] memory dataManagers = new address[](1);
-        dataManagers[0] = address(0x2);
-
-        address vdrAddress = factory.createVDR(
-            "MyVDR",
-            vdrOwner,
-            dataManagers
-        );
-        console.log("VDR deployed at:", vdrAddress);
-
-        vm.stopBroadcast();
+        revert("DEPRECATED: Use VDR_Deploy_Initial.s.sol for initial deployment or VDR_Upgrade.s.sol for upgrades");
     }
 }
