@@ -69,13 +69,14 @@ contract VDRDeployInitial is Script {
         require(ccdaoCreate2 != address(0), "CCDAO_CREATE2 address not set");
         
         // Get salt values (or use defaults)
-        bytes32 vdrImplSalt = vm.envBytes32("VDR_IMPL_SALT", DEFAULT_VDR_IMPL_SALT);
-        bytes32 vdrfImplSalt = vm.envBytes32("VDRF_IMPL_SALT", DEFAULT_VDRF_IMPL_SALT);
-        bytes32 vdrfProxySalt = vm.envBytes32("VDRF_PROXY_SALT", DEFAULT_VDRF_PROXY_SALT);
+        // For simplicity, use default salts - can be overridden by modifying constants
+        bytes32 vdrImplSalt = DEFAULT_VDR_IMPL_SALT;
+        bytes32 vdrfImplSalt = DEFAULT_VDRF_IMPL_SALT;
+        bytes32 vdrfProxySalt = DEFAULT_VDRF_PROXY_SALT;
 
-        console.log("=".concat("=", "=", "=", "=", "=", "=", "=", "=", "=", "="));
+        console.log("==================================================");
         console.log("VDR Initial Deployment (Stage 2)");
-        console.log("=".concat("=", "=", "=", "=", "=", "=", "=", "=", "=", "="));
+        console.log("==================================================");
         console.log("Deployer:", deployer);
         console.log("CCDAO_CREATE2 Factory:", ccdaoCreate2);
         console.log("Chain ID:", block.chainid);
@@ -91,7 +92,7 @@ contract VDRDeployInitial is Script {
         bytes32 vdrBytecodeHash = keccak256(vdrBytecode);
         address vdrImpl = factory.deploy(vdrBytecode, vdrImplSalt);
         require(vdrImpl != address(0), "VDR Implementation deployment failed");
-        console.log("✓ VDR Implementation:", vdrImpl);
+        console.log("[OK] VDR Implementation:", vdrImpl);
         console.log("  Bytecode Hash:", vm.toString(vdrBytecodeHash));
 
         // Step 2: Deploy VDRFactory implementation via CREATE2
@@ -100,7 +101,7 @@ contract VDRDeployInitial is Script {
         bytes32 vdrfBytecodeHash = keccak256(vdrfBytecode);
         address vdrfImpl = factory.deploy(vdrfBytecode, vdrfImplSalt);
         require(vdrfImpl != address(0), "VDRFactory Implementation deployment failed");
-        console.log("✓ VDRFactory Implementation:", vdrfImpl);
+        console.log("[OK] VDRFactory Implementation:", vdrfImpl);
         console.log("  Bytecode Hash:", vm.toString(vdrfBytecodeHash));
 
         // Step 3: Deploy VDRFactory proxy via CREATE2
@@ -117,7 +118,7 @@ contract VDRDeployInitial is Script {
         bytes32 proxyBytecodeHash = keccak256(proxyBytecode);
         address vdrfProxy = factory.deploy(proxyBytecode, vdrfProxySalt);
         require(vdrfProxy != address(0), "VDRFactory Proxy deployment failed");
-        console.log("✓ VDRFactory Proxy:", vdrfProxy);
+        console.log("[OK] VDRFactory Proxy:", vdrfProxy);
         console.log("  Bytecode Hash:", vm.toString(proxyBytecodeHash));
 
         // Step 4: Create example VDR instance
@@ -133,14 +134,14 @@ contract VDRDeployInitial is Script {
             vdrOwner,
             dataManagers
         );
-        console.log("✓ VDR Instance:", vdrAddress);
+        console.log("[OK] VDR Instance:", vdrAddress);
 
         vm.stopBroadcast();
 
         console.log("");
-        console.log("=".concat("=", "=", "=", "=", "=", "=", "=", "=", "=", "="));
+        console.log("==================================================");
         console.log("Deployment Summary");
-        console.log("=".concat("=", "=", "=", "=", "=", "=", "=", "=", "=", "="));
+        console.log("==================================================");
         console.log("VDR Implementation:", vdrImpl);
         console.log("VDRFactory Implementation:", vdrfImpl);
         console.log("VDRFactory Proxy:", vdrfProxy);

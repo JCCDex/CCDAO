@@ -71,14 +71,16 @@ contract VDRUpgrade is Script {
         // Get required addresses
         address ccdaoCreate2 = vm.envAddress("CCDAO_CREATE2");
         address vdrfFactoryProxy = vm.envAddress("VDRF_FACTORY_PROXY");
-        bytes32 upgradeSalt = vm.envBytes32("VDR_IMPL_UPGRADE_SALT", DEFAULT_UPGRADE_SALT);
         
         require(ccdaoCreate2 != address(0), "CCDAO_CREATE2 address not set");
         require(vdrfFactoryProxy != address(0), "VDRF_FACTORY_PROXY address not set");
+        
+        // Use default upgrade salt - modify constant to use different salt for each upgrade
+        bytes32 upgradeSalt = DEFAULT_UPGRADE_SALT;
 
-        console.log("=".concat("=", "=", "=", "=", "=", "=", "=", "=", "=", "="));
+        console.log("==================================================");
         console.log("VDR Implementation Upgrade (Stage 3+)");
-        console.log("=".concat("=", "=", "=", "=", "=", "=", "=", "=", "=", "="));
+        console.log("==================================================");
         console.log("Deployer:", deployer);
         console.log("CCDAO_CREATE2:", ccdaoCreate2);
         console.log("VDRFactory Proxy:", vdrfFactoryProxy);
@@ -95,7 +97,7 @@ contract VDRUpgrade is Script {
         bytes32 vdrBytecodeHash = keccak256(vdrBytecode);
         address newVdrImpl = factory.deploy(vdrBytecode, upgradeSalt);
         require(newVdrImpl != address(0), "VDR Implementation deployment failed");
-        console.log("✓ New VDR Implementation:", newVdrImpl);
+        console.log("[OK] New VDR Implementation:", newVdrImpl);
         console.log("  Bytecode Hash:", vm.toString(vdrBytecodeHash));
         console.log("  Upgrade Salt:", vm.toString(upgradeSalt));
 
@@ -109,14 +111,14 @@ contract VDRUpgrade is Script {
         // - new implementation doesn't have getVersion() method
         // - new implementation version is not higher than current
         vdrfFactory.setVDRImplementation(newVdrImpl);
-        console.log("✓ Implementation updated successfully");
+        console.log("[OK] Implementation updated successfully");
 
         vm.stopBroadcast();
 
         console.log("");
-        console.log("=".concat("=", "=", "=", "=", "=", "=", "=", "=", "=", "="));
+        console.log("==================================================");
         console.log("Upgrade Summary");
-        console.log("=".concat("=", "=", "=", "=", "=", "=", "=", "=", "=", "="));
+        console.log("==================================================");
         console.log("New VDR Implementation:", newVdrImpl);
         console.log("VDRFactory Proxy:", vdrfFactoryProxy);
         console.log("");
@@ -124,13 +126,5 @@ contract VDRUpgrade is Script {
         console.log("");
         console.log("For next upgrade, use a different SALT:");
         console.log("  export VDR_IMPL_UPGRADE_SALT=0x...");
-    }
-        console.log("=".concat("=", "=", "=", "=", "=", "=", "=", "=", "=", "="));
-        console.log("New VDR Implementation:", address(newVdrImpl));
-        console.log("VDRFactory Proxy:", VDRF_FACTORY_PROXY);
-        console.log("");
-        console.log("Status: ✓ All existing VDR instances now use the new implementation");
-        console.log("Existing contracts: All VDR instances are automatically upgraded");
-        console.log("New contracts: factory.createVDR() will use the new implementation");
     }
 }
