@@ -298,4 +298,131 @@ contract VDRGasBenchmark is Test {
             vdr.getVC(vcId);
         }
     }
+
+    /**
+     * @dev Heavy stress test: 5000 register operations
+     * This simulates real-world usage where the contract is called thousands of times
+     * Measures cumulative cost difference between optimizer runs
+     */
+    function test_GasBenchmark_HeavyStress_Register5000() public {
+        vm.startPrank(issuer1);
+        
+        // Register 5000 VCs
+        // Split into multiple holders to avoid array getting too large for one holder
+        for (uint256 i = 0; i < 5000; i++) {
+            bytes32 vcId = _getVcId(string(abi.encodePacked("heavy-stress-vc-", vm.toString(i))));
+            bytes32 contentHash = _getContentHash(string(abi.encodePacked("heavy-stress-content-", vm.toString(i))));
+            uint256 issuanceDate = block.timestamp - uint256(5001 - i) * 1 seconds;
+            
+            // Distribute across multiple holders (round-robin)
+            address currentHolder = (i % 3 == 0) ? holder1 : (i % 3 == 1) ? holder2 : holder3;
+            
+            vdr.registerVC(vcId, currentHolder, contentHash, issuanceDate);
+        }
+        vm.stopPrank();
+    }
+
+    /**
+     * @dev Heavy stress test: 5000 read operations
+     * Simulates continuous queries on accumulated data
+     */
+    function test_GasBenchmark_HeavyStress_Query5000() public {
+        // First register enough data
+        vm.startPrank(issuer1);
+        for (uint256 i = 0; i < 100; i++) {
+            bytes32 vcId = _getVcId(string(abi.encodePacked("query-stress-vc-", vm.toString(i))));
+            bytes32 contentHash = _getContentHash(string(abi.encodePacked("query-stress-content-", vm.toString(i))));
+            uint256 issuanceDate = block.timestamp - uint256(101 - i) * 1 seconds;
+            
+            address currentHolder = (i % 3 == 0) ? holder1 : (i % 3 == 1) ? holder2 : holder3;
+            vdr.registerVC(vcId, currentHolder, contentHash, issuanceDate);
+        }
+        vm.stopPrank();
+
+        // Now do 5000 query operations
+        vm.startPrank(verifier);
+        for (uint256 i = 0; i < 5000; i++) {
+            // Query different holders in round-robin
+            if (i % 3 == 0) {
+                vdr.getHolderVCs(holder1);
+            } else if (i % 3 == 1) {
+                vdr.getHolderVCs(holder2);
+            } else {
+                vdr.getHolderVCs(holder3);
+            }
+        }
+        vm.stopPrank();
+    }
+
+    /**
+     * @dev Heavy stress test: 5000 get operations on single VC
+     * Simulates repeated lookups of same credential
+     */
+    function test_GasBenchmark_HeavyStress_GetSingle5000() public {
+        // Register one VC
+        bytes32 vcId = _getVcId("single-stress-vc");
+        bytes32 contentHash = _getContentHash("single-stress-content");
+        uint256 issuanceDate = block.timestamp - 1 days;
+
+        vm.prank(issuer1);
+        vdr.registerVC(vcId, holder1, contentHash, issuanceDate);
+
+        // Retrieve it 5000 times
+        vm.startPrank(verifier);
+        for (uint256 i = 0; i < 5000; i++) {
+            vdr.getVC(vcId);
+        }
+        vm.stopPrank();
+    }
+
+    /**
+     * @dev Heavy stress test: Mixed intensive operations
+     * 1000 registers + 1000 revokes + 1000 queries + 1000 direct gets
+     */
+    function test_GasBenchmark_HeavyStress_MixedIntensive() public {
+        bytes32[] memory vcIds = new bytes32[](1000);
+        
+        // Phase 1: 1000 registers
+        vm.startPrank(issuer1);
+        for (uint256 i = 0; i < 1000; i++) {
+            vcIds[i] = _getVcId(string(abi.encodePacked("mixed-intensive-vc-", vm.toString(i))));
+            bytes32 contentHash = _getContentHash(string(abi.encodePacked("mixed-intensive-content-", vm.toString(i))));
+            uint256 issuanceDate = block.timestamp - uint256(1001 - i) * 1 seconds;
+            
+            address currentHolder = (i % 2 == 0) ? holder1 : holder2;
+            vdr.registerVC(vcIds[i], currentHolder, contentHash, issuanceDate);
+        }
+
+        // Phase 2: 1000 revokes
+        for (uint256 i = 0; i < 1000; i++) {
+            vdr.revokeVC(vcIds[i]);
+        }
+        vm.stopPrank();
+
+        // Phase 3: 1000 queries by issuer
+        vm.startPrank(verifier);
+        for (uint256 i = 0; i < 1000; i++) {
+            vdr.getIssuerVCs(issuer1);
+        }
+
+        // Phase 4: 1000 direct get operations
+        // Re-register some to have active VCs
+        vm.stopPrank();
+        vm.startPrank(issuer1);
+        for (uint256 i = 0; i < 1000; i++) {
+            bytes32 vcId = _getVcId(string(abi.encodePacked("mixed-intensive-new-vc-", vm.toString(i))));
+            bytes32 contentHash = _getContentHash(string(abi.encodePacked("mixed-intensive-new-content-", vm.toString(i))));
+            uint256 issuanceDate = block.timestamp - uint256(1001 - i) * 1 seconds;
+            
+            vdr.registerVC(vcId, holder1, contentHash, issuanceDate);
+        }
+        vm.stopPrank();
+
+        vm.startPrank(verifier);
+        for (uint256 i = 0; i < 1000; i++) {
+            bytes32 vcId = _getVcId(string(abi.encodePacked("mixed-intensive-new-vc-", vm.toString(i))));
+            vdr.getVC(vcId);
+        }
+        vm.stopPrank();
+    }
 }
