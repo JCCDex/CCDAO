@@ -7,36 +7,38 @@ import "../src/VDRFactory.sol";
 import "@openzeppelin/contracts/proxy/ERC1967/ERC1967Proxy.sol";
 
 /**
- * @title VDR Initial Deployment Script
- * @dev First-time deployment using deterministic addresses
+ * @title VDR Initial Deployment Script (Stage 2)
+ * @dev Deploys VDR core contracts AFTER CCDAO_CREATE2 is deployed
  * 
- * This script is used for INITIAL deployment only. It deploys:
- * 1. VDR Implementation contract
- * 2. VDRFactory Implementation contract
- * 3. VDRFactory Proxy (behind ERC1967Proxy)
- * 4. Example VDR instance (optional)
+ * Deployment Stages:
+ * Stage 1: Deploy CCDAO_CREATE2 factory (or get existing address)
+ * Stage 2: This script - Deploy VDR infrastructure:
+ *   - VDR Implementation contract
+ *   - VDRFactory Implementation contract  
+ *   - VDRFactory Proxy (behind ERC1967Proxy for upgrades)
+ * Stage 3: Use VDRFactory.createVDR() to create VDR instances
  * 
- * After initial deployment, use VDR_Upgrade.s.sol for upgrades.
+ * For upgrades after Stage 2: Use VDR_Upgrade.s.sol
  * 
- * Usage:
+ * Prerequisites:
+ * - CCDAO_CREATE2 must be deployed first (Stage 1)
+ * - See ../../../contract/CCDAO_CREATE2/script/ for Stage 1
  * 
- * Local Anvil:
+ * Usage Examples:
+ * 
+ * Local Anvil (Stage 1: CCDAO_CREATE2):
+ * cd ../../CCDAO_CREATE2
+ * forge script script/CCDAOCreator2.s.sol --rpc-url http://localhost:8545 --broadcast
+ * 
+ * Local Anvil (Stage 2: This script):
  * forge script script/VDR_Deploy_Initial.s.sol \
  *   --rpc-url http://localhost:8545 \
  *   --broadcast \
  *   --sender 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266
  * 
- * Sepolia Testnet:
+ * Testnet (Stage 1 already deployed, just Stage 2):
  * forge script script/VDR_Deploy_Initial.s.sol \
  *   --rpc-url https://ethereum-sepolia-rpc.publicnode.com \
- *   --private-key $PRIVATE_KEY \
- *   --broadcast \
- *   --verify \
- *   --etherscan-api-key $ETHERSCAN_API_KEY
- * 
- * Production (Ethereum):
- * forge script script/VDR_Deploy_Initial.s.sol \
- *   --rpc-url https://eth.llamarpc.com \
  *   --private-key $PRIVATE_KEY \
  *   --broadcast \
  *   --verify \

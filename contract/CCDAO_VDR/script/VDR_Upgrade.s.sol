@@ -6,38 +6,48 @@ import "../src/VDR.sol";
 import "../src/VDRFactory.sol";
 
 /**
- * @title VDR Upgrade Script
- * @dev Used for upgrading VDR implementation after initial deployment
+ * @title VDR Upgrade Script (Stage 3+)
+ * @dev Upgrades VDR implementations AFTER initial deployment complete
  * 
- * This script is used for UPGRADE operations only. It:
- * 1. Deploys a new VDR Implementation contract
- * 2. Updates VDRFactory to point to the new implementation
- * 3. All existing VDR instances automatically use the new implementation
+ * Prerequisite:
+ * - Initial deployment must be complete (Stage 1 & 2)
+ * - Requires VDRFactory proxy address from Stage 2 deployment
  * 
- * The VDRFactory proxy address remains the same - only the implementation changes.
+ * When to use:
+ * - When VDR contract code needs updates
+ * - VDRFactory version must be >= current version
+ * - All existing VDR instances automatically upgraded via factory
+ * 
+ * What this script does:
+ * 1. Deploy new VDR Implementation
+ * 2. Call VDRFactory.setVDRImplementation() with new address
+ * 3. All existing VDR proxies now point to new implementation
+ * 
+ * Important:
+ * - VDRFactory proxy is NOT redeployed
+ * - Only the implementation contracts are updated
+ * - VDR instances created before and after upgrade coexist
+ * 
+ * Configuration:
+ * Set this environment variable with the VDRFactory Proxy address from Stage 2:
+ * export VDRF_FACTORY_PROXY=0x...
  * 
  * Usage:
  * 
- * Local Anvil:
+ * Local Anvil Upgrade:
+ * export VDRF_FACTORY_PROXY=0x5FbDB2315678afccb333f8a9c45b65d30c01f173
  * forge script script/VDR_Upgrade.s.sol \
  *   --rpc-url http://localhost:8545 \
  *   --broadcast \
  *   --sender 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266
  * 
- * Sepolia Testnet:
+ * Testnet Upgrade:
+ * export VDRF_FACTORY_PROXY=0x...
  * forge script script/VDR_Upgrade.s.sol \
  *   --rpc-url https://ethereum-sepolia-rpc.publicnode.com \
  *   --private-key $PRIVATE_KEY \
- *   --broadcast \
- *   --verify \
- *   --etherscan-api-key $ETHERSCAN_API_KEY
- * 
- * Production (Ethereum):
- * forge script script/VDR_Upgrade.s.sol \
- *   --rpc-url https://eth.llamarpc.com \
- *   --private-key $PRIVATE_KEY \
- *   --broadcast \
- *   --verify \
+ *   --broadcast
+ */ \
  *   --etherscan-api-key $ETHERSCAN_API_KEY
  * 
  * Important:

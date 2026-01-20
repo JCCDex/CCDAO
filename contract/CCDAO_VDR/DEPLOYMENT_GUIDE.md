@@ -1,41 +1,82 @@
-# VDR 部署指南
+# VDR 部署快速参考
 
-VDR (Virtual Data Room) 使用两个分离的脚本处理部署和升级，确保安全性和清晰的操作流程。
+> 📖 **完整说明见** [DEPLOYMENT_STRATEGY.md](./DEPLOYMENT_STRATEGY.md)
+>
+> 本文档是快速命令参考。了解部署三阶段和设计原理，请阅读 DEPLOYMENT_STRATEGY.md
 
-## 📋 脚本说明
+## 部署三个阶段
 
-### 1. VDR_Deploy_Initial.s.sol - 首次部署脚本
+```
+Stage 1: CCDAO_CREATE2          Stage 2: VDR 初始部署           Stage 3: 创建实例
+(获取或部署工厂)               (部署实现+代理)                 (通过 factory)
+         ↓                               ↓                              ↓
+contract/CCDAO_CREATE2/      contract/CCDAO_VDR/          VDRFactory.createVDR()
+script/CCDAOCreator2.s.sol    script/VDR_Deploy_Initial.s.sol
+```
 
-**用途**: 初始部署，部署所有必要组件
+---
 
-**部署内容**:
-- VDR Implementation（实现合约）
-- VDRFactory Implementation（工厂实现）
-- VDRFactory Proxy（代理，使用 ERC1967）
-- 示例 VDR 实例
+## Stage 1: CCDAO_CREATE2（如需执行）
 
-**何时使用**:
-- 第一次在新网络上部署
-- 全新的 VDR 系统设置
-
-**执行命令**:
+### 测试链部署
 
 ```bash
-# 本地 Anvil
+cd ../../CCDAO_CREATE2
+
+forge script script/CCDAOCreator2.s.sol \
+  --rpc-url http://localhost:8545 \
+  --broadcast \
+  --sender 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266
+```
+
+**记录输出地址**:
+```
+✓ CCDAO_CREATE2 deployed: 0x...
+```
+
+### 生产链查询
+
+```bash
+# 工厂可能已存在，仅获取地址
+cast call 0xYourCCDAO_CREATE2Address "owner()" \
+  --rpc-url https://eth.llamarpc.com
+```
+
+---
+
+## Stage 2: 初始部署（VDR 核心）
+
+> 每个网络上执行 **一次**
+
+部署内容：
+- ✓ VDR Implementation
+- ✓ VDRFactory Implementation  
+- ✓ VDRFactory Proxy (ERC1967)
+- ✓ 示例 VDR 实例
+
+### 本地 Anvil
+
+```bash
 forge script script/VDR_Deploy_Initial.s.sol \
   --rpc-url http://localhost:8545 \
   --broadcast \
   --sender 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266
+```
 
-# Sepolia 测试网
+### Sepolia 测试网
+
+```bash
 forge script script/VDR_Deploy_Initial.s.sol \
   --rpc-url https://ethereum-sepolia-rpc.publicnode.com \
   --private-key $PRIVATE_KEY \
   --broadcast \
   --verify \
   --etherscan-api-key $ETHERSCAN_API_KEY
+```
 
-# 以太坊主网
+### Ethereum 主网
+
+```bash
 forge script script/VDR_Deploy_Initial.s.sol \
   --rpc-url https://eth.llamarpc.com \
   --private-key $PRIVATE_KEY \
@@ -45,218 +86,195 @@ forge script script/VDR_Deploy_Initial.s.sol \
   --priority-gas-price 1000000000
 ```
 
-**输出示例**:
-```
-✓ VDR Implementation: 0x1234...
-✓ VDRFactory Implementation: 0x5678...
-✓ VDRFactory Proxy: 0x9abc...
-✓ VDR Instance: 0xdef0...
+### 保存关键地址
+
+脚本执行后，**必须记录**这些地址（特别是 VDRF_FACTORY_PROXY）：
+
+```bash
+# 保存为环境变量（便于后续升级）
+export VDRF_FACTORY_PROXY=0x...    # ← 最重要！升级时需要
+export VDR_IMPLEMENTATION=0x...
+export VDRF_IMPLEMENTATION=0x...
 ```
 
-**重要**: 保存所有输出地址，特别是 **VDRFactory Proxy** 地址！
+或保存到 `.env` 文件：
+
+```bash
+# .env
+VDRF_FACTORY_PROXY=0x...
+VDR_IMPLEMENTATION=0x...
+VDRF_IMPLEMENTATION=0x...
+```
 
 ---
 
-### 2. VDR_Upgrade.s.sol - 升级脚本
+## Stage 3: 创建 VDR 实例
 
-**用途**: 升级 VDR 实现合约
+> 按需执行，可多次创建
 
-**升级流程**:
+### 使用 Foundry Script
+
+```solidity
+// 使用 VDRFactory 创建实例
+address newVDR = VDRFactory(VDRF_FACTORY_PROXY).createVDR(
+    "My VDR Name",
+    ownerAddress,
+    [dataManager1, dataManager2]
+);
+```
+
+### 使用 ethers.js
+
+```javascript
+const factory = new ethers.Contract(
+    VDRF_FACTORY_PROXY,
+    VDRFactory_ABI,
+    signer
+);
+
+const tx = await factory.createVDR(
+    "Organization A VDR",
+    ownerAddress,
+    [manager1, manager2]
+);
+
+const receipt = await tx.wait();
+// 从 receipt 中获取创建的实例地址
+```
+
+### 使用 cast
+
+```bash
+cast send $VDRF_FACTORY_PROXY \
+  "createVDR(string,address,address[])" \
+  "My VDR" \
+  "0xOwnerAddress" \
+  "[0xManager1,0xManager2]" \
+  --rpc-url http://localhost:8545 \
+  --private-key $PRIVATE_KEY
+```
+
+---
+
+## 升级（后续版本）
+
+> 仅当需要更新 VDR 代码时执行
+
+### 前置条件
+
+必须有 VDRF_FACTORY_PROXY 地址（来自 Stage 2）：
+
+```bash
+export VDRF_FACTORY_PROXY=0x...
+```
+
+### 执行升级
+
+```bash
+forge script script/VDR_Upgrade.s.sol \
+  --rpc-url http://localhost:8545 \
+  --broadcast \
+  --sender 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266
+```
+
+**升级会**:
 1. 部署新的 VDR Implementation
-2. 调用 `VDRFactory.setVDRImplementation()`
-3. 所有现有 VDR 实例自动指向新实现
-
-**何时使用**:
-- 部署新版本（BUG 修复、功能增强）
-- VDRFactory Proxy 地址保持不变
-- 用户数据和状态不受影响
-
-**执行命令**:
-
-```bash
-# 首先，编辑脚本设置 VDRFactory Proxy 地址：
-# 在 VDR_Upgrade.s.sol 中找到：
-#   address constant VDRF_FACTORY_PROXY = address(0); // TODO: Set this!
-# 改为：
-#   address constant VDRF_FACTORY_PROXY = 0x9abc...; // 从初始部署获得
-
-# 然后运行升级脚本
-
-# 本地 Anvil
-forge script script/VDR_Upgrade.s.sol \
-  --rpc-url http://localhost:8545 \
-  --broadcast \
-  --sender 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266
-
-# Sepolia 测试网
-forge script script/VDR_Upgrade.s.sol \
-  --rpc-url https://ethereum-sepolia-rpc.publicnode.com \
-  --private-key $PRIVATE_KEY \
-  --broadcast \
-  --verify \
-  --etherscan-api-key $ETHERSCAN_API_KEY
-
-# 以太坊主网
-forge script script/VDR_Upgrade.s.sol \
-  --rpc-url https://eth.llamarpc.com \
-  --private-key $PRIVATE_KEY \
-  --broadcast \
-  --verify \
-  --etherscan-api-key $ETHERSCAN_API_KEY \
-  --priority-gas-price 1000000000
-```
-
-**输出示例**:
-```
-✓ New VDR Implementation: 0xabcd...
-✓ Implementation updated successfully
-Status: All existing VDR instances now use the new implementation
-```
+2. 调用 VDRFactory.setVDRImplementation() 更新工厂指向
+3. 所有现有 VDR 实例自动获得新版本
+4. VDRFactory Proxy 地址不变
 
 ---
 
-## 🔄 完整部署流程
+## 常见命令速查
 
-### 第一次部署（完整设置）
+### 检查部署
 
 ```bash
-# 1. 设置环境变量
+# 检查 VDRFactory 当前版本
+cast call $VDRF_FACTORY_PROXY \
+  "vdrImplementationVersion()" \
+  --rpc-url http://localhost:8545
+
+# 获取 VDRFactory 所有 VDR 实例
+cast call $VDRF_FACTORY_PROXY \
+  "getVDRCount()" \
+  --rpc-url http://localhost:8545
+
+# 获取某个 VDR 实例信息
+cast call $VDRF_FACTORY_PROXY \
+  "getVDRDetails(address)" \
+  "0xVDRAddress" \
+  --rpc-url http://localhost:8545
+```
+
+### 环境变量设置
+
+```bash
+# 方案1：临时设置（仅当前会话）
 export PRIVATE_KEY=0x...
-export SEPOLIA_RPC=https://ethereum-sepolia-rpc.publicnode.com
-export ETHERSCAN_API_KEY=...
+export VDRF_FACTORY_PROXY=0x...
 
-# 2. 部署到 Sepolia 测试网
-forge script script/VDR_Deploy_Initial.s.sol \
-  --rpc-url $SEPOLIA_RPC \
-  --private-key $PRIVATE_KEY \
-  --broadcast
+# 方案2：持久化（.env 文件）
+echo "PRIVATE_KEY=0x..." >> .env
+echo "VDRF_FACTORY_PROXY=0x..." >> .env
 
-# 3. 保存输出地址
-# VDRFactory Proxy: 0x9abc...
-# VDR Implementation: 0x1234...
+# 方案3：.env.local（忽略版本控制）
+cat > .env.local << EOF
+PRIVATE_KEY=0x...
+VDRF_FACTORY_PROXY=0x...
+EOF
 ```
 
-### 升级到新版本
+---
+
+## 故障排查
+
+### 部署失败：insufficient balance
 
 ```bash
-# 1. 编辑 VDR_Upgrade.s.sol，设置 VDRF_FACTORY_PROXY 地址
+# 检查账户余额
+cast balance $ACCOUNT_ADDRESS \
+  --rpc-url http://localhost:8545
 
-# 2. 部署新实现
-forge script script/VDR_Upgrade.s.sol \
-  --rpc-url $SEPOLIA_RPC \
-  --private-key $PRIVATE_KEY \
-  --broadcast
-
-# 3. 验证升级
-# 查看新的 VDR Implementation 地址
-# 所有现有 VDR 实例自动使用新实现
+# Anvil：获取测试 ETH（自动给予足量余额）
+# 确保使用 Anvil 默认账户
 ```
 
----
-
-## ⚠️ 重要注意事项
-
-### 初始部署 (VDR_Deploy_Initial.s.sol)
-
-✅ **应该做**:
-- 第一次在新网络部署
-- 保存所有输出地址
-- VDRFactory Proxy 地址最重要
-
-❌ **不应该做**:
-- 再次运行相同脚本（会创建新的代理）
-- 丢失 VDRFactory Proxy 地址
-
-### 升级 (VDR_Upgrade.s.sol)
-
-✅ **应该做**:
-- 设置正确的 VDRF_FACTORY_PROXY 地址
-- 确保调用者是 factory owner
-- 新实现版本号必须更高
-
-❌ **不应该做**:
-- 修改 VDRFactory Proxy 地址
-- 使用非 owner 账户运行
-- 部署版本号更低的实现
-
----
-
-## 🔐 权限要求
-
-| 操作 | 脚本 | 权限要求 |
-|------|------|--------|
-| 初始部署 | VDR_Deploy_Initial.s.sol | 部署者自动成为 factory owner |
-| 升级 | VDR_Upgrade.s.sol | 必须是 factory owner |
-| 创建 VDR 实例 | 任何人可以调用 `factory.createVDR()` | 无 |
-
----
-
-## 📊 地址管理
-
-### 初始部署后保存的地址
-
-```
-Network: Sepolia
-Date: 2024-01-20
-
-VDRFactory Proxy: 0x9abc...
-  └─ Owner: 0x1234...
-  
-VDR Implementation v1.0.0: 0x1234...
-VDRFactory Implementation: 0x5678...
-
-Default VDR Instance: 0xdef0...
-```
-
-### 升级后的地址变化
-
-```
-升级前：
-VDR Implementation v1.0.0: 0x1234...
-
-升级后：
-VDR Implementation v1.1.0: 0xabcd...  ← 新地址
-VDRFactory Proxy: 0x9abc...           ← 不变！
-```
-
----
-
-## 🧪 测试部署
-
-在实际部署前，始终先在本地测试：
+### 升级失败：setVDRImplementation 权限问题
 
 ```bash
-# 使用 Anvil 测试首次部署
-anvil
+# 检查 caller 是否是 factory owner
+cast call $VDRF_FACTORY_PROXY \
+  "owner()" \
+  --rpc-url http://localhost:8545
 
-# 另一个终端
-forge script script/VDR_Deploy_Initial.s.sol \
-  --rpc-url http://localhost:8545 \
-  --broadcast \
-  --sender 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 \
-  --non-interactive
+# 确保使用正确的私钥（owner 地址）
+```
 
-# 测试升级
-forge script script/VDR_Upgrade.s.sol \
-  --rpc-url http://localhost:8545 \
-  --broadcast \
-  --sender 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 \
-  --non-interactive
+### 创建实例失败：invalid owner address
+
+```bash
+# 检查 owner 地址有效性
+cast balance 0xOwnerAddress \
+  --rpc-url http://localhost:8545
 ```
 
 ---
 
-## 常见问题
+## 关键概念
 
-**Q: 升级后旧的 VDR 实例会丢失数据吗?**
-A: 不会。VDR 实例使用代理模式，数据存储在代理中，新实现会读取所有现有状态。
+| 概念 | 说明 |
+|-----|------|
+| **VDRF_FACTORY_PROXY** | VDRFactory 的永久代理地址（升级时不变） |
+| **VDR Implementation** | VDR 业务逻辑合约（升级时更新） |
+| **VDR Instance** | 用户创建的 VDR 实例（有独立的 Proxy） |
+| **UUPS** | 合约升级标准（VDRFactory 支持） |
+| **ERC1967** | 代理标准（所有 Proxy 使用） |
 
-**Q: 为什么需要两个脚本？**
-A: 防止意外重新部署代理（会导致状态丢失）。分离脚本使意图清晰，操作更安全。
+---
 
-**Q: 如何回滚升级？**
-A: 部署上一个版本的实现，再次调用 `setVDRImplementation()`。
+## 更多信息
 
-**Q: 能否更改 VDRFactory 的 owner？**
-A: 可以，通过调用 `transferOwnership()`。升级脚本需要在 owner 下执行。
-
+- 🔍 **完整说明**: [DEPLOYMENT_STRATEGY.md](./DEPLOYMENT_STRATEGY.md)
+- 📚 **合约代码**: [src/VDRFactory.sol](./src/VDRFactory.sol)、[src/VDR.sol](./src/VDR.sol)
+- ✅ **测试用例**: [test/VDRFactory.t.sol](./test/VDRFactory.t.sol)
