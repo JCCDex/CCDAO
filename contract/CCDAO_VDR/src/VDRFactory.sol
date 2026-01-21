@@ -2,14 +2,15 @@
 pragma solidity ^0.8.20;
 
 import "./VDR.sol";
-import "@openzeppelin/contracts/proxy/ERC1967/ERC1967Proxy.sol";
 import "./interfaces/IVDRFactory.sol";
+import "@openzeppelin/contracts/proxy/ERC1967/ERC1967Proxy.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 
 interface ICCDAO_CREATE2 {
     function deploy(bytes calldata bytecode, bytes32 salt) external payable returns (address);
+    function predictAddress(bytes32 salt, bytes32 bytecodeHash) external view returns (address);
 }
 
 /**
@@ -68,12 +69,9 @@ contract VDRFactory is IVDRFactory, Initializable, UUPSUpgradeable, OwnableUpgra
             abi.encodeWithSelector(VDR.getVersion.selector)
         );
         require(success, "VDRFactory: failed to read version from initial implementation");
-        // getVersion now returns (major, minor, patch) - each uint256, total 96 bytes
-        require(result.length == 96, "VDRFactory: invalid version data from initial implementation");
+        require(result.length == 32, "VDRFactory: invalid version data from initial implementation");
         
-        (uint256 major, uint256 minor, uint256 patch) = abi.decode(result, (uint256, uint256, uint256));
-        // Reconstruct the version number in MMMNNNPPP format
-        uint256 implVersion = major * 1000000 + minor * 1000 + patch;
+        uint256 implVersion = abi.decode(result, (uint256));
         // Implementation version must be greater than 0
         require(implVersion > 0, "VDRFactory: implementation version must be greater than 0");
         vdrImplementationVersion = implVersion;
@@ -105,7 +103,25 @@ contract VDRFactory is IVDRFactory, Initializable, UUPSUpgradeable, OwnableUpgra
             dataManagers
         );
         
-        return _createVDRWithData(vdrImplementation, initData, owner, name);
+        // Predict the deterministic address before deployment
+        // Generate salt from daoName and caller (msg.sender) - caller cannot be forged
+        bytes32 salt = keccak256(abi.encodePacked(name, msg.sender));
+        
+        // Calculate the actual bytecode that will be deployed
+        // This must match exactly what _createVDRWithData will deploy
+        bytes memory proxyBytecode = abi.encodePacked(
+            type(ERC1967Proxy).creationCode,
+            abi.encode(vdrImplementation, initData)
+        );
+        bytes32 bytecodeHash = keccak256(proxyBytecode);
+        
+        ICCDAO_CREATE2 factory = ICCDAO_CREATE2(ccdaoCreate2);
+        address predictedAddress = factory.predictAddress(salt, bytecodeHash);
+        
+        // Check if this address is already in use (prevent DAO name collision)
+        require(!validVDRs[predictedAddress], "VDRFactory: VDR for this DAO name already exists");
+        
+        return _createVDRWithData(vdrImplementation, initData, owner, salt, msg.sender);
     }
 
     /**
@@ -122,12 +138,10 @@ contract VDRFactory is IVDRFactory, Initializable, UUPSUpgradeable, OwnableUpgra
             abi.encodeWithSelector(VDR.getVersion.selector)
         );
         require(success, "VDRFactory: invalid implementation - missing getVersion() method");
-        // getVersion now returns (major, minor, patch) - each uint256, total 96 bytes
-        require(result.length == 96, "VDRFactory: invalid implementation - getVersion() returned unexpected data");
+        require(result.length == 32, "VDRFactory: invalid implementation - getVersion() returned unexpected data");
         
-        // Decode the version components from the result
-        (uint256 major, uint256 minor, uint256 patch) = abi.decode(result, (uint256, uint256, uint256));
-        uint256 newVersion = major * 1000000 + minor * 1000 + patch;
+        // Decode the version from the result
+        uint256 newVersion = abi.decode(result, (uint256));
         
         // Verify new version is greater than 0
         require(newVersion > 0, "VDRFactory: implementation version must be greater than 0");
@@ -273,7 +287,7 @@ contract VDRFactory is IVDRFactory, Initializable, UUPSUpgradeable, OwnableUpgra
         require(newImpl != currentImpl, "VDRFactory: already at latest version");
         
         // Call upgradeToAndCall on the VDR proxy
-        // VDR's _authorizeUpgrade will verify msg.sender == factory and increment version
+        // VDR's _authorizeUpgrade will verify msg.sender == factory
         (bool success, ) = vdrAddress.call(
             abi.encodeWithSignature("upgradeToAndCall(address,bytes)", newImpl, "")
         );
@@ -281,35 +295,33 @@ contract VDRFactory is IVDRFactory, Initializable, UUPSUpgradeable, OwnableUpgra
         
         // Update tracked implementation (version is already updated in VDR._authorizeUpgrade)
         vdrImplementations[vdrAddress] = newImpl;
-        (uint256 major, uint256 minor, uint256 patch) = vdr.getVersion();
-        vdrVersions[vdrAddress] = major * 1000000 + minor * 1000 + patch;  // Reconstruct and sync version
+        vdrVersions[vdrAddress] = vdr.getVersion();  // Sync version
     }
 
     // ============ Utility Functions ============
 
     /**
      * @dev Internal function to create VDR proxy instance
-     * Uses CREATE2 for deterministic proxy deployment based on DAO name
-     * This ensures VDR instances for the same DAO have consistent addresses across networks
+     * Uses CREATE2 for deterministic proxy deployment based on DAO name and caller
      * @param vdrImpl Address of VDR implementation to deploy as proxy
      * @param initData Encoded initialization data
      * @param owner The owner address
-     * @param daoName The DAO name (used to generate salt for deterministic address)
+     * @param salt The pre-calculated salt (daoName + caller hash)
+     * @param caller The caller address (msg.sender, unforgeable)
      * @return vdrAddress The address of the created VDR proxy
      */
     function _createVDRWithData(
         address vdrImpl,
         bytes memory initData,
         address owner,
-        string memory daoName
+        bytes32 salt,
+        address caller
     ) internal returns (address) {
         require(vdrImpl != address(0), "VDRFactory: invalid VDR implementation");
         require(ccdaoCreate2 != address(0), "VDRFactory: CCDAO_CREATE2 not set");
         
-        // Generate salt from DAO name to ensure deterministic address for this DAO across networks
-        bytes32 salt = keccak256(abi.encodePacked(daoName));
-        
         // Create proxy bytecode with encoded constructor arguments
+        // This includes the ERC1967Proxy creation code + initialization parameters
         bytes memory proxyBytecode = abi.encodePacked(
             type(ERC1967Proxy).creationCode,
             abi.encode(vdrImpl, initData)
@@ -323,11 +335,11 @@ contract VDRFactory is IVDRFactory, Initializable, UUPSUpgradeable, OwnableUpgra
         // Register the VDR
         vdrInstances.push(vdrAddress);
         validVDRs[vdrAddress] = true;
-        creatorVDRs[msg.sender].push(vdrAddress);
+        creatorVDRs[caller].push(vdrAddress);
         vdrImplementations[vdrAddress] = vdrImpl;  // Record the initial implementation
         vdrVersions[vdrAddress] = vdrImplementationVersion;  // Initialize version from current implementation version
 
-        emit VDRCreated(vdrAddress, owner, msg.sender);
+        emit VDRCreated(vdrAddress, owner, caller);
 
         return vdrAddress;
     }

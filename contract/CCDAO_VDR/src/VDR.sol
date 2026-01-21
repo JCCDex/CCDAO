@@ -446,15 +446,13 @@ contract VDR is Initializable, OwnableUpgradeable, UUPSUpgradeable, IVDR {
     // ============ View Functions ============
 
     /**
-     * @dev Get the current version as major, minor, patch components
-     * @return major Major version number
-     * @return minor Minor version number
-     * @return patch Patch version number
+     * @dev Get the current version encoded as MMMNNNPPP
+     * Format: MMM (major) NNN (minor) PPP (patch)
+     * Example: 1.0.0 = 001000000, 1.1.5 = 001001005
+     * @return Encoded version number
      */
-    function getVersion() external view returns (uint256 major, uint256 minor, uint256 patch) {
-        major = version / 1000000;           // First 3 digits
-        minor = (version % 1000000) / 1000;  // Middle 3 digits
-        patch = version % 1000;              // Last 3 digits
+    function getVersion() public pure returns (uint256) {
+        return version;
     }
 
     /**

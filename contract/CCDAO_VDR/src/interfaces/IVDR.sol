@@ -240,12 +240,12 @@ interface IVDR {
     // ============ View Functions ============
 
     /**
-     * @dev Get the current version as major, minor, patch components
-     * @return major Major version number
-     * @return minor Minor version number
-     * @return patch Patch version number
+     * @dev Get the current version encoded as MMMNNNPPP
+     * Format: MMM (major) NNN (minor) PPP (patch)
+     * Example: 1.0.0 = 001000000, 1.1.5 = 001001005
+     * @return Encoded version number
      */
-    function getVersion() external view returns (uint256 major, uint256 minor, uint256 patch);
+    function getVersion() external view returns (uint256);
 
     /**
      * @dev Get the current implementation

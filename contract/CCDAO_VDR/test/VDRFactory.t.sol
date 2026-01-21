@@ -8,26 +8,50 @@ import "@openzeppelin/contracts/proxy/ERC1967/ERC1967Proxy.sol";
 import "../src/libraries/VDRConstants.sol";
 
 /**
- * @dev Mock CCDAO_CREATE2 factory for testing
- * Simulates CREATE2 deployment by simply creating contracts via new
+ * @dev Real CCDAO_CREATE2 implementation for testing
+ * Uses actual CREATE2 opcode for deterministic deployment
  */
-contract MockCCDAO_CREATE2 {
-    function deploy(bytes calldata bytecode, bytes32) external payable returns (address) {
-        // In a real implementation, this would use CREATE2 opcode
-        // For testing, we just deploy directly and ignore salt
-        // This allows tests to work without complex bytecode manipulation
+contract CCDAO_CREATE2 {
+    function deploy(bytes calldata bytecode, bytes32 salt) external payable returns (address) {
+        // Convert calldata to memory to ensure correct handling in assembly
+        bytes memory bytecodeInMemory = bytes(bytecode);
         
         address deployed;
         assembly {
-            // Load bytecode from calldata and deploy
-            deployed := create(0, bytecode.offset, bytecode.length)
+            // Use CREATE2 with actual salt parameter
+            // Read from memory: skip length prefix (first 32 bytes) and use mload to get length
+            deployed := create2(
+                callvalue(),
+                add(bytecodeInMemory, 0x20),  // Skip the length prefix
+                mload(bytecodeInMemory),       // Get length from first 32 bytes
+                salt
+            )
         }
-        require(deployed != address(0), "Deployment failed");
+        require(deployed != address(0), "CREATE2 deployment failed");
         return deployed;
     }
     
-    function owner() external view returns (address) {
-        return msg.sender;
+    function predictAddress(bytes32 salt, bytes32 bytecodeHash) external view returns (address) {
+        // CREATE2 address prediction formula
+        return address(
+            uint160(
+                uint256(
+                    keccak256(
+                        abi.encodePacked(
+                            bytes1(0xff),
+                            address(this),
+                            salt,
+                            bytecodeHash
+                        )
+                    )
+                )
+            )
+        );
+    }
+    
+    // Helper function to compute bytecode hash (for debugging)
+    function getBytecodeHash(bytes memory bytecode) external pure returns (bytes32) {
+        return keccak256(bytecode);
     }
 }
 
@@ -35,7 +59,7 @@ contract VDRFactoryTest is Test {
     VDRFactory factory;
     ERC1967Proxy factoryProxy;
     VDR vdrImplementation;
-    MockCCDAO_CREATE2 mockCreate2;
+    CCDAO_CREATE2 create2Factory;
     
     address creator;
     address vdrOwner;
@@ -46,17 +70,17 @@ contract VDRFactoryTest is Test {
         // Deploy VDR implementation
         vdrImplementation = new VDR();
         
+        // Deploy real CCDAO_CREATE2 factory
+        create2Factory = new CCDAO_CREATE2();
+        
         // Deploy VDRFactory implementation
         VDRFactory factoryImpl = new VDRFactory();
         
-        // Deploy mock CCDAO_CREATE2 factory
-        mockCreate2 = new MockCCDAO_CREATE2();
-        
-        // Prepare initialization data
+        // Prepare initialization data for factory
         factoryOwner = address(0x999);
         bytes memory initData = abi.encodeCall(
             VDRFactory.initialize,
-            (factoryOwner, address(vdrImplementation), address(mockCreate2))
+            (factoryOwner, address(vdrImplementation), address(create2Factory))
         );
         
         // Deploy factory behind ERC1967Proxy
@@ -528,4 +552,166 @@ contract VDRFactoryTest is Test {
         
         // Both VDRs have same version since they use same implementation
         assertEq(factory.getVDRVersion(vdr1), factory.getVDRVersion(vdr2));
+    }
+
+    // ============ Address Prediction Tests ============
+
+    function test_PredictVDRAddressUsingCREATE2() public {
+        address[] memory managers = new address[](1);
+        managers[0] = vdrDataManager;
+        
+        string memory daoName = "PredictTest DAO";
+        
+        // Calculate salt and bytecode hash the same way factory does
+        bytes32 salt = keccak256(abi.encodePacked(daoName, creator));
+        
+        // Encode initialization data
+        bytes memory initData = abi.encodeWithSelector(
+            VDR.initialize.selector,
+            daoName,
+            vdrOwner,
+            managers
+        );
+        
+        // Create proxy bytecode
+        bytes memory proxyBytecode = abi.encodePacked(
+            type(ERC1967Proxy).creationCode,
+            abi.encode(address(vdrImplementation), initData)
+        );
+        bytes32 bytecodeHash = keccak256(proxyBytecode);
+        
+        // Predict address using CREATE2 factory
+        address predictedAddress = create2Factory.predictAddress(salt, bytecodeHash);
+        assertNotEq(predictedAddress, address(0), "Predicted address should not be zero");
+        
+        // Actually create the VDR
+        vm.prank(creator);
+        address actualAddress = factory.createVDR(
+            daoName,
+            vdrOwner,
+            managers
+        );
+        
+        // Verify predicted and actual addresses match
+        assertEq(predictedAddress, actualAddress, "Predicted address should match actual deployed address");
+        
+        // Verify the VDR is valid and functional
+        assertTrue(factory.isValidVDR(actualAddress));
+        VDR vdr = VDR(actualAddress);
+        assertEq(vdr.vdrName(), daoName);
+        assertEq(vdr.owner(), vdrOwner);
+    }
+
+    function test_DifferentCreatorsGetDifferentAddresses() public {
+        address[] memory managers = new address[](0);
+        string memory daoName = "Shared DAO Name";
+        
+        address creator1 = address(0x111);
+        address creator2 = address(0x222);
+        
+        // Encode initialization data
+        bytes memory initData = abi.encodeWithSelector(
+            VDR.initialize.selector,
+            daoName,
+            vdrOwner,
+            managers
+        );
+        
+        // Create proxy bytecode
+        bytes memory proxyBytecode = abi.encodePacked(
+            type(ERC1967Proxy).creationCode,
+            abi.encode(address(vdrImplementation), initData)
+        );
+        bytes32 bytecodeHash = keccak256(proxyBytecode);
+        
+        // Salt for creator1
+        bytes32 salt1 = keccak256(abi.encodePacked(daoName, creator1));
+        address predictedAddr1 = create2Factory.predictAddress(salt1, bytecodeHash);
+        
+        // Salt for creator2 (same DAO name, different creator)
+        bytes32 salt2 = keccak256(abi.encodePacked(daoName, creator2));
+        address predictedAddr2 = create2Factory.predictAddress(salt2, bytecodeHash);
+        
+        // Addresses should be different because salt includes creator
+        assertNotEq(predictedAddr1, predictedAddr2, "Different creators should get different addresses for same DAO name");
+        
+        // Both should be deployable
+        vm.prank(creator1);
+        address vdr1 = factory.createVDR(daoName, vdrOwner, managers);
+        assertEq(vdr1, predictedAddr1, "Creator1 VDR should match predicted address");
+        
+        vm.prank(creator2);
+        address vdr2 = factory.createVDR(daoName, vdrOwner, managers);
+        assertEq(vdr2, predictedAddr2, "Creator2 VDR should match predicted address");
+        
+        // Both VDRs should be valid and distinct
+        assertTrue(factory.isValidVDR(vdr1));
+        assertTrue(factory.isValidVDR(vdr2));
+        assertNotEq(vdr1, vdr2);
+    }
+
+    function test_SameCreatorCannotCreateSameDAONameTwice() public {
+        address[] memory managers = new address[](0);
+        string memory daoName = "Unique DAO";
+        
+        // First creation succeeds
+        vm.prank(creator);
+        address vdr1 = factory.createVDR(daoName, vdrOwner, managers);
+        assertTrue(factory.isValidVDR(vdr1));
+        
+        // Second creation with same name and same creator should fail
+        vm.prank(creator);
+        vm.expectRevert("VDRFactory: VDR for this DAO name already exists");
+        factory.createVDR(daoName, vdrOwner, managers);
+    }
+
+    function test_CreateVDRAndVerifyFunctionality() public {
+        address[] memory managers = new address[](2);
+        managers[0] = address(0x201);
+        managers[1] = address(0x202);
+        
+        string memory daoName = "Functional Test DAO";
+        
+        // Calculate salt and bytecode hash to predict address
+        bytes32 salt = keccak256(abi.encodePacked(daoName, creator));
+        
+        bytes memory initData = abi.encodeWithSelector(
+            VDR.initialize.selector,
+            daoName,
+            vdrOwner,
+            managers
+        );
+        
+        bytes memory proxyBytecode = abi.encodePacked(
+            type(ERC1967Proxy).creationCode,
+            abi.encode(address(vdrImplementation), initData)
+        );
+        bytes32 bytecodeHash = keccak256(proxyBytecode);
+        
+        // Predict address using CREATE2
+        address predictedAddress = create2Factory.predictAddress(salt, bytecodeHash);
+        assertNotEq(predictedAddress, address(0), "Predicted address should not be zero");
+        
+        // Create VDR
+        vm.prank(creator);
+        address vdrAddress = factory.createVDR(daoName, vdrOwner, managers);
+        
+        // Verify address prediction was correct
+        assertEq(vdrAddress, predictedAddress, "Deployed address must match prediction");
+        
+        // Verify VDR functionality
+        VDR vdr = VDR(vdrAddress);
+        
+        // Check basic properties
+        assertEq(vdr.vdrName(), daoName);
+        assertEq(vdr.owner(), vdrOwner);
+        assertEq(vdr.getMemberCount(), 2);
+        
+        // Verify creator tracking
+        address[] memory creatorVDRs = factory.getVDRsByCreator(creator);
+        assertEq(creatorVDRs.length, 1);
+        assertEq(creatorVDRs[0], vdrAddress);
+        
+        // Verify implementation tracking
+        assertEq(factory.getVDRImplementation(vdrAddress), address(vdrImplementation));
     }}

@@ -683,10 +683,9 @@ contract VDRTest is Test {
     // ============ Version Tests ============
 
     function test_GetVersion() public view {
-        (uint256 major, uint256 minor, uint256 patch) = vdr.getVersion();
-        assertEq(major, 1);
-        assertEq(minor, 0);
-        assertEq(patch, 0);
+        uint256 version = vdr.getVersion();
+        // Version 1.0.0 encoded as MMMNNNPPP = 001000000
+        assertEq(version, 1000000);
     }
 
     function test_GetImplementation() public view {
