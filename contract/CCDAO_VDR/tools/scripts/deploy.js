@@ -163,28 +163,24 @@ async function main() {
       );
     }
 
-    // ========== 第 2 步：部署 VDR 实现合约（使用 CREATE2 确保地址固定）==========
-    console.log('\n[2/5] 部署 VDR 实现合约（CREATE2）');
+    // ========== 第 2 步：部署 VDR 实现合约 ==========
+    console.log('\n[2/5] 部署 VDR 实现合约');
     
-    const vdrImplSalt = ethers.keccak256(ethers.toUtf8Bytes('VDR_impl_v1'));
-    const vdrImplementationAddress = await deployWithCreate2(
+    const vdrImplementationAddress = await deployContract(
       'VDR (Implementation)',
+      vdrJson.abi,
       vdrJson.bytecode.object,
-      vdrImplSalt,
-      ccdaoCreate2Address,
-      deployer
+      []
     );
 
-    // ========== 第 3 步：部署 VDRFactory 实现合约（使用 CREATE2 确保地址固定）==========
-    console.log('\n[3/5] 部署 VDRFactory 实现合约（CREATE2）');
+    // ========== 第 3 步：部署 VDRFactory 实现合约 ==========
+    console.log('\n[3/5] 部署 VDRFactory 实现合约');
     
-    const vdrFactoryImplSalt = ethers.keccak256(ethers.toUtf8Bytes('VDRFactory_impl_v1'));
-    const vdrFactoryImplementationAddress = await deployWithCreate2(
+    const vdrFactoryImplementationAddress = await deployContract(
       'VDRFactory (Implementation)',
+      vdrFactoryJson.abi,
       vdrFactoryJson.bytecode.object,
-      vdrFactoryImplSalt,
-      ccdaoCreate2Address,
-      deployer
+      []
     );
 
     // ========== 第 4 步：通过 CREATE2 部署 VDRFactoryProxy ==========
@@ -211,10 +207,10 @@ async function main() {
     );
     
     // 固定的 salt
-    const vdrFactoryProxySalt = ethers.keccak256(ethers.toUtf8Bytes('VDRFactoryProxy_v1'));
+    const vdrFactoryProxySalt = ethers.keccak256(ethers.toUtf8Bytes('VDRFactoryProxy'));
     
     const vdrFactoryAddress = await deployWithCreate2(
-      'VDRFactory (Proxy)',
+      'CCDAO VDRFactory (Proxy)',
       proxyBytecode,
       vdrFactoryProxySalt,
       ccdaoCreate2Address,
