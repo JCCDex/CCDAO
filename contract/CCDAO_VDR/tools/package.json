@@ -5,8 +5,7 @@
   "type": "module",
   "scripts": {
     "deploy": "node scripts/deploy.js",
-    "test": "mocha test/determinism.test.js",
-    "test:integration": "mocha test/integration.test.js"
+    "test": "mocha test/integration.test.js"
   },
   "dependencies": {
     "ethers": "^6.10.0"

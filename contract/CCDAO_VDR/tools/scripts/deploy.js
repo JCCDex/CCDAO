@@ -190,7 +190,7 @@ async function main() {
     const iface = new ethers.Interface(vdrFactoryJson.abi);
     const initCall = iface.encodeFunctionData('initialize', [
       deployer.address,
-      vdrFactoryImplementationAddress,
+      vdrImplementationAddress,  // VDR 实现地址，不是 VDRFactory 实现地址
       ccdaoCreate2Address
     ]);
 

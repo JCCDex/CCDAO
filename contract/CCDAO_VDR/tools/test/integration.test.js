@@ -85,11 +85,11 @@ describe('CCDAO VDR Integration Tests', function () {
       console.log('\n[TEST] 测试：创建 VDR 实例');
       
       const userAccount = users[0];
-      const vdrName = `TestDAO VDR`; // 固定名称，每次运行都相同（因为 Anvil 会重置）
+      const vdrName = `TestDAO_${Date.now()}`; // 使用时间戳确保唯一性
       const owner = userAccount.address; // VDR owner
       const dataManagers = [users[1].address]; // 指定数据管理员
 
-      // 调用 factory 创建 VDR
+      // 创建新的 VDR
       const factoryWithUser = vdrFactory.connect(userAccount);
       console.log(`  调用 createVDR: name=${vdrName}, owner=${owner}, dataManagers=${dataManagers}`);
       
@@ -97,20 +97,32 @@ describe('CCDAO VDR Integration Tests', function () {
       console.log(`  交易发送: ${tx.hash}`);
       
       const receipt = await tx.wait(1);
-      console.log(`  交易确认, receipt:`, receipt);
+      console.log(`  交易确认, blockNumber: ${receipt.blockNumber}`);
       
-      // 获取创建的 VDR 地址
+      // 从事件中解析 VDR 地址
+      const vdrCreatedEvent = receipt.logs.find(log => {
+        try {
+          const parsed = vdrFactory.interface.parseLog(log);
+          return parsed && parsed.name === 'VDRCreated';
+        } catch { return false; }
+      });
+      
+      expect(vdrCreatedEvent).to.not.be.undefined;
+      const parsedEvent = vdrFactory.interface.parseLog(vdrCreatedEvent);
+      const vdrAddressFromEvent = parsedEvent.args.vdrAddress;
+      console.log(`  [OK] 从事件获取 VDR 地址: ${vdrAddressFromEvent}`);
+      
+      // 获取创建的 VDR 地址（通过查询）
       const vdrCount = await vdrFactory.getVDRCount();
       console.log(`  [OK] VDR 总数: ${vdrCount}`);
       expect(Number(vdrCount)).to.be.greaterThan(0);
 
-      try {
-        userVDRAddress = await vdrFactory.getVDRByIndex(vdrCount - 1n);
-        console.log(`  [OK] 新 VDR 地址: ${userVDRAddress}`);
-      } catch (err) {
-        console.error(`  [FAIL] 获取 VDR 地址失败:`, err.message);
-        throw err;
-      }
+      userVDRAddress = await vdrFactory.getVDRByIndex(vdrCount - 1n);
+      console.log(`  [OK] 查询 VDR 地址: ${userVDRAddress}`);
+      
+      // 验证事件地址和查询地址一致
+      expect(vdrAddressFromEvent).to.equal(userVDRAddress);
+      console.log(`  [OK] 事件地址与查询地址一致 ✓`);
     });
 
     it('应该注册 VC（Verifiable Credential）', async function () {
