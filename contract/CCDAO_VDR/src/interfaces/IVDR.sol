@@ -74,12 +74,12 @@ interface IVDR {
      * @dev Initialize the VDR
      * @param _name The name of the VDR
      * @param _owner The owner address (can be a multisig contract)
-     * @param _issuers Array of initial issuer addresses
+     * @param _verifiers Array of initial verifier addresses
      */
     function initialize(
         string memory _name,
         address _owner,
-        address[] calldata _issuers
+        address[] calldata _verifiers
     ) external;
 
     // ============ VC Registration ============

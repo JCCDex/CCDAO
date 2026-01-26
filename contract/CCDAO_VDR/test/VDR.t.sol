@@ -45,13 +45,13 @@ contract VDRTest is Test {
         vm.warp(100 days);
 
         // Prepare initialization data
-        address[] memory issuers = new address[](2);
-        issuers[0] = issuer1;
-        issuers[1] = issuer2;
+        address[] memory verifiers = new address[](2);
+        verifiers[0] = issuer1;
+        verifiers[1] = issuer2;
 
         bytes memory initData = abi.encodeCall(
             VDR.initialize,
-            ("Test VDR", owner, issuers)
+            ("Test VDR", owner, verifiers)
         );
 
         // Deploy proxy
@@ -385,7 +385,7 @@ contract VDRTest is Test {
         assertEq(uint256(vc.status), uint256(VDRConstants.VCStatus.Revoked));
     }
 
-    function test_RevokeVC_OnlyIssuerOrOwner() public {
+    function test_RevokeVC_OnlyIssuerAdminOrOwner() public {
         bytes32 vcId = _getVcId("test-vc-20");
         bytes32 contentHash = _getContentHash("content");
         uint256 issuanceDate = block.timestamp - 1 days;
@@ -393,8 +393,8 @@ contract VDRTest is Test {
         vm.prank(issuer1);
         vdr.registerVC(vcId, holder1, contentHash, issuanceDate);
 
-        vm.prank(holder1); // Not issuer
-        vm.expectRevert("VDR: only issuer can revoke");
+        vm.prank(holder1); // Not issuer, admin, or owner
+        vm.expectRevert("VDR: only issuer, admin or owner can revoke");
         vdr.revokeVC(vcId);
     }
 
@@ -632,6 +632,65 @@ contract VDRTest is Test {
         vdr.revokeVC(vc1);
         
         // Count should be decremented
+        assertEq(vdr.getTotalVCCount(), 1);
+    }
+
+    function test_GetTotalVCCount_AfterResolveDisputeRevoke() public {
+        _setupOfficialTokens();
+        
+        bytes32 vc1 = _getVcId("test-vc-count-resolve-1");
+        bytes32 vc2 = _getVcId("test-vc-count-resolve-2");
+        bytes32 contentHash = _getContentHash("content");
+        uint256 issuanceDate = block.timestamp - 1 days;
+        
+        // Register two VCs
+        vm.prank(issuer1);
+        vdr.registerVC(vc1, holder1, contentHash, issuanceDate);
+        vm.prank(issuer1);
+        vdr.registerVC(vc2, holder1, contentHash, issuanceDate);
+        
+        assertEq(vdr.getTotalVCCount(), 2);
+        
+        // Dispute vc1
+        vm.prank(holder1);
+        vdr.disputeVC(vc1);
+        
+        // Count should still be 2 (disputed, not revoked)
+        assertEq(vdr.getTotalVCCount(), 2);
+        
+        // Resolve dispute by revoking - this should decrement vcCount
+        vm.prank(admin);
+        vdr.resolveDispute(vc1, true);
+        
+        // Count should be decremented to 1 (vc1 was revoked via resolveDispute)
+        assertEq(vdr.getTotalVCCount(), 1);
+    }
+
+    function test_GetTotalVCCount_AfterResolveDisputeRestore() public {
+        _setupOfficialTokens();
+        
+        bytes32 vc1 = _getVcId("test-vc-count-restore-1");
+        bytes32 contentHash = _getContentHash("content");
+        uint256 issuanceDate = block.timestamp - 1 days;
+        
+        // Register VC
+        vm.prank(issuer1);
+        vdr.registerVC(vc1, holder1, contentHash, issuanceDate);
+        
+        assertEq(vdr.getTotalVCCount(), 1);
+        
+        // Dispute vc1
+        vm.prank(holder1);
+        vdr.disputeVC(vc1);
+        
+        // Count should still be 1
+        assertEq(vdr.getTotalVCCount(), 1);
+        
+        // Resolve dispute by restoring - count should stay the same
+        vm.prank(admin);
+        vdr.resolveDispute(vc1, false);
+        
+        // Count should still be 1 (vc1 was restored, not revoked)
         assertEq(vdr.getTotalVCCount(), 1);
     }
 

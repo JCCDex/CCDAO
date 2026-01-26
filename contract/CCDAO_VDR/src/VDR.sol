@@ -104,22 +104,22 @@ contract VDR is Initializable, OwnableUpgradeable, UUPSUpgradeable, IVDR {
      * @dev Initialize the VDR
      * @param _name The name of the VDR
      * @param _owner The owner address (can be a multisig contract)
-     * @param _issuers Array of initial issuer addresses
+     * @param _verifiers Array of initial verifier addresses
      */
     function initialize(
         string memory _name,
         address _owner,
-        address[] calldata _issuers
+        address[] calldata _verifiers
     ) external initializer {
         __Ownable_init(_owner);
         factory = msg.sender;
         
         vdrName = _name;
 
-        // Initialize issuers
-        for (uint256 i = 0; i < _issuers.length; i++) {
-            if (_issuers[i] != address(0)) {
-                _addMember(_issuers[i], VDRConstants.VERIFIER_ROLE);
+        // Initialize verifiers
+        for (uint256 i = 0; i < _verifiers.length; i++) {
+            if (_verifiers[i] != address(0)) {
+                _addMember(_verifiers[i], VDRConstants.VERIFIER_ROLE);
             }
         }
     }
@@ -134,8 +134,9 @@ contract VDR is Initializable, OwnableUpgradeable, UUPSUpgradeable, IVDR {
         require(newImplementation != address(0), "VDR: invalid implementation");
         
         // Get version from new implementation via staticcall to verify compatibility
+        // Use function signature directly since getVersion() is a pure function
         (bool success, bytes memory result) = newImplementation.staticcall(
-            abi.encodeWithSelector(VDR.getVersion.selector)
+            abi.encodeWithSignature("getVersion()")
         );
         require(success, "VDR: failed to read version from new implementation");
         require(result.length == 32, "VDR: invalid version data from new implementation");
@@ -193,23 +194,21 @@ contract VDR is Initializable, OwnableUpgradeable, UUPSUpgradeable, IVDR {
 
     /**
      * @dev Revoke a credential
+     * Can be called by: issuer, admin, or owner
      * @param vcId The credential to revoke
      */
     function revokeVC(bytes32 vcId) external vcExists(vcId) {
         VDRConstants.VCRecord storage vc = vcRecords[vcId];
         require(
-            vc.issuer == _msgSender() || owner() == _msgSender(),
-            "VDR: only issuer can revoke"
+            vc.issuer == _msgSender() || 
+            hasMemberRole(_msgSender(), VDRConstants.ADMIN_ROLE) ||
+            owner() == _msgSender(),
+            "VDR: only issuer, admin or owner can revoke"
         );
         require(vc.status == VDRConstants.VCStatus.Active || vc.status == VDRConstants.VCStatus.Disputed, 
             "VDR: cannot revoke non-active VC");
 
-        vc.status = VDRConstants.VCStatus.Revoked;
-        
-        // Decrement VC count
-        vcCount--;
-        
-        emit VCRevoked(vcId, _msgSender());
+        _revokeVC(vcId);
     }
 
     // ============ VC Disputes ============
@@ -264,8 +263,7 @@ contract VDR is Initializable, OwnableUpgradeable, UUPSUpgradeable, IVDR {
         require(vcRecords[vcId].status == VDRConstants.VCStatus.Disputed, "VDR: VC not in disputed state");
 
         if (shouldRevoke) {
-            vcRecords[vcId].status = VDRConstants.VCStatus.Revoked;
-            emit VCRevoked(vcId, _msgSender());
+            _revokeVC(vcId);
         } else {
             vcRecords[vcId].status = VDRConstants.VCStatus.Active;
             emit DisputeResolved(vcId, false);
@@ -498,6 +496,16 @@ contract VDR is Initializable, OwnableUpgradeable, UUPSUpgradeable, IVDR {
         delete memberIndices[member];
 
         emit MemberRemoved(member);
+    }
+
+    /**
+     * @dev Internal function to revoke a VC
+     * @param vcId The credential to revoke
+     */
+    function _revokeVC(bytes32 vcId) internal {
+        vcRecords[vcId].status = VDRConstants.VCStatus.Revoked;
+        vcCount--;
+        emit VCRevoked(vcId, _msgSender());
     }
 
     function _removeDisputedVC(bytes32 vcId) internal {

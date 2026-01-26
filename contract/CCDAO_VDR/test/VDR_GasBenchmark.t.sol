@@ -61,13 +61,13 @@ contract VDRGasBenchmark is Test {
         vm.warp(100 days);
 
         // Prepare initialization data
-        address[] memory issuers = new address[](2);
-        issuers[0] = issuer1;
-        issuers[1] = issuer2;
+        address[] memory verifiers = new address[](2);
+        verifiers[0] = issuer1;
+        verifiers[1] = issuer2;
 
         bytes memory initData = abi.encodeCall(
             VDR.initialize,
-            ("Test VDR", owner, issuers)
+            ("Test VDR", owner, verifiers)
         );
 
         // Deploy proxy

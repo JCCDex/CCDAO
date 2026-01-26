@@ -20,13 +20,13 @@ interface IVDRFactory {
      * @dev Create a new VDR instance using the latest implementation
      * @param name The name of the VDR
      * @param owner The owner address (can be a multisig contract like Safe)
-     * @param dataManagers Array of initial data manager addresses
+     * @param verifiers Array of initial verifier addresses
      * @return vdrAddress The address of the created VDR
      */
     function createVDR(
         string calldata name,
         address owner,
-        address[] calldata dataManagers
+        address[] calldata verifiers
     ) external returns (address);
 
     /**

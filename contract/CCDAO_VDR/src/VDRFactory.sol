@@ -84,13 +84,13 @@ contract VDRFactory is IVDRFactory, Initializable, UUPSUpgradeable, OwnableUpgra
      * VDR proxy address is deterministic based on DAO name (via CREATE2)
      * @param name The name of the VDR (also used as salt for deterministic proxy deployment)
      * @param owner The owner address (can be a multisig contract like Safe)
-     * @param dataManagers Array of initial data manager addresses
+     * @param verifiers Array of initial verifier addresses
      * @return vdrAddress The address of the created VDR proxy (deterministic based on name)
      */
     function createVDR(
         string calldata name,
         address owner,
-        address[] calldata dataManagers
+        address[] calldata verifiers
     ) external returns (address) {
         require(owner != address(0), "VDRFactory: invalid owner address");
         require(bytes(name).length > 0, "VDRFactory: DAO name cannot be empty");
@@ -100,7 +100,7 @@ contract VDRFactory is IVDRFactory, Initializable, UUPSUpgradeable, OwnableUpgra
             VDR.initialize.selector,
             name,
             owner,
-            dataManagers
+            verifiers
         );
         
         // Predict the deterministic address before deployment
