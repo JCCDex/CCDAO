@@ -112,7 +112,7 @@ contract VDRTest is Test {
         uint256 issuanceDate = block.timestamp - 1 days;
         
         vm.prank(issuer1);
-        vdr.registerVC(vcId, holder1, contentHash, issuanceDate);
+        vdr.registerVC(vcId, holder1, bytes32(0), contentHash, issuanceDate);
 
         VDRConstants.VCRecord memory vc = vdr.getVC(vcId);
         assertEq(vc.issuer, issuer1);
@@ -129,7 +129,7 @@ contract VDRTest is Test {
         uint256 issuanceDate = block.timestamp - 1 days;
         
         vm.prank(issuer1);
-        vdr.registerVC(vcId, issuer1, contentHash, issuanceDate);
+        vdr.registerVC(vcId, issuer1, bytes32(0), contentHash, issuanceDate);
 
         VDRConstants.VCRecord memory vc = vdr.getVC(vcId);
         assertEq(vc.issuer, issuer1);
@@ -142,7 +142,7 @@ contract VDRTest is Test {
         
         vm.prank(issuer1);
         vm.expectRevert("VDR: invalid VC ID");
-        vdr.registerVC(bytes32(0), holder1, contentHash, issuanceDate);
+        vdr.registerVC(bytes32(0), holder1, bytes32(0), contentHash, issuanceDate);
     }
 
     function test_RegisterVC_InvalidHolder() public {
@@ -152,7 +152,7 @@ contract VDRTest is Test {
         
         vm.prank(issuer1);
         vm.expectRevert("VDR: invalid holder");
-        vdr.registerVC(vcId, address(0), contentHash, issuanceDate);
+        vdr.registerVC(vcId, address(0), bytes32(0), contentHash, issuanceDate);
     }
 
     function test_RegisterVC_InvalidContentHash() public {
@@ -161,7 +161,7 @@ contract VDRTest is Test {
         
         vm.prank(issuer1);
         vm.expectRevert("VDR: invalid content hash");
-        vdr.registerVC(vcId, holder1, bytes32(0), issuanceDate);
+        vdr.registerVC(vcId, holder1, bytes32(0), bytes32(0), issuanceDate);
     }
 
     function test_RegisterVC_InvalidIssuanceDate_Zero() public {
@@ -170,7 +170,7 @@ contract VDRTest is Test {
         
         vm.prank(issuer1);
         vm.expectRevert("VDR: invalid issuance date");
-        vdr.registerVC(vcId, holder1, contentHash, 0);
+        vdr.registerVC(vcId, holder1, bytes32(0), contentHash, 0);
     }
 
     function test_RegisterVC_InvalidIssuanceDate_Future() public {
@@ -180,7 +180,7 @@ contract VDRTest is Test {
         
         vm.prank(issuer1);
         vm.expectRevert("VDR: invalid issuance date");
-        vdr.registerVC(vcId, holder1, contentHash, futureDate);
+        vdr.registerVC(vcId, holder1, bytes32(0), contentHash, futureDate);
     }
 
     function test_RegisterVC_Duplicate() public {
@@ -191,12 +191,12 @@ contract VDRTest is Test {
         
         // Register first VC
         vm.prank(issuer1);
-        vdr.registerVC(vcId, holder1, contentHash1, issuanceDate);
+        vdr.registerVC(vcId, holder1, bytes32(0), contentHash1, issuanceDate);
         
         // Try to register with same vcId - should fail
         vm.prank(issuer2);
         vm.expectRevert("VDR: VC already exists");
-        vdr.registerVC(vcId, holder2, contentHash2, issuanceDate);
+        vdr.registerVC(vcId, holder2, bytes32(0), contentHash2, issuanceDate);
     }
 
     function test_RegisterVC_AnyoneCanRegisterAsIssuer() public {
@@ -206,7 +206,7 @@ contract VDRTest is Test {
         address randomAddr = address(0x77);
         
         vm.prank(randomAddr);
-        vdr.registerVC(vcId, holder1, contentHash, issuanceDate);
+        vdr.registerVC(vcId, holder1, bytes32(0), contentHash, issuanceDate);
 
         VDRConstants.VCRecord memory vc = vdr.getVC(vcId);
         assertEq(vc.issuer, randomAddr);
@@ -220,7 +220,7 @@ contract VDRTest is Test {
         uint256 pastDate = block.timestamp - 1 days;
         
         vm.prank(issuer1);
-        vdr.registerVC(vcId, holder1, contentHash, pastDate);
+        vdr.registerVC(vcId, holder1, bytes32(0), contentHash, pastDate);
 
         VDRConstants.VCRecord memory vc = vdr.getVC(vcId);
         assertEq(vc.issuanceDate, pastDate);
@@ -233,7 +233,7 @@ contract VDRTest is Test {
         // Edge case: issuanceDate == block.timestamp (should be allowed)
         
         vm.prank(issuer1);
-        vdr.registerVC(vcId, holder1, contentHash, block.timestamp);
+        vdr.registerVC(vcId, holder1, bytes32(0), contentHash, block.timestamp);
 
         VDRConstants.VCRecord memory vc = vdr.getVC(vcId);
         assertEq(vc.issuanceDate, block.timestamp);
@@ -248,7 +248,7 @@ contract VDRTest is Test {
         vm.prank(issuer1);
         vm.expectEmit(true, true, false, false);
         emit IVDR.VCRegistered(vcId, issuer1, holder1, bytes32(0));
-        vdr.registerVC(vcId, holder1, contentHash, issuanceDate);
+        vdr.registerVC(vcId, holder1, bytes32(0), contentHash, issuanceDate);
     }
 
     function test_RegisterVC_IndexingIssuer() public {
@@ -259,10 +259,10 @@ contract VDRTest is Test {
         
         // Same issuer registers two VCs
         vm.prank(issuer1);
-        vdr.registerVC(vcId1, holder1, contentHash, issuanceDate);
+        vdr.registerVC(vcId1, holder1, bytes32(0), contentHash, issuanceDate);
         
         vm.prank(issuer1);
-        vdr.registerVC(vcId2, holder2, contentHash, issuanceDate);
+        vdr.registerVC(vcId2, holder2, bytes32(0), contentHash, issuanceDate);
 
         // Verify both VCs are indexed under issuer1
         bytes32[] memory issuerVCs = vdr.getIssuerVCs(issuer1);
@@ -279,10 +279,10 @@ contract VDRTest is Test {
         
         // Different issuers register VCs for the same holder
         vm.prank(issuer1);
-        vdr.registerVC(vcId1, holder1, contentHash, issuanceDate);
+        vdr.registerVC(vcId1, holder1, bytes32(0), contentHash, issuanceDate);
         
         vm.prank(issuer2);
-        vdr.registerVC(vcId2, holder1, contentHash, issuanceDate);
+        vdr.registerVC(vcId2, holder1, bytes32(0), contentHash, issuanceDate);
 
         // Verify both VCs are indexed under holder1
         bytes32[] memory holderVCs = vdr.getHolderVCs(holder1);
@@ -297,7 +297,7 @@ contract VDRTest is Test {
         uint256 issuanceDate = block.timestamp - 1 days;
         
         vm.prank(issuer1);
-        vdr.registerVC(vcId, holder1, contentHash, issuanceDate);
+        vdr.registerVC(vcId, holder1, bytes32(0), contentHash, issuanceDate);
 
         // Verify initial status is Active
         VDRConstants.VCRecord memory vc = vdr.getVC(vcId);
@@ -312,7 +312,7 @@ contract VDRTest is Test {
         uint256 issuanceDate = block.timestamp - 2 days;
         
         vm.prank(issuer1);
-        vdr.registerVC(vcId, holder1, contentHash, issuanceDate);
+        vdr.registerVC(vcId, holder1, bytes32(0), contentHash, issuanceDate);
 
         VDRConstants.VCRecord memory vc = vdr.getVC(vcId);
         assertEq(vc.vcId, vcId);
@@ -330,13 +330,13 @@ contract VDRTest is Test {
         uint256 issuanceDate = block.timestamp - 1 days;
         
         vm.prank(issuer1);
-        vdr.registerVC(vcId1, holder1, contentHash, issuanceDate);
+        vdr.registerVC(vcId1, holder1, bytes32(0), contentHash, issuanceDate);
         
         vm.prank(issuer1);
-        vdr.registerVC(vcId2, holder2, contentHash, issuanceDate);
+        vdr.registerVC(vcId2, holder2, bytes32(0), contentHash, issuanceDate);
         
         vm.prank(issuer2);
-        vdr.registerVC(vcId3, holder1, contentHash, issuanceDate);
+        vdr.registerVC(vcId3, holder1, bytes32(0), contentHash, issuanceDate);
 
         bytes32[] memory issuer1VCs = vdr.getIssuerVCs(issuer1);
         assertEq(issuer1VCs.length, 2);
@@ -353,13 +353,13 @@ contract VDRTest is Test {
         uint256 issuanceDate = block.timestamp - 1 days;
         
         vm.prank(issuer1);
-        vdr.registerVC(vcId1, holder1, contentHash, issuanceDate);
+        vdr.registerVC(vcId1, holder1, bytes32(0), contentHash, issuanceDate);
         
         vm.prank(issuer1);
-        vdr.registerVC(vcId2, holder1, contentHash, issuanceDate);
+        vdr.registerVC(vcId2, holder1, bytes32(0), contentHash, issuanceDate);
         
         vm.prank(issuer2);
-        vdr.registerVC(vcId3, holder2, contentHash, issuanceDate);
+        vdr.registerVC(vcId3, holder2, bytes32(0), contentHash, issuanceDate);
 
         bytes32[] memory holder1VCs = vdr.getHolderVCs(holder1);
         assertEq(holder1VCs.length, 2);
@@ -376,7 +376,7 @@ contract VDRTest is Test {
         uint256 issuanceDate = block.timestamp - 1 days;
         
         vm.prank(issuer1);
-        vdr.registerVC(vcId, holder1, contentHash, issuanceDate);
+        vdr.registerVC(vcId, holder1, bytes32(0), contentHash, issuanceDate);
 
         vm.prank(issuer1);
         vdr.revokeVC(vcId);
@@ -391,7 +391,7 @@ contract VDRTest is Test {
         uint256 issuanceDate = block.timestamp - 1 days;
         
         vm.prank(issuer1);
-        vdr.registerVC(vcId, holder1, contentHash, issuanceDate);
+        vdr.registerVC(vcId, holder1, bytes32(0), contentHash, issuanceDate);
 
         vm.prank(holder1); // Not issuer, admin, or owner
         vm.expectRevert("VDR: only issuer, admin or owner can revoke");
@@ -404,7 +404,7 @@ contract VDRTest is Test {
         uint256 issuanceDate = block.timestamp - 1 days;
         
         vm.prank(issuer1);
-        vdr.registerVC(vcId, holder1, contentHash, issuanceDate);
+        vdr.registerVC(vcId, holder1, bytes32(0), contentHash, issuanceDate);
 
         vm.prank(owner);
         vdr.revokeVC(vcId);
@@ -423,7 +423,7 @@ contract VDRTest is Test {
         uint256 issuanceDate = block.timestamp - 1 days;
         
         vm.prank(issuer1);
-        vdr.registerVC(vcId, holder1, contentHash, issuanceDate);
+        vdr.registerVC(vcId, holder1, bytes32(0), contentHash, issuanceDate);
 
         vm.prank(holder1);
         vdr.disputeVC(vcId);
@@ -439,7 +439,7 @@ contract VDRTest is Test {
         uint256 issuanceDate = block.timestamp - 1 days;
         
         vm.prank(issuer1);
-        vdr.registerVC(vcId, holder1, contentHash, issuanceDate);
+        vdr.registerVC(vcId, holder1, bytes32(0), contentHash, issuanceDate);
 
         // holder1 has no tokens, should fail
         vm.prank(holder1);
@@ -454,7 +454,7 @@ contract VDRTest is Test {
         uint256 issuanceDate = block.timestamp - 1 days;
         
         vm.prank(issuer1);
-        vdr.registerVC(vcId, holder1, contentHash, issuanceDate);
+        vdr.registerVC(vcId, holder1, bytes32(0), contentHash, issuanceDate);
 
         // Owner can dispute even without tokens
         vm.prank(owner);
@@ -477,7 +477,7 @@ contract VDRTest is Test {
         uint256 issuanceDate = block.timestamp - 1 days;
         
         vm.prank(issuer1);
-        vdr.registerVC(vcId, holder1, contentHash, issuanceDate);
+        vdr.registerVC(vcId, holder1, bytes32(0), contentHash, issuanceDate);
 
         // Should succeed with 1 NFT
         vm.prank(holder1);
@@ -495,7 +495,7 @@ contract VDRTest is Test {
         uint256 issuanceDate = block.timestamp - 1 days;
         
         vm.prank(issuer1);
-        vdr.registerVC(vcId, holder1, contentHash, issuanceDate);
+        vdr.registerVC(vcId, holder1, bytes32(0), contentHash, issuanceDate);
 
         vm.prank(holder1);
         vdr.disputeVC(vcId);
@@ -515,7 +515,7 @@ contract VDRTest is Test {
         uint256 issuanceDate = block.timestamp - 1 days;
         
         vm.prank(issuer1);
-        vdr.registerVC(vcId, holder1, contentHash, issuanceDate);
+        vdr.registerVC(vcId, holder1, bytes32(0), contentHash, issuanceDate);
 
         vm.prank(holder1);
         vdr.disputeVC(vcId);
@@ -538,11 +538,11 @@ contract VDRTest is Test {
         
         // Register three VCs
         vm.prank(issuer1);
-        vdr.registerVC(vc1, holder1, contentHash, issuanceDate);
+        vdr.registerVC(vc1, holder1, bytes32(0), contentHash, issuanceDate);
         vm.prank(issuer1);
-        vdr.registerVC(vc2, holder1, contentHash, issuanceDate);
+        vdr.registerVC(vc2, holder1, bytes32(0), contentHash, issuanceDate);
         vm.prank(issuer1);
-        vdr.registerVC(vc3, holder1, contentHash, issuanceDate);
+        vdr.registerVC(vc3, holder1, bytes32(0), contentHash, issuanceDate);
 
         // Dispute two of them
         vm.prank(holder1);
@@ -568,9 +568,9 @@ contract VDRTest is Test {
         
         // Register and dispute two VCs
         vm.prank(issuer1);
-        vdr.registerVC(vc1, holder1, contentHash, issuanceDate);
+        vdr.registerVC(vc1, holder1, bytes32(0), contentHash, issuanceDate);
         vm.prank(issuer1);
-        vdr.registerVC(vc2, holder1, contentHash, issuanceDate);
+        vdr.registerVC(vc2, holder1, bytes32(0), contentHash, issuanceDate);
         
         vm.prank(holder1);
         vdr.disputeVC(vc1);
@@ -599,17 +599,17 @@ contract VDRTest is Test {
         
         // Register first VC
         vm.prank(issuer1);
-        vdr.registerVC(vc1, holder1, contentHash, issuanceDate);
+        vdr.registerVC(vc1, holder1, bytes32(0), contentHash, issuanceDate);
         assertEq(vdr.getTotalVCCount(), 1);
         
         // Register second VC
         vm.prank(issuer1);
-        vdr.registerVC(vc2, holder1, contentHash, issuanceDate);
+        vdr.registerVC(vc2, holder1, bytes32(0), contentHash, issuanceDate);
         assertEq(vdr.getTotalVCCount(), 2);
         
         // Register third VC
         vm.prank(issuer1);
-        vdr.registerVC(vc3, holder1, contentHash, issuanceDate);
+        vdr.registerVC(vc3, holder1, bytes32(0), contentHash, issuanceDate);
         assertEq(vdr.getTotalVCCount(), 3);
     }
 
@@ -621,9 +621,9 @@ contract VDRTest is Test {
         
         // Register two VCs
         vm.prank(issuer1);
-        vdr.registerVC(vc1, holder1, contentHash, issuanceDate);
+        vdr.registerVC(vc1, holder1, bytes32(0), contentHash, issuanceDate);
         vm.prank(issuer1);
-        vdr.registerVC(vc2, holder1, contentHash, issuanceDate);
+        vdr.registerVC(vc2, holder1, bytes32(0), contentHash, issuanceDate);
         
         assertEq(vdr.getTotalVCCount(), 2);
         
@@ -645,9 +645,9 @@ contract VDRTest is Test {
         
         // Register two VCs
         vm.prank(issuer1);
-        vdr.registerVC(vc1, holder1, contentHash, issuanceDate);
+        vdr.registerVC(vc1, holder1, bytes32(0), contentHash, issuanceDate);
         vm.prank(issuer1);
-        vdr.registerVC(vc2, holder1, contentHash, issuanceDate);
+        vdr.registerVC(vc2, holder1, bytes32(0), contentHash, issuanceDate);
         
         assertEq(vdr.getTotalVCCount(), 2);
         
@@ -675,7 +675,7 @@ contract VDRTest is Test {
         
         // Register VC
         vm.prank(issuer1);
-        vdr.registerVC(vc1, holder1, contentHash, issuanceDate);
+        vdr.registerVC(vc1, holder1, bytes32(0), contentHash, issuanceDate);
         
         assertEq(vdr.getTotalVCCount(), 1);
         
@@ -759,7 +759,7 @@ contract VDRTest is Test {
         uint256 pastIssuanceDate = block.timestamp - 10 days;
         
         vm.prank(issuer1);
-        vdr.registerVC(vcId, holder1, contentHash, pastIssuanceDate);
+        vdr.registerVC(vcId, holder1, bytes32(0), contentHash, pastIssuanceDate);
 
         VDRConstants.VCRecord memory vc = vdr.getVC(vcId);
         assertTrue(vc.registrationTime >= vc.issuanceDate);
@@ -776,7 +776,7 @@ contract VDRTest is Test {
         
         // 1. issuer1 registers credential for holder1
         vm.prank(issuer1);
-        vdr.registerVC(vcId, holder1, contentHash, issuanceDate);
+        vdr.registerVC(vcId, holder1, bytes32(0), contentHash, issuanceDate);
 
         // 2. Holder disputes
         vm.prank(holder1);
@@ -806,15 +806,15 @@ contract VDRTest is Test {
         
         // issuer1 issues VC to holder1
         vm.prank(issuer1);
-        vdr.registerVC(vc1, holder1, contentHash, issuanceDate);
+        vdr.registerVC(vc1, holder1, bytes32(0), contentHash, issuanceDate);
         
         // issuer1 issues VC to holder2
         vm.prank(issuer1);
-        vdr.registerVC(vc2, holder2, contentHash, issuanceDate);
+        vdr.registerVC(vc2, holder2, bytes32(0), contentHash, issuanceDate);
 
         // issuer2 issues VC to holder1
         vm.prank(issuer2);
-        vdr.registerVC(vc3, holder1, contentHash, issuanceDate);
+        vdr.registerVC(vc3, holder1, bytes32(0), contentHash, issuanceDate);
 
         // Verify issuer indices
         bytes32[] memory issuer1VCs = vdr.getIssuerVCs(issuer1);

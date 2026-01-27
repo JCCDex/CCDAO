@@ -82,6 +82,50 @@ The VDR contract is designed following Safe's multi-signature architecture:
 3. **Access Control**: Fine-grained permissions for different roles
 4. **Extensibility**: Easy to extend with custom handlers and logic
 
+## VC Registration Best Practices
+
+### vcId Generation
+
+The `vcId` parameter in `registerVC()` should be a **keccak256 hash** of the original VC identifier from the DID document, NOT the raw string.
+
+**Why use a hash?**
+
+| Benefit | Description |
+|---------|-------------|
+| Collision resistance | 256-bit hash space (2^256) virtually eliminates duplicates |
+| Privacy protection | On-chain vcId cannot be reversed to reveal original ID |
+| Easy verification | Hash the original ID and compare with on-chain record |
+| W3C VC compatibility | Works with standard VC URI formats |
+
+**Example (JavaScript/ethers.js):**
+
+```javascript
+import { ethers } from 'ethers';
+
+// Original VC ID from DID document (W3C standard format)
+const originalVcId = "urn:uuid:" + crypto.randomUUID();
+// e.g., "urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6"
+
+// Hash it for on-chain storage
+const vcIdHash = ethers.keccak256(ethers.toUtf8Bytes(originalVcId));
+
+// Register on-chain
+await vdr.registerVC(vcIdHash, holderAddress, contentHash, issuanceDate);
+```
+
+**Example (Solidity):**
+
+```solidity
+// If computing hash on-chain (less common)
+bytes32 vcId = keccak256(bytes("urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6"));
+```
+
+**Verification flow:**
+
+1. User presents original VC with ID `urn:uuid:xxx`
+2. Verifier computes `keccak256("urn:uuid:xxx")`
+3. Query `vdr.getVC(hash)` to verify on-chain status
+
 ## License
 
 MIT

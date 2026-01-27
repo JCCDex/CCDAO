@@ -292,7 +292,10 @@ contract VDRFactory is IVDRFactory, Initializable, UUPSUpgradeable, OwnableUpgra
             abi.encodeWithSignature("upgradeToAndCall(address,bytes)", newImpl, "")
         );
         require(success, "VDRFactory: upgrade failed");
-        
+
+        address actualImpl = VDR(vdrAddress).getImplementation();
+        require(actualImpl == newImpl, "VDRFactory: upgrade verification failed");        
+
         // Update tracked implementation (version is already updated in VDR._authorizeUpgrade)
         vdrImplementations[vdrAddress] = newImpl;
         vdrVersions[vdrAddress] = vdr.getVersion();  // Sync version
@@ -353,5 +356,10 @@ contract VDRFactory is IVDRFactory, Initializable, UUPSUpgradeable, OwnableUpgra
      */
     function _authorizeUpgrade(address newImplementation) internal override onlyOwner {
         require(newImplementation != address(0), "VDRFactory: invalid implementation");
+        // 添加接口兼容性检查
+        (bool success, ) = newImplementation.staticcall(
+            abi.encodeWithSignature("vdrImplementation()")
+        );
+        require(success, "VDRFactory: incompatible implementation");
     }
 }

@@ -89,12 +89,14 @@ interface IVDR {
      * Caller is the issuer, holder can be different
      * @param vcId Unique identifier for the VC (must be globally unique)
      * @param holder Address of the credential holder
+     * @param vcType Type of the VC (bytes32(0) means untyped/generic)
      * @param contentHash keccak256 hash of VC content (32 bytes, verifiable by anyone)
      * @param issuanceDate Timestamp when VC was issued off-chain
      */
     function registerVC(
         bytes32 vcId,
         address holder,
+        bytes32 vcType,
         bytes32 contentHash,
         uint256 issuanceDate
     ) external;

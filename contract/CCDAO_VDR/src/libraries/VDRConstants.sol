@@ -46,6 +46,7 @@ library VDRConstants {
      * @param vcId Unique identifier for the VC (provided by caller, must be globally unique)
      * @param issuer Address of the credential issuer
      * @param holder Address of the credential holder
+     * @param vcType Type of the VC (bytes32(0) means untyped/generic)
      * @param contentHash keccak256 hash of the VC content (32 bytes, verifiable by anyone)
      * @param issuanceDate Timestamp when the VC was issued (off-chain)
      * @param registrationTime Timestamp when the VC was registered on-chain (auto-recorded)
@@ -55,6 +56,7 @@ library VDRConstants {
         bytes32 vcId;
         address issuer;
         address holder;
+        bytes32 vcType;           // bytes32(0) = untyped/generic
         bytes32 contentHash;
         uint256 issuanceDate;
         uint256 registrationTime;

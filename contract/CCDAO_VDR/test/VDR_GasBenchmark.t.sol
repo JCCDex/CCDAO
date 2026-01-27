@@ -103,7 +103,7 @@ contract VDRGasBenchmark is Test {
         uint256 issuanceDate = block.timestamp - 1 days;
 
         vm.prank(issuer1);
-        vdr.registerVC(vcId, holder1, contentHash, issuanceDate);
+        vdr.registerVC(vcId, holder1, bytes32(0), contentHash, issuanceDate);
         // Check registration success
         VDRConstants.VCRecord memory vc = vdr.getVC(vcId);
         assertEq(vc.issuer, issuer1);
@@ -120,7 +120,7 @@ contract VDRGasBenchmark is Test {
             bytes32 contentHash = _getContentHash(string(abi.encodePacked("content-", vm.toString(i))));
             uint256 issuanceDate = block.timestamp - uint256(11 - i) * 1 days;
 
-            vdr.registerVC(vcId, holder1, contentHash, issuanceDate);
+            vdr.registerVC(vcId, holder1, bytes32(0), contentHash, issuanceDate);
         }
         vm.stopPrank();
     }
@@ -136,7 +136,7 @@ contract VDRGasBenchmark is Test {
         uint256 issuanceDate = block.timestamp - 1 days;
 
         vm.prank(issuer1);
-        vdr.registerVC(vcId, holder1, contentHash, issuanceDate);
+        vdr.registerVC(vcId, holder1, bytes32(0), contentHash, issuanceDate);
 
         // Then revoke it
         vm.prank(issuer1);
@@ -160,7 +160,7 @@ contract VDRGasBenchmark is Test {
             bytes32 contentHash = _getContentHash(string(abi.encodePacked("revoke-content-", vm.toString(i))));
             uint256 issuanceDate = block.timestamp - uint256(11 - i) * 1 days;
 
-            vdr.registerVC(vcIds[i], holder1, contentHash, issuanceDate);
+            vdr.registerVC(vcIds[i], holder1, bytes32(0), contentHash, issuanceDate);
         }
         vm.stopPrank();
 
@@ -184,7 +184,7 @@ contract VDRGasBenchmark is Test {
             bytes32 contentHash = _getContentHash(string(abi.encodePacked("issuer-query-content-", vm.toString(i))));
             uint256 issuanceDate = block.timestamp - uint256(6 - i) * 1 days;
 
-            vdr.registerVC(vcId, holder1, contentHash, issuanceDate);
+            vdr.registerVC(vcId, holder1, bytes32(0), contentHash, issuanceDate);
         }
         vm.stopPrank();
 
@@ -206,7 +206,7 @@ contract VDRGasBenchmark is Test {
             bytes32 contentHash = _getContentHash(string(abi.encodePacked("holder-query-content-", vm.toString(i))));
             uint256 issuanceDate = block.timestamp - uint256(6 - i) * 1 days;
 
-            vdr.registerVC(vcId, holder1, contentHash, issuanceDate);
+            vdr.registerVC(vcId, holder1, bytes32(0), contentHash, issuanceDate);
         }
         vm.stopPrank();
 
@@ -229,7 +229,7 @@ contract VDRGasBenchmark is Test {
             bytes32 contentHash = _getContentHash(string(abi.encodePacked("mixed-content-", vm.toString(i))));
             uint256 issuanceDate = block.timestamp - uint256(6 - i) * 1 days;
 
-            vdr.registerVC(vcIds[i], holder1, contentHash, issuanceDate);
+            vdr.registerVC(vcIds[i], holder1, bytes32(0), contentHash, issuanceDate);
         }
 
         // Query by issuer
@@ -244,7 +244,7 @@ contract VDRGasBenchmark is Test {
             bytes32 contentHash = _getContentHash(string(abi.encodePacked("mixed-content-", vm.toString(i))));
             uint256 issuanceDate = block.timestamp - uint256(9 - i) * 1 days;
 
-            vdr.registerVC(vcId, holder2, contentHash, issuanceDate);
+            vdr.registerVC(vcId, holder2, bytes32(0), contentHash, issuanceDate);
         }
 
         // Query by holder
@@ -270,7 +270,7 @@ contract VDRGasBenchmark is Test {
             uint256 issuanceDate = block.timestamp - uint256(21 - i) * 1 days;
 
             address currentHolder = i % 2 == 0 ? holder1 : holder2;
-            vdr.registerVC(vcId, currentHolder, contentHash, issuanceDate);
+            vdr.registerVC(vcId, currentHolder, bytes32(0), contentHash, issuanceDate);
         }
         vm.stopPrank();
 
@@ -291,7 +291,7 @@ contract VDRGasBenchmark is Test {
         uint256 issuanceDate = block.timestamp - 1 days;
 
         vm.prank(issuer1);
-        vdr.registerVC(vcId, holder1, contentHash, issuanceDate);
+        vdr.registerVC(vcId, holder1, bytes32(0), contentHash, issuanceDate);
 
         // Retrieve it multiple times
         for (uint256 i = 0; i < 10; i++) {
@@ -317,7 +317,7 @@ contract VDRGasBenchmark is Test {
             // Distribute across multiple holders (round-robin)
             address currentHolder = (i % 3 == 0) ? holder1 : (i % 3 == 1) ? holder2 : holder3;
             
-            vdr.registerVC(vcId, currentHolder, contentHash, issuanceDate);
+            vdr.registerVC(vcId, currentHolder, bytes32(0), contentHash, issuanceDate);
         }
         vm.stopPrank();
     }
@@ -335,7 +335,7 @@ contract VDRGasBenchmark is Test {
             uint256 issuanceDate = block.timestamp - uint256(101 - i) * 1 seconds;
             
             address currentHolder = (i % 3 == 0) ? holder1 : (i % 3 == 1) ? holder2 : holder3;
-            vdr.registerVC(vcId, currentHolder, contentHash, issuanceDate);
+            vdr.registerVC(vcId, currentHolder, bytes32(0), contentHash, issuanceDate);
         }
         vm.stopPrank();
 
@@ -365,7 +365,7 @@ contract VDRGasBenchmark is Test {
         uint256 issuanceDate = block.timestamp - 1 days;
 
         vm.prank(issuer1);
-        vdr.registerVC(vcId, holder1, contentHash, issuanceDate);
+        vdr.registerVC(vcId, holder1, bytes32(0), contentHash, issuanceDate);
 
         // Retrieve it 5000 times
         vm.startPrank(verifier);
@@ -391,7 +391,7 @@ contract VDRGasBenchmark is Test {
             uint256 issuanceDate = block.timestamp - uint256(iterations - i) * 1 seconds;
             
             address currentHolder = (i % 2 == 0) ? holder1 : holder2;
-            vdr.registerVC(vcIds[i], currentHolder, contentHash, issuanceDate);
+            vdr.registerVC(vcIds[i], currentHolder, bytes32(0), contentHash, issuanceDate);
         }
 
         // Phase 2: 100 revokes
@@ -415,7 +415,7 @@ contract VDRGasBenchmark is Test {
             bytes32 contentHash = _getContentHash(string(abi.encodePacked("mixed-intensive-new-content-", vm.toString(i))));
             uint256 issuanceDate = block.timestamp - uint256(iterations - i) * 1 seconds;
             
-            vdr.registerVC(vcId, holder1, contentHash, issuanceDate);
+            vdr.registerVC(vcId, holder1, bytes32(0), contentHash, issuanceDate);
         }
         vm.stopPrank();
 

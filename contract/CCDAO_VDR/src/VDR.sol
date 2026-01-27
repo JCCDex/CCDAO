@@ -4,8 +4,10 @@ pragma solidity ^0.8.20;
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
+import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/proxy/ERC1967/ERC1967Utils.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol";
 import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 import "./interfaces/IVDR.sol";
 import "./libraries/VDRConstants.sol";
@@ -26,7 +28,7 @@ import "./libraries/VDRConstants.sol";
  * 
  * @author CCDAO Team
  */
-contract VDR is Initializable, OwnableUpgradeable, UUPSUpgradeable, IVDR {
+contract VDR is Initializable, OwnableUpgradeable, UUPSUpgradeable, ReentrancyGuard, IVDR {
     using VDRConstants for *;
 
     // ============ State Variables ============
@@ -152,14 +154,28 @@ contract VDR is Initializable, OwnableUpgradeable, UUPSUpgradeable, IVDR {
     /**
      * @dev Register a new Verifiable Credential
      * Caller is the issuer, holder can be different
-     * @param vcId Unique identifier for the VC (must be globally unique)
+     *
+     * BEST PRACTICE for vcId:
+     * The vcId should be a keccak256 hash of the original VC identifier from the DID document.
+     * This provides:
+     * - Collision resistance: 256-bit space virtually eliminates duplicates
+     * - Privacy protection: On-chain vcId cannot be reversed to reveal original ID
+     * - Easy verification: Simply hash the original ID and compare
+     *
+     * Example (off-chain):
+     *   originalVcId = "urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6"
+     *   vcId = keccak256(bytes(originalVcId))
+     *
+     * @param vcId keccak256 hash of original VC ID from DID document (must be globally unique)
      * @param holder Address of the credential holder (can be different from issuer)
+     * @param vcType Type of the VC (bytes32(0) means untyped/generic, use VDRConstants.VC_TYPE_* for typed)
      * @param contentHash keccak256 hash of VC content (verifiable by anyone)
      * @param issuanceDate When the VC was issued off-chain
      */
     function registerVC(
         bytes32 vcId,
         address holder,
+        bytes32 vcType,
         bytes32 contentHash,
         uint256 issuanceDate
     ) external {
@@ -175,6 +191,7 @@ contract VDR is Initializable, OwnableUpgradeable, UUPSUpgradeable, IVDR {
         vc.vcId = vcId;
         vc.issuer = issuer;              // Caller is the issuer
         vc.holder = holder;              // Holder can be different from issuer
+        vc.vcType = vcType;              // bytes32(0) = untyped/generic
         vc.contentHash = contentHash;    // keccak256 hash - verifiable by anyone
         vc.issuanceDate = issuanceDate;  // When issued off-chain
         vc.registrationTime = block.timestamp; // When registered on-chain
@@ -187,7 +204,7 @@ contract VDR is Initializable, OwnableUpgradeable, UUPSUpgradeable, IVDR {
         // Increment VC count
         vcCount++;
 
-        emit VCRegistered(vcId, issuer, holder, bytes32(0));
+        emit VCRegistered(vcId, issuer, holder, vcType);
     }
 
     // ============ VC Revocation ============
@@ -220,7 +237,7 @@ contract VDR is Initializable, OwnableUpgradeable, UUPSUpgradeable, IVDR {
      * - At least 1 of the official ERC721 token
      * @param vcId The credential to dispute
      */
-    function disputeVC(bytes32 vcId) external vcExists(vcId) {
+    function disputeVC(bytes32 vcId) external nonReentrant vcExists(vcId) {
         require(vcRecords[vcId].status == VDRConstants.VCStatus.Active, "VDR: can only dispute active VCs");
         
         // Check token balance requirements
@@ -229,10 +246,18 @@ contract VDR is Initializable, OwnableUpgradeable, UUPSUpgradeable, IVDR {
 
         // Check ERC20 balance (require at least 10,000 tokens)
         if (officialERC20 != address(0)) {
-            uint256 erc20Balance = IERC20(officialERC20).balanceOf(_msgSender());
-            hasERC20 = erc20Balance >= 10000 * 10**18; // Assuming 18 decimal places
+            try IERC20(officialERC20).balanceOf(_msgSender()) returns (uint256 erc20Balance) {
+                try IERC20Metadata(officialERC20).decimals() returns (uint8 decimals) {
+                    if (decimals <= 77) {  // 防止溢出
+                        hasERC20 = erc20Balance >= 10000 * 10**decimals;
+                    }
+                } catch {
+                    // 无法获取 decimals，跳过
+                }
+            } catch {
+                // Token 不可用，跳过
+            }
         }
-
         // Check ERC721 balance (require at least 1 token)
         if (officialERC721 != address(0)) {
             uint256 erc721Balance = IERC721(officialERC721).balanceOf(_msgSender());
@@ -264,6 +289,7 @@ contract VDR is Initializable, OwnableUpgradeable, UUPSUpgradeable, IVDR {
 
         if (shouldRevoke) {
             _revokeVC(vcId);
+            emit DisputeResolved(vcId, true);
         } else {
             vcRecords[vcId].status = VDRConstants.VCStatus.Active;
             emit DisputeResolved(vcId, false);
@@ -504,7 +530,9 @@ contract VDR is Initializable, OwnableUpgradeable, UUPSUpgradeable, IVDR {
      */
     function _revokeVC(bytes32 vcId) internal {
         vcRecords[vcId].status = VDRConstants.VCStatus.Revoked;
-        vcCount--;
+        if (vcCount > 0){
+            vcCount--;
+        }
         emit VCRevoked(vcId, _msgSender());
     }
 
