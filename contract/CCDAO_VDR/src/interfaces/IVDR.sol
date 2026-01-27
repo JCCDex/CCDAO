@@ -77,7 +77,7 @@ interface IVDR {
      * @param _verifiers Array of initial verifier addresses
      */
     function initialize(
-        string memory _name,
+        string calldata _name,
         address _owner,
         address[] calldata _verifiers
     ) external;

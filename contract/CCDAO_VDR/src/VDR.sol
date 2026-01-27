@@ -109,7 +109,7 @@ contract VDR is Initializable, OwnableUpgradeable, UUPSUpgradeable, ReentrancyGu
      * @param _verifiers Array of initial verifier addresses
      */
     function initialize(
-        string memory _name,
+        string calldata _name,
         address _owner,
         address[] calldata _verifiers
     ) external initializer {
@@ -260,8 +260,11 @@ contract VDR is Initializable, OwnableUpgradeable, UUPSUpgradeable, ReentrancyGu
         }
         // Check ERC721 balance (require at least 1 token)
         if (officialERC721 != address(0)) {
-            uint256 erc721Balance = IERC721(officialERC721).balanceOf(_msgSender());
-            hasERC721 = erc721Balance >= 1;
+            try IERC721(officialERC721).balanceOf(_msgSender()) returns (uint256 erc721Balance) {
+                hasERC721 = erc721Balance >= 1;
+            } catch {
+                // Token 不可用，跳过
+            }
         }
 
         // Must have at least one of the official tokens
@@ -537,6 +540,7 @@ contract VDR is Initializable, OwnableUpgradeable, UUPSUpgradeable, ReentrancyGu
     }
 
     function _removeDisputedVC(bytes32 vcId) internal {
+        require(disputedVCs.length > 0, "VDR: no disputed VCs to remove");
         uint256 index = disputedVCIndices[vcId];
         bytes32 lastVC = disputedVCs[disputedVCs.length - 1];
 
