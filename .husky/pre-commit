@@ -1,0 +1,4 @@
+cd backend/swtc-vdr
+
+yarn lint || exit 1
+yarn format
