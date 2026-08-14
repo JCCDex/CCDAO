@@ -4,7 +4,7 @@
     <img v-if="!isTp" class="boximg" src="../assets/CCDAO.svg" />
     <span class="sanhen" style="margin-right: 10px"></span>
     <div class="headbt1" style="position: relative">
-      <div style="width: 620px; height: 36px; display: flex; justify-content: space-between">
+      <div style="width: 100%; height: 36px; display: flex; justify-content: space-between">
         <div class="fbt" style="margin-left: 10px">
           <div class="fbt1">
             {{ $t("message.Community") }}
@@ -45,6 +45,14 @@
         <a href="#connector" @click="before('#connector')"
           ><div class="fbt2">{{ $t("message.Connector") }}</div></a
         >
+        <div class="fbt2" style="cursor: pointer" @click="download">
+          {{ $t("message.download_app") }}
+        </div>
+        <a href="https://app.ccda.ooo/#/" target="_blank"
+          ><div class="fbt2" style="width: 124px">
+            {{ $t("message.ccdao_dapp") }}
+            <img style="margin-left: 6px" src="@/assets/urlJump.svg" alt="" /></div
+        ></a>
       </div>
     </div>
     <div class="wallet" v-if="isTpWallet" style="position: relative">
@@ -74,6 +82,7 @@
 
 <script>
 import Dialogs from "./Dialogs";
+import CcdaoDownload from "./ccdaoDownload";
 
 export default {
   name: "Header",
@@ -99,6 +108,9 @@ export default {
       if (this.$router.history.current.path != "/") {
         this.$router.push({ path: "/", hash: hash });
       }
+    },
+    download() {
+      CcdaoDownload().show();
     },
   },
 };

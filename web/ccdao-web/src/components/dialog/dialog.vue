@@ -21,7 +21,11 @@
     <component :is="btname"></component>
 
     <!-- 对话框底部按钮 -->
-    <span slot="footer" class="dialog-footer" style="width: 320px; display: flex; justify-content: space-between">
+    <span
+      slot="footer"
+      class="dialog-footer"
+      style="width: 320px; display: flex; justify-content: space-between; margin-top: 40px"
+    >
       <el-button @click="(visible = false), clearData()">{{ $t("message.cancel") }}</el-button>
       <el-button type="primary" :disabled="!istextarea && file === undefined" @click="nextshow()">{{
         $t("message.confirm")
