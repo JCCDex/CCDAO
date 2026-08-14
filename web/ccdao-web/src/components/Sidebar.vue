@@ -53,11 +53,17 @@
           <span></span>
         </div>
       </a>
+      <div class="sidebarbt between" style="cursor: pointer" @click="download">
+        <span>{{ $t("message.download_app") }}</span>
+        <span></span>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import CcdaoDownload from "./ccdaoDownload";
+
 export default {
   name: "Sidebar",
   data() {
@@ -81,6 +87,9 @@ export default {
         this.$router.push({ path: "/", hash: hash });
       }
     },
+    download() {
+      CcdaoDownload().show();
+    },
   },
   mounted() {
     this.sidebarHeight = window.screen.height;
@@ -103,7 +112,7 @@ a {
 .sidebarbox {
   width: 100%;
   position: fixed;
-  z-index: 10000;
+  z-index: 2000;
   left: 0px;
 }
 .sidebardiv {

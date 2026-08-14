@@ -19,12 +19,18 @@
             <div class="value">$ {{ fullyDilutedValuation }}</div>
           </div>
         </div>
+        <div class="downloadBtn" @click="download" style="cursor: pointer">
+          <img style="width: 24px" src="@/assets/downloadRocker.svg" alt="" />
+          <span style="margin-left: 14px">{{ $t("message.download_app") }}</span>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import CcdaoDownload from "./ccdaoDownload";
+
 export default {
   name: "Wel",
   computed: {
@@ -33,6 +39,11 @@ export default {
     },
     fullyDilutedValuation() {
       return this.$store.state.fullyDilutedValuation.toLocaleString();
+    },
+  },
+  methods: {
+    download() {
+      CcdaoDownload().show();
     },
   },
 };

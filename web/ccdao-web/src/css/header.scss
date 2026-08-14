@@ -2,6 +2,18 @@ a {
   text-decoration: none;
 }
 
+@media (min-width: 1300px) {
+  .headbt1 {
+    width: 854px;
+  }
+}
+
+@media (max-width: 1299px) {
+  .headbt1 {
+    width: 750px;
+  }
+}
+
 @media (min-width: 1080px) {
   .sanhen {
     display: none;
@@ -10,7 +22,7 @@ a {
     justify-content: space-between;
   }
   .boximg {
-    margin-left: 50px;
+    margin-left: 15px;
   }
   .wallet {
     margin-right: 50px;
@@ -90,7 +102,7 @@ a {
   top: 36px;
   position: absolute;
   display: none;
-  z-index: 9999;
+  z-index: 1999;
 }
 .outbt {
   margin-top: 9px;
@@ -150,7 +162,7 @@ a {
 }
 .walletdia {
   position: absolute;
-  z-index: 9999;
+  z-index: 1999;
   top: 36px;
   padding-top: 12px;
   display: none;
